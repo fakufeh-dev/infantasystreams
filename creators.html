@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- In Fantasy Streams · Creators v14 · Archivo visual de libros + nuevo reproductor Sly Flourish -->
+<!-- In Fantasy Streams · Creators v17 · portadas actualizadas + navegación destacada -->
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -555,6 +555,481 @@
     border-top:1px solid rgba(197,151,49,.32);
   }
 }
+
+/* =========================================================
+   v16 · MULTI-CREATOR + PUBLICACIONES DIRECTAS
+   MrRhexx hereda el lenguaje visual de v14.
+========================================================= */
+.creator-profile[hidden]{display:none!important}
+
+/* Suplementos sin índice: conservan portada, ficha de Archivo y flotación v14. */
+.book.direct{
+  grid-template-columns:1fr;
+  height:282px;
+  min-height:282px;
+}
+.book.direct .book-main{
+  grid-column:1;
+  grid-row:1;
+  display:grid;
+  grid-template-columns:25% 75%;
+  gap:0;
+  height:100%;
+  padding:0;
+}
+.book.direct .book-cover-wrap{
+  padding:20px 14px;
+}
+.book.direct .book-meta{
+  padding:22px 28px 20px 8px;
+  gap:12px;
+}
+.direct-link{
+  justify-self:start;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  min-height:34px;
+  padding:0 3px 0 0;
+  color:#bd9848;
+  text-decoration:none;
+  font:700 9px/1 Arial,sans-serif;
+  letter-spacing:.17em;
+  text-transform:uppercase;
+  transition:color .15s ease,transform .15s ease;
+}
+.direct-link:hover,
+.direct-link:focus-visible{
+  color:#e0bd5c;
+  transform:translateX(2px);
+  outline:none;
+}
+.direct-arrow{
+  width:25px;
+  height:25px;
+  border:1px solid rgba(197,151,49,.45);
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:rgba(0,0,0,.18);
+  color:#dfbd61;
+  font-size:12px;
+}
+.direct-link.unavailable{
+  color:#796d55;
+  cursor:not-allowed;
+  opacity:.82;
+  transform:none!important;
+}
+.direct-link.unavailable .direct-arrow{
+  border-style:dashed;
+  border-color:rgba(153,132,82,.34);
+  background:rgba(0,0,0,.12);
+  color:#a08b5e;
+  font-size:13px;
+}
+.collection-divider{
+  position:relative;
+  margin:10px 0 3px;
+  padding:12px 4px 10px;
+  color:#b99a54;
+  font:700 9px/1 Arial,sans-serif;
+  letter-spacing:.21em;
+  text-transform:uppercase;
+}
+.collection-divider::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:1px;
+  background:linear-gradient(90deg,rgba(211,170,64,.48),rgba(211,170,64,.12) 55%,transparent);
+}
+
+@media (max-width:620px){
+  .book.direct{
+    grid-template-columns:1fr;
+    grid-template-rows:auto;
+    height:auto;
+    min-height:0;
+  }
+  .book.direct .book-main{
+    grid-column:auto;
+    grid-row:1;
+    grid-template-columns:92px minmax(0,1fr);
+    gap:14px;
+    height:auto;
+    min-height:0;
+    padding:14px;
+  }
+  .book.direct .book-cover-wrap{padding:0}
+  .book.direct .book-meta{padding:0}
+  .direct-link{font-size:8.5px}
+}
+
+
+/* =========================================================
+   v19 · VOLVER AL DIRECTORIO · MÖRK BORG / ALTO CONTRASTE
+========================================================= */
+.backbar{
+  padding:14px 18px;
+  background:#050504;
+  border-top:1px solid rgba(232,205,34,.26);
+  border-bottom:2px solid #d7bd18;
+  box-shadow:none;
+}
+.back{
+  appearance:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:11px;
+  min-width:300px;
+  min-height:54px;
+  padding:0 22px;
+  border:3px solid #080705;
+  background:#e2c51d;
+  color:#080705;
+  cursor:pointer;
+  font-family:Impact,"Arial Black",Arial,Helvetica,sans-serif;
+  font-size:14px;
+  font-weight:900;
+  line-height:1;
+  letter-spacing:.075em;
+  text-transform:uppercase;
+  text-shadow:none;
+  box-shadow:5px 5px 0 #080705;
+  transition:background .12s ease,color .12s ease,transform .12s ease,box-shadow .12s ease;
+}
+.back-arrow{
+  flex:0 0 auto;
+  display:inline;
+  width:auto;
+  height:auto;
+  border:0;
+  background:none;
+  color:inherit;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:22px;
+  font-weight:900;
+  line-height:1;
+  transition:transform .12s ease;
+}
+.back:hover,
+.back:focus-visible{
+  background:#eee5cf;
+  color:#050504;
+  border-color:#050504;
+  transform:translate(-2px,-2px);
+  box-shadow:7px 7px 0 #050504;
+  outline:none;
+}
+.back:hover .back-arrow,
+.back:focus-visible .back-arrow{
+  transform:translateX(-3px);
+  background:none;
+  border:0;
+  color:inherit;
+}
+.back:focus-visible{
+  outline:3px solid #e2c51d;
+  outline-offset:4px;
+}
+.back:active{
+  transform:translate(2px,2px);
+  box-shadow:2px 2px 0 #050504;
+}
+@media(max-width:620px){
+  .backbar{padding:11px 12px}
+  .back{
+    width:100%;
+    min-width:0;
+    min-height:56px;
+    justify-content:center;
+    padding:0 15px;
+    font-size:13px;
+    letter-spacing:.065em;
+    box-shadow:4px 4px 0 #080705;
+  }
+}
+
+
+/* =========================================================
+   v20 · JP COO­VERT · ARCHIVO DE ZINES / CARTOGRAFÍA
+   Catálogo compacto para una colección extensa, manteniendo
+   el lenguaje visual del Archivo sin convertir cada zine en
+   una tarjeta de libro de gran formato.
+========================================================= */
+.medal[data-creator="jpcoovert"] .logo-mask,
+.creator-profile[data-profile="jpcoovert"] .portrait-mask{
+  background:
+    radial-gradient(circle at 35% 30%,rgba(232,201,103,.22),transparent 34%),
+    linear-gradient(145deg,#d9c58e,#9e7734 58%,#24180b);
+  color:#171006;
+}
+.jp-monogram{
+  position:relative;
+  z-index:2;
+  display:grid;
+  place-items:center;
+  width:100%;
+  height:100%;
+  font-family:Impact,"Arial Black",Arial,sans-serif;
+  font-size:clamp(20px,3vw,38px);
+  font-weight:900;
+  letter-spacing:-.04em;
+  text-shadow:0 1px rgba(255,244,194,.45);
+  transform:rotate(-5deg);
+}
+.medal[data-creator="jpcoovert"] .jp-monogram{font-size:28px}
+.jp-monogram::after{
+  content:"✎";
+  position:absolute;
+  right:14%;
+  bottom:12%;
+  font-family:Georgia,serif;
+  font-size:.45em;
+  transform:rotate(18deg);
+  opacity:.72;
+}
+.jp-catalog-intro{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:22px;
+  padding:0 2px 15px;
+  border-bottom:1px solid rgba(199,151,49,.22);
+}
+.jp-catalog-intro small{
+  color:#8f7848;
+  font:700 9px/1 Arial,sans-serif;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+}
+.jp-catalog-intro h3{
+  margin:6px 0 0;
+  color:#ddc477;
+  font-size:27px;
+}
+.jp-catalog-intro p{
+  max-width:480px;
+  margin:0;
+  color:#8f8879;
+  font-size:11px;
+  line-height:1.55;
+  text-align:right;
+}
+.jp-catalog-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(185px,1fr));
+  gap:15px;
+}
+.jp-zine{
+  position:relative;
+  min-width:0;
+  min-height:272px;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  border:1px solid rgba(176,137,45,.25);
+  background:
+    radial-gradient(circle at 20% 0,rgba(196,143,39,.07),transparent 35%),
+    linear-gradient(180deg,#110e09,#070605 80%);
+  color:inherit;
+  text-decoration:none;
+  box-shadow:0 10px 22px rgba(0,0,0,.24);
+  transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease;
+}
+.jp-zine::after{
+  content:"";
+  position:absolute;
+  inset:6px;
+  border:1px solid rgba(216,172,63,.055);
+  pointer-events:none;
+}
+.jp-zine:hover,
+.jp-zine:focus-visible{
+  transform:translateY(-3px);
+  border-color:rgba(222,177,65,.52);
+  box-shadow:0 16px 28px rgba(0,0,0,.34),0 0 22px rgba(181,126,28,.05);
+  outline:none;
+}
+.jp-zine-thumb{
+  position:relative;
+  height:176px;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  background:
+    radial-gradient(ellipse at center,rgba(178,117,31,.13),transparent 52%),
+    #080705;
+  border-bottom:1px solid rgba(184,140,43,.18);
+}
+.jp-zine-thumb img{
+  width:82%;
+  height:88%;
+  object-fit:contain;
+  filter:drop-shadow(0 9px 9px rgba(0,0,0,.48));
+  transform:rotate(-2.3deg);
+  transition:transform .18s ease;
+}
+.jp-zine:hover .jp-zine-thumb img,
+.jp-zine:focus-visible .jp-zine-thumb img{transform:translateY(-3px) rotate(-1deg) scale(1.025)}
+.jp-zine-copy{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+  padding:13px 14px 14px;
+}
+.jp-zine-copy small{
+  margin-bottom:6px;
+  color:#8d7645;
+  font:700 7px/1 Arial,sans-serif;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.jp-zine-copy strong{
+  color:#e5dcc8;
+  font-size:13px;
+  line-height:1.15;
+}
+.jp-zine-action{
+  margin-top:auto;
+  padding-top:12px;
+  color:#b89342;
+  font:700 8px/1 Arial,sans-serif;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+.jp-dragon-feature{
+  position:relative;
+  display:grid;
+  grid-template-columns:minmax(250px,.72fr) minmax(0,1.28fr);
+  gap:32px;
+  min-height:420px;
+  padding:30px;
+  overflow:hidden;
+  border:1px solid rgba(194,149,47,.31);
+  background:
+    radial-gradient(circle at 13% 38%,rgba(196,123,29,.15),transparent 28%),
+    linear-gradient(135deg,rgba(18,13,8,.98),rgba(6,5,4,.99));
+  box-shadow:inset 0 0 50px rgba(0,0,0,.4),0 15px 30px rgba(0,0,0,.24);
+}
+.jp-dragon-feature::before{
+  content:"";
+  position:absolute;
+  inset:8px;
+  border:1px solid rgba(216,172,63,.07);
+  pointer-events:none;
+}
+.jp-feature-covers{
+  position:relative;
+  min-height:350px;
+  display:grid;
+  place-items:center;
+}
+.jp-feature-cover{
+  position:absolute;
+  width:min(185px,67%);
+  aspect-ratio:.72;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  border:1px solid rgba(217,179,75,.2);
+  background:#0b0906;
+  box-shadow:0 20px 30px rgba(0,0,0,.48);
+}
+.jp-feature-cover img{width:100%;height:100%;object-fit:contain}
+.jp-feature-cover:first-child{transform:translate(-23px,5px) rotate(-7deg);z-index:2}
+.jp-feature-cover:last-child{transform:translate(49px,-9px) rotate(5deg);z-index:1;opacity:.92}
+.jp-feature-copy{position:relative;z-index:2;align-self:center}
+.jp-feature-copy small{
+  color:#aa8842;
+  font:700 9px/1 Arial,sans-serif;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+}
+.jp-feature-copy h3{
+  margin:8px 0 13px;
+  color:#e0c774;
+  font-size:clamp(28px,3.5vw,43px);
+  line-height:1.02;
+}
+.jp-feature-copy p{
+  max-width:620px;
+  color:#c3baa7;
+  font-size:14px;
+  line-height:1.68;
+}
+.jp-feature-actions,
+.jp-extras{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:18px;
+}
+.jp-feature-link,
+.jp-extra-link{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  min-height:39px;
+  padding:0 13px;
+  border:1px solid rgba(199,151,49,.34);
+  background:rgba(16,12,7,.74);
+  color:#c9ac62;
+  text-decoration:none;
+  font:700 8px/1 Arial,sans-serif;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  transition:background .14s ease,color .14s ease,border-color .14s ease,transform .14s ease;
+}
+.jp-feature-link:first-child{
+  background:#c9a63c;
+  border-color:#d8b54c;
+  color:#0a0804;
+}
+.jp-feature-link:hover,.jp-feature-link:focus-visible,
+.jp-extra-link:hover,.jp-extra-link:focus-visible{
+  transform:translateY(-1px);
+  border-color:#d1ad4b;
+  background:#e4d9bf;
+  color:#171006;
+  outline:none;
+}
+.jp-extras-wrap{
+  margin-top:24px;
+  padding-top:17px;
+  border-top:1px solid rgba(190,145,45,.18);
+}
+.jp-extras-label{
+  color:#827354;
+  font:700 8px/1 Arial,sans-serif;
+  letter-spacing:.17em;
+  text-transform:uppercase;
+}
+@media(max-width:760px){
+  .jp-dragon-feature{grid-template-columns:1fr;gap:10px;padding:22px 18px 24px}
+  .jp-feature-covers{min-height:300px}
+  .jp-catalog-intro{display:block}
+  .jp-catalog-intro p{margin-top:10px;text-align:left}
+}
+@media(max-width:620px){
+  .jp-catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .jp-zine{min-height:232px}
+  .jp-zine-thumb{height:142px}
+  .jp-zine-copy{padding:11px}
+  .jp-zine-copy strong{font-size:11.5px}
+  .jp-feature-cover{width:min(155px,62%)}
+  .jp-feature-covers{min-height:265px}
+  .jp-feature-copy p{font-size:12.5px}
+  .jp-feature-link,.jp-extra-link{flex:1 1 150px}
+}
+
 </style>
 </head>
 <body>
@@ -573,15 +1048,42 @@
 </div></section>
 <div class="chain" aria-hidden="true"></div>
 <section class="creators"><div class="workspace" id="workspace">
-<div id="directory"><div class="directory-head"><small>Índice de voces</small><h2>El Directorio</h2><p>Selecciona un medallón para abrir el archivo de ese creador. El directorio está preparado para crecer automáticamente a varias filas.</p></div><div class="medals" id="medals"><button class="medal" data-creator="sly" type="button"><span class="medal-frame"><span class="logo-mask"><img src="https://drive.google.com/thumbnail?id=1B5eahryTp6w7hwhP5rRfDI5j4U2Ss81t&sz=w700" alt="" aria-hidden="true"></span></span><span class="medal-name">Sly Flourish</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button></div></div>
-<div id="profileView" hidden><article class="profile"><div class="backbar"><button class="back" id="backBtn" type="button">← Volver al directorio</button></div><header class="profile-head"><div class="portrait-frame"><div class="portrait-mask"><img src="https://drive.google.com/thumbnail?id=1B5eahryTp6w7hwhP5rRfDI5j4U2Ss81t&sz=w900" alt="" aria-hidden="true"></div></div><div><small>Archivo de creador</small><h3>Sly Flourish</h3><div class="profile-sub">Mike Shea · Consejos para Game Masters · Preparación de partidas · Herramientas</div><div class="tags"><span class="tag">GM Advice</span><span class="tag">D&amp;D / 5e</span><span class="tag">Prep</span><span class="tag">Tools</span></div></div></header>
+<div id="directory"><div class="directory-head"><small>Índice de voces</small><h2>El Directorio</h2><p>Selecciona un medallón para abrir el archivo de ese creador. El directorio está preparado para crecer automáticamente a varias filas.</p></div><div class="medals" id="medals"><button class="medal" data-creator="sly" type="button"><span class="medal-frame"><span class="logo-mask"><img src="https://drive.google.com/thumbnail?id=1B5eahryTp6w7hwhP5rRfDI5j4U2Ss81t&sz=w700" alt="" aria-hidden="true"></span></span><span class="medal-name">Sly Flourish</span></button><button class="medal" data-creator="mrrhexx" type="button"><span class="medal-frame"><span class="logo-mask"><img src="https://drive.google.com/thumbnail?id=1hw-bJqNUx-QwDrMIdd5EwNFVYHDsBhg6&sz=w700" data-fallback="https://lh3.googleusercontent.com/d/1hw-bJqNUx-QwDrMIdd5EwNFVYHDsBhg6=w700" alt="" aria-hidden="true" onerror="if(this.dataset.fallback){this.onerror=null;this.src=this.dataset.fallback}"></span></span><span class="medal-name">MrRhexx</span></button><button class="medal" data-creator="jpcoovert" type="button"><span class="medal-frame"><span class="logo-mask"><span class="jp-monogram" aria-hidden="true">JP</span></span></span><span class="medal-name">JP Coovert</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button></div></div>
+<div id="profileView" hidden>
+<div class="creator-profile" data-profile="sly">
+<article class="profile"><div class="backbar"><button class="back creator-back" type="button"><span class="back-arrow" aria-hidden="true">←</span><span>Volver al directorio</span></button></div><header class="profile-head"><div class="portrait-frame"><div class="portrait-mask"><img src="https://drive.google.com/thumbnail?id=1B5eahryTp6w7hwhP5rRfDI5j4U2Ss81t&sz=w900" alt="" aria-hidden="true"></div></div><div><small>Archivo de creador</small><h3>Sly Flourish</h3><div class="profile-sub">Mike Shea · Consejos para Game Masters · Preparación de partidas · Herramientas</div><div class="tags"><span class="tag">GM Advice</span><span class="tag">D&amp;D / 5e</span><span class="tag">Prep</span><span class="tag">Tools</span></div></div></header>
 <nav class="tabs" aria-label="Contenido de Sly Flourish"><button class="tab active" data-tab="bio" type="button">Bio</button><button class="tab" data-tab="videos" type="button">Videos</button><button class="tab" data-tab="tools" type="button">Herramientas</button><button class="tab" data-tab="supplements" type="button">Suplementos</button></nav>
 <div class="content">
 <section class="pane active" data-pane="bio"><div class="bio"><aside class="bio-portrait" aria-label="Retrato de Sly Flourish"><div class="bio-frame"><div class="bio-photo has-image" id="slyBioPhoto"><img src="https://drive.google.com/thumbnail?id=1IwT0YQMrmtkA2CFWuLX5JpAghr7qZDzt&sz=w1200" data-fallback="https://lh3.googleusercontent.com/d/1IwT0YQMrmtkA2CFWuLX5JpAghr7qZDzt=w1200" alt="Sly Flourish" onerror="if(this.dataset.fallback){this.onerror=null;this.src=this.dataset.fallback}"><span class="bio-photo-placeholder">Sly Flourish</span></div></div></aside><div class="bio-copy"><h3>Bio</h3><p>Mike Shea es escritor y diseñador de juegos de rol de mesa, conocido por su trabajo como Sly Flourish y por desarrollar una filosofía de preparación ligera para Game Masters. Su enfoque busca concentrar el tiempo de preparación en los elementos que más probablemente mejoren la partida en mesa.</p><p>Su trabajo reúne artículos, videos, podcasts, libros y herramientas prácticas orientadas a dirigir mejores sesiones sin convertir la preparación en una segunda jornada de trabajo. Esta combinación lo convierte en un creador especialmente útil para directores de juego que buscan procesos claros, reutilizables y fáciles de consultar.</p></div></div></section>
-<section class="pane" data-pane="videos"><div class="video-shell"><iframe class="video-frame" id="videoFrame" scrolling="no" title="Archivo de videos de Sly Flourish" loading="lazy" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" referrerpolicy="strict-origin-when-cross-origin"></iframe></div></section>
-<section class="pane" data-pane="tools"><div class="books-head"><small>Biblioteca esencial de Sly Flourish</small><h3>Herramientas</h3></div><div class="books-grid" id="toolsBooksGrid"></div></section>
-<section class="pane" data-pane="supplements"><div class="books-head"><small>Biblioteca de Sly Flourish</small><h3>Suplementos</h3></div><div class="books-grid" id="supplementsGrid"></div></section>
-</div></article></div>
+<section class="pane" data-pane="videos"><div class="video-shell"><iframe class="video-frame" id="slyVideoFrame" scrolling="no" title="Archivo de videos de Sly Flourish" loading="lazy" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" referrerpolicy="strict-origin-when-cross-origin"></iframe></div></section>
+<section class="pane" data-pane="tools"><div class="books-head"><small>Biblioteca esencial de Sly Flourish</small><h3>Herramientas</h3></div><div class="books-grid" id="slyToolsBooksGrid"></div></section>
+<section class="pane" data-pane="supplements"><div class="books-head"><small>Biblioteca de Sly Flourish</small><h3>Suplementos</h3></div><div class="books-grid" id="slySupplementsGrid"></div></section>
+</div></article>
+</div>
+
+<div class="creator-profile" data-profile="mrrhexx" hidden>
+<article class="profile"><div class="backbar"><button class="back creator-back" type="button"><span class="back-arrow" aria-hidden="true">←</span><span>Volver al directorio</span></button></div><header class="profile-head"><div class="portrait-frame"><div class="portrait-mask"><img src="https://drive.google.com/thumbnail?id=1hw-bJqNUx-QwDrMIdd5EwNFVYHDsBhg6&sz=w900" data-fallback="https://lh3.googleusercontent.com/d/1hw-bJqNUx-QwDrMIdd5EwNFVYHDsBhg6=w900" alt="" aria-hidden="true" onerror="if(this.dataset.fallback){this.onerror=null;this.src=this.dataset.fallback}"></div></div><div><small>Archivo de creador</small><h3>MrRhexx</h3><div class="profile-sub">Lore de D&amp;D · Criaturas · Planos · Historia de los mundos</div><div class="tags"><span class="tag">Lore</span><span class="tag">D&amp;D</span><span class="tag">Monsters</span><span class="tag">Worldbuilding</span></div></div></header>
+<nav class="tabs" aria-label="Contenido de MrRhexx"><button class="tab active" data-tab="bio" type="button">Bio</button><button class="tab" data-tab="videos" type="button">Videos</button><button class="tab" data-tab="books" type="button">Libros</button><button class="tab" data-tab="supplements" type="button">Suplementos</button></nav>
+<div class="content">
+<section class="pane active" data-pane="bio"><div class="bio"><aside class="bio-portrait" aria-label="Retrato de MrRhexx"><div class="bio-frame"><div class="bio-photo has-image"><img src="https://drive.google.com/thumbnail?id=1GIoYG1XxonnsMSbsMLjVxKvNVtYNwrwQ&sz=w1200" data-fallback="https://lh3.googleusercontent.com/d/1GIoYG1XxonnsMSbsMLjVxKvNVtYNwrwQ=w1200" alt="MrRhexx" onerror="if(this.dataset.fallback){this.onerror=null;this.src=this.dataset.fallback}"><span class="bio-photo-placeholder">MrRhexx</span></div></div></aside><div class="bio-copy"><h3>Bio</h3><p>MrRhexx es un creador de contenido especializado en el lore de Dungeons &amp; Dragons. Su trabajo explora criaturas, razas, dragones, planos, dioses, magia y la historia de los mundos del juego, reuniendo información dispersa entre distintas ediciones y presentándola como relatos fáciles de seguir.</p><p>Su serie <em>What They Don't Tell You About</em> se ha convertido en una de sus señas de identidad: una exploración de detalles, antecedentes y material olvidado que normalmente queda fuera de las descripciones más breves. En el Archivo se conservan además varios de sus suplementos y materiales de juego.</p></div></div></section>
+<section class="pane" data-pane="videos"><div class="video-shell"><iframe class="video-frame" id="mrrhexxVideoFrame" scrolling="no" title="Archivo de videos de MrRhexx" loading="lazy" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" referrerpolicy="strict-origin-when-cross-origin"></iframe></div></section>
+<section class="pane" data-pane="books"><div class="books-head"><small>Campaña de MrRhexx</small><h3>Libros</h3></div><div class="books-grid" id="mrrhexxBooksGrid"></div></section>
+<section class="pane" data-pane="supplements"><div class="books-head"><small>Material de juego de MrRhexx</small><h3>Suplementos</h3></div><div class="books-grid" id="mrrhexxSupplementsGrid"></div></section>
+</div></article>
+</div>
+
+<div class="creator-profile" data-profile="jpcoovert" hidden>
+<article class="profile"><div class="backbar"><button class="back creator-back" type="button"><span class="back-arrow" aria-hidden="true">←</span><span>Volver al directorio</span></button></div><header class="profile-head"><div class="portrait-frame"><div class="portrait-mask"><span class="jp-monogram" aria-hidden="true">JP</span></div></div><div><small>Archivo de creador</small><h3>JP Coovert</h3><div class="profile-sub">Ilustración · Cartografía · Zines · Aventuras system-neutral</div><div class="tags"><span class="tag">Maps</span><span class="tag">Drawing</span><span class="tag">Zines</span><span class="tag">Adventures</span></div></div></header>
+<nav class="tabs" aria-label="Contenido de JP Coovert"><button class="tab active" data-tab="bio" type="button">Bio</button><button class="tab" data-tab="videos" type="button">Videos</button><button class="tab" data-tab="dragontown" type="button">Dragon Town</button><button class="tab" data-tab="workshop" type="button">Taller</button><button class="tab" data-tab="adventures" type="button">Aventuras</button></nav>
+<div class="content">
+<section class="pane active" data-pane="bio"><div class="bio"><aside class="bio-portrait" aria-label="Identidad de JP Coovert"><div class="bio-frame"><div class="bio-photo"><span class="jp-monogram" aria-hidden="true">JP</span><span class="bio-photo-placeholder">JP Coovert</span></div></div></aside><div class="bio-copy"><h3>Bio</h3><p>JP Coovert es dibujante, ilustrador, creador de videos y Game Master. Su trabajo gira alrededor de una idea especialmente útil para el Archivo: convertir el acto de crear una partida en algo visual, inmediato y divertido, mediante mapas dibujados a mano, monstruos extraños, objetos, personajes y pequeñas aventuras.</p><p>Sus zines combinan material listo para jugar con guías para crear y dibujar tus propios mundos. En esta ficha el material se ordena en cuatro rutas: <em>Creating for D&amp;D</em> para su archivo de videos, <em>Dragon Town</em> como obra central, el <em>Taller</em> para recursos de creación y <em>Aventuras</em> para lugares y escenarios que pueden llevarse directamente a la mesa.</p></div></div></section>
+<section class="pane" data-pane="videos"><div class="video-shell"><iframe class="video-frame" id="jpcoovertVideoFrame" scrolling="no" title="Archivo de videos de JP Coovert · Creating for D&amp;D" loading="lazy" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" referrerpolicy="strict-origin-when-cross-origin"></iframe></div></section>
+<section class="pane" data-pane="dragontown"><div class="jp-dragon-feature"><div class="jp-feature-covers" aria-hidden="true"><span class="jp-feature-cover"><img src="https://drive.google.com/thumbnail?id=1_OQaF4Uohh3cKDen5Hn6AeavSdt89qS-&sz=w1000" alt=""></span><span class="jp-feature-cover"><img src="https://drive.google.com/thumbnail?id=1voT6S8VJsAXpmy6lUuy2AOC-G6cEFLgN&sz=w1000" alt=""></span></div><div class="jp-feature-copy"><small>Obra destacada · Archivo JP Coovert</small><h3>Dragon Town</h3><p>Una aventura fantástica system-neutral que parte de una premisa sencilla: el alcalde de Dragon Town —un enorme dragón dorado— ha desaparecido. La búsqueda conduce desde el pueblo hasta un mundo subterráneo lleno de criaturas extrañas, peligros, mapas y lugares que pueden jugarse como campaña o separarse en aventuras más pequeñas.</p><div class="jp-feature-actions"><a class="jp-feature-link" href="https://drive.google.com/file/d/1_OQaF4Uohh3cKDen5Hn6AeavSdt89qS-/view?usp=drive_link" target="_blank" rel="noopener noreferrer">Dragon Town <span aria-hidden="true">↗</span></a><a class="jp-feature-link" href="https://drive.google.com/file/d/1voT6S8VJsAXpmy6lUuy2AOC-G6cEFLgN/view?usp=drive_link" target="_blank" rel="noopener noreferrer">Dragon Town &amp; the Darkness Below <span aria-hidden="true">↗</span></a></div><div class="jp-extras-wrap"><div class="jp-extras-label">Material complementario</div><div class="jp-extras"><a class="jp-extra-link" href="https://drive.google.com/file/d/1rb3YZXexMRyP6P7EjUdhVO1BtuBbRecL/view?usp=drive_link" target="_blank" rel="noopener noreferrer">Paper Minis ↗</a><a class="jp-extra-link" href="https://drive.google.com/file/d/11gOwPVyZf0Bkt_byB7fDPKnARXdHQ8P6/view?usp=drive_link" target="_blank" rel="noopener noreferrer">Mapa de Malumir Valley ↗</a><a class="jp-extra-link" href="https://drive.google.com/file/d/1Eyl1KMA6bG15RO1ZbnZxVEnsLxV1xvwM/view?usp=drive_link" target="_blank" rel="noopener noreferrer">Mapa de Dragon Town ↗</a><a class="jp-extra-link" href="https://drive.google.com/drive/folders/1gVZPeTpcDQRu_iBYsPlwOPo-2Ju5ONYA?usp=drive_link" target="_blank" rel="noopener noreferrer">Tokens ↗</a></div></div></div></div></section>
+<section class="pane" data-pane="workshop"><div class="jp-catalog-intro"><div><small>Guías para crear</small><h3>El Taller</h3></div><p>Dibujo, cartografía, monstruos, ciudades y herramientas visuales. Cada ficha abre directamente el ejemplar conservado en el Archivo.</p></div><div class="jp-catalog-grid" id="jpWorkshopGrid"></div></section>
+<section class="pane" data-pane="adventures"><div class="jp-catalog-intro"><div><small>Material listo para mesa</small><h3>Aventuras &amp; Lugares</h3></div><p>Zines y escenarios de Flik Silverpen organizados como una estantería compacta para explorar sin perderse entre decenas de entradas.</p></div><div class="jp-catalog-grid" id="jpAdventuresGrid"></div></section>
+</div></article>
+</div>
+</div>
 </div></section>
 </main>
 <textarea id="slyPlayerSource" hidden aria-hidden="true"><!DOCTYPE html>
@@ -4295,6 +4797,3724 @@ initialize();
 
 </body>
 </html></textarea>
+<textarea id="mrrhexxPlayerSource" hidden aria-hidden="true"><!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+/>
+
+<meta
+  name="referrer"
+  content="strict-origin-when-cross-origin"
+/>
+
+<title>
+MrRhexx · In Fantasy Streams
+</title>
+
+<style>
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root {
+
+  --bg:#090909;
+
+  --panel:#10100f;
+
+  --line:
+    rgba(255,255,255,.08);
+
+  --gold:#c7a86d;
+
+  --gold-soft:#a88b58;
+
+  --text:#e6dfd3;
+
+  --muted:#918a7e;
+
+  --dim:#68635b;
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+  box-sizing:border-box;
+}
+
+
+html,
+body {
+
+  margin:0;
+
+  padding:0;
+
+  width:100%;
+
+  background:
+    transparent;
+
+}
+
+
+body {
+
+  color:
+    var(--text);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+}
+
+
+button {
+  font:inherit;
+}
+
+
+/* =========================================================
+   WRAPPER
+========================================================= */
+
+.page {
+
+  width:100%;
+
+  margin:0;
+
+  background:
+
+    radial-gradient(
+      circle at 30% -20%,
+      rgba(199,168,109,.055),
+      transparent 38%
+    ),
+
+    #090909;
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.creator-header {
+
+  display:flex;
+
+  align-items:flex-end;
+
+  justify-content:
+    space-between;
+
+  gap:20px;
+
+  padding:
+    18px 18px 15px;
+
+}
+
+
+.creator-identity {
+  min-width:0;
+}
+
+
+.eyebrow {
+
+  margin-bottom:6px;
+
+  color:
+    var(--gold-soft);
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:8px;
+
+  font-weight:700;
+
+  letter-spacing:.18em;
+
+  text-transform:uppercase;
+
+}
+
+
+.creator-name {
+
+  margin:0;
+
+  color:#eee7db;
+
+  font-size:
+    clamp(
+      24px,
+      3vw,
+      37px
+    );
+
+  font-weight:400;
+
+  line-height:1;
+
+}
+
+
+.creator-description {
+
+  margin-top:7px;
+
+  color:
+    var(--muted);
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:9px;
+
+  letter-spacing:.035em;
+
+}
+
+
+.database-status {
+
+  flex:0 0 auto;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:7px;
+
+  color:
+    var(--dim);
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:7px;
+
+  letter-spacing:.06em;
+
+  text-transform:uppercase;
+
+}
+
+
+.status-dot {
+
+  width:6px;
+
+  height:6px;
+
+  border-radius:50%;
+
+  background:#59554e;
+
+}
+
+
+.database-status.live
+.status-dot {
+
+  background:
+    var(--gold);
+
+  box-shadow:
+    0 0 10px
+    rgba(199,168,109,.4);
+
+}
+
+
+.database-status.error
+.status-dot {
+
+  background:#a4645e;
+
+}
+
+
+/* =========================================================
+   SERIES BAR
+========================================================= */
+
+.series-bar {
+
+  position:relative;
+
+  overflow:hidden;
+
+  border-top:
+    1px solid
+    var(--line);
+
+  border-bottom:
+    1px solid
+    var(--line);
+
+  background:
+
+    linear-gradient(
+      180deg,
+      #14130f,
+      #0d0d0b
+    );
+
+}
+
+
+.series-tabs {
+
+  display:flex;
+
+  align-items:stretch;
+
+  overflow-x:auto;
+
+  overflow-y:hidden;
+
+  scrollbar-width:none;
+
+}
+
+
+.series-tabs::-webkit-scrollbar {
+  display:none;
+}
+
+
+.series-tab {
+
+  position:relative;
+
+  flex:0 0 auto;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  min-height:42px;
+
+  padding:
+    0 18px;
+
+  border:0;
+
+  border-right:
+    1px solid
+    var(--line);
+
+  background:
+    transparent;
+
+  color:#777168;
+
+  cursor:pointer;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:8px;
+
+  font-weight:700;
+
+  letter-spacing:.095em;
+
+  text-transform:uppercase;
+
+  white-space:nowrap;
+
+}
+
+
+.series-tab:hover {
+
+  color:#c7b99e;
+
+  background:
+    rgba(255,255,255,.018);
+
+}
+
+
+.series-tab.active {
+
+  color:#e2d7c4;
+
+  background:
+
+    linear-gradient(
+      180deg,
+      rgba(199,168,109,.075),
+      rgba(199,168,109,.018)
+    );
+
+}
+
+
+.series-tab.active::after {
+
+  content:"";
+
+  position:absolute;
+
+  left:14px;
+
+  right:14px;
+
+  bottom:0;
+
+  height:2px;
+
+  background:
+    var(--gold);
+
+}
+
+
+.series-count {
+
+  min-width:20px;
+
+  padding:
+    2px 5px;
+
+  border:
+    1px solid
+    rgba(199,168,109,.18);
+
+  border-radius:20px;
+
+  color:#8f7a55;
+
+  font-size:7px;
+
+  text-align:center;
+
+}
+
+
+/* =========================================================
+   CINEMA
+========================================================= */
+
+.cinema {
+
+  display:grid;
+
+  grid-template-columns:
+
+    minmax(
+      0,
+      72%
+    )
+
+    minmax(
+      230px,
+      28%
+    );
+
+  width:100%;
+
+  overflow:hidden;
+
+  background:#080808;
+
+}
+
+
+/* =========================================================
+   PLAYER COLUMN
+========================================================= */
+
+.player-column {
+
+  min-width:0;
+
+  background:#080808;
+
+}
+
+
+/* =========================================================
+   YOUTUBE
+========================================================= */
+
+.stage {
+
+  position:relative;
+
+  width:100%;
+
+  aspect-ratio:
+    16 / 9;
+
+  overflow:hidden;
+
+  background:#000;
+
+}
+
+
+.youtube-frame {
+
+  position:absolute;
+
+  inset:0;
+
+  display:block;
+
+  width:100%;
+
+  height:100%;
+
+  border:0;
+
+  background:#000;
+
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.player-loading {
+
+  position:absolute;
+
+  inset:0;
+
+  z-index:10;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:12px;
+
+  pointer-events:none;
+
+  background:
+
+    radial-gradient(
+      circle at center,
+      #17150f,
+      #050505 70%
+    );
+
+  transition:
+    opacity .25s ease;
+
+}
+
+
+.player-loading.hidden {
+
+  opacity:0;
+
+  visibility:hidden;
+
+}
+
+
+.loading-ring {
+
+  width:28px;
+
+  height:28px;
+
+  border:
+    1px solid
+    rgba(199,168,109,.18);
+
+  border-top-color:
+    var(--gold);
+
+  border-radius:50%;
+
+  animation:
+    spin 1s linear infinite;
+
+}
+
+
+.loading-label {
+
+  color:#8e7a56;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:7px;
+
+  font-weight:700;
+
+  letter-spacing:.15em;
+
+  text-transform:uppercase;
+
+}
+
+
+@keyframes spin {
+
+  to {
+    transform:
+      rotate(360deg);
+  }
+
+}
+
+
+/* =========================================================
+   VIDEO INFO
+========================================================= */
+
+.video-info {
+
+  min-height:102px;
+
+  padding:
+    15px 18px 13px;
+
+  border-top:
+    1px solid
+    var(--line);
+
+  background:
+
+    linear-gradient(
+      180deg,
+      #11110f,
+      #0c0c0b
+    );
+
+}
+
+
+.video-series {
+
+  margin-bottom:6px;
+
+  color:
+    var(--gold-soft);
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:7px;
+
+  font-weight:700;
+
+  letter-spacing:.13em;
+
+  text-transform:uppercase;
+
+}
+
+
+.video-title {
+
+  display:-webkit-box;
+
+  overflow:hidden;
+
+  margin:0;
+
+  min-height:41px;
+
+  max-height:41px;
+
+  color:#e1dbd0;
+
+  font-size:17px;
+
+  font-weight:400;
+
+  line-height:1.18;
+
+  -webkit-line-clamp:2;
+
+  -webkit-box-orient:vertical;
+
+}
+
+
+.video-meta {
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:
+    5px 13px;
+
+  margin-top:10px;
+
+  color:
+    var(--dim);
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:7px;
+
+}
+
+
+.video-meta span {
+
+  position:relative;
+
+}
+
+
+.video-meta
+span:not(:last-child)::after {
+
+  content:"·";
+
+  position:absolute;
+
+  right:-8px;
+
+  color:#4f4b44;
+
+}
+
+
+/* =========================================================
+   CONTROLS
+========================================================= */
+
+.controls {
+
+  display:flex;
+
+  align-items:center;
+
+  min-height:46px;
+
+  padding:
+    0 13px;
+
+  border-top:
+    1px solid
+    var(--line);
+
+  background:#0d0d0c;
+
+}
+
+
+.control-button {
+
+  display:grid;
+
+  place-items:center;
+
+  width:38px;
+
+  height:34px;
+
+  padding:0;
+
+  border:0;
+
+  background:transparent;
+
+  color:#a39b90;
+
+  cursor:pointer;
+
+  font-size:10px;
+
+}
+
+
+.control-button:hover {
+
+  color:
+    var(--gold);
+
+}
+
+
+.control-button:disabled {
+
+  color:#373530;
+
+  cursor:default;
+
+}
+
+
+.controls-spacer {
+  flex:1;
+}
+
+
+.player-state {
+
+  color:#59554e;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:7px;
+
+  letter-spacing:.1em;
+
+  text-transform:uppercase;
+
+}
+
+
+/* =========================================================
+   PLAYLIST
+========================================================= */
+
+.playlist-column {
+
+  min-width:0;
+
+  display:flex;
+
+  flex-direction:column;
+
+  overflow:hidden;
+
+  border-left:
+    1px solid
+    var(--line);
+
+  background:
+
+    linear-gradient(
+      180deg,
+      #13120f,
+      #0b0b0a
+    );
+
+}
+
+
+.playlist-header {
+
+  flex:0 0 auto;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:
+    space-between;
+
+  min-height:49px;
+
+  padding:
+    0 12px;
+
+  border-bottom:
+    1px solid
+    var(--line);
+
+}
+
+
+.playlist-label {
+
+  color:#b7aa94;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:8px;
+
+  font-weight:700;
+
+  letter-spacing:.12em;
+
+  text-transform:uppercase;
+
+}
+
+
+.playlist-series-name {
+
+  overflow:hidden;
+
+  margin-top:3px;
+
+  color:#5f5a52;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:7px;
+
+  text-overflow:ellipsis;
+
+  white-space:nowrap;
+
+}
+
+
+.playlist-count {
+
+  color:#77694f;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:8px;
+
+}
+
+
+.playlist {
+
+  flex:1;
+
+  min-height:0;
+
+  overflow-x:hidden;
+
+  overflow-y:auto;
+
+  scrollbar-width:thin;
+
+  scrollbar-color:
+    #39352d
+    transparent;
+
+}
+
+
+.playlist::-webkit-scrollbar {
+  width:5px;
+}
+
+
+.playlist::-webkit-scrollbar-thumb {
+  background:#38342c;
+}
+
+
+/* =========================================================
+   PLAYLIST ITEM
+========================================================= */
+
+.playlist-item {
+
+  position:relative;
+
+  display:grid;
+
+  grid-template-columns:
+
+    78px
+    minmax(
+      0,
+      1fr
+    );
+
+  gap:9px;
+
+  width:100%;
+
+  min-height:64px;
+
+  padding:10px;
+
+  border:0;
+
+  border-bottom:
+    1px solid
+    rgba(255,255,255,.045);
+
+  background:transparent;
+
+  color:inherit;
+
+  cursor:pointer;
+
+  text-align:left;
+
+  font-family:inherit;
+
+}
+
+
+.playlist-item:hover {
+
+  background:
+    rgba(255,255,255,.025);
+
+}
+
+
+.playlist-item.active {
+
+  background:
+
+    linear-gradient(
+      90deg,
+      rgba(199,168,109,.11),
+      rgba(199,168,109,.015)
+    );
+
+}
+
+
+.playlist-item.active::before {
+
+  content:"";
+
+  position:absolute;
+
+  left:0;
+
+  top:0;
+
+  bottom:0;
+
+  width:2px;
+
+  background:
+    var(--gold);
+
+}
+
+
+/* =========================================================
+   THUMB
+========================================================= */
+
+.thumbnail {
+
+  position:relative;
+
+  width:78px;
+
+  height:44px;
+
+  overflow:hidden;
+
+  background:#000;
+
+}
+
+
+.thumbnail img {
+
+  display:block;
+
+  width:100%;
+
+  height:100%;
+
+  object-fit:cover;
+
+  opacity:.82;
+
+}
+
+
+.playlist-item:hover
+.thumbnail img,
+
+.playlist-item.active
+.thumbnail img {
+
+  opacity:1;
+
+}
+
+
+.thumb-play {
+
+  position:absolute;
+
+  inset:0;
+
+  display:grid;
+
+  place-items:center;
+
+  color:white;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:10px;
+
+  opacity:.8;
+
+  text-shadow:
+    0 2px 10px #000;
+
+}
+
+
+/* =========================================================
+   ITEM COPY
+========================================================= */
+
+.item-copy {
+  min-width:0;
+}
+
+
+.item-number {
+
+  margin-bottom:3px;
+
+  color:#806b43;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:6px;
+
+  font-weight:700;
+
+  letter-spacing:.1em;
+
+  text-transform:uppercase;
+
+}
+
+
+.item-title {
+
+  display:-webkit-box;
+
+  overflow:hidden;
+
+  min-height:23px;
+
+  max-height:23px;
+
+  color:#d8d0c4;
+
+  font-size:9px;
+
+  line-height:1.28;
+
+  -webkit-line-clamp:2;
+
+  -webkit-box-orient:vertical;
+
+}
+
+
+.item-date {
+
+  margin-top:3px;
+
+  overflow:hidden;
+
+  color:
+    var(--dim);
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:7px;
+
+  text-overflow:ellipsis;
+
+  white-space:nowrap;
+
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.error-state {
+
+  display:none;
+
+  padding:30px;
+
+  background:#0d0b0b;
+
+  color:#b9867d;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:11px;
+
+  text-align:center;
+
+}
+
+
+.error-state.visible {
+  display:block;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media
+(max-width:700px) {
+
+  .creator-header {
+
+    align-items:flex-start;
+
+    padding:
+      15px;
+
+  }
+
+
+  .database-status {
+    display:none;
+  }
+
+
+  .series-tab {
+
+    min-height:40px;
+
+    padding:
+      0 14px;
+
+    font-size:7px;
+
+  }
+
+
+  .cinema {
+
+    grid-template-columns:
+      1fr;
+
+  }
+
+
+  .playlist-column {
+
+    height:
+      310px !important;
+
+    border-left:0;
+
+    border-top:
+      1px solid
+      var(--line);
+
+  }
+
+
+  .video-info {
+
+    min-height:96px;
+
+    padding:
+      13px 15px;
+
+  }
+
+
+  .video-title {
+    font-size:15px;
+  }
+
+}
+
+
+@media
+(max-width:450px) {
+
+  .creator-name {
+    font-size:27px;
+  }
+
+
+  .playlist-item {
+
+    grid-template-columns:
+
+      92px
+      minmax(
+        0,
+        1fr
+      );
+
+    min-height:72px;
+
+  }
+
+
+  .thumbnail {
+
+    width:92px;
+
+    height:52px;
+
+  }
+
+}
+
+
+
+/* =========================================================
+   INTEGRACIÓN IN FANTASY STREAMS / CANVA
+   - Sin scroll exterior del módulo.
+   - Las series bajan de fila en vez de generar scroll horizontal.
+   - El único scroll vertical interno es el de la playlist.
+========================================================= */
+html,
+body {
+  overflow:hidden;
+  scrollbar-width:none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display:none;
+}
+
+.series-bar {
+  overflow:visible;
+}
+
+.series-tabs {
+  flex-wrap:wrap;
+  overflow-x:visible;
+  overflow-y:visible;
+}
+
+.series-tab {
+  flex:0 1 auto;
+}
+
+@media (max-width:700px) {
+  .series-tabs {
+    flex-wrap:wrap;
+  }
+
+  .series-tab {
+    flex:1 1 50%;
+    min-width:0;
+    justify-content:center;
+  }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<main class="page">
+
+
+<!-- ========================================================
+     HEADER
+========================================================= -->
+
+<header class="creator-header">
+
+
+  <div class="creator-identity">
+
+    <div class="eyebrow">
+      In Fantasy Streams · Creator Archive
+    </div>
+
+
+    <h1
+      class="creator-name"
+      id="creator-name"
+    >
+      MrRhexx
+    </h1>
+
+
+    <div
+      class="creator-description"
+      id="creator-description"
+    >
+      Video Archive
+    </div>
+
+  </div>
+
+
+
+  <div
+    class="database-status"
+    id="database-status"
+  >
+
+    <span class="status-dot"></span>
+
+    <span id="database-status-text">
+      Leyendo archivo
+    </span>
+
+  </div>
+
+
+</header>
+
+
+
+<!-- ========================================================
+     SERIES
+========================================================= -->
+
+<div class="series-bar">
+
+  <div
+    class="series-tabs"
+    id="series-tabs"
+  ></div>
+
+</div>
+
+
+
+<!-- ========================================================
+     CINEMA
+========================================================= -->
+
+<section
+  class="cinema"
+  id="cinema"
+>
+
+
+<!-- PLAYER -->
+
+<div
+  class="player-column"
+  id="player-column"
+>
+
+
+  <div class="stage">
+
+
+    <!--
+      ESTE ES EL REPRODUCTOR REAL.
+
+      EXACTAMENTE EL MISMO PRINCIPIO
+      QUE FUNCIONA EN GITHUB.
+
+      NO HAY BOTÓN INTERMEDIO.
+    -->
+
+    <iframe
+      id="youtube-frame"
+      class="youtube-frame"
+      src=""
+      title="In Fantasy Streams Video Player"
+      allow="
+        accelerometer;
+        autoplay;
+        clipboard-write;
+        encrypted-media;
+        gyroscope;
+        picture-in-picture;
+        web-share
+      "
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+    ></iframe>
+
+
+
+    <div
+      class="player-loading"
+      id="player-loading"
+    >
+
+      <div class="loading-ring"></div>
+
+      <div
+        class="loading-label"
+        id="loading-label"
+      >
+        Consultando el Archivo
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+
+  <!-- INFO -->
+
+  <div class="video-info">
+
+
+    <div
+      class="video-series"
+      id="video-series"
+    >
+      Video Archive
+    </div>
+
+
+    <h2
+      class="video-title"
+      id="video-title"
+    >
+      Buscando video...
+    </h2>
+
+
+    <div
+      class="video-meta"
+      id="video-meta"
+    ></div>
+
+
+  </div>
+
+
+
+  <!-- CONTROLS -->
+
+  <div class="controls">
+
+
+    <button
+      class="control-button"
+      id="previous-button"
+      type="button"
+      title="Video anterior"
+    >
+      ◀
+    </button>
+
+
+    <button
+      class="control-button"
+      id="reload-button"
+      type="button"
+      title="Recargar video"
+    >
+      ↻
+    </button>
+
+
+    <button
+      class="control-button"
+      id="next-button"
+      type="button"
+      title="Video siguiente"
+    >
+      ▶
+    </button>
+
+
+    <div class="controls-spacer"></div>
+
+
+    <div class="player-state">
+      Creator Archive
+    </div>
+
+
+  </div>
+
+
+</div>
+
+
+
+<!-- PLAYLIST -->
+
+<aside
+  class="playlist-column"
+  id="playlist-column"
+>
+
+
+  <div class="playlist-header">
+
+
+    <div>
+
+      <div class="playlist-label">
+        Videos
+      </div>
+
+
+      <div
+        class="playlist-series-name"
+        id="playlist-series-name"
+      >
+        Archive
+      </div>
+
+    </div>
+
+
+
+    <div
+      class="playlist-count"
+      id="playlist-count"
+    >
+      0
+    </div>
+
+
+  </div>
+
+
+
+  <div
+    class="playlist"
+    id="playlist"
+  ></div>
+
+
+</aside>
+
+
+</section>
+
+
+
+<div
+  class="error-state"
+  id="error-state"
+></div>
+
+
+</main>
+
+
+
+<script>
+
+/* =========================================================
+   CONFIG
+========================================================= */
+
+const CONFIG = {
+
+  spreadsheetId:
+    "1PIqBgddIbX-z25I1s_-soSkYv3VG0bKv6KHSRVLETWc",
+
+  sheetName:
+    "YouTube",
+
+  /*
+    ESTA INSTANCIA DE CANVA
+    ABRE SLY FLOURISH.
+  */
+
+  defaultCreator:
+    "mrrhexx",
+
+  sheetTimeout:
+    12000
+
+};
+
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let allRows =
+  [];
+
+
+let creatorRows =
+  [];
+
+
+let creatorId =
+  CONFIG.defaultCreator;
+
+
+let channelName =
+  "";
+
+
+let seriesMap =
+  new Map();
+
+
+let seriesNames =
+  [];
+
+
+let activeSeries =
+  "";
+
+
+let videos =
+  [];
+
+
+let currentIndex =
+  0;
+
+
+
+/* =========================================================
+   DOM
+========================================================= */
+
+const creatorNameElement =
+  document.getElementById(
+    "creator-name"
+  );
+
+
+const creatorDescription =
+  document.getElementById(
+    "creator-description"
+  );
+
+
+const seriesTabs =
+  document.getElementById(
+    "series-tabs"
+  );
+
+
+const videoSeries =
+  document.getElementById(
+    "video-series"
+  );
+
+
+const videoTitle =
+  document.getElementById(
+    "video-title"
+  );
+
+
+const videoMeta =
+  document.getElementById(
+    "video-meta"
+  );
+
+
+const previousButton =
+  document.getElementById(
+    "previous-button"
+  );
+
+
+const reloadButton =
+  document.getElementById(
+    "reload-button"
+  );
+
+
+const nextButton =
+  document.getElementById(
+    "next-button"
+  );
+
+
+const youtubeFrame =
+  document.getElementById(
+    "youtube-frame"
+  );
+
+
+const playlist =
+  document.getElementById(
+    "playlist"
+  );
+
+
+const playlistCount =
+  document.getElementById(
+    "playlist-count"
+  );
+
+
+const playlistSeriesName =
+  document.getElementById(
+    "playlist-series-name"
+  );
+
+
+const playerColumn =
+  document.getElementById(
+    "player-column"
+  );
+
+
+const playlistColumn =
+  document.getElementById(
+    "playlist-column"
+  );
+
+
+const playerLoading =
+  document.getElementById(
+    "player-loading"
+  );
+
+
+const loadingLabel =
+  document.getElementById(
+    "loading-label"
+  );
+
+
+const cinema =
+  document.getElementById(
+    "cinema"
+  );
+
+
+const errorState =
+  document.getElementById(
+    "error-state"
+  );
+
+
+const databaseStatus =
+  document.getElementById(
+    "database-status"
+  );
+
+
+const databaseStatusText =
+  document.getElementById(
+    "database-status-text"
+  );
+
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function normalizeText(
+  value
+) {
+
+  return String(
+    value ?? ""
+  )
+    .trim()
+    .toLowerCase();
+
+}
+
+
+
+function isTrue(
+  value
+) {
+
+  if (
+    value === true ||
+    value === 1
+  ) {
+
+    return true;
+
+  }
+
+
+  return [
+
+    "true",
+    "1",
+    "si",
+    "sí"
+
+  ].includes(
+    normalizeText(
+      value
+    )
+  );
+
+}
+
+
+
+function getSeriesName(
+  row
+) {
+
+  return (
+
+    String(
+      row.Serie ||
+      "Video Archive"
+    ).trim()
+
+    ||
+
+    "Video Archive"
+
+  );
+
+}
+
+
+
+function thumbnailFor(
+  video
+) {
+
+  const existing =
+    String(
+      video[
+        "Thumbnail URL"
+      ] ||
+      ""
+    ).trim();
+
+
+  if (
+    existing
+  ) {
+
+    return existing;
+
+  }
+
+
+  return (
+
+    "https://i.ytimg.com/vi/" +
+
+    video.Video_ID +
+
+    "/hqdefault.jpg"
+
+  );
+
+}
+
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+function setStatus(
+  mode,
+  text
+) {
+
+  databaseStatus.classList.remove(
+    "live",
+    "error"
+  );
+
+
+  if (
+    mode
+  ) {
+
+    databaseStatus.classList.add(
+      mode
+    );
+
+  }
+
+
+  databaseStatusText.textContent =
+    text;
+
+}
+
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+function showError(
+  message
+) {
+
+  console.error(
+    message
+  );
+
+
+  cinema.style.display =
+    "none";
+
+
+  errorState.classList.add(
+    "visible"
+  );
+
+
+  errorState.textContent =
+    message;
+
+
+  setStatus(
+    "error",
+    "Error"
+  );
+
+}
+
+
+
+/* =========================================================
+   PLAYER HEIGHT
+========================================================= */
+
+function syncPlaylistHeight() {
+
+  if (
+    window.innerWidth <=
+    700
+  ) {
+
+    playlistColumn.style.height =
+      "310px";
+
+    return;
+
+  }
+
+
+  const height =
+    playerColumn
+      .getBoundingClientRect()
+      .height;
+
+
+  playlistColumn.style.height =
+    Math.ceil(
+      height
+    ) +
+    "px";
+
+}
+
+
+
+if (
+  "ResizeObserver"
+  in window
+) {
+
+  new ResizeObserver(
+    syncPlaylistHeight
+  ).observe(
+    playerColumn
+  );
+
+}
+
+
+window.addEventListener(
+  "resize",
+  syncPlaylistHeight
+);
+
+
+
+/* =========================================================
+   GOOGLE SHEETS
+========================================================= */
+
+function loadGoogleSheet() {
+
+  return new Promise(
+    (
+      resolve,
+      reject
+    ) => {
+
+
+      const callbackName =
+
+        "__IFS_CANVA_" +
+
+        Date.now() +
+
+        "_" +
+
+        Math.floor(
+          Math.random() *
+          100000
+        );
+
+
+      const script =
+        document.createElement(
+          "script"
+        );
+
+
+      let completed =
+        false;
+
+
+      function cleanup() {
+
+        try {
+
+          delete window[
+            callbackName
+          ];
+
+        }
+
+        catch (
+          error
+        ) {
+
+          window[
+            callbackName
+          ] =
+            undefined;
+
+        }
+
+
+        if (
+          script.parentNode
+        ) {
+
+          script.parentNode.removeChild(
+            script
+          );
+
+        }
+
+      }
+
+
+
+      const timeout =
+        setTimeout(
+          () => {
+
+
+            if (
+              completed
+            ) {
+
+              return;
+
+            }
+
+
+            completed =
+              true;
+
+
+            cleanup();
+
+
+            reject(
+              new Error(
+                "Google Sheets no respondió."
+              )
+            );
+
+          },
+          CONFIG.sheetTimeout
+        );
+
+
+
+      window[
+        callbackName
+      ] =
+        function (
+          response
+        ) {
+
+
+          if (
+            completed
+          ) {
+
+            return;
+
+          }
+
+
+          completed =
+            true;
+
+
+          clearTimeout(
+            timeout
+          );
+
+
+          try {
+
+
+            if (
+              !response ||
+              !response.table ||
+              !Array.isArray(
+                response.table.cols
+              ) ||
+              !Array.isArray(
+                response.table.rows
+              )
+            ) {
+
+              throw new Error(
+                "La pestaña YouTube no devolvió una tabla válida."
+              );
+
+            }
+
+
+            resolve(
+              tableToRows(
+                response.table
+              )
+            );
+
+          }
+
+
+          catch (
+            error
+          ) {
+
+            reject(
+              error
+            );
+
+          }
+
+
+          finally {
+
+            cleanup();
+
+          }
+
+        };
+
+
+
+      const tqx =
+
+        "out:json;" +
+
+        "responseHandler:" +
+
+        callbackName;
+
+
+
+      script.src =
+
+        "https://docs.google.com/spreadsheets/d/" +
+
+        CONFIG.spreadsheetId +
+
+        "/gviz/tq?" +
+
+        "tqx=" +
+
+        encodeURIComponent(
+          tqx
+        ) +
+
+        "&sheet=" +
+
+        encodeURIComponent(
+          CONFIG.sheetName
+        ) +
+
+        "&_=" +
+
+        Date.now();
+
+
+
+      script.async =
+        true;
+
+
+
+      script.onerror =
+        function () {
+
+
+          if (
+            completed
+          ) {
+
+            return;
+
+          }
+
+
+          completed =
+            true;
+
+
+          clearTimeout(
+            timeout
+          );
+
+
+          cleanup();
+
+
+          reject(
+            new Error(
+              "No fue posible conectar con Google Sheets."
+            )
+          );
+
+        };
+
+
+
+      document.head.appendChild(
+        script
+      );
+
+    }
+  );
+
+}
+
+
+
+/* =========================================================
+   TABLE TO ROWS
+========================================================= */
+
+function tableToRows(
+  table
+) {
+
+  const columns =
+    table.cols.map(
+      (
+        column,
+        index
+      ) =>
+
+        String(
+
+          column.label ||
+
+          column.id ||
+
+          (
+            "COL_" +
+            index
+          )
+
+        ).trim()
+
+    );
+
+
+  return table.rows.map(
+    row => {
+
+
+      const object =
+        {};
+
+
+      columns.forEach(
+        (
+          column,
+          index
+        ) => {
+
+
+          const cell =
+            row.c
+              ? row.c[
+                  index
+                ]
+              : null;
+
+
+          if (
+            !cell
+          ) {
+
+            object[
+              column
+            ] =
+              "";
+
+            return;
+
+          }
+
+
+          object[
+            column
+          ] =
+
+            cell.f ??
+
+            cell.v ??
+
+            "";
+
+        }
+      );
+
+
+      return object;
+
+    }
+  );
+
+}
+
+
+
+/* =========================================================
+   CREATOR ROWS
+========================================================= */
+
+function resolveCreatorRows(
+  rows
+) {
+
+  const activeRows =
+    rows.filter(
+      row => {
+
+
+        const videoId =
+          String(
+            row.Video_ID ||
+            ""
+          ).trim();
+
+
+        return (
+
+          videoId
+
+          &&
+
+          isTrue(
+            row.Disponible
+          )
+
+        );
+
+      }
+    );
+
+
+  creatorRows =
+    activeRows.filter(
+      row =>
+
+        normalizeText(
+          row.Creator_ID
+        )
+
+        ===
+
+        normalizeText(
+          CONFIG.defaultCreator
+        )
+    );
+
+
+  if (
+    !creatorRows.length
+  ) {
+
+    throw new Error(
+      "No se encontraron videos activos para MrRhexx."
+    );
+
+  }
+
+
+  channelName =
+    String(
+      creatorRows[0].Canal ||
+      "MrRhexx"
+    ).trim();
+
+}
+
+
+
+/* =========================================================
+   SERIES MAP
+========================================================= */
+
+function buildSeriesMap(
+  rows
+) {
+
+  const groups =
+    new Map();
+
+
+  const canonicalNames =
+    new Map();
+
+
+  const seenBySeries =
+    new Map();
+
+
+
+  rows.forEach(
+    row => {
+
+
+      const videoId =
+        String(
+          row.Video_ID ||
+          ""
+        ).trim();
+
+
+      if (
+        !videoId
+      ) {
+
+        return;
+
+      }
+
+
+      const rawSeries =
+        getSeriesName(
+          row
+        );
+
+
+      const key =
+        normalizeText(
+          rawSeries
+        );
+
+
+      if (
+        !canonicalNames.has(
+          key
+        )
+      ) {
+
+        canonicalNames.set(
+          key,
+          rawSeries
+        );
+
+      }
+
+
+      const seriesName =
+        canonicalNames.get(
+          key
+        );
+
+
+      if (
+        !groups.has(
+          seriesName
+        )
+      ) {
+
+        groups.set(
+          seriesName,
+          []
+        );
+
+
+        seenBySeries.set(
+          seriesName,
+          new Set()
+        );
+
+      }
+
+
+      const seen =
+        seenBySeries.get(
+          seriesName
+        );
+
+
+      /*
+        Un mismo video puede
+        pertenecer a dos series.
+
+        Sólo eliminamos duplicados
+        DENTRO de cada serie.
+      */
+
+      if (
+        seen.has(
+          videoId
+        )
+      ) {
+
+        return;
+
+      }
+
+
+      seen.add(
+        videoId
+      );
+
+
+      groups
+        .get(
+          seriesName
+        )
+        .push(
+          row
+        );
+
+    }
+  );
+
+
+
+  groups.forEach(
+    group => {
+
+
+      group.sort(
+        (
+          a,
+          b
+        ) => {
+
+
+          const orderA =
+            Number(
+              a.Orden
+            );
+
+
+          const orderB =
+            Number(
+              b.Orden
+            );
+
+
+          const safeA =
+            Number.isFinite(
+              orderA
+            )
+              ? orderA
+              : 999999;
+
+
+          const safeB =
+            Number.isFinite(
+              orderB
+            )
+              ? orderB
+              : 999999;
+
+
+          return (
+            safeA -
+            safeB
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+  return groups;
+
+}
+
+
+
+/* =========================================================
+   SERIES
+========================================================= */
+
+function renderSeriesTabs() {
+
+  seriesTabs.innerHTML =
+    "";
+
+
+  seriesNames.forEach(
+    series => {
+
+
+      const button =
+        document.createElement(
+          "button"
+        );
+
+
+      button.type =
+        "button";
+
+
+      button.className =
+        "series-tab";
+
+
+      if (
+        series ===
+        activeSeries
+      ) {
+
+        button.classList.add(
+          "active"
+        );
+
+      }
+
+
+
+      const label =
+        document.createElement(
+          "span"
+        );
+
+
+      label.textContent =
+        series;
+
+
+
+      const count =
+        document.createElement(
+          "span"
+        );
+
+
+      count.className =
+        "series-count";
+
+
+      count.textContent =
+        seriesMap
+          .get(
+            series
+          )
+          .length;
+
+
+
+      button.appendChild(
+        label
+      );
+
+
+      button.appendChild(
+        count
+      );
+
+
+
+      button.addEventListener(
+        "click",
+        () => {
+
+
+          activeSeries =
+            series;
+
+
+          videos =
+            seriesMap.get(
+              series
+            ) || [];
+
+
+          currentIndex =
+            0;
+
+
+          renderSeriesTabs();
+
+
+          renderPlaylist();
+
+
+          loadCurrentVideo(
+            false
+          );
+
+
+          playlist.scrollTop =
+            0;
+
+        }
+      );
+
+
+      seriesTabs.appendChild(
+        button
+      );
+
+    }
+  );
+
+}
+
+
+
+/* =========================================================
+   PLAYLIST
+========================================================= */
+
+function renderPlaylist() {
+
+  playlist.innerHTML =
+    "";
+
+
+  playlistSeriesName.textContent =
+    activeSeries;
+
+
+  playlistCount.textContent =
+    videos.length;
+
+
+
+  const fragment =
+    document.createDocumentFragment();
+
+
+
+  videos.forEach(
+    (
+      video,
+      index
+    ) => {
+
+
+      const button =
+        document.createElement(
+          "button"
+        );
+
+
+      button.type =
+        "button";
+
+
+      button.className =
+        "playlist-item";
+
+
+      button.dataset.index =
+        index;
+
+
+
+      if (
+        index ===
+        currentIndex
+      ) {
+
+        button.classList.add(
+          "active"
+        );
+
+      }
+
+
+
+      /* Thumbnail */
+
+      const thumb =
+        document.createElement(
+          "div"
+        );
+
+
+      thumb.className =
+        "thumbnail";
+
+
+      const image =
+        document.createElement(
+          "img"
+        );
+
+
+      image.src =
+        thumbnailFor(
+          video
+        );
+
+
+      image.alt =
+        "";
+
+
+      image.loading =
+        "lazy";
+
+
+
+      const play =
+        document.createElement(
+          "div"
+        );
+
+
+      play.className =
+        "thumb-play";
+
+
+      play.textContent =
+        "▶";
+
+
+      thumb.appendChild(
+        image
+      );
+
+
+      thumb.appendChild(
+        play
+      );
+
+
+
+      /* Copy */
+
+      const copy =
+        document.createElement(
+          "div"
+        );
+
+
+      copy.className =
+        "item-copy";
+
+
+
+      const number =
+        document.createElement(
+          "div"
+        );
+
+
+      number.className =
+        "item-number";
+
+
+      number.textContent =
+
+        String(
+          index + 1
+        ).padStart(
+          2,
+          "0"
+        )
+
+        +
+
+        " / "
+
+        +
+
+        String(
+          videos.length
+        ).padStart(
+          2,
+          "0"
+        );
+
+
+
+      const title =
+        document.createElement(
+          "div"
+        );
+
+
+      title.className =
+        "item-title";
+
+
+      title.textContent =
+        video.Título ||
+        "Untitled";
+
+
+
+      copy.appendChild(
+        number
+      );
+
+
+      copy.appendChild(
+        title
+      );
+
+
+
+      const date =
+        String(
+          video[
+            "Fecha publicación"
+          ] ||
+          ""
+        ).trim();
+
+
+
+      if (
+        date
+      ) {
+
+
+        const dateElement =
+          document.createElement(
+            "div"
+          );
+
+
+        dateElement.className =
+          "item-date";
+
+
+        dateElement.textContent =
+          date;
+
+
+        copy.appendChild(
+          dateElement
+        );
+
+      }
+
+
+
+      button.appendChild(
+        thumb
+      );
+
+
+      button.appendChild(
+        copy
+      );
+
+
+
+      /*
+        AHORA EL CLIC SÍ
+        CAMBIA EL IFRAME REAL.
+      */
+
+      button.addEventListener(
+        "click",
+        () => {
+
+
+          currentIndex =
+            index;
+
+
+          renderPlaylist();
+
+
+          loadCurrentVideo(
+            true
+          );
+
+        }
+      );
+
+
+      fragment.appendChild(
+        button
+      );
+
+    }
+  );
+
+
+  playlist.appendChild(
+    fragment
+  );
+
+
+  requestAnimationFrame(
+    syncPlaylistHeight
+  );
+
+}
+
+
+
+/* =========================================================
+   VIDEO INFO
+========================================================= */
+
+function updateVideoInfo() {
+
+  const video =
+    videos[
+      currentIndex
+    ];
+
+
+  if (
+    !video
+  ) {
+
+    return;
+
+  }
+
+
+  creatorNameElement.textContent =
+    channelName;
+
+
+  creatorDescription.textContent =
+    activeSeries;
+
+
+  videoSeries.textContent =
+    activeSeries;
+
+
+  videoTitle.textContent =
+    video.Título ||
+    "Untitled";
+
+
+  videoMeta.innerHTML =
+    "";
+
+
+  const date =
+    String(
+      video[
+        "Fecha publicación"
+      ] ||
+      ""
+    ).trim();
+
+
+
+  const metadata = [
+
+    channelName,
+
+    date ||
+    "Fecha no disponible",
+
+    (
+      currentIndex +
+      1
+    )
+
+    +
+
+    " / "
+
+    +
+
+    videos.length
+
+  ];
+
+
+
+  metadata.forEach(
+    value => {
+
+
+      const span =
+        document.createElement(
+          "span"
+        );
+
+
+      span.textContent =
+        value;
+
+
+      videoMeta.appendChild(
+        span
+      );
+
+    }
+  );
+
+
+
+  previousButton.disabled =
+    currentIndex <=
+    0;
+
+
+  nextButton.disabled =
+    currentIndex >=
+    videos.length -
+    1;
+
+}
+
+
+
+/* =========================================================
+   YOUTUBE PLAYER
+
+   ESTA ES LA PRUEBA IMPORTANTE.
+========================================================= */
+
+function loadCurrentVideo(
+  autoplay
+) {
+
+  const video =
+    videos[
+      currentIndex
+    ];
+
+
+  if (
+    !video
+  ) {
+
+    return;
+
+  }
+
+
+
+  updateVideoInfo();
+
+
+
+  playerLoading.classList.remove(
+    "hidden"
+  );
+
+
+  loadingLabel.textContent =
+    "Abriendo video";
+
+
+
+  const query =
+    new URLSearchParams();
+
+
+
+  query.set(
+    "controls",
+    "1"
+  );
+
+
+  query.set(
+    "rel",
+    "0"
+  );
+
+
+  query.set(
+    "playsinline",
+    "1"
+  );
+
+
+
+  /*
+    Sólo intentamos autoplay después
+    de que el usuario haya hecho clic
+    en una fila de la playlist.
+  */
+
+  if (
+    autoplay
+  ) {
+
+    query.set(
+      "autoplay",
+      "1"
+    );
+
+  }
+
+
+
+  youtubeFrame.src =
+
+    "https://www.youtube.com/embed/" +
+
+    encodeURIComponent(
+      video.Video_ID
+    )
+
+    +
+
+    "?" +
+
+    query.toString();
+
+
+
+  clearTimeout(
+    loadCurrentVideo.loadingTimer
+  );
+
+
+
+  loadCurrentVideo.loadingTimer =
+    setTimeout(
+      () => {
+
+        playerLoading.classList.add(
+          "hidden"
+        );
+
+      },
+      2000
+    );
+
+
+
+  const currentItem =
+    playlist.querySelector(
+
+      '.playlist-item[data-index="' +
+
+      currentIndex +
+
+      '"]'
+
+    );
+
+
+
+  if (
+    currentItem
+  ) {
+
+    currentItem.scrollIntoView(
+      {
+        block:"nearest",
+        behavior:"smooth"
+      }
+    );
+
+  }
+
+}
+
+
+
+/* =========================================================
+   IFRAME LOAD
+========================================================= */
+
+youtubeFrame.addEventListener(
+  "load",
+  () => {
+
+    playerLoading.classList.add(
+      "hidden"
+    );
+
+  }
+);
+
+
+
+/* =========================================================
+   PREVIOUS
+========================================================= */
+
+previousButton.addEventListener(
+  "click",
+  () => {
+
+
+    if (
+      currentIndex <=
+      0
+    ) {
+
+      return;
+
+    }
+
+
+    currentIndex--;
+
+
+    renderPlaylist();
+
+
+    loadCurrentVideo(
+      true
+    );
+
+  }
+);
+
+
+
+/* =========================================================
+   NEXT
+========================================================= */
+
+nextButton.addEventListener(
+  "click",
+  () => {
+
+
+    if (
+      currentIndex >=
+      videos.length -
+      1
+    ) {
+
+      return;
+
+    }
+
+
+    currentIndex++;
+
+
+    renderPlaylist();
+
+
+    loadCurrentVideo(
+      true
+    );
+
+  }
+);
+
+
+
+/* =========================================================
+   RELOAD
+========================================================= */
+
+reloadButton.addEventListener(
+  "click",
+  () => {
+
+    loadCurrentVideo(
+      false
+    );
+
+  }
+);
+
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+async function initialize() {
+
+  try {
+
+
+    setStatus(
+      "",
+      "Leyendo archivo"
+    );
+
+
+    loadingLabel.textContent =
+      "Consultando el Archivo";
+
+
+
+    allRows =
+      await loadGoogleSheet();
+
+
+
+    resolveCreatorRows(
+      allRows
+    );
+
+
+
+    seriesMap =
+      buildSeriesMap(
+        creatorRows
+      );
+
+
+
+    seriesNames =
+      Array.from(
+        seriesMap.keys()
+      );
+
+
+
+    if (
+      !seriesNames.length
+    ) {
+
+      throw new Error(
+        "MrRhexx no tiene series activas."
+      );
+
+    }
+
+
+
+    activeSeries =
+      seriesNames[0];
+
+
+    videos =
+      seriesMap.get(
+        activeSeries
+      ) || [];
+
+
+    currentIndex =
+      0;
+
+
+
+    renderSeriesTabs();
+
+
+    renderPlaylist();
+
+
+
+    /*
+      PRIMER VIDEO SIN AUTOPLAY.
+
+      Debe aparecer el reproductor
+      normal de YouTube con su
+      botón PLAY propio.
+    */
+
+    loadCurrentVideo(
+      false
+    );
+
+
+
+    const total =
+      seriesNames.reduce(
+        (
+          sum,
+          series
+        ) =>
+
+          sum +
+
+          seriesMap
+            .get(
+              series
+            )
+            .length,
+
+        0
+      );
+
+
+
+    setStatus(
+
+      "live",
+
+      seriesNames.length +
+
+      " listas · " +
+
+      total +
+
+      " videos"
+
+    );
+
+
+
+    requestAnimationFrame(
+      syncPlaylistHeight
+    );
+
+
+  }
+
+
+  catch (
+    error
+  ) {
+
+
+    console.error(
+      error
+    );
+
+
+    playerLoading.classList.add(
+      "hidden"
+    );
+
+
+    showError(
+      "No fue posible cargar el Archivo. " +
+      error.message
+    );
+
+  }
+
+}
+
+
+
+initialize();
+
+</script>
+
+
+
+
+<script>
+/* Informa al contenedor principal la altura real del reproductor.
+   Así el iframe no crea una segunda barra vertical. */
+(function(){
+  function reportHeight(){
+    var page=document.querySelector('.page');
+    var height=page
+      ? Math.ceil(Math.max(page.scrollHeight,page.getBoundingClientRect().height))
+      : Math.ceil(Math.max(document.documentElement.scrollHeight,document.body.scrollHeight));
+
+    if(height>0){
+      parent.postMessage({type:'ifs-mrrhexx-player-height',height:height},'*');
+    }
+  }
+
+  window.addEventListener('load',function(){
+    setTimeout(reportHeight,60);
+    setTimeout(reportHeight,450);
+    setTimeout(reportHeight,1200);
+  });
+
+  window.addEventListener('resize',reportHeight);
+
+  if('ResizeObserver' in window){
+    var target=document.querySelector('.page') || document.body;
+    if(target){
+      new ResizeObserver(reportHeight).observe(target);
+    }
+  }
+
+  setInterval(reportHeight,1600);
+})();
+</script>
+
+</body>
+</html></textarea>
+<textarea id="jpcoovertPlayerSource" hidden aria-hidden="true"><!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="strict-origin-when-cross-origin"><title>JP Coovert · Creating for D&amp;D</title>
+<style>
+:root{--bg:#090909;--panel:#10100f;--line:rgba(255,255,255,.08);--gold:#c7a86d;--goldsoft:#a88b58;--text:#e6dfd3;--muted:#918a7e;--dim:#68635b}*{box-sizing:border-box}html,body{margin:0;width:100%;background:transparent;overflow:hidden;scrollbar-width:none}body{color:var(--text);font-family:Georgia,"Times New Roman",serif}button{font:inherit}.page{width:100%;background:radial-gradient(circle at 30% -20%,rgba(199,168,109,.055),transparent 38%),#090909}.creator-header{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:18px 18px 15px}.eyebrow{margin-bottom:6px;color:var(--goldsoft);font:700 8px/1 Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase}h1{margin:0;color:#eee7db;font-size:clamp(24px,3vw,37px);font-weight:400;line-height:1}.desc{margin-top:7px;color:var(--muted);font:9px Arial,sans-serif;letter-spacing:.035em}.status{color:var(--dim);font:7px Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase}.series{display:flex;align-items:center;min-height:42px;padding:0 18px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:linear-gradient(#14130f,#0d0d0b);color:#e2d7c4;font:700 8px Arial,sans-serif;letter-spacing:.095em;text-transform:uppercase}.count{margin-left:9px;padding:2px 6px;border:1px solid rgba(199,168,109,.18);border-radius:20px;color:#8f7a55;font-size:7px}.cinema{display:grid;grid-template-columns:minmax(0,72%) minmax(230px,28%);width:100%;overflow:hidden;background:#080808}.player{min-width:0;background:#080808}.stage{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#000}iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}.loading{position:absolute;inset:0;z-index:2;display:grid;place-items:center;background:radial-gradient(circle,#17150f,#050505 70%);color:#8e7a56;font:700 8px Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;transition:.2s}.loading.hidden{opacity:0;visibility:hidden}.info{min-height:102px;padding:15px 18px 13px;border-top:1px solid var(--line);background:linear-gradient(#11110f,#0c0c0b)}.series-label{margin-bottom:6px;color:var(--goldsoft);font:700 7px Arial,sans-serif;letter-spacing:.13em;text-transform:uppercase}.title{display:-webkit-box;overflow:hidden;margin:0;min-height:41px;max-height:41px;color:#e1dbd0;font-size:17px;font-weight:400;line-height:1.18;-webkit-line-clamp:2;-webkit-box-orient:vertical}.meta{margin-top:10px;color:var(--dim);font:7px Arial,sans-serif}.controls{display:flex;align-items:center;min-height:46px;padding:0 13px;border-top:1px solid var(--line);background:#0d0d0c}.ctl{display:grid;place-items:center;width:38px;height:34px;border:0;background:none;color:#a39b90;cursor:pointer}.ctl:hover{color:var(--gold)}.ctl:disabled{color:#373530;cursor:default}.spacer{flex:1}.state{color:#59554e;font:7px Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase}.side{min-width:0;display:flex;flex-direction:column;overflow:hidden;border-left:1px solid var(--line);background:linear-gradient(#13120f,#0b0b0a)}.side-head{display:flex;align-items:center;justify-content:space-between;min-height:49px;padding:0 12px;border-bottom:1px solid var(--line)}.side-label{color:#b7aa94;font:700 8px Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase}.side-sub{margin-top:3px;color:#5f5a52;font:7px Arial,sans-serif}.playlist{flex:1;min-height:0;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#39352d transparent}.item{position:relative;display:grid;grid-template-columns:78px minmax(0,1fr);gap:9px;width:100%;min-height:64px;padding:10px;border:0;border-bottom:1px solid rgba(255,255,255,.045);background:none;color:inherit;cursor:pointer;text-align:left}.item:hover{background:rgba(255,255,255,.025)}.item.active{background:linear-gradient(90deg,rgba(199,168,109,.11),rgba(199,168,109,.015))}.item.active:before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold)}.thumb{position:relative;width:78px;height:44px;overflow:hidden;background:#000}.thumb img{width:100%;height:100%;object-fit:cover;opacity:.84}.copy{min-width:0}.num{margin-bottom:3px;color:#806b43;font:700 6px Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase}.ititle{display:-webkit-box;overflow:hidden;min-height:23px;max-height:23px;color:#d8d0c4;font-size:9px;line-height:1.28;-webkit-line-clamp:2;-webkit-box-orient:vertical}@media(max-width:700px){.creator-header{padding:15px}.status{display:none}.cinema{grid-template-columns:1fr}.side{height:310px!important;border-left:0;border-top:1px solid var(--line)}.title{font-size:15px}}@media(max-width:450px){.item{grid-template-columns:92px minmax(0,1fr);min-height:72px}.thumb{width:92px;height:52px}}
+</style></head><body><main class="page"><header class="creator-header"><div><div class="eyebrow">In Fantasy Streams · Creator Archive</div><h1>JP Coovert</h1><div class="desc">Creating for D&amp;D</div></div><div class="status">Archivo estático · 191 videos</div></header><div class="series">Creating for D&amp;D <span class="count">191</span></div><section class="cinema"><div class="player" id="player"><div class="stage"><iframe id="yt" title="JP Coovert video" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture;web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe><div class="loading" id="loading">Abriendo video</div></div><div class="info"><div class="series-label">Creating for D&amp;D</div><h2 class="title" id="title">Cargando...</h2><div class="meta" id="meta"></div></div><div class="controls"><button class="ctl" id="prev" title="Video anterior">◀</button><button class="ctl" id="reload" title="Recargar video">↻</button><button class="ctl" id="next" title="Video siguiente">▶</button><div class="spacer"></div><div class="state">Creator Archive</div></div></div><aside class="side" id="side"><div class="side-head"><div><div class="side-label">Videos</div><div class="side-sub">Creating for D&amp;D</div></div><div class="side-label">191</div></div><div class="playlist" id="playlist"></div></aside></section></main><script>
+const VIDEOS=[{"title":"HUGE Collection of D&D Miniatures (Now Available!)","id":"9rpIHxRzE28"},{"title":"How To Make Easy Paper Miniatures For Your D&D Game!!!","id":"pV88jlL_akc"},{"title":"How to Draw Your Own D&D City Map!!!","id":"63DZ7nLpSDE"},{"title":"How to Design and Draw a D&D Hex Map! (Includes Free Template Download!)","id":"Fwkfo97P1Cs"},{"title":"How to Design and Draw a D&D Tavern/Inn!!!","id":"5rippzKhKpg"},{"title":"How to Draw a Fantasy World Map!!!","id":"ebItHUEuYQ0"},{"title":"How to Create a One Page Dungeon! Temple of the Blood Crystal! Free Download!!!","id":"WrJL0EzQifc"},{"title":"How To Create A Homebrew D&D Monster!!!","id":"tA0-sN7LbM0"},{"title":"How to Draw Mountains, Forests, Swamps and Cities for a Fantasy World Map!","id":"d1XEVzX5cxg"},{"title":"3 Tips For How To Be A Better Dungeon Master!","id":"SKIqtqkfHjQ"},{"title":"How to Create an Isometric Dungeon Map! Free Template!","id":"ZUYixzUC8A0"},{"title":"Creating Illustrated Tokens for Roll 20 Virtual Table Top!!!","id":"1GQwYHWA9cw"},{"title":"How To Color A Fantasy D&D World Map!","id":"4-TFKWmnSvQ"},{"title":"How to Make a Pixel Art D&D Map!!!","id":"wKCln6M7lwg"},{"title":"THIS IS 'IT' PENNYWISE STILL MAD ABOUT THE DISS TRACK! [DEATH PARK]","id":"ndpdjWKk8AY"},{"title":"Designing a D&D Inspired Skateboard Graphic!!!","id":"5taw99P4cU4"},{"title":"How to Draw Your Own D&D Town Map!","id":"YLrR8Oh3vrc"},{"title":"How to Draw D&D Player Character Portraits!!!","id":"d3JH-Y-ZmOk"},{"title":"How to Draw a SUPER SIMPLE Fantasy Map for your D&D Game!!!","id":"CvZXbHRL6MU"},{"title":"Creating a D&D Cavern Dungeon Map! The Ettercap Lair!!!","id":"NkU_CuhASIk"},{"title":"Creating a free D&D Giant Spider Adventure! The Ettercap Lair!!!","id":"2dp3pD3w5tI"},{"title":"How to Create a Fantasy World Map Inspired by Video Games!","id":"iuko0Ro0Am8"},{"title":"How to Scan Your Hand-drawn Maps, Illustrations, and Artwork!","id":"tv-r-OwAABc"},{"title":"Drawing D&D Dungeon Maps for Fun!!!","id":"eCKTl5Z1iuI"},{"title":"How To Make D&D Paper Miniatures Without A Computer!!!","id":"ehjWZRPq9JA"},{"title":"How To Start Running Dungeons and Dragons! (with The Lost Mine of Phandelver)","id":"qYOP1aX_Maw"},{"title":"How To Letter Your Hand Drawn Maps!","id":"BUC-klQd5z0"},{"title":"Making a RPG Zine!","id":"l38YthD8ZW8"},{"title":"How to Draw an Isometric D&D Town Map!","id":"3hyWS6wWxgE"},{"title":"How to Create Homebrew D&D Enemies!","id":"_sRQi0tBZMk"},{"title":"Easiest Way to Create Your Own D&D Dungeon!","id":"7Yh9PCU75eU"},{"title":"How To Make Fun Magic Items For Your D&D Game!","id":"jNcfMm35rus"},{"title":"How To Make Awesome NPC's For Your D&D Game!","id":"v17PqsYscR4"},{"title":"Launching a ZineQuest Kickstarter!!!","id":"Zjx9QjUqVCg"},{"title":"How To Write A D&D Adventure!","id":"jsZJUReZmqE"},{"title":"Drawing A Randomly Generated D&D Character!","id":"PtZrvgnAtkw"},{"title":"How To Create Awesome D&D Shops!","id":"DahuvD30P48"},{"title":"Create Your Own Pixel Art D&D Character!!!","id":"Mld4pVo0hTA"},{"title":"Drawing Every Monster in the Monster Manual!!!","id":"2q_8FUpWB8M"},{"title":"How to Design Quick Dungeons AND Battle Maps!","id":"J-UW-8sCJVU"},{"title":"Why We Play D&D!","id":"vmjwqKOWDrM"},{"title":"Make Better D&D Encounters!!!","id":"n1sOJfrJgE0"},{"title":"Drawing a Fantasy Castle Map for D&D!!!","id":"e5C6-C3TV0E"},{"title":"How To Create Fantasy Maps That ANYONE Can Draw!!!","id":"Iso2yGj8q1A"},{"title":"How to Make Better Maps!","id":"P_WWnmoXSXg"},{"title":"D&D Zine Layout Behind the Scenes!","id":"5wvahtfoSD4"},{"title":"How To Draw A D&D Region Map!!!","id":"UNE5lT3l9GE"},{"title":"My Dungeon Mastering Epiphany!","id":"RiOuVb3ZEE8"},{"title":"How to Make an 8 Page Zine Out of a Single Sheet of Paper!","id":"nSg6MDKzJIY"},{"title":"DRAGON TOWN A Low-level D&D Adventure Preview!","id":"5AbdEuCjkJ4"},{"title":"Using Video Games to Inspire Your D&D Campaign!","id":"KmvYRCsQSd0"},{"title":"I'm Creating Monthly TTRPG Adventures!","id":"RtfctaY9p6I"},{"title":"How To Create A Side View Dungeon Map!","id":"3kpFT9nC7Es"},{"title":"How to Draw Jungles, Volcanoes, and Wetlands for Your Fantasy Maps!","id":"d51eja8TBD0"},{"title":"How to Make Easy Dungeon Tiles! (FREE Download)","id":"GJnjqZwTDOw"},{"title":"Making an Army of Kobold Miniatures!","id":"qLbHwYAGxeI"},{"title":"How to Draw a Dungeon Map in Under 30 Minutes!","id":"hDWhoMoK5Eo"},{"title":"How To Draw Your D&D Character! It's Easy!","id":"i6OZrAYkCRM"},{"title":"You Should Become A Dungeon Master!","id":"ZLV2g8mLIIE"},{"title":"Making A TTRPG + Studio Vlog","id":"pwngSbJ9mCM"},{"title":"The Best TTRPG Books!","id":"O7Q4ZbhkxBo"},{"title":"Can I draw a map with the WORST PEN EVER?!","id":"6FqA7gs_tHE"},{"title":"How to Make a Battle Map in Minutes!","id":"jYyEvhYMWkI"},{"title":"Making the GROSSEST dungeon EVER!","id":"bZupk5EZyqM"},{"title":"How To Draw An Underground City Map!","id":"6FR2E-CHm0Q"},{"title":"How To Hand Draw A Pixel Art World Map!","id":"ADyo-USQonM"},{"title":"What's Inside These Monthly DnD Zines?!","id":"0pkcwF3EHgA"},{"title":"Drawing Fantasy Maps for Players!","id":"PzwnrtBtR1U"},{"title":"Making D&D Character Sheet Mini Books! Free Download!","id":"JjXCQQoODXk"},{"title":"Easiest Way to Make Dungeon Maps?! Dungeon Scrawl!","id":"-0_ukoyopWM"},{"title":"How to Make D&D Dungeon Maps that Change!","id":"mhrWYfnDdec"},{"title":"Redrawing the 5e Monster Manual!","id":"Qi--bDiAfDM"},{"title":"How to Make Your D&D Game EXCITING!","id":"rDgb79SwE8o"},{"title":"How To Draw an Elden Ring Style Map!","id":"ymG3Xz22_9k"},{"title":"Mapping My D&D Campaign!","id":"IfpnaKpvBtg"},{"title":"Writing One Shot D&D Adventures!","id":"X-XrLJiQcmQ"},{"title":"How to Make 1 inch Paper Minis!","id":"19gEmTYa4KQ"},{"title":"How To Draw A Ruined Town Map!","id":"t7uWaOh9BZk"},{"title":"How to Design a Point Crawl Adventure!","id":"6-19W2uJwS4"},{"title":"Drawing D&D Player Characters! + Campaign Recap!","id":"2QCIunibXrc"},{"title":"How To Make Awesome D&D Tokens!","id":"LBZPi4oKlCQ"},{"title":"Making Dungeon Maps on a Whiteboard!","id":"AkTlOfg2zGs"},{"title":"How to Create Magic Items in Under a Minute!","id":"HmL_YN7xFog"},{"title":"Making World Maps for Streaming D&D Games!","id":"NfT-XwIJZqs"},{"title":"Drawing Maps Like Tolkien!","id":"dPmajnVdx3w"},{"title":"How to Create Your Own D&D Dungeon!","id":"afq6IU40-00"},{"title":"Land of Eem Adventure Design!","id":"ao93FmJ3UOY"},{"title":"How To Draw A World Map!","id":"LyD6SKxyXj4"},{"title":"Drawing Horrifying Monsters for Mork Borg!","id":"kTI8jkx16YI"},{"title":"I'm Making A Game!","id":"JNLFzdWo6Gg"},{"title":"The Best Pens for Drawing Fantasy Maps?","id":"FCLiG5teoJY"},{"title":"Drawing My New D&D Character!","id":"PFgmiT7PisE"},{"title":"Are D&D Maps Worth Using?","id":"XxnBkiWr2vI"},{"title":"Get Inspired to Run D&D","id":"NAzIZPqhHWA"},{"title":"How To Draw Towns and Cities for Fantasy Maps!","id":"GDkWfgSOjBE"},{"title":"Making Fantasy Maps!","id":"nvcCR50bWP0"},{"title":"How To Make A Fantasy City Map In Minutes!","id":"a2F7WXLcd6s"},{"title":"Creating Dungeons The Easy Way!","id":"UE044JBSQv8"},{"title":"Creating DnD Encounters!","id":"lHals9j0JPI"},{"title":"I Made A Game!","id":"Sm3aHTA9lgg"},{"title":"How to Make Dragons Even Cooler!","id":"4OSVM5M868U"},{"title":"Making a One Page Dungeon - Free Download!","id":"ywkEFsoHXy0"},{"title":"How To Make A Fun One Shot TTRPG Adventure!","id":"l6G_eKuxw0w"},{"title":"Is It Time To Stop Playing D&D?","id":"hjhT6b8OZis"},{"title":"How to Draw A Detailed Dungeon Map (It's not hard!)","id":"9lonMLamfZI"},{"title":"How To Make A TTRPG Zine!","id":"NWMFxa_AG5c"},{"title":"Worldbuilding with Hex Grid Maps!","id":"9RmDp5hboLE"},{"title":"How to Make Customized Hex Tiles!","id":"Ff-Z1sY_kqQ"},{"title":"How To Write A Homebrew TTRPG Adventure!","id":"DaIbAI3_8zQ"},{"title":"How To Make A Pixel Art World Map!","id":"dRBmlgFZcU0"},{"title":"How To Draw BIG Fantasy World Maps!","id":"JkFaLmLj408"},{"title":"How to Write a TTRPG Heist Adventure!","id":"uf4lBkWST9g"},{"title":"Making Pixel Art Dungeons!","id":"OVCrXXfDQcQ"},{"title":"How To Make A Fantasy World Map In Minutes!","id":"lE3MmBpUCIY"},{"title":"Fastest and Easiest Dungeon Tiles!","id":"-YFaBJMZmJU"},{"title":"Creating Pixel Art Monster Sprites!","id":"IY6NyVrcBzE"},{"title":"Drawing A Fantasy Town Map With A Sharpie!","id":"ag533AMAlwU"},{"title":"Draw a Battle Map in an Hour!","id":"sbKL5WxFFd4"},{"title":"Create a TTRPG Adventure in 10 Easy Steps!","id":"td3HemC3qOg"},{"title":"How To Draw A Floating Island Fantasy Map!","id":"Kr83o07LqZs"},{"title":"How To Create A Sandbox Dungeon!","id":"lBoBiAa6ITo"},{"title":"Making a Dungeon Map Dice Tray!","id":"Zfa2NVesVrI"},{"title":"Drawing Fantasy Cities!","id":"8yPZUpaZ6QY"},{"title":"How To Write A TTRPG Adventure?","id":"OKB4UbsS3Fk"},{"title":"My New Tabletop RPG!","id":"nQg8QmuLmOQ"},{"title":"How To Draw Fantasy Maps with CHEAP Markers!","id":"RMIkD2AJ-L0"},{"title":"Write Adventures The Easy Way!","id":"cgFdlXliK1U"},{"title":"Running D&D For Kids!","id":"AMweo5r4390"},{"title":"I can't believe how cool it is! Monstrous!","id":"4qHH9aS2oRE"},{"title":"Easy To Make Magic Item Cards! Free Template!","id":"yTSAtsB8U40"},{"title":"Surprise Your Players With Dungeon Maps!","id":"kkxU6C72OOw"},{"title":"How To Draw A Dark Fantasy Map!","id":"tc9S13GWpuM"},{"title":"Get Inspired to Make Monsters!","id":"aF4yMHwTsJs"},{"title":"Turn Your Childhood Into A TTRPG!","id":"s0zsU0VaYms"},{"title":"How To Make A Parchment Map! It’s Easy!","id":"1oCAdYvt5i0"},{"title":"How To Draw A Ship Map!","id":"Jf05mKYOhN8"},{"title":"How To Draw Fantasy Monsters! It’s Easy!","id":"mU6p7tA-Xuw"},{"title":"Can I fit a Dungeon on a postcard?!","id":"SkVJjXmpSDE"},{"title":"Making Simple Adventure Maps! Fun Way To Prep!","id":"OHCudOE94VY"},{"title":"Add These Four Things To Your Dungeons!","id":"XcoohpJHyHE"},{"title":"Drawing an Isometric Dungeon Map!","id":"_EJGiUYbaQg"},{"title":"Drawing Fantastical World Maps!","id":"0WSb88ccUtA"},{"title":"How To Make Paper Miniature Monsters!","id":"yVZdLC8lLB0"},{"title":"How To Draw A Lord of the Rings Style Map!","id":"xSfu9NjYvxQ"},{"title":"How To Draw A D&D Character!","id":"paIT5rtznRo"},{"title":"YOU Can Draw Fantasy Maps!","id":"Rme5YnNh6yQ"},{"title":"Drawing a Sci-Fi / Fantasy Desert Map","id":"EOlsueTrwnE"},{"title":"6 Types of Non-Combat Encounters for your TTRPG!","id":"KrQuzTTs8Ag"},{"title":"How To Make Awesome TTRPG Characters!","id":"t__u-ouXheY"},{"title":"I Made 12 TTRPG Zines in 12 Months!","id":"tNyqe5BbJtE"},{"title":"How To Craft Your Own DM Screen!","id":"zAWxhFm_w8M"},{"title":"How to make a Shadowdark Dungeon!","id":"8EbyklQRj_8"},{"title":"How to make the Perfect Zine Holder (free template!)","id":"cU4hLK_sPoo"},{"title":"Drawing a Sci-Fi Spaceship Map!","id":"xjsKT3LyO5o"},{"title":"A Ghost-busting TTRPG!","id":"Z-lKrndza1E"},{"title":"How To Make A Colorful World Map!","id":"L2Gp8aZd-XA"},{"title":"How To Make Sci-Fi TTRPG Tokens!","id":"iE4Bi_49SUU"},{"title":"How To Draw A Wizard Tower Map!","id":"tg19NQEBhNM"},{"title":"What Makes A Good First TTRPG Adventure?","id":"3f822I4JscI"},{"title":"How To Make A DM Screen The Easy Way!","id":"mCguVYfw1QM"},{"title":"How I make Fun TTRPG Monsters!","id":"IRwwtd-QCms"},{"title":"How to Draw A Fantasy Village Map!","id":"ycHamQiDiUg"},{"title":"The Best Way To Build A World!","id":"H52GqnyII8c"},{"title":"How to draw Magic Weapons the easy way!","id":"7I3tyf8r5PM"},{"title":"Make TTRPG Dungeons That Are Actually Fun!","id":"6i2em4-fLQQ"},{"title":"Simple Trick for Coloring Your World Maps!","id":"FVHFgNPIbSo"},{"title":"How To Draw A Maze Dungeon Map!","id":"SmKRVgeTGZ4"},{"title":"How I prep a TTRPG session!","id":"n7oDjThFU0o"},{"title":"How To Draw A Fantasy Farm Map!","id":"U4GXmrSsID4"},{"title":"Reveal your dungeon map one room at a time!","id":"Urm2SdTsuq4"},{"title":"Drawing Old-School D&D Monsters!","id":"JIwlq7RhTFY"},{"title":"Can You Run a TTRPG Dungeon From Just a Map?","id":"cjKVrK1uYR4"},{"title":"Drawing the New Shadowdark Class! (The Wyrdling)","id":"QqWEdmrNNc4"},{"title":"Drawing Dragons for Monster Week!","id":"xIvdpKgx-9s"},{"title":"Drawing Fantasy City Maps","id":"wFidbG90cZo"},{"title":"World Building with Maps!","id":"vzvmbJ9yb_c"},{"title":"Draw Fantasy Portraits the Easy Way!","id":"eTaLIwa36z0"},{"title":"Making a One Page Dungeon! Dungeon Jam 2025!","id":"N2VTsknNr6M"},{"title":"I made a mistake... and became a better DM because of it!","id":"68Kcdi4WHU0"},{"title":"How To Draw Super Simple Fantasy World Maps!","id":"ISSYsFx4rAc"},{"title":"Easy to Draw Fantasy Castle Map!","id":"Jp1HRgfF6Ro"},{"title":"Making 1000 Fantasy Map Stickers!","id":"DBbbuWnA3LQ"},{"title":"Drawing Viewer Suggested Magic Items!","id":"P5cTX0ErYg4"},{"title":"Can I make the perfect TTRPG?","id":"jKGivZxiFEw"},{"title":"3 Ways to Have More Fun Running TTRPGs","id":"P_pfXj-8PXI"},{"title":"An Easy Way to Write a TTRPG Adventure!","id":"c9aMwBv2VQg"},{"title":"Simple tricks for creating a TTRPG Adventure + Big Sale!","id":"oFS4NgVxypM"},{"title":"How to draw your own Paper Miniatures in minutes! It's easy!","id":"btXS_YLz7Ms"},{"title":"How To Draw a Sci-fi Building Map!","id":"uaoJKELrhf4"},{"title":"The Perfect Fantasy TTRPG?","id":"qbrQ3FTNlj4"},{"title":"Making props for my tabletop RPG!","id":"hagIUwewM0A"}];let current=0;const yt=document.getElementById('yt'),title=document.getElementById('title'),meta=document.getElementById('meta'),playlist=document.getElementById('playlist'),loading=document.getElementById('loading'),player=document.getElementById('player'),side=document.getElementById('side'),prev=document.getElementById('prev'),next=document.getElementById('next');function sync(){if(innerWidth<=700){side.style.height='310px';return}side.style.height=Math.ceil(player.getBoundingClientRect().height)+'px'}if('ResizeObserver'in window)new ResizeObserver(sync).observe(player);addEventListener('resize',sync);function render(){playlist.innerHTML='';const f=document.createDocumentFragment();VIDEOS.forEach((v,i)=>{const b=document.createElement('button');b.type='button';b.className='item'+(i===current?' active':'');b.dataset.i=i;b.innerHTML='<span class="thumb"><img loading="lazy" alt="" src="https://i.ytimg.com/vi/'+encodeURIComponent(v.id)+'/hqdefault.jpg"></span><span class="copy"><span class="num">'+String(i+1).padStart(3,'0')+' / 191</span><span class="ititle">'+escapeHtml(v.title)+'</span></span>';b.onclick=()=>{current=i;render();load(true)};f.appendChild(b)});playlist.appendChild(f);requestAnimationFrame(sync)}function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}function load(autoplay=false){const v=VIDEOS[current];title.textContent=v.title;meta.textContent='JP Coovert · '+(current+1)+' / '+VIDEOS.length;prev.disabled=current===0;next.disabled=current===VIDEOS.length-1;loading.classList.remove('hidden');const q=new URLSearchParams({controls:'1',rel:'0',playsinline:'1'});if(autoplay)q.set('autoplay','1');yt.src='https://www.youtube.com/embed/'+encodeURIComponent(v.id)+'?'+q.toString();setTimeout(()=>loading.classList.add('hidden'),1800);const row=playlist.querySelector('[data-i="'+current+'"]');row&&row.scrollIntoView({block:'nearest',behavior:'smooth'})}yt.addEventListener('load',()=>loading.classList.add('hidden'));prev.onclick=()=>{if(current>0){current--;render();load(true)}};next.onclick=()=>{if(current<VIDEOS.length-1){current++;render();load(true)}};document.getElementById('reload').onclick=()=>load(false);render();load(false);function reportHeight(){const page=document.querySelector('.page');const h=Math.ceil(Math.max(page.scrollHeight,page.getBoundingClientRect().height));if(h>0)parent.postMessage({type:'ifs-jpcoovert-player-height',height:h},'*')}addEventListener('load',()=>{setTimeout(reportHeight,60);setTimeout(reportHeight,450);setTimeout(reportHeight,1200)});addEventListener('resize',reportHeight);if('ResizeObserver'in window)new ResizeObserver(reportHeight).observe(document.querySelector('.page'));setInterval(reportHeight,1600);
+</script></body></html></textarea>
 <script>
 const BOOKS=[{"title": "The Return of the Lazy Dungeon Master", "description": "Diseñado para ayudar a los directores de juego a sacar más provecho de sus partidas preparando menos.", "kicker": "Lazy DM · Preparación", "chapters": [{"title": "Contents", "url": "https://drive.google.com/file/d/1PJnIzgnlfp0zFc-Bm7wKCAHZ685HIutO/view?usp=drive_link"}, {"title": "Pt. 1 · Preparing for yor Game", "url": "https://drive.google.com/file/d/1qZxkqf4CkxgIHcKJGWvLQX9NrRy57pTK/view?usp=drive_link"}, {"title": "Pt. 2 · Running your game", "url": "https://drive.google.com/file/d/1jvmVwvzrbfMkBkSWTsMeN5f8vME0A-S5/view?usp=drive_link"}, {"title": "Pt. 3 · Thinking of your Game", "url": "https://drive.google.com/file/d/1sK4OehkP_UgU_X9zShZ-Tb7Kwf7UrlxK/view?usp=drive_link"}]}, {"title": "The Lazy DM’s Companion", "description": "Consejos, organización, fundamentos de aventura, exploración, combate, generadores y mapas para agilizar la preparación.", "kicker": "Lazy DM · Referencia", "chapters": [{"title": "Contents", "url": "https://drive.google.com/file/d/1wg6Blekz-xN3fQFeEyN0mA28ABUfgMKo/view?usp=drive_link"}, {"title": "Pt. 1 · Tips & Improv", "url": "https://drive.google.com/file/d/1yyVUea14w8zLgYJwpknpct2ewDtOZOJq/view?usp=drive_link"}, {"title": "Pt. 2 · Organize Games", "url": "https://drive.google.com/file/d/1IY9t4am1saDp37Ta_up_G4PSJKJkj3TR/view?usp=drive_link"}, {"title": "Pt. 3 · Adventure foundations", "url": "https://drive.google.com/file/d/12ZAtN-zaJ-EOWJcfjA263MrQx8QBz2sW/view?usp=drive_link"}, {"title": "Pt. 4 · Exploration Aids", "url": "https://drive.google.com/file/d/1LpfJ6pMl-NJb8m6YUKv2FwBYt4jF3mgw/view?usp=drive_link"}, {"title": "Pt. 5 · Combat Suggestions", "url": "https://drive.google.com/file/d/1SRyaw2skrnr-lHcIaSCJqTNzKTcY9TrU/view?usp=drive_link"}, {"title": "Pt. 6 · Generators", "url": "https://drive.google.com/file/d/1U8lai54zHBcAwOHXF0W1EJarz_mVdEJN/view?usp=drive_link"}, {"title": "Pt. 7 · Maps", "url": "https://drive.google.com/file/d/1x1YxAwjWz611BWnNdDsWS7W1ZNV8KWL2/view?usp=drive_link"}, {"title": "Appendices", "url": "https://drive.google.com/file/d/1R91A6bpXVxqBBc7nrZ93noq-IzDFCqiY/view?usp=drive_link"}]}, {"title": "The Lazy DM's Workbook", "description": "Guías, referencias y generadores para preparar, construir y dirigir mejores partidas de rol.", "kicker": "Lazy DM · Workbook", "chapters": [{"title": "About", "url": "https://drive.google.com/file/d/1iwyU1hvgJK7Wi7XX3l_S9DlNTUBFcgXi/view?usp=drive_link"}, {"title": "Pt. 1 · 5e References", "url": "https://drive.google.com/file/d/1z8QeyL_XY2HuucbPc7Stw_6nEuNu4vWe/view?usp=drive_link"}, {"title": "Pt. 2 · Random Tables", "url": "https://drive.google.com/file/d/1anrxsc0tMV2HOt5t0WVva_2ywf3zKAr1/view?usp=drive_link"}, {"title": "Pt. 3 · Theater-of-the-Mind", "url": "https://drive.google.com/file/d/1DR02O4gMe5oiFKtxVMDXqe8ODtiVpOVa/view?usp=drive_link"}, {"title": "Pt. 4 · Lazy Lairs", "url": "https://drive.google.com/file/d/1pEZ-qljWQIlW1LL3iIQSqWTPL56tXFbg/view?usp=drive_link"}, {"title": "Fill-in Sheets", "url": "https://drive.google.com/file/d/1GzwHoatUa6oEO1_KDqehQSvgWKC0s2yP/view?usp=drive_link"}]}, {"title": "Forge of Foes", "description": "Herramientas y orientación para dirigir monstruos memorables y construir mejores encuentros en tus juegos.", "kicker": "Monstruos · Encuentros", "chapters": [{"title": "Contents + Introduction", "url": "https://drive.google.com/file/d/12ZpFqf7TgrlOb7mw3TavDDsP41ETUURk/view?usp=drive_link"}, {"title": "Ch. 1 · Monster Toolkits", "url": "https://drive.google.com/file/d/1luIDoB5T4bXP-zqSyNGZempv8B71Ea3z/view?usp=drive_link"}, {"title": "Ch. 2 · Monster Tips & Tricks", "url": "https://drive.google.com/file/d/1EnEYz_jWTWWf5XmQ5CZh8RlvQ7nt0IpW/view?usp=drive_link"}, {"title": "Ch. 3 · Building Encounters", "url": "https://drive.google.com/file/d/1CTcStjxhfz5wyKo2zLaryxMChLr0tWQa/view?usp=drive_link"}, {"title": "Ch. 4 · Monster Discussion", "url": "https://drive.google.com/file/d/1FsUpzMs_9NtLlxbstSCSG-nDWrS4p_KN/view?usp=drive_link"}]}, {"title": "City of Arches", "description": "Una ambientación urbana fantástica con facciones, lugares y aventuras listas para llevar a la mesa.", "kicker": "Campaña · Ciudad", "chapters": [{"title": "Contents + Introduction", "url": "https://drive.google.com/file/d/1awS_JJnV63xkNYmfeL_1JvuFMJTp1jgK/view?usp=drive_link"}, {"title": "Ch. 1 · Welcome to the City", "url": "https://drive.google.com/file/d/1e-41FfSza6gDpXMNr-WetFXxM1fkO4QH/view?usp=drive_link"}, {"title": "Ch. 2 · Gazetteer of the City", "url": "https://drive.google.com/file/d/12pFZwReNnbQAwNgKVz0DiDsb2qHrAgeO/view?usp=drive_link"}, {"title": "Ch. 3 · The Lower Reaches", "url": "https://drive.google.com/file/d/1XmoNnSjGVGcT_SwudtExazTcBgGZBPC1/view?usp=drive_link"}, {"title": "Ch. 4 · Cliffs of the Dead", "url": "https://drive.google.com/file/d/1VQor0geUVzVIkBjqAS05t0YFmnSv4KmH/view?usp=drive_link"}, {"title": "Ch. 5 · Endless Warrens", "url": "https://drive.google.com/file/d/1JO2fnPimUyqHx2ggquZEk_w5T6BdX0Ps/view?usp=drive_link"}, {"title": "Ch. 6 · Sunken Revvia", "url": "https://drive.google.com/file/d/1zKCeLk9jdoqJf9EqLRXoNSp92ffQpx6J/view?usp=drive_link"}, {"title": "Ch. 7 · Vaults of Nameless King", "url": "https://drive.google.com/file/d/1si3dfRc5QjZqnsjlaYLIFLO1YnM5nIfE/view?usp=drive_link"}, {"title": "Ch. 8 · Borderlands", "url": "https://drive.google.com/file/d/1UJL74mpG_-RrE1zOAq_joAkZVG2jX028/view?usp=drive_link"}, {"title": "Ch. 9 · Worlds Beyond", "url": "https://drive.google.com/file/d/1nExXE6hwho0i40xx1wZ0jnX2WevZXTZI/view?usp=drive_link"}, {"title": "Ch. 10 · Campaign Arcs", "url": "https://drive.google.com/file/d/1GlrR4rfaShPZpfHLfsA1zqJhBHyi_nxG/view?usp=drive_link"}, {"title": "Ch. 11 · Adventures", "url": "https://drive.google.com/file/d/1DmFHxAz4IxlA-yV31pSsuKLQZFWyiBgK/view?usp=drive_link"}, {"title": "Ch. 12 · Frameworks", "url": "https://drive.google.com/file/d/1zKy9pXj9IJCOTaf56CrDquNEIH88HkWA/view?usp=drive_link"}, {"title": "App. A–B · Monsters & NPC’s", "url": "https://drive.google.com/file/d/1C2jXI-fcpK1ZHcqsv9iAPDKKkB5lNoso/view?usp=drive_link"}, {"title": "App. C–D · Adventure Generators", "url": "https://drive.google.com/file/d/1JqkJ3i7yXUQBJlG8sxr3Cm-oex2vFfgW/view?usp=drive_link"}, {"title": "App. E · Player’s Guide", "url": "https://drive.google.com/file/d/12x_SIKAxI2qyR37a_iLtS_HqV_YRnUhp/view?usp=drive_link"}]}, {"title": "Fantastic Adventures", "description": "Una colección de aventuras listas para usar, fáciles de preparar y rápidas de poner en juego.", "kicker": "Aventuras · 2nd–5th lvl", "chapters": [{"title": "Contents + Summaries", "url": "https://drive.google.com/file/d/1RdcRtbxR_X-Le7SGTlF8JfrNH4VXTd3H/view?usp=drive_link"}, {"title": "Ch. 1 · Whistesparrow Village", "url": "https://drive.google.com/file/d/1ZdsxgRO4pMWwlNMK9rQiWR7e7aHupdmi/view?usp=drive_link"}, {"title": "Ch. 2 · The Night Blade", "url": "https://drive.google.com/file/d/1oWuDwicAkHKS9v_t6HtBMmMBk9fPGDkm/view?usp=drive_link"}, {"title": "Ch. 3 · The Dwarven Vault", "url": "https://drive.google.com/file/d/1656QoZ4B_AKzi-a41b7cupBihv4CaYiZ/view?usp=drive_link"}, {"title": "Ch. 4 · Well of the Black Sun", "url": "https://drive.google.com/file/d/1_UF0VgL6Ryu-xNJCu5fUo-jlqYD_KLW0/view?usp=drive_link"}, {"title": "Ch. 5 · Rosethorn", "url": "https://drive.google.com/file/d/15XfN3AFiftBYX_0hYp6Y7n0MspeU3uTb/view?usp=drive_link"}, {"title": "Ch. 6 · Gleam in King’s Eye", "url": "https://drive.google.com/file/d/1liGt44GfO_XTsIV7BwXnq6PjPY0aVIN7/view?usp=drive_link"}, {"title": "Ch. 7 · The Crashed Palace", "url": "https://drive.google.com/file/d/1ZAyeImN4-UFM8mpK8jnaqSLzS2yDx9Vg/view?usp=drive_link"}, {"title": "Ch. 8 · The Flesh Eaters", "url": "https://drive.google.com/file/d/1q5S_7VKnx6DheKBzAyXXD9QT9MwgTVQF/view?usp=drive_link"}, {"title": "Ch. 9 · Queen of Red Water", "url": "https://drive.google.com/file/d/1jDqDVklgDUWllUcOL5hXCcuY945Igh_g/view?usp=drive_link"}, {"title": "Ch. 10 · Cult of Dusk", "url": "https://drive.google.com/file/d/16ueJkDeT2gYt08L-fNCVbRfF1vNG_xX_/view?usp=drive_link"}, {"title": "Ch. 11 · Gloom", "url": "https://drive.google.com/file/d/1fc7pxPldVbJacOdPQJ1me0_ErNXmX0jN/view?usp=drive_link"}]}, {"title": "Ruins of the Grendleroot", "description": "Libro de aventuras de quinta edición centrado en una campaña subterránea fácil de preparar y de dirigir.", "kicker": "Aventuras · Grendleroot", "chapters": [{"title": "Contents + About", "url": "https://drive.google.com/file/d/1xi_KaeK88-W6prDwhUYvyM-TQ5Ls__Ts/view?usp=drive_link"}, {"title": "Ch. 1 · Deepdelver’s Enclave", "url": "https://drive.google.com/file/d/1aGKeYbWKpG1MwYHcvp_K1Q9doQt4mmqS/view?usp=drive_link"}, {"title": "Ch. 2 · Story of Blackclaw Mtn.", "url": "https://drive.google.com/file/d/1s-Ytw4thXxR6YHPG4K4nPwEAuJKjNLg7/view?usp=drive_link"}, {"title": "Ch. 3 · Call of Starsong Tower", "url": "https://drive.google.com/file/d/1dUSGiwkRD_9CAtmy4tpVdqRp5riaEigm/view?usp=drive_link"}, {"title": "Ch. 4 · Forgotten God’s Temple", "url": "https://drive.google.com/file/d/1nNKoYz_NKSu4RGI93SP7SImX0EkcqWJz/view?usp=drive_link"}, {"title": "Ch. 5 · Spire of Violet Falls", "url": "https://drive.google.com/file/d/1Pge_UEM9mdQYf2MbRjGJIEUesKQxtH1L/view?usp=drive_link"}, {"title": "Ch. 6 · Fistful of Copper", "url": "https://drive.google.com/file/d/10hgsx3UarGIxuc9Xm-bpQYgC9uva7VAM/view?usp=drive_link"}, {"title": "Ch. 7 · Shatter", "url": "https://drive.google.com/file/d/1xTiDx5yfWPoWWXZqS9XhM4UCCToc5q3_/view?usp=drive_link"}, {"title": "Ch. 8 · Chuul", "url": "https://drive.google.com/file/d/197f6T5zSePEpL-Sv4kbx0GNg7UMrEzPt/view?usp=drive_link"}, {"title": "Ch. 9 · The Cell", "url": "https://drive.google.com/file/d/1sIYWtbnnBQFLcvXuNPZtK9MsSFv8BoLq/view?usp=drive_link"}, {"title": "Ch. 10 · White Queen’s Vault", "url": "https://drive.google.com/file/d/1WvzbEWJvz71kCdZh_UJS8braftF4LNbm/view?usp=drive_link"}, {"title": "Ch. 11 · Red Rose’s Children", "url": "https://drive.google.com/file/d/1sIQboSqsh0ZcSo36RAtXyvrBODKXmv9G/view?usp=drive_link"}, {"title": "Ch. 12 · Black Cathedral’s Seed", "url": "https://drive.google.com/file/d/1leA2MWFyHBrbB7uoKMBlJUBWw-JlwRan/view?usp=drive_link"}, {"title": "App. A · Blackclaw Player’s Guide", "url": "https://drive.google.com/file/d/1HfU6gLzbuT7m9L_BBiS5-_bRiL6SqGjY/view?usp=drive_link"}, {"title": "App. B · Blackclaw GM’s Toolkit", "url": "https://drive.google.com/file/d/1WT2toYfKuHJUs2OuNIkzuydMgASmL-6e/view?usp=drive_link"}, {"title": "App. C · Black Star’s Rise", "url": "https://drive.google.com/file/d/1IuVlRG7FS6YyfSeRQY2L9otNybGjmXNg/view?usp=drive_link"}]}, {"title": "Fantastic Locations", "description": "Localizaciones listas para insertar en campaña, cada una basada en un tema fantástico y jugable.", "kicker": "Localizaciones · 5e", "chapters": [{"title": "Contents + Introduction", "url": "https://drive.google.com/file/d/1RkXhxxr4CJAwIU-ko0usIAT_ttH3z13R/view?usp=drive_link"}, {"title": "Ch. 1 · Ziggurats of Doom Priests", "url": "https://drive.google.com/file/d/1nw0d5NSKHlel0G34g7nj8mX419a1UV58/view?usp=drive_link"}, {"title": "Ch. 2 · Pyramid of Night King", "url": "https://drive.google.com/file/d/1y6ZoJDKOA2MaN9q_RgNkmFM2oGkco9Bv/view?usp=drive_link"}, {"title": "Ch. 3 · The Undercity", "url": "https://drive.google.com/file/d/11_9Zv6t6FUMQMYVd3RolHITIdMzIlFLL/view?usp=drive_link"}, {"title": "Ch. 4 · The Dark Abbey", "url": "https://drive.google.com/file/d/1-cBF2niOsqtx9XZDHS4f7ufyT_yRn2Fa/view?usp=drive_link"}, {"title": "Ch. 5 · Moonwillow elf City", "url": "https://drive.google.com/file/d/1oRq3BObWXnao4p3Y5ojWhS7kXh2DLOZ9/view?usp=drive_link"}, {"title": "Ch. 6 · Lich’s Sanctuary", "url": "https://drive.google.com/file/d/1Q8azMs8JSQwqPiyK_UBHZMJeimuMRy47/view?usp=drive_link"}, {"title": "Ch. 7 · Celestial’s Fallen Palace", "url": "https://drive.google.com/file/d/1DlCiJ3K1N7m7ZReGQ4Td4w-mKjHhffbX/view?usp=drive_link"}, {"title": "Ch. 8 · Dungeon of Fire", "url": "https://drive.google.com/file/d/1H750C1vxZrOGdwRY0aifIdz1zB2-4DII/view?usp=drive_link"}, {"title": "Ch. 9 · Stormwatch Tower", "url": "https://drive.google.com/file/d/1IXNLYkPcXLkY3VUuzlU1QhRhu4AHDdT3/view?usp=drive_link"}, {"title": "Ch. 10 · The Red Keep", "url": "https://drive.google.com/file/d/1ijJQ7DmMu6Gvt0cWRI67OcpcU7QzvYu5/view?usp=drive_link"}, {"title": "Ch. 11 · The Dam of Kings", "url": "https://drive.google.com/file/d/1dOst0Ch0uQw_vCRdvr3sVdeZTeKhIjYd/view?usp=drive_link"}, {"title": "Ch. 12 · Forgotten Library", "url": "https://drive.google.com/file/d/1N5gl22V7wZbOV248iabET8Pg34p1A-Qr/view?usp=drive_link"}, {"title": "Ch. 13 · Mad King’s Castle", "url": "https://drive.google.com/file/d/1QkExQPq3bvWa59Ax548zZKwP395HNipZ/view?usp=drive_link"}, {"title": "Ch. 14 · The Obsidian Enclave", "url": "https://drive.google.com/file/d/11pkVPTkxvCq_A4poaPaoE_5LmSKyu--c/view?usp=drive_link"}, {"title": "Ch. 15 · Elemental Lords Earthmote", "url": "https://drive.google.com/file/d/1STZd1CBKHdSgDQvLR2K-jVIxJMLmesvF/view?usp=drive_link"}, {"title": "Ch. 16 · Theater of the Mind", "url": "https://drive.google.com/file/d/1xLsVEHjHTJrmJrtjrLsFRelXOAhBzFj4/view?usp=drive_link"}, {"title": "Ch. 17 · The Primeval Rock", "url": "https://drive.google.com/file/d/13NheHj5ipiri5tbtN46QosihzaGqoaQh/view?usp=drive_link"}, {"title": "Ch. 18 · The Blighted Evertree", "url": "https://drive.google.com/file/d/1oBZ5dQjCfvOxwM2tnTmh9Hff-ytXUSfA/view?usp=drive_link"}, {"title": "Ch. 19 · The Infernal Machine", "url": "https://drive.google.com/file/d/1OoZazfdYSDBMBwASFo4H6WwPn9c-Ohou/view?usp=drive_link"}, {"title": "Ch. 20 · Run & Build Fantastic Locations", "url": "https://drive.google.com/file/d/19lQgVCvy6MY33QQrUnnPY8oeUfmqUEkE/view?usp=drive_link"}]}, {"title": "Fantastic Lairs", "description": "Guaridas y escenarios con mapas, monstruos y situaciones preparadas para encuentros inmediatos.", "kicker": "Encuentros · Lairs", "chapters": [{"title": "Contents + Introduction", "url": "https://drive.google.com/file/d/1Z_V1gDtYmT9vsbiMFzWMarstZN_THQuq/view?usp=drive_link"}, {"title": "Ch. 1 · Caves of the Cockatrice", "url": "https://drive.google.com/file/d/1Yh99fvzg2Sas31_VtEw5fxtnkJRWhmLp/view?usp=drive_link"}, {"title": "Ch. 2 · Temple of Centipede Cult", "url": "https://drive.google.com/file/d/1TsWiQLfx9j0rqPoHCn4NLTJBhQvQhmcc/view?usp=drive_link"}, {"title": "Ch. 3 · Lair of Lord Whiskers", "url": "https://drive.google.com/file/d/1PA_E2ubMR1vlzuTCQgdGXhWvCXkbTRUA/view?usp=drive_link"}, {"title": "Ch. 4 · Last Call at Nevermind", "url": "https://drive.google.com/file/d/1PFzpgWDQzVe77virmSWHJ_kDLWJk8Tky/view?usp=drive_link"}, {"title": "Ch. 5 · Nature’s Rage", "url": "https://drive.google.com/file/d/1HBt_6DlR4FLuosjH05anBgB8kaR_eiXN/view?usp=drive_link"}, {"title": "Ch. 6 · Ashnarl’s Secrets", "url": "https://drive.google.com/file/d/1QCgZgtfXsyDKm8uty-LWFdBQYMYd3mLg/view?usp=drive_link"}, {"title": "Ch. 7 · Sticky Toffee", "url": "https://drive.google.com/file/d/1WoDij4uaZBznRQLIEWbPUtph27Id7I4d/view?usp=drive_link"}, {"title": "Ch. 8 · Bumpy Ride", "url": "https://drive.google.com/file/d/1X3omqwaAvcR4F0yZxOj1xkNwSZlPja2c/view?usp=drive_link"}, {"title": "Ch. 9 · The Lamia Job", "url": "https://drive.google.com/file/d/1G3JHQ0FcsPlsrTL-YNpffHc6dB89eqTY/view?usp=drive_link"}, {"title": "Ch. 10 · Ithrix Blackbile", "url": "https://drive.google.com/file/d/1Am5JyTibXBt-iSdDvyIIasmUuEyKm3Rx/view?usp=drive_link"}, {"title": "Ch. 11 · Those about to Die", "url": "https://drive.google.com/file/d/1Sbr0fEr0Eh55SphUshe3g939l3J1tzg4/view?usp=drive_link"}, {"title": "Ch. 12 · Zengran’s Game", "url": "https://drive.google.com/file/d/1hrGuVqy8HQRjoOxM6_OufCK3V8RmvM0Q/view?usp=drive_link"}, {"title": "Ch. 13 · Blood Palace", "url": "https://drive.google.com/file/d/1-bBcaC7f_KQxpLsIMDt5lQgsjK1CGJPn/view?usp=drive_link"}, {"title": "Ch. 14 · Curse of Black Ice", "url": "https://drive.google.com/file/d/1PRBNwLpJgiK924LbK05MMwn_c6ou0vx4/view?usp=drive_link"}, {"title": "Ch. 15 · Korrington Academy", "url": "https://drive.google.com/file/d/1Fe8TRgHTO_HjHGNRW2uTgnK4lQXlsjlh/view?usp=drive_link"}, {"title": "Ch. 16 · The Remembered Gof", "url": "https://drive.google.com/file/d/1pf4WCmoPuQ9R3ZwhSGlXBKtFDIIwIsKU/view?usp=drive_link"}, {"title": "Ch. 17 · Dragons Mummy’s Rage", "url": "https://drive.google.com/file/d/1q4VMmmAJBx04aLykI9dJAAO8vuQZxEmV/view?usp=drive_link"}, {"title": "Ch. 18 · Valentyne’s Legacy", "url": "https://drive.google.com/file/d/1Iyqf61b2oapKFceQ7v812FqEbmk78DRC/view?usp=drive_link"}, {"title": "Ch. 19 · The World Eater", "url": "https://drive.google.com/file/d/1XArJBli3YehFMGyvuQBmfmfxZ1jKwPxp/view?usp=drive_link"}, {"title": "Ch. 20 · Forge of Sizzle Death", "url": "https://drive.google.com/file/d/1ghOO9wmUwFTZMrC7K-RvMSw0IwWW92RY/view?usp=drive_link"}, {"title": "Ch. 21 · Blade of Queen’s Throne", "url": "https://drive.google.com/file/d/17DADd7kD17SjIcteKHXOL4V24M7Nujtc/view?usp=drive_link"}, {"title": "Ch. 22 · Hells’ Heart", "url": "https://drive.google.com/file/d/1JnIY9y4s4heUriGcLTZvmMTLhvQC5eL2/view?usp=drive_link"}, {"title": "Ch. 23 · Put the Monster Back", "url": "https://drive.google.com/file/d/1Qe0fS3ZSVOYHg1F1xGscDb0CaXL3Ssig/view?usp=drive_link"}, {"title": "Ch. 24 · Building a Boss Lair", "url": "https://drive.google.com/file/d/1w6Hsgx67UqEn8hypgTb3n9mLmIcAxh4L/view?usp=drive_link"}]}];
 const CORE_TOOL_TITLES = new Set([
@@ -4311,17 +8531,207 @@ const COVER_IDS = {
   "Forge of Foes": "1J1pWMVsmL29K2HB2IrtfsnZVtUJWLrqW",
   "City of Arches": "1ACXlH785OKWVpwK4Tg4hiW_R6G8OyRrH",
   "Fantastic Adventures": "1aJp47ADIe1jJKp_6bFM14CeBDVWjXCjb",
+  "Ruins of the Grendleroot": "1ZKY3vMEkpWm6DA_TgWFfWz8o8y4NU1NH",
   "Fantastic Locations": "1RXy3QJqX990T6yDHzA4p_uNEbgrGXNCk",
   "Fantastic Lairs": "1TTqccI_hAK5MrIduPRDbad9yz199HuY9"
 };
 
-const playerSource=document.getElementById('slyPlayerSource');
-const directory=document.getElementById('directory'),profileView=document.getElementById('profileView'),workspace=document.getElementById('workspace'),backBtn=document.getElementById('backBtn'),toolsBooksGrid=document.getElementById('toolsBooksGrid'),supplementsGrid=document.getElementById('supplementsGrid'),videoFrame=document.getElementById('videoFrame');let savedY=0,lastMedal=null,playerLoaded=false;
-function resetTabs(){document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab==='bio'));document.querySelectorAll('.pane').forEach(p=>p.classList.toggle('active',p.dataset.pane==='bio'))}
-document.querySelector('[data-creator="sly"]').addEventListener('click',e=>{savedY=scrollY;lastMedal=e.currentTarget;directory.hidden=true;profileView.hidden=false;resetTabs();requestAnimationFrame(()=>{scrollTo({top:Math.max(0,workspace.getBoundingClientRect().top+scrollY-14),behavior:'smooth'});backBtn.focus({preventScroll:true})})});
-backBtn.addEventListener('click',()=>{profileView.hidden=true;directory.hidden=false;requestAnimationFrame(()=>{scrollTo({top:savedY,behavior:'auto'});lastMedal&&lastMedal.focus({preventScroll:true})})});
-document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b===btn));document.querySelectorAll('.pane').forEach(p=>p.classList.toggle('active',p.dataset.pane===btn.dataset.tab));if(btn.dataset.tab==='videos'&&!playerLoaded){videoFrame.srcdoc=playerSource.value;playerLoaded=true}}));
+const MRRHEXX_BOOKS = [
+  {
+    title:"Sands of Doom",
+    kicker:"Campaña · Niveles 1–11",
+    description:"La campaña insignia de MrRhexx para D&D 5e: una travesía por el desierto de Kirat entre ciudades perdidas, reliquias divinas y un ejército de muertos que avanza contra el mundo.",
+    coverId:"15pjGh4RKXG6nXrJlexZzCo70bVmVaUxh",
+    chapters:[
+      {title:"Contents + Introduction",url:"https://drive.google.com/file/d/1MZPh3utK7meelf0ZQ9us3nsZvYTW56Ho/view?usp=drive_link"},
+      {title:"Ch. 1 · City of Al’Kirat",url:"https://drive.google.com/file/d/1y4bCmmr9Ih2ASfcZHMayiaB4XtKBjcFe/view?usp=drive_link"},
+      {title:"Ch. 2 · Outskirts of Al’Kirat",url:"https://drive.google.com/file/d/1fWpgKQDxm_jU4afcLN3Rp3rkT1V7gJx3/view?usp=drive_link"},
+      {title:"Ch. 3 · Prophecies in the Sand",url:"https://drive.google.com/file/d/1ofnaohuNwZlxSSYA7SOscqKYa_BjoqLP/view?usp=drive_link"},
+      {title:"Ch. 4 · The Great Pyramid",url:"https://drive.google.com/file/d/1iur-W-BNJXwyam-n0xOYgE6qsv-C6toB/view?usp=drive_link"},
+      {title:"Ch. 5 · Alone and Afraid",url:"https://drive.google.com/file/d/1LBDRdEBBuJmFhLbjey99mhGDbmDs-YWt/view?usp=drive_link"},
+      {title:"Ch. 6 · Exploring the Wasteland",url:"https://drive.google.com/file/d/1i90912QQxuShrwD6V9cRv05QPci-q1tO/view?usp=drive_link"},
+      {title:"Ch. 7 · The Veil and the Flame",url:"https://drive.google.com/file/d/1X-dfcaxRDRDNEG2d9Ug_lMo2pqr0WuIZ/view?usp=drive_link"},
+      {title:"Ch. 8 · Enchanted Gala",url:"https://drive.google.com/file/d/1BKtk5ueoVIjKlqg96cFev1xeNJXE8_Nz/view?usp=drive_link"},
+      {title:"Ch. 9 · Sunken City of Anan’Thul",url:"https://drive.google.com/file/d/1hRDBYA_YC73NtU8dv2FrQ8vRqOKp1jhV/view?usp=drive_link"},
+      {title:"Ch. 10 · Sapphire Sandstorm",url:"https://drive.google.com/file/d/1P2ZiXZymD0tiA5LdbAXf2oEbfVU9e6Lk/view?usp=drive_link"},
+      {title:"Ch. 11 · Siege of Al’Kirat",url:"https://drive.google.com/file/d/1Tb84RpZMCr_4vRL9fIxYI0rEawykwABy/view?usp=drive_link"},
+      {title:"App. A · Timeline in Sands of Doom",url:"https://drive.google.com/file/d/1vxPZEi_bwr6Dev7J8LXyLDSS6yBlel7f/view?usp=drive_link"},
+      {title:"App. B · Creatures",url:"https://drive.google.com/file/d/1NIGmX91qtjijY4F0XuLCaC-nNF-Lm4hH/view?usp=drive_link"},
+      {title:"App. C · Magic in Sands of Doom",url:"https://drive.google.com/file/d/1qRQHIlFaUDe--0Cxyu1QRjkUcTOczXGE/view?usp=drive_link"},
+      {title:"App. D · Genies in Sands of Doom",url:"https://drive.google.com/file/d/1WH8l2lqISmlxIFvBPu0Z6e2Npv3ebY5v/view?usp=drive_link"},
+      {title:"App. F · The Grand Bazaar",url:"https://drive.google.com/file/d/14i4ycNT2mx0ZpqlN2Zbnt0_fIpkOF1dh/view?usp=drive_link"},
+      {title:"Maps",url:"https://drive.google.com/file/d/1-AMqpOC72sOqK0HwCjVd8WI3xb3HGRyj/view?usp=drive_link"}
+    ]
+  }
+];
+
+const MRRHEXX_SUPPLEMENTS = [
+  {
+    title:"Monster Classes I",
+    collection:"Monster Classes",
+    description:"Deva, Succubus y Ghost convertidos en clases jugables de nivel 1 a 20, con tablas de origen, lore y mecánicas temáticas para llevar criaturas sobrenaturales al centro de la aventura.",
+    url:"https://drive.google.com/file/d/1H0hzSBiVqWwfL0pUrH2ryUSjM8pLKhxt/view?usp=drive_link",
+    coverId:"17qG9mcJ6jykdA5pl24vklJzhOhdc0zxA"
+  },
+  {
+    title:"Monster Classes II",
+    collection:"Monster Classes",
+    description:"Dragon, Ogre y Lycanthrope como personajes completos de 5e: variantes dracónicas, fuerza bruta con armas improvisadas y transformaciones bestiales con progresión hasta nivel 20.",
+    url:"https://drive.google.com/file/d/1w5I8pe7F3T7Y6VSlJrk20ODA1SxYA53_/view?usp=drive_link",
+    coverId:"1dt1xvmFHDAA1WVnRHNkKHzuqjBpcZaMu"
+  },
+  {
+    title:"Monster Classes III",
+    collection:"Monster Classes",
+    description:"Familiar, Treant y Vampire se vuelven opciones jugables: apoyo coordinado, magia y defensa vegetal, y una clase vampírica flexible con fuerte potencial de personalización y roleplay.",
+    url:"https://drive.google.com/file/d/1zUTygo3h6ZkrbqIH5Smzu6idIIPVhOw_/view?usp=drive_link",
+    coverId:"1FRKrT2TO9wCREiHYQjSX98XFMWtWuHln"
+  },
+  {
+    title:"Monster Classes IV",
+    collection:"Monster Classes",
+    description:"Mind Lord, Eye Tyrant y Serpentfolk como clases completas: poder psiónico, decenas de rayos oculares configurables y un sistema de venenos pensado para manipular y dominar el campo de batalla.",
+    url:"https://drive.google.com/file/d/1BrMpPOtrbzqkGd48Epb5AYKaNQJjcvuh/view?usp=drive_link",
+    coverId:"1Qn8j5ru3HG2yUOvRYJcwEc0hqmOnoDUp"
+  },
+  {
+    title:"Monster Classes V",
+    collection:"Monster Classes",
+    description:"Earth Elemental, Gnoll y Troll como clases de nivel 1 a 20: resistencia y control de la tierra, movilidad táctica y una regeneración monstruosa capaz de convertir el daño en parte del estilo de juego.",
+    url:"https://drive.google.com/file/d/1LUAsJFNFDPV3UMyU7Y2cCPvbXSEmnKDQ/view?usp=drive_link",
+    coverId:"1ziN6vuHlsMExPW9kuJe2BTg6cp4eVeLI"
+  },
+  {
+    title:"Monster Classes 1, 2 & 3",
+    collection:"Monster Classes",
+    description:"Recopilación que reúne en un solo suplemento las criaturas jugables de Monster Classes I, II y III: Deva, Ghost, Succubus, Dragon, Ogre, Lycanthrope, Vampire, Familiar y Treant, con progresión completa para personajes monstruosos.",
+    url:"https://drive.google.com/file/d/1kn4qJwyvRVUR-o3V5C6Zhm63Hdt4-veU/view?usp=drive_link",
+    coverId:"18l0KhuNEN342PxocJgjqDnbcbR-bAtdx"
+  },
+  {
+    title:"Armor Redesigned",
+    collection:"What They Don't Tell You About",
+    description:"Suplemento centrado en replantear el funcionamiento de la armadura y ofrecer una alternativa a las reglas habituales de D&D.",
+    url:"https://drive.google.com/file/d/1kVRI_D-kAAACHG9G3ShbwbwSfB6Su1eE/view?usp=drive_link",
+    coverId:"1S8FX225eWGBXm1Neucl9m_D9Gvwf9YMI"
+  },
+  {
+    title:"Dragon Hoards",
+    collection:"What They Don't Tell You About",
+    description:"Material dedicado a los tesoros de los dragones y a ampliar lo que puede encontrarse alrededor de sus legendarios botines.",
+    url:"https://drive.google.com/file/d/1kQXZZ2O-cLIii7rdBqDUs_2MSsbUvjMr/view?usp=drive_link",
+    coverId:"1n5Ok2g-ujok2eBlQ66sbB3g7wHtr3YCm"
+  },
+  {
+    title:"Magic Items",
+    collection:"What They Don't Tell You About",
+    description:"Suplemento de la colección dedicado a objetos mágicos y a material que amplía su presencia dentro de una campaña de D&D.",
+    url:"https://drive.google.com/file/d/17IV1q2RoVXfHkLMT_XV-Wm1wjkd_qSER/view?usp=drive_link",
+    coverId:"1GAoOVbZy4j69GhdXSEGK820NVoTvgDum"
+  },
+  {
+    title:"The Faces of Evil",
+    collection:"What They Don't Tell You About",
+    description:"Doce subclases oscuras —una por cada clase de 5e— orientadas a antihéroes, historias moralmente grises y personajes con un giro siniestro o no-muerto.",
+    url:"",
+    available:false,
+    coverId:"1wiOoXhgZfKgWLoS2gkFrqmYeYaaAjJ78"
+  }
+];
+
+const JP_WORKSHOP = [{"title":"Drawing Monsters","kicker":"Guía de dibujo","fileId":"1YdRZOb3LkqtW_zUErxVl4NBw85K_VW9X","url":"https://drive.google.com/file/d/1YdRZOb3LkqtW_zUErxVl4NBw85K_VW9X/view?usp=drive_link"},{"title":"Drawing Heroes","kicker":"Guía de dibujo","fileId":"1rzJMLdZKxch5IfEE6aDMyn57Kqv7LTsL","url":"https://drive.google.com/file/d/1rzJMLdZKxch5IfEE6aDMyn57Kqv7LTsL/view?usp=drive_link"},{"title":"Dragons","kicker":"Criaturas & dibujo","fileId":"1tY9QPlM7qQPwjF6e0mxEJmW-U-V8r7fL","url":"https://drive.google.com/file/d/1tY9QPlM7qQPwjF6e0mxEJmW-U-V8r7fL/view?usp=drive_link"},{"title":"Exploring Dungeons","kicker":"Diseño de dungeons","fileId":"1r3_U0dnbWy5ex_2wlqbsZjQ0y68VD-st","url":"https://drive.google.com/file/d/1r3_U0dnbWy5ex_2wlqbsZjQ0y68VD-st/view?usp=drive_link"},{"title":"Making Monsters","kicker":"Creación de monstruos","fileId":"1IUxIcMx3TFM90lvvP0tpaAvu5bRqvn4N","url":"https://drive.google.com/file/d/1IUxIcMx3TFM90lvvP0tpaAvu5bRqvn4N/view?usp=drive_link"},{"title":"Little Weirdos","kicker":"Criaturas","fileId":"1ULZhvjBi5HS1eias63BL6Rps30aruYEH","url":"https://drive.google.com/file/d/1ULZhvjBi5HS1eias63BL6Rps30aruYEH/view?usp=drive_link"},{"title":"Bizarre Bazaars","kicker":"Mercados & encuentros","fileId":"1aMj8Ct4hLjN0ZQbkWYBaNxz3G7zHJ1hv","url":"https://drive.google.com/file/d/1aMj8Ct4hLjN0ZQbkWYBaNxz3G7zHJ1hv/view?usp=drive_link"},{"title":"Making Maps More Fantastical","kicker":"Cartografía","fileId":"1MCNeilW-83bsFzxFNdwSFDwBproaP7ib","url":"https://drive.google.com/file/d/1MCNeilW-83bsFzxFNdwSFDwBproaP7ib/view?usp=drive_link"},{"title":"Drawing Cities","kicker":"Cartografía urbana","fileId":"1RpeliPDMpGAiSff3dZT34yiqUf8DFOxC","url":"https://drive.google.com/file/d/1RpeliPDMpGAiSff3dZT34yiqUf8DFOxC/view?usp=drive_link"},{"title":"Making Maps","kicker":"Cartografía","fileId":"17gjGZfwXVDzAD1ORFnMu7YwwR9OpdnTf","url":"https://drive.google.com/file/d/17gjGZfwXVDzAD1ORFnMu7YwwR9OpdnTf/view?usp=drive_link"},{"title":"Unscrupulous Emporiums","kicker":"Tiendas & lugares","fileId":"1qNqKIYOoPOoeirE1x8jj1DoFcbp6xQvi","url":"https://drive.google.com/file/d/1qNqKIYOoPOoeirE1x8jj1DoFcbp6xQvi/view?usp=drive_link"},{"title":"Bustling Streets & Unsavory Alleyways","kicker":"Ciudades & calles","fileId":"1iRXyV_xXqhmqU1cZXPhn4NDqxNsbjUId","url":"https://drive.google.com/file/d/1iRXyV_xXqhmqU1cZXPhn4NDqxNsbjUId/view?usp=drive_link"}];
+const JP_ADVENTURES = [{"title":"Ravenwood","kicker":"Hexcrawl & bosque","fileId":"19h-A-DnmxwdwSk5PjHUd3fa7uywfX4NN","url":"https://drive.google.com/file/d/19h-A-DnmxwdwSk5PjHUd3fa7uywfX4NN/view?usp=drive_link"},{"title":"The City of Eternal Night","kicker":"Ciudad & aventura","fileId":"1PajuFlomYLPX-bN5XVsYmZPAXn1fGyX1","url":"https://drive.google.com/file/d/1PajuFlomYLPX-bN5XVsYmZPAXn1fGyX1/view?usp=drive_link"},{"title":"Great Goblin Flight","kicker":"Aventura","fileId":"1gGp4-nENNOebTkQl1KCwD3IYHRjI144o","url":"https://drive.google.com/file/d/1gGp4-nENNOebTkQl1KCwD3IYHRjI144o/view?usp=drive_link"},{"title":"Plumb Wax Kobolds","kicker":"Kobolds & aventura","fileId":"1H_lgGv3KUhcQ9REYWZXZy_S85wbxW9gi","url":"https://drive.google.com/file/d/1H_lgGv3KUhcQ9REYWZXZy_S85wbxW9gi/view?usp=drive_link"},{"title":"Darkness Below","kicker":"Dungeon & aventura","fileId":"1yPfECUCRYEgduM1YglwbqesJayfQOCDe","url":"https://drive.google.com/file/d/1yPfECUCRYEgduM1YglwbqesJayfQOCDe/view?usp=drive_link"},{"title":"Shadespear Mountains","kicker":"Montañas & aventura","fileId":"1gDWWOEaeZ5hHsUP9cCnZJgylmNohOCsL","url":"https://drive.google.com/file/d/1gDWWOEaeZ5hHsUP9cCnZJgylmNohOCsL/view?usp=drive_link"},{"title":"Perilous Passage","kicker":"Aventura","fileId":"1-cOoJ3cjFHyx8gBhThY85OYMadmcodj7","url":"https://drive.google.com/file/d/1-cOoJ3cjFHyx8gBhThY85OYMadmcodj7/view?usp=drive_link"},{"title":"Windsong Woods","kicker":"Bosque & aventura","fileId":"1Wjs99moszFd0xJXvAoAqfUPA2S4KHxUd","url":"https://drive.google.com/file/d/1Wjs99moszFd0xJXvAoAqfUPA2S4KHxUd/view?usp=drive_link"},{"title":"Errant Tower","kicker":"Torre & aventura","fileId":"1UOKEcFAVQZKUYVvcbGLK9DvTUGHoHQOD","url":"https://drive.google.com/file/d/1UOKEcFAVQZKUYVvcbGLK9DvTUGHoHQOD/view?usp=drive_link"},{"title":"Wordless Dungeon","kicker":"Dungeon visual","fileId":"1rvVJJIylKsYkCfwXLWJSfx2_ploQzCPJ","url":"https://drive.google.com/file/d/1rvVJJIylKsYkCfwXLWJSfx2_ploQzCPJ/view?usp=drive_link"},{"title":"Fiery Caldera","kicker":"Aventura","fileId":"1GT84SLUAo7-V_cQrCjU5XTKBi3bhP5YE","url":"https://drive.google.com/file/d/1GT84SLUAo7-V_cQrCjU5XTKBi3bhP5YE/view?usp=drive_link"},{"title":"Waking Thread","kicker":"Templo & aventura","fileId":"1jc5MXPDtYoTMp5AboNVciJbVDbN1x0qJ","url":"https://drive.google.com/file/d/1jc5MXPDtYoTMp5AboNVciJbVDbN1x0qJ/view?usp=drive_link"},{"title":"Emperor of Worms","kicker":"Aventura","fileId":"1HfhAklCNXup6jezQf-M-QfQBd7h9Rv8R","url":"https://drive.google.com/file/d/1HfhAklCNXup6jezQf-M-QfQBd7h9Rv8R/view?usp=drive_link"},{"title":"Sky Garden","kicker":"Aventura","fileId":"1vMAlVAR2uJfrhnjAzKByEyRunjkm12kW","url":"https://drive.google.com/file/d/1vMAlVAR2uJfrhnjAzKByEyRunjkm12kW/view?usp=drive_link"},{"title":"Red Growth","kicker":"Aventura","fileId":"1byqtjBJwe6gWd9lU1Z1kL3unS_SBRPy6","url":"https://drive.google.com/file/d/1byqtjBJwe6gWd9lU1Z1kL3unS_SBRPy6/view?usp=drive_link"}];
+
+const playerSources={
+  sly:document.getElementById('slyPlayerSource'),
+  mrrhexx:document.getElementById('mrrhexxPlayerSource'),
+  jpcoovert:document.getElementById('jpcoovertPlayerSource')
+};
+const videoFrames={
+  sly:document.getElementById('slyVideoFrame'),
+  mrrhexx:document.getElementById('mrrhexxVideoFrame'),
+  jpcoovert:document.getElementById('jpcoovertVideoFrame')
+};
+const playerLoaded={sly:false,mrrhexx:false,jpcoovert:false};
+const directory=document.getElementById('directory');
+const profileView=document.getElementById('profileView');
+const workspace=document.getElementById('workspace');
+const slyToolsBooksGrid=document.getElementById('slyToolsBooksGrid');
+const slySupplementsGrid=document.getElementById('slySupplementsGrid');
+const mrrhexxBooksGrid=document.getElementById('mrrhexxBooksGrid');
+const mrrhexxSupplementsGrid=document.getElementById('mrrhexxSupplementsGrid');
+const jpWorkshopGrid=document.getElementById('jpWorkshopGrid');
+const jpAdventuresGrid=document.getElementById('jpAdventuresGrid');
+let savedY=0,lastMedal=null,activeCreator='';
+
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
+
+function closeBooks(scope=document){
+  scope.querySelectorAll('.book.open').forEach(art=>{
+    const panel=art.querySelector('.chapters');
+    const trigger=art.querySelector('.book-index-btn');
+    if(panel&&trigger)closeBook(art,panel,trigger);
+  });
+}
+
+function resetProfileTabs(panel){
+  panel.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab==='bio'));
+  panel.querySelectorAll('.pane').forEach(p=>p.classList.toggle('active',p.dataset.pane==='bio'));
+  closeBooks(panel);
+}
+
+function showCreator(key,medal){
+  const panel=profileView.querySelector(`[data-profile="${key}"]`);
+  if(!panel)return;
+  savedY=scrollY;
+  lastMedal=medal;
+  activeCreator=key;
+  directory.hidden=true;
+  profileView.hidden=false;
+  profileView.querySelectorAll('.creator-profile').forEach(p=>p.hidden=p!==panel);
+  resetProfileTabs(panel);
+  requestAnimationFrame(()=>{
+    scrollTo({top:Math.max(0,workspace.getBoundingClientRect().top+scrollY-14),behavior:'smooth'});
+    panel.querySelector('.creator-back')?.focus({preventScroll:true});
+  });
+}
+
+document.querySelectorAll('.medal[data-creator]').forEach(medal=>{
+  medal.addEventListener('click',()=>showCreator(medal.dataset.creator,medal));
+});
+
+document.querySelectorAll('.creator-back').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    profileView.querySelectorAll('.creator-profile').forEach(p=>closeBooks(p));
+    profileView.hidden=true;
+    directory.hidden=false;
+    activeCreator='';
+    requestAnimationFrame(()=>{
+      scrollTo({top:savedY,behavior:'auto'});
+      lastMedal&&lastMedal.focus({preventScroll:true});
+    });
+  });
+});
+
+document.querySelectorAll('.creator-profile').forEach(panel=>{
+  const creator=panel.dataset.profile;
+  panel.querySelectorAll('.tab').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      panel.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b===btn));
+      panel.querySelectorAll('.pane').forEach(p=>p.classList.toggle('active',p.dataset.pane===btn.dataset.tab));
+      if(!['supplements','tools','books'].includes(btn.dataset.tab))closeBooks(panel);
+      if(btn.dataset.tab==='videos'&&!playerLoaded[creator]){
+        const frame=videoFrames[creator];
+        const source=playerSources[creator];
+        if(frame&&source){
+          frame.srcdoc=source.value;
+          playerLoaded[creator]=true;
+        }
+      }
+    });
+  });
+});
+
 function renderBookCollection(container, collection){
   if(!container)return;
   container.innerHTML='';
@@ -4329,27 +8739,77 @@ function renderBookCollection(container, collection){
     const art=document.createElement('article');
     art.className='book';
     const panelId=(container.id||'books')+'-chapters-'+i;
-    const coverId=COVER_IDS[book.title]||'';
+    const coverId=book.coverId||COVER_IDS[book.title]||'';
     const coverMarkup=coverId
       ? `<img src="https://drive.google.com/thumbnail?id=${esc(coverId)}&sz=w700" data-fallback="https://lh3.googleusercontent.com/d/${esc(coverId)}=w700" alt="Portada de ${esc(book.title)}" loading="lazy" onerror="if(this.dataset.fallback){this.onerror=null;this.src=this.dataset.fallback}">`
       : '';
-    art.innerHTML=`<div class="book-main"><span class="book-cover-wrap"><span class="book-cover">${coverMarkup}<span class="book-cover-placeholder"><small>${esc(book.kicker)}</small><strong>${esc(book.title)}</strong></span></span></span><span class="book-meta"><span class="book-title">${esc(book.title)}</span><span class="book-desc">${esc(book.description)}</span><button class="book-index-btn" type="button" aria-expanded="false" aria-controls="${panelId}">Índice <span class="plus" aria-hidden="true">＋</span></button></span></div><aside class="chapters" id="${panelId}" aria-hidden="true" aria-label="Índice de ${esc(book.title)}"><div class="chapters-head"><div><small>Archivo PDF</small><strong>${esc(book.title)}</strong></div><button class="close-book" type="button" aria-label="Cerrar índice">×</button></div><div class="chapter-list">${book.chapters.map(ch=>`<a class="chapter" href="${esc(ch.url)}" target="_blank" rel="noopener noreferrer"><span>${esc(ch.title)}</span><span aria-hidden="true">↗</span></a>`).join('')}</div></aside>`;
+    const desktopHidden=window.innerWidth<=620?'true':'false';
+    art.innerHTML=`<div class="book-main"><span class="book-cover-wrap"><span class="book-cover">${coverMarkup}<span class="book-cover-placeholder"><small>${esc(book.kicker)}</small><strong>${esc(book.title)}</strong></span></span></span><span class="book-meta"><span class="book-title">${esc(book.title)}</span><span class="book-desc">${esc(book.description)}</span><button class="book-index-btn" type="button" aria-expanded="false" aria-controls="${panelId}">Índice <span class="plus" aria-hidden="true">＋</span></button></span></div><aside class="chapters" id="${panelId}" aria-hidden="${desktopHidden}" aria-label="Índice de ${esc(book.title)}"><div class="chapters-head"><div><small>Archivo PDF</small><strong>${esc(book.title)}</strong></div><button class="close-book" type="button" aria-label="Cerrar índice">×</button></div><div class="chapter-list">${book.chapters.map(ch=>`<a class="chapter" href="${esc(ch.url)}" target="_blank" rel="noopener noreferrer"><span>${esc(ch.title)}</span><span aria-hidden="true">↗</span></a>`).join('')}</div></aside>`;
     container.appendChild(art);
-    const trigger=art.querySelector('.book-index-btn'),panel=art.querySelector('.chapters'),close=art.querySelector('.close-book');
+    const trigger=art.querySelector('.book-index-btn');
+    const panel=art.querySelector('.chapters');
+    const close=art.querySelector('.close-book');
     trigger.addEventListener('click',()=>toggleBook(art,panel,trigger));
     close.addEventListener('click',()=>closeBook(art,panel,trigger));
   });
 }
+
+function renderDirectCollection(container, collection){
+  if(!container)return;
+  container.innerHTML='';
+  let lastCollection='';
+  collection.forEach(item=>{
+    if(item.collection&&item.collection!==lastCollection){
+      const divider=document.createElement('div');
+      divider.className='collection-divider';
+      divider.textContent=item.collection;
+      container.appendChild(divider);
+      lastCollection=item.collection;
+    }
+    const art=document.createElement('article');
+    art.className='book direct';
+    const coverMarkup=item.coverId
+      ? `<img src="https://drive.google.com/thumbnail?id=${esc(item.coverId)}&sz=w700" data-fallback="https://lh3.googleusercontent.com/d/${esc(item.coverId)}=w700" alt="Portada de ${esc(item.title)}" loading="lazy" onerror="if(this.dataset.fallback){this.onerror=null;this.src=this.dataset.fallback}">`
+      : '';
+    const actionMarkup=(item.available===false || !item.url)
+      ? `<span class="direct-link unavailable" aria-disabled="true">Aún no disponible <span class="direct-arrow" aria-hidden="true">⧖</span></span>`
+      : `<a class="direct-link" href="${esc(item.url)}" target="_blank" rel="noopener noreferrer">Ir al suplemento <span class="direct-arrow" aria-hidden="true">↗</span></a>`;
+    art.innerHTML=`<div class="book-main"><span class="book-cover-wrap"><span class="book-cover">${coverMarkup}<span class="book-cover-placeholder"><small>${esc(item.collection)}</small><strong>${esc(item.title)}</strong></span></span></span><span class="book-meta"><span class="book-title">${esc(item.title)}</span><span class="book-desc">${esc(item.description)}</span>${actionMarkup}</span></div>`;
+    container.appendChild(art);
+  });
+}
+
+
+function renderJPCatalog(container, collection){
+  if(!container)return;
+  container.innerHTML='';
+  const fragment=document.createDocumentFragment();
+  collection.forEach(item=>{
+    const link=document.createElement('a');
+    link.className='jp-zine';
+    link.href=item.url;
+    link.target='_blank';
+    link.rel='noopener noreferrer';
+    link.innerHTML=`<span class="jp-zine-thumb"><img src="https://drive.google.com/thumbnail?id=${esc(item.fileId)}&sz=w700" data-fallback="https://lh3.googleusercontent.com/d/${esc(item.fileId)}=w700" alt="Portada de ${esc(item.title)}" loading="lazy" onerror="if(this.dataset.fallback){this.onerror=null;this.src=this.dataset.fallback}"></span><span class="jp-zine-copy"><small>${esc(item.kicker)}</small><strong>${esc(item.title)}</strong><span class="jp-zine-action">Abrir en el Archivo ↗</span></span>`;
+    fragment.appendChild(link);
+  });
+  container.appendChild(fragment);
+}
+
 function closeBook(art,panel,trigger){
   art.classList.remove('open');
   panel.setAttribute('aria-hidden','true');
   trigger.setAttribute('aria-expanded','false');
 }
+
 function toggleBook(art,panel,trigger){
+  if(window.innerWidth>620)return;
   const wasOpen=art.classList.contains('open');
-  document.querySelectorAll('.book.open').forEach(other=>{
-    const p=other.querySelector('.chapters'),t=other.querySelector('.book-index-btn');
-    closeBook(other,p,t);
+  const scope=art.closest('.creator-profile')||document;
+  scope.querySelectorAll('.book.open').forEach(other=>{
+    const p=other.querySelector('.chapters');
+    const t=other.querySelector('.book-index-btn');
+    if(p&&t)closeBook(other,p,t);
   });
   if(!wasOpen){
     art.classList.add('open');
@@ -4358,15 +8818,12 @@ function toggleBook(art,panel,trigger){
   }
 }
 
-renderBookCollection(
-  toolsBooksGrid,
-  BOOKS.filter(book=>CORE_TOOL_TITLES.has(book.title))
-);
-
-renderBookCollection(
-  supplementsGrid,
-  BOOKS.filter(book=>!CORE_TOOL_TITLES.has(book.title))
-);
+renderBookCollection(slyToolsBooksGrid,BOOKS.filter(book=>CORE_TOOL_TITLES.has(book.title)));
+renderBookCollection(slySupplementsGrid,BOOKS.filter(book=>!CORE_TOOL_TITLES.has(book.title)));
+renderBookCollection(mrrhexxBooksGrid,MRRHEXX_BOOKS);
+renderDirectCollection(mrrhexxSupplementsGrid,MRRHEXX_SUPPLEMENTS);
+renderJPCatalog(jpWorkshopGrid,JP_WORKSHOP);
+renderJPCatalog(jpAdventuresGrid,JP_ADVENTURES);
 
 /* parallax */
 (()=>{
@@ -4436,12 +8893,21 @@ renderBookCollection(
 
 <script>
 (function(){
-  const frame=document.getElementById("videoFrame");
-  if(!frame) return;
+  const frames={
+    sly:document.getElementById("slyVideoFrame"),
+    mrrhexx:document.getElementById("mrrhexxVideoFrame"),
+    jpcoovert:document.getElementById("jpcoovertVideoFrame")
+  };
   window.addEventListener("message",function(event){
-    if(!event.data || event.data.type!=="ifs-sly-player-height") return;
+    if(!event.data)return;
+    let key="";
+    if(event.data.type==="ifs-sly-player-height")key="sly";
+    if(event.data.type==="ifs-mrrhexx-player-height")key="mrrhexx";
+    if(event.data.type==="ifs-jpcoovert-player-height")key="jpcoovert";
+    if(!key)return;
+    const frame=frames[key];
     const measured=Math.ceil(Number(event.data.height)||0);
-    if(measured>0){
+    if(frame&&measured>0){
       frame.style.height=Math.max(620,measured)+"px";
     }
   });
