@@ -1,0 +1,4451 @@
+<!DOCTYPE html>
+<!-- In Fantasy Streams · Creators v14 · Archivo visual de libros + nuevo reproductor Sly Flourish -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>In Fantasy Streams · Creators</title>
+<style>
+:root{--black:#050504;--gold:#c7a13a;--gold2:#e4c45f;--cream:#e7dfcc;--muted:#a99d84;--paper:#d8c79d;--ink:#352816;--max:1220px}
+*{box-sizing:border-box}html{background:#000;scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}body{margin:0;min-width:320px;overflow-x:hidden;background:#050504;color:var(--cream);font-family:Georgia,"Times New Roman",serif}button,a{font:inherit}button{color:inherit}img{display:block;max-width:100%}.page{min-height:100vh;background:linear-gradient(rgba(4,4,3,.9),rgba(4,4,3,.9)),url("https://drive.google.com/thumbnail?id=1o6Z70dTYkuyG6dp45jxqu97cbNT2oswa&sz=w2000") center top/900px auto repeat}
+/* banner */
+.banner{position:relative;z-index:20;min-height:132px;display:grid;place-items:center;padding:24px 20px 26px;overflow:hidden;border-bottom:1px solid rgba(205,167,61,.32);background:linear-gradient(90deg,#000,rgba(29,20,9,.96) 50%,#000),url("https://drive.google.com/thumbnail?id=1o6Z70dTYkuyG6dp45jxqu97cbNT2oswa&sz=w2000") center/900px auto repeat;box-shadow:0 10px 35px rgba(0,0,0,.65)}.banner:before,.banner:after{content:"";position:absolute;left:50%;width:min(880px,82vw);height:1px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,rgba(211,173,63,.75),transparent)}.banner:before{top:18px}.banner:after{bottom:17px}.banner-inner{text-align:center}.banner-kicker{margin:0 0 5px;color:#9c895d;font:700 10px/1 Arial,sans-serif;letter-spacing:.38em;text-transform:uppercase}.banner h1{margin:0;color:var(--gold2);font-size:clamp(34px,5vw,70px);line-height:.94;letter-spacing:.18em;text-indent:.18em;text-transform:uppercase;text-shadow:0 3px #241805,0 0 20px rgba(211,169,52,.22)}.banner-sub{margin:10px 0 0;color:#b7aa8d;font:11px/1 Arial,sans-serif;letter-spacing:.32em;text-transform:uppercase}
+/* hero */
+.hero{position:relative;min-height:520px;overflow:hidden;background:radial-gradient(ellipse at 25% 100%,rgba(169,104,25,.13),transparent 32%),linear-gradient(180deg,#0b0907,#040403)}.hero-inner{position:relative;width:min(var(--max),calc(100% - 40px));min-height:520px;margin:auto;display:grid;grid-template-columns:minmax(300px,.88fr) minmax(420px,1.12fr);gap:18px;align-items:end}.parallax-host{position:relative;min-height:500px;align-self:end;overflow:hidden;isolation:isolate}.parallax{position:absolute;inset:0;overflow:hidden;background:#050505;-webkit-mask-image:linear-gradient(to right,#000 0,#000 82%,transparent 100%);mask-image:linear-gradient(to right,#000 0,#000 82%,transparent 100%)}.p-layer{position:absolute;pointer-events:none;user-select:none;-webkit-user-drag:none;will-change:transform}.p-wide{inset:-3%;width:106%;height:106%;object-fit:cover;transform:translate3d(calc(var(--x,0px) + var(--bx,0px)),calc(var(--y,0px) + var(--by,0px)),0) scale(var(--s,1));transform-origin:center}.p-bg{z-index:1;--s:1.04}.p-depth{position:absolute;inset:0;z-index:2;background:radial-gradient(ellipse at 50% 48%,transparent 0 34%,rgba(0,0,0,.12) 64%,rgba(0,0,0,.34) 100%)}.p-backlight{position:absolute;z-index:3;left:48.5%;top:37%;width:62%;aspect-ratio:1;border-radius:50%;transform:translate(calc(-50% + var(--lx,0px)),calc(-50% + var(--ly,0px))) scale(var(--ls,1));background:radial-gradient(circle,rgba(177,106,49,.12),rgba(120,54,33,.08) 25%,transparent 72%);filter:blur(20px);mix-blend-mode:screen}.p-vespera{z-index:4;left:48.5%;height:82%;bottom:8%;width:auto;max-width:none;transform:translate3d(calc(-50% + var(--vx,0px)),var(--vy,0px),0) rotate(var(--vr,0deg)) scale(var(--vs,1));transform-origin:50% 80%;filter:drop-shadow(0 16px 20px rgba(0,0,0,.65))}.p-steam{position:absolute;z-index:5;left:47%;top:55%;width:8%;height:13%;transform:translate3d(calc(-50% + var(--sx,0px)),var(--sy,0px),0)}.steam-cloud{position:absolute;left:50%;bottom:0;width:65%;height:20%;transform:translateX(-50%);border-radius:50%;background:radial-gradient(ellipse,rgba(248,242,228,.28),transparent 76%);filter:blur(5px);animation:steamCloud 3.6s ease-in-out infinite}.steam{position:absolute;bottom:2%;width:9px;height:58px;border-radius:50%;background:linear-gradient(to top,rgba(250,245,232,.05),rgba(246,240,226,.38) 25%,transparent);filter:blur(4px);opacity:0;animation:steam 4.8s ease-in-out infinite}.steam:nth-child(2){left:35%;animation-delay:-1.2s}.steam:nth-child(3){left:52%;animation-delay:-3.1s}@keyframes steamCloud{50%{opacity:.58;transform:translateX(-50%) scale(1.06)}}@keyframes steam{0%,100%{opacity:0;transform:translateY(5px)}38%{opacity:.58;transform:translate(3px,-13px)}72%{opacity:.28;transform:translate(-2px,-38px)}}.p-candle-atmo{position:absolute;z-index:5;left:20.5%;top:64.5%;width:44%;aspect-ratio:1;border-radius:50%;transform:translate(calc(-50% + var(--cx,0px)),calc(-50% + var(--cy,0px))) scale(var(--cs,1));background:radial-gradient(circle,rgba(255,234,176,.28),rgba(255,142,42,.18) 28%,transparent 81%);filter:blur(4px);mix-blend-mode:screen}.p-desk{z-index:6;--s:.91;--by:108px}.p-candle{position:absolute;z-index:7;left:20.5%;top:64.5%;width:18%;aspect-ratio:1;border-radius:50%;transform:translate(calc(-50% + var(--cx,0px)),calc(-50% + var(--cy,0px))) scale(var(--ccs,1));background:radial-gradient(circle,rgba(255,252,225,.65),rgba(255,142,42,.25) 32%,transparent 76%);filter:blur(9px);mix-blend-mode:screen}.p-fg{z-index:9;--s:1.035;--by:-48px}.p-vignette{position:absolute;inset:0;z-index:30;background:radial-gradient(ellipse at 50% 47%,transparent 0 51%,rgba(0,0,0,.2) 72%,rgba(0,0,0,.82) 95%,#000);pointer-events:none}.intro-wrap{position:relative;z-index:5;align-self:center;padding:34px 10px 34px 0}.intro{position:relative;max-width:680px;margin-left:auto;padding:54px 66px 58px;color:var(--ink);background:linear-gradient(rgba(218,199,151,.92),rgba(195,171,116,.92)),url("https://drive.google.com/thumbnail?id=1CZ6V9Xe7NaM3e3k00WbK7PV_Z4dCbCHx&sz=w1600") center/cover;border:1px solid rgba(91,61,21,.8);box-shadow:0 22px 48px rgba(0,0,0,.58),inset 0 0 45px rgba(72,45,15,.28);clip-path:polygon(2% 4%,10% 1%,21% 3%,34% 1%,48% 2%,65% 0%,77% 3%,91% 1%,98% 5%,99% 22%,97% 36%,100% 52%,98% 67%,99% 85%,96% 96%,82% 98%,68% 97%,53% 100%,37% 98%,21% 100%,8% 97%,1% 92%,2% 77%,0 61%,2% 46%,0 31%)}.intro:before{content:"";position:absolute;inset:14px 18px;border:1px solid rgba(89,60,23,.28)}.eyebrow{margin:0 0 8px;color:#7c5b1e;font:700 10px/1 Arial,sans-serif;letter-spacing:.24em;text-transform:uppercase}.intro h2{margin:0 0 14px;font-size:clamp(27px,3vw,42px);line-height:1}.intro p{font-size:clamp(14px,1.2vw,17px);line-height:1.62}.signature{text-align:right;font-style:italic;color:#63471b}
+/* cadena exacta del home */
+.chain{position:relative;z-index:14;width:100%;height:clamp(44px,4vw,60px);overflow:visible;pointer-events:none;background:#000}.chain:before{content:"";position:absolute;left:50%;top:50%;display:block;width:min(490px,44vw);aspect-ratio:700/2172;background-image:url("https://lh3.googleusercontent.com/d/1jzJwxrDupUZgQNdyTOhMDkGl1zb_3eNk=w2400"),url("https://drive.google.com/thumbnail?id=1jzJwxrDupUZgQNdyTOhMDkGl1zb_3eNk&sz=w2400");background-size:contain;background-position:center;background-repeat:no-repeat;opacity:.92;will-change:transform;animation:chain 7s ease-in-out infinite alternate}@keyframes chain{0%{transform:translate3d(calc(-50% - 10px),-50%,0) rotate(90deg)}100%{transform:translate3d(calc(-50% + 22px),-50%,0) rotate(90deg)}}
+/* workspace */
+.creators{padding:54px 20px 84px;background:radial-gradient(circle at 50% 0,rgba(154,107,29,.06),transparent 34rem),#040403}.workspace{width:min(var(--max),100%);margin:auto;min-height:420px}[hidden]{display:none!important}.directory-head{text-align:center;margin-bottom:34px}.directory-head small{color:#8e7a50;font:10px/1 Arial,sans-serif;letter-spacing:.32em;text-transform:uppercase}.directory-head h2{margin:7px 0;color:#d5bd73;font-size:clamp(25px,3vw,38px);letter-spacing:.08em}.directory-head p{max-width:720px;margin:10px auto;color:#9c927f;font-size:13px;line-height:1.55}.medals{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:24px 18px;padding:22px;border-top:1px solid rgba(174,137,48,.14);border-bottom:1px solid rgba(174,137,48,.14)}.medal{appearance:none;border:0;background:none;display:grid;justify-items:center;gap:10px;cursor:pointer}.medal-ring{width:92px;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#8f6b2b,#4c3514 55%,#120d06 72%,#9a7836 74%,#2b1d0c 78%,#070604 84%);box-shadow:0 8px 18px #000,inset 0 0 0 1px rgba(229,196,91,.3)}.medal-face{width:69px;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:#17120d;color:#e7d494;font-weight:700}.medal-name{max-width:116px;color:#bdb39f;font-size:12px;text-align:center}.medal-face img{width:78%;height:78%;object-fit:contain}.portrait img{width:76%;height:76%;object-fit:contain}.placeholder{opacity:.38;cursor:default}.backbar{position:sticky;top:0;z-index:60;padding:9px 18px;background:rgba(8,6,4,.98);border-bottom:1px solid rgba(177,141,50,.18)}.back{appearance:none;min-height:38px;padding:8px 13px;border:1px solid rgba(182,145,53,.28);background:#0d0a06;color:#c9b370;cursor:pointer;font:700 10px/1 Arial,sans-serif;letter-spacing:.13em;text-transform:uppercase}.profile{overflow:hidden;border:1px solid rgba(169,130,45,.26);background:linear-gradient(rgba(12,9,6,.96),rgba(7,6,4,.98)),url("https://drive.google.com/thumbnail?id=1o6Z70dTYkuyG6dp45jxqu97cbNT2oswa&sz=w2000") center/800px auto repeat}.profile-head{display:grid;grid-template-columns:150px 1fr;gap:26px;align-items:center;padding:34px 38px 28px;border-bottom:1px solid rgba(177,141,50,.16)}.portrait{width:132px;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;border:7px solid #4b3415;outline:1px solid rgba(218,177,68,.42);background:#17120d;color:#e8d596;font-size:34px;font-weight:700}.profile-head small{color:#8c7546;font:10px/1 Arial,sans-serif;letter-spacing:.25em;text-transform:uppercase}.profile-head h3{margin:5px 0;color:#dfc778;font-size:clamp(30px,4vw,50px)}.profile-sub{color:#b7ac95;font-size:14px}.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}.tag{padding:4px 9px;border:1px solid rgba(170,134,48,.22);color:#ad9f82;font:9px/1 Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase}.tabs{display:flex;overflow-x:auto;padding:0 38px;border-bottom:1px solid rgba(177,141,50,.14)}.tab{appearance:none;min-width:112px;padding:15px 18px 13px;border:0;border-bottom:2px solid transparent;background:none;color:#8f8674;cursor:pointer;font:700 11px/1 Arial,sans-serif;letter-spacing:.13em;text-transform:uppercase}.tab.active{color:#e0c97e;border-bottom-color:#b98d2b}.content{padding:34px 38px 42px}.pane{display:none}.pane.active{display:block}
+/* bio */
+.bio{display:grid;grid-template-columns:280px minmax(0,1fr);gap:30px;align-items:start}.bio-copy h3{margin-top:0;color:#cfb66b}.bio-copy p{color:#c8bfab;font-size:14px;line-height:1.72}.bio-portrait{width:100%;max-width:280px;margin:0 auto}.bio-frame{position:relative;width:100%;aspect-ratio:1;isolation:isolate;filter:drop-shadow(0 14px 18px rgba(0,0,0,.45))}.bio-frame:after{content:"";position:absolute;z-index:3;inset:0;background-image:url("https://drive.google.com/thumbnail?id=1wqEp_bJiTRZYd9STv9t5_RXfhE9szfUw&sz=w1200"),url("https://lh3.googleusercontent.com/d/1wqEp_bJiTRZYd9STv9t5_RXfhE9szfUw=w1200");background-position:center;background-size:contain;background-repeat:no-repeat;pointer-events:none}.bio-photo{position:absolute;z-index:1;inset:14.8%;border-radius:50%;overflow:hidden;display:grid;place-items:center;background:radial-gradient(circle at 50% 30%,rgba(231,200,107,.16),transparent 44%),linear-gradient(180deg,#15110c,#070605);border:1px solid rgba(208,170,64,.15)}.bio-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.bio-photo-placeholder{position:relative;z-index:1;padding:20px;color:#cdb77e;font:700 11px/1.45 Arial,sans-serif;letter-spacing:.08em;text-align:center;text-transform:uppercase}.bio-photo.has-image .bio-photo-placeholder{display:none}
+/* videos · módulo definitivo aislado */
+.video-shell{border:1px solid rgba(138,103,34,.24);background:#090909;overflow:hidden}.video-frame{display:block;width:100%;height:860px;border:0;background:#090909}
+/* books · portada + información + columna de índice */
+.books-head{margin-bottom:18px}.books-head small{color:#77694d;font:700 9px/1 Arial,sans-serif;letter-spacing:.19em;text-transform:uppercase}.books-head h3{margin:5px 0;color:#cfb66b}.books-grid{display:grid;grid-template-columns:1fr;gap:14px}.book{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 340px;height:252px;border:1px solid rgba(126,97,38,.22);background:linear-gradient(180deg,rgba(14,11,7,.78),rgba(7,6,4,.82));overflow:hidden;transition:border-color .2s ease,box-shadow .2s ease}.book.open{border-color:rgba(214,170,72,.45);box-shadow:0 14px 30px rgba(0,0,0,.28)}.book-main{display:grid;grid-template-columns:118px minmax(0,1fr);gap:18px;align-items:center;min-width:0;height:100%;padding:17px 18px}.book-cover-wrap{display:flex;align-items:center;justify-content:center}.book-cover{width:90px;aspect-ratio:.72;border-radius:4px 7px 7px 4px;background:linear-gradient(145deg,#191715,#3a2b1c);box-shadow:0 11px 18px rgba(0,0,0,.34),8px 10px 0 -2px rgba(231,223,204,.9),10px 12px 0 -2px rgba(201,191,172,.72);transform:rotate(-7deg);overflow:hidden;position:relative}.book-cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:2;background:transparent}.book-cover-placeholder{position:absolute;z-index:1;inset:0;padding:12px 10px 10px 16px;display:flex;flex-direction:column;justify-content:space-between}.book-cover-placeholder small{color:#b89f58;font:700 6px/1.2 Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase}.book-cover-placeholder strong{color:#efe6cf;font-size:9.5px;line-height:1.02;text-transform:uppercase}.book-meta{display:grid;grid-template-rows:auto auto auto;gap:10px;min-width:0;align-content:center}.book-title{color:#efe6cf;font-size:14px;font-weight:700;line-height:1.08;letter-spacing:.01em;text-transform:uppercase}.book-desc{padding:12px 14px;border:1px solid rgba(208,191,153,.14);background:linear-gradient(#e2d6bb,#cebe9c);color:#46331a;font:700 9px/1.35 Arial,sans-serif;letter-spacing:.045em;text-transform:uppercase}.book-index-btn{appearance:none;justify-self:start;display:inline-flex;align-items:center;gap:10px;padding:0;border:0;background:none;color:#b79a54;cursor:pointer;font:700 10px/1 Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase}.book-index-btn:hover,.book-index-btn:focus-visible{color:#e0c26c;outline:none}.plus{width:24px;height:24px;border:1px solid rgba(187,145,47,.34);border-radius:50%;display:grid;place-items:center;color:#d0b66b;font-size:16px;transition:transform .2s ease,background .2s ease}.book.open .plus{transform:rotate(45deg);background:rgba(176,130,34,.1)}.chapters{min-width:0;height:100%;border-left:1px solid rgba(178,139,45,.22);background:linear-gradient(rgba(211,191,143,.97),rgba(181,153,96,.98)),url("https://drive.google.com/thumbnail?id=1CZ6V9Xe7NaM3e3k00WbK7PV_Z4dCbCHx&sz=w1200") center/cover;color:#392a18;box-shadow:inset 18px 0 28px rgba(67,42,13,.12);visibility:hidden;opacity:0;pointer-events:none;transition:opacity .18s ease}.book.open .chapters{visibility:visible;opacity:1;pointer-events:auto}.chapters-head{height:64px;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:14px 15px 11px;background:rgba(205,181,126,.96);border-bottom:1px solid rgba(74,47,15,.2)}.chapters-head small{display:block;color:#72521d;font:700 7px/1 Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase}.chapters-head strong{display:block;margin-top:4px;color:#352410;font-size:11.5px;line-height:1.14}.close-book{appearance:none;flex:0 0 auto;width:28px;height:28px;border:1px solid rgba(76,48,14,.3);border-radius:50%;background:rgba(78,49,15,.09);color:#4b3213;cursor:pointer;font-size:19px}.chapter-list{height:188px;overflow-y:auto;padding:6px 8px 8px;scrollbar-width:thin;scrollbar-color:rgba(83,54,17,.5) transparent;overscroll-behavior:contain}.chapter-list::-webkit-scrollbar{width:5px}.chapter-list::-webkit-scrollbar-thumb{background:rgba(83,54,17,.45)}.chapter{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:42px;padding:8px 9px;border-bottom:1px solid rgba(79,51,16,.13);color:#443016;text-decoration:none;font:700 9.5px/1.25 Arial,sans-serif;transition:padding-left .14s ease,background .14s ease}.chapter:hover,.chapter:focus-visible{padding-left:13px;background:rgba(84,55,18,.09);color:#26180a;outline:none}
+
+.tools{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.tool{padding:20px;border:1px solid rgba(167,132,48,.18);background:rgba(20,15,9,.7)}.tool h4{color:#d4bf80;margin:0 0 8px}.tool p{color:#9f9786;font-size:12px;line-height:1.55}
+@media(max-width:900px){.banner{min-height:112px}.hero,.hero-inner{min-height:700px}.hero-inner{width:100%;display:block}.parallax-host,.parallax{position:absolute;inset:0;width:100%;height:100%;min-height:100%}.parallax{-webkit-mask-image:none;mask-image:none}.p-vespera{height:69%;bottom:20%}.p-desk{--by:9.5%;--s:.91}.p-fg{--by:-4.5%}.p-backlight{width:72vw;top:34%}.intro-wrap{position:absolute;z-index:10;left:50%;bottom:24px;width:min(620px,92vw);padding:0;transform:translateX(-50%)}.intro{padding:40px 38px 42px}.bio{grid-template-columns:min(260px,38%) minmax(0,1fr);gap:22px}.bio-portrait{max-width:260px}.video-frame{height:850px}.profile-head{grid-template-columns:120px 1fr;padding:28px 24px}.portrait{width:104px}.content{padding:28px 24px 34px}}
+@media(max-width:620px){.banner{min-height:98px;padding:20px 14px}.banner h1{font-size:clamp(30px,11vw,48px)}.hero,.hero-inner{min-height:700px}.p-vespera{height:65%;bottom:22%}.intro-wrap{bottom:20px;width:94vw}.intro{padding:31px 25px 33px}.intro h2{font-size:26px}.intro p{font-size:12px;line-height:1.46}.creators{padding:42px 12px 62px}.medals{grid-template-columns:repeat(auto-fill,minmax(86px,1fr));gap:20px 8px;padding-inline:0}.medal-ring{width:76px}.medal-face{width:57px}.profile-head{grid-template-columns:80px 1fr;gap:13px;padding:23px 16px}.portrait{width:72px;border-width:4px;font-size:22px}.tabs{padding:0 8px}.tab{min-width:90px;padding:13px;font-size:9px}.content{padding:24px 17px 28px}.video-frame{height:850px}.bio{grid-template-columns:1fr}.bio-portrait{width:min(290px,100%);max-width:290px;margin:0 auto}.book,.book.open{grid-template-columns:1fr;grid-template-rows:auto 240px;height:auto;min-height:452px}.book-main{grid-template-columns:92px minmax(0,1fr);gap:14px;padding:14px}.book-cover{width:76px}.book-title{font-size:12.5px}.book-desc{font-size:8.5px}.chapters{height:240px;border-left:0;border-top:1px solid rgba(178,139,45,.22)}.chapters-head{height:64px}.chapter-list{height:176px}.chapter{min-height:40px}.tools{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.chain:before{animation:none!important;transform:translate3d(-50%,-50%,0) rotate(90deg)!important}.steam,.steam-cloud{animation:none}}
+
+
+/* =========================================================
+   v12 · AJUSTES DE UX
+========================================================= */
+
+/* Pestañas: nunca generan scroll horizontal; si no caben, bajan de fila. */
+.tabs{
+  flex-wrap:wrap;
+  overflow-x:visible;
+}
+.tab{
+  flex:1 1 140px;
+  min-width:0;
+  white-space:nowrap;
+}
+
+/* Mensaje definitivo de Vespera enlazado desde Drive. */
+.intro-wrap{
+  padding:22px 0;
+  display:flex;
+  justify-content:flex-end;
+}
+.intro-visual{
+  width:min(760px,100%);
+  filter:drop-shadow(0 22px 38px rgba(0,0,0,.55));
+}
+.intro-visual img{
+  width:100%;
+  height:auto;
+  object-fit:contain;
+}
+
+/* Marco redondo definitivo para logos de creadores. */
+.medal-frame,
+.portrait-frame{
+  position:relative;
+  aspect-ratio:1;
+  display:grid;
+  place-items:center;
+  filter:drop-shadow(0 9px 18px rgba(0,0,0,.5));
+}
+.medal-frame{
+  width:112px;
+  transition:transform .22s ease,filter .22s ease;
+}
+.medal:hover .medal-frame,
+.medal:focus-visible .medal-frame{
+  transform:scale(1.12);
+  filter:drop-shadow(0 13px 24px rgba(0,0,0,.62));
+}
+.medal:focus-visible{outline:none}
+.medal-frame::after,
+.portrait-frame::after{
+  content:"";
+  position:absolute;
+  z-index:3;
+  inset:0;
+  background-image:
+    url("https://drive.google.com/thumbnail?id=1ujbGr04QPEQ7lUQg-x1G5mxLwKQQTax-&sz=w1200"),
+    url("https://lh3.googleusercontent.com/d/1ujbGr04QPEQ7lUQg-x1G5mxLwKQQTax-=w1200");
+  background-position:center;
+  background-repeat:no-repeat;
+  background-size:contain;
+  pointer-events:none;
+}
+.logo-mask,
+.portrait-mask{
+  position:absolute;
+  z-index:1;
+  inset:15%;
+  overflow:hidden;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#14110c;
+}
+.logo-mask img,
+.portrait-mask img{
+  width:100%;
+  height:100%;
+  max-width:none;
+  object-fit:contain;
+  transform:scale(1.28);
+  transform-origin:center;
+}
+.portrait-frame{width:132px}
+.placeholder .logo-mask{
+  color:#e7d494;
+  font-size:24px;
+  font-weight:700;
+  background:radial-gradient(circle,#1b160f,#080705);
+}
+
+/* El iframe nunca posee scrollbar propio; su altura la informa el módulo interno. */
+.video-frame{
+  overflow:hidden;
+  scrollbar-width:none;
+}
+.video-frame::-webkit-scrollbar{display:none}
+
+/* DESKTOP · 25% portada | 25% información | 50% índice siempre visible. */
+@media (min-width:621px){
+  .book{
+    grid-template-columns:25% 25% 50%;
+    height:282px;
+    min-height:282px;
+  }
+  .book-main{
+    grid-column:1 / span 2;
+    display:grid;
+    grid-template-columns:50% 50%;
+    gap:0;
+    height:100%;
+    padding:0;
+  }
+  .book-cover-wrap{
+    padding:20px 14px;
+  }
+  .book-cover{
+    width:min(148px,78%);
+    animation:ifsBookFloat 5s ease-in-out infinite;
+  }
+  .book:nth-child(even) .book-cover{animation-delay:-2.2s}
+  .book:nth-child(3n) .book-cover{animation-delay:-1.1s}
+  .book-meta{
+    padding:22px 18px 20px 8px;
+    gap:12px;
+  }
+  .book-title{
+    font-size:12.5px;
+    line-height:1.08;
+  }
+  .book-desc{
+    font-size:8.7px;
+    line-height:1.36;
+  }
+  .book-index-btn{display:none!important}
+  .chapters{
+    grid-column:3;
+    grid-row:1;
+    height:282px;
+    visibility:visible!important;
+    opacity:1!important;
+    pointer-events:auto!important;
+    overflow:hidden;
+  }
+  .chapters-head{
+    height:60px;
+    min-height:60px;
+    padding:13px 15px 10px;
+  }
+  .close-book{display:none!important}
+  .chapter-list{
+    height:190px;
+    max-height:190px;
+    overflow-y:auto;
+    padding:7px 8px;
+    overscroll-behavior:contain;
+  }
+  .chapter{
+    min-height:43px;
+    height:auto;
+    padding:8px 9px;
+  }
+}
+
+@keyframes ifsBookFloat{
+  0%,100%{transform:translateY(0) rotate(-7deg)}
+  50%{transform:translateY(-8px) rotate(-6.15deg)}
+}
+
+/* MOBILE · mantiene el índice plegable, sin espacio vacío al estar cerrado. */
+@media (max-width:620px){
+  .tabs{
+    gap:0;
+    padding:0 8px;
+  }
+  .tab{
+    flex:1 1 50%;
+    min-width:0;
+    padding:13px 8px;
+  }
+  .medal-frame{width:90px}
+  .portrait-frame{width:72px}
+
+  .book,
+  .book.open{
+    grid-template-columns:1fr;
+    height:auto;
+    min-height:0;
+  }
+  .book{
+    grid-template-rows:auto 0;
+  }
+  .book.open{
+    grid-template-rows:auto 240px;
+  }
+  .book-main{
+    grid-column:auto;
+    grid-row:1;
+  }
+  .book-index-btn{display:inline-flex}
+  .chapters{
+    grid-column:auto;
+    grid-row:2;
+    height:0;
+    visibility:hidden;
+    opacity:0;
+    pointer-events:none;
+    overflow:hidden;
+  }
+  .book.open .chapters{
+    height:240px;
+    visibility:visible;
+    opacity:1;
+    pointer-events:auto;
+  }
+  .close-book{display:grid;place-items:center}
+  .chapter-list{
+    height:176px;
+    max-height:176px;
+    overflow-y:auto;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .book-cover{animation:none!important}
+  .medal-frame{transition:none!important}
+}
+
+
+/* =========================================================
+   v14 · LIBROS · LENGUAJE VISUAL IN FANTASY STREAMS
+   Sólo estilización. La estructura 25 / 25 / 50 y la lógica
+   desktop/móvil permanecen intactas.
+========================================================= */
+
+.books-head{
+  position:relative;
+  margin-bottom:24px;
+  padding:0 0 14px 4px;
+}
+.books-head::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:1px;
+  background:linear-gradient(90deg,rgba(211,170,64,.58),rgba(211,170,64,.14) 52%,transparent);
+  box-shadow:0 1px 12px rgba(195,143,32,.08);
+}
+.books-head small{
+  color:#927b49;
+  letter-spacing:.24em;
+}
+.books-head h3{
+  margin-top:7px;
+  color:#e1c878;
+  text-shadow:0 2px 10px rgba(0,0,0,.65);
+}
+
+.books-grid{
+  gap:18px;
+}
+
+.book{
+  isolation:isolate;
+  border:1px solid rgba(164,126,40,.34);
+  background:
+    radial-gradient(circle at 13% 50%,rgba(172,105,26,.095),transparent 24%),
+    radial-gradient(circle at 75% 30%,rgba(219,175,64,.035),transparent 33%),
+    linear-gradient(180deg,rgba(13,10,7,.985),rgba(5,5,4,.995)),
+    url("https://drive.google.com/thumbnail?id=1o6Z70dTYkuyG6dp45jxqu97cbNT2oswa&sz=w1600") center/720px auto repeat;
+  box-shadow:
+    inset 0 0 0 1px rgba(239,204,103,.025),
+    inset 0 0 52px rgba(0,0,0,.55),
+    0 13px 30px rgba(0,0,0,.28);
+}
+.book::before{
+  content:"";
+  position:absolute;
+  z-index:10;
+  pointer-events:none;
+  inset:7px;
+  border:1px solid rgba(202,156,49,.085);
+  clip-path:polygon(0 0,18% 0,18% 1px,1px 1px,1px 22%,0 22%,0 0,100% 0,100% 22%,calc(100% - 1px) 22%,calc(100% - 1px) 1px,82% 1px,82% 0,100% 0,100% 100%,82% 100%,82% calc(100% - 1px),calc(100% - 1px) calc(100% - 1px),calc(100% - 1px) 78%,100% 78%,100% 100%,0 100%,0 78%,1px 78%,1px calc(100% - 1px),18% calc(100% - 1px),18% 100%,0 100%);
+}
+.book:hover{
+  border-color:rgba(211,169,58,.5);
+  box-shadow:
+    inset 0 0 0 1px rgba(239,204,103,.045),
+    inset 0 0 56px rgba(0,0,0,.52),
+    0 17px 36px rgba(0,0,0,.34),
+    0 0 20px rgba(166,116,26,.055);
+}
+
+.book-main{
+  position:relative;
+  z-index:2;
+}
+
+.book-cover-wrap{
+  position:relative;
+  background:
+    radial-gradient(ellipse at center,rgba(186,121,35,.12),transparent 48%),
+    linear-gradient(90deg,transparent,rgba(206,157,53,.025),transparent);
+}
+.book-cover-wrap::after{
+  content:"";
+  position:absolute;
+  right:0;
+  top:12%;
+  bottom:12%;
+  width:1px;
+  background:linear-gradient(transparent,rgba(191,145,47,.29),transparent);
+}
+
+.book-cover{
+  filter:
+    drop-shadow(0 16px 13px rgba(0,0,0,.48))
+    drop-shadow(0 0 10px rgba(201,147,45,.055));
+  box-shadow:
+    0 10px 16px rgba(0,0,0,.32),
+    7px 9px 0 -2px rgba(213,202,177,.88),
+    9px 11px 0 -2px rgba(135,121,98,.68);
+}
+.book:hover .book-cover{
+  filter:
+    drop-shadow(0 18px 15px rgba(0,0,0,.55))
+    drop-shadow(0 0 13px rgba(213,157,47,.095));
+}
+
+.book-meta{
+  position:relative;
+}
+.book-title{
+  color:#eee2c8;
+  font-family:Georgia,"Times New Roman",serif;
+  font-weight:700;
+  letter-spacing:.015em;
+  text-shadow:0 2px 8px #000;
+}
+.book-title::after{
+  content:"";
+  display:block;
+  width:46px;
+  height:1px;
+  margin-top:9px;
+  background:linear-gradient(90deg,#ba8e2f,transparent);
+}
+.book-desc{
+  position:relative;
+  padding:13px 15px;
+  border:1px solid rgba(95,64,23,.58);
+  background:
+    linear-gradient(rgba(210,188,137,.91),rgba(181,151,91,.92)),
+    url("https://drive.google.com/thumbnail?id=1CZ6V9Xe7NaM3e3k00WbK7PV_Z4dCbCHx&sz=w1000") center/cover;
+  color:#3e2c16;
+  box-shadow:
+    inset 0 0 18px rgba(84,52,14,.16),
+    0 7px 14px rgba(0,0,0,.18);
+  text-shadow:0 1px rgba(255,245,210,.22);
+}
+.book-desc::before{
+  content:"";
+  position:absolute;
+  inset:4px;
+  border:1px solid rgba(80,51,17,.12);
+  pointer-events:none;
+}
+
+/* Panel de índice: pasa del pergamino plano a una ficha del Archivo. */
+.chapters{
+  position:relative;
+  z-index:2;
+  border-left:1px solid rgba(197,151,49,.38);
+  background:
+    linear-gradient(rgba(28,22,13,.90),rgba(13,11,8,.96)),
+    url("https://drive.google.com/thumbnail?id=1CZ6V9Xe7NaM3e3k00WbK7PV_Z4dCbCHx&sz=w1200") center/cover;
+  color:#ded1b4;
+  box-shadow:
+    inset 17px 0 28px rgba(0,0,0,.33),
+    inset 0 0 38px rgba(0,0,0,.34);
+}
+.chapters::before{
+  content:"";
+  position:absolute;
+  left:8px;
+  right:8px;
+  top:8px;
+  bottom:8px;
+  border:1px solid rgba(202,158,55,.08);
+  pointer-events:none;
+  z-index:3;
+}
+.chapters-head{
+  position:relative;
+  z-index:4;
+  background:
+    linear-gradient(90deg,rgba(174,126,38,.16),rgba(174,126,38,.035)),
+    rgba(8,7,5,.74);
+  border-bottom:1px solid rgba(197,150,49,.27);
+  box-shadow:0 8px 18px rgba(0,0,0,.18);
+}
+.chapters-head::after{
+  content:"";
+  position:absolute;
+  left:15px;
+  right:15px;
+  bottom:-1px;
+  height:1px;
+  background:linear-gradient(90deg,rgba(226,184,78,.43),transparent 72%);
+}
+.chapters-head small{
+  color:#b49148;
+  letter-spacing:.22em;
+}
+.chapters-head strong{
+  color:#efe3c7;
+  font-family:Georgia,"Times New Roman",serif;
+  font-weight:700;
+  text-shadow:0 2px 7px #000;
+}
+
+.chapter-list{
+  position:relative;
+  z-index:4;
+  scrollbar-color:#94702e rgba(0,0,0,.18);
+}
+.chapter-list::-webkit-scrollbar{
+  width:7px;
+}
+.chapter-list::-webkit-scrollbar-track{
+  margin:6px 0;
+  background:rgba(0,0,0,.16);
+  border-left:1px solid rgba(192,147,48,.08);
+}
+.chapter-list::-webkit-scrollbar-thumb{
+  border:2px solid rgba(14,11,7,.65);
+  border-radius:8px;
+  background:linear-gradient(#b68c35,#70501e);
+}
+.chapter{
+  position:relative;
+  color:#cbbfaa;
+  border-bottom:1px solid rgba(198,151,48,.10);
+  font-family:Arial,Helvetica,sans-serif;
+  font-weight:700;
+  letter-spacing:.01em;
+}
+.chapter::before{
+  content:"";
+  position:absolute;
+  left:3px;
+  top:50%;
+  width:3px;
+  height:3px;
+  border-radius:50%;
+  background:#9d7832;
+  transform:translateY(-50%);
+  opacity:.58;
+}
+.chapter > span:first-child{
+  padding-left:7px;
+}
+.chapter > span:last-child{
+  color:#b68a31;
+  transition:transform .14s ease,color .14s ease;
+}
+.chapter:hover,
+.chapter:focus-visible{
+  padding-left:13px;
+  background:linear-gradient(90deg,rgba(187,137,40,.13),rgba(187,137,40,.025));
+  color:#f0e2c4;
+}
+.chapter:hover > span:last-child,
+.chapter:focus-visible > span:last-child{
+  transform:translate(2px,-2px);
+  color:#e0b952;
+}
+
+.close-book{
+  border-color:rgba(194,147,47,.34);
+  background:rgba(0,0,0,.17);
+  color:#d5b35d;
+}
+
+.book-index-btn{
+  color:#bd9848;
+}
+.plus{
+  border-color:rgba(197,151,49,.45);
+  background:rgba(0,0,0,.18);
+  color:#dfbd61;
+}
+
+@media (min-width:621px){
+  /* Mantiene exactamente las proporciones existentes. */
+  .book{
+    grid-template-columns:25% 25% 50%;
+  }
+  .chapter-list{
+    /* 4 entradas visibles; cualquier quinta entrada se recorre internamente. */
+    height:190px;
+    max-height:190px;
+    overflow-y:auto;
+  }
+}
+
+@media (max-width:620px){
+  .book{
+    background:
+      radial-gradient(circle at 18% 23%,rgba(172,105,26,.095),transparent 25%),
+      linear-gradient(180deg,rgba(13,10,7,.985),rgba(5,5,4,.995)),
+      url("https://drive.google.com/thumbnail?id=1o6Z70dTYkuyG6dp45jxqu97cbNT2oswa&sz=w1200") center/640px auto repeat;
+  }
+  .book::before{inset:5px}
+  .book-cover-wrap::after{display:none}
+  .book-desc{
+    padding:11px 12px;
+  }
+  .chapters{
+    border-left:0;
+    border-top:1px solid rgba(197,151,49,.32);
+  }
+}
+</style>
+</head>
+<body>
+<main class="page">
+<header class="banner"><div class="banner-inner"><p class="banner-kicker">In Fantasy Streams</p><h1>Creators</h1><p class="banner-sub">Voces del Archivo</p></div></header>
+<section class="hero"><div class="hero-inner">
+<div class="parallax-host"><div class="parallax" id="parallax">
+<img class="p-layer p-wide p-bg" id="pBg" src="https://drive.google.com/thumbnail?id=1mYXZq1nNCtiXrgLmrKbAU_6eK82Cpglr&sz=w2500" alt="Habitación de Vespera">
+<div class="p-depth"></div><div class="p-backlight" id="pBack"></div>
+<img class="p-layer p-vespera" id="pVespera" src="https://drive.google.com/thumbnail?id=1qFFl2xpOcOdprT0wxp1i_Vi0mxE_bdER&sz=w2000" alt="Vespera hablando">
+<div class="p-steam" id="pSteam"><span class="steam-cloud"></span><span class="steam"></span><span class="steam"></span></div><div class="p-candle-atmo" id="pAtmo"></div>
+<img class="p-layer p-wide p-desk" id="pDesk" src="https://drive.google.com/thumbnail?id=1zwIQSBNkVs-5e2WT7eqgdkVdhqW0cMWn&sz=w2500" alt="Escritorio de Vespera"><div class="p-candle" id="pCandle"></div>
+<img class="p-layer p-wide p-fg" id="pFg" src="https://drive.google.com/thumbnail?id=1EyqmG0hIKCCUc7WKB7ZEeMQ9Wa357YWV&sz=w2500" alt=""><div class="p-vignette"></div>
+</div></div>
+<div class="intro-wrap"><div class="intro-visual"><img src="https://drive.google.com/thumbnail?id=1bE71K6td-g0KFGKecK7vFaqIpy_WrdOt&sz=w1800" data-fallback="https://lh3.googleusercontent.com/d/1bE71K6td-g0KFGKecK7vFaqIpy_WrdOt=w1800" alt="Bienvenidos al Podcast de Vespera" onerror="if(this.dataset.fallback){this.onerror=null;this.src=this.dataset.fallback}"></div></div>
+</div></section>
+<div class="chain" aria-hidden="true"></div>
+<section class="creators"><div class="workspace" id="workspace">
+<div id="directory"><div class="directory-head"><small>Índice de voces</small><h2>El Directorio</h2><p>Selecciona un medallón para abrir el archivo de ese creador. El directorio está preparado para crecer automáticamente a varias filas.</p></div><div class="medals" id="medals"><button class="medal" data-creator="sly" type="button"><span class="medal-frame"><span class="logo-mask"><img src="https://drive.google.com/thumbnail?id=1B5eahryTp6w7hwhP5rRfDI5j4U2Ss81t&sz=w700" alt="" aria-hidden="true"></span></span><span class="medal-name">Sly Flourish</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button></div></div>
+<div id="profileView" hidden><article class="profile"><div class="backbar"><button class="back" id="backBtn" type="button">← Volver al directorio</button></div><header class="profile-head"><div class="portrait-frame"><div class="portrait-mask"><img src="https://drive.google.com/thumbnail?id=1B5eahryTp6w7hwhP5rRfDI5j4U2Ss81t&sz=w900" alt="" aria-hidden="true"></div></div><div><small>Archivo de creador</small><h3>Sly Flourish</h3><div class="profile-sub">Mike Shea · Consejos para Game Masters · Preparación de partidas · Herramientas</div><div class="tags"><span class="tag">GM Advice</span><span class="tag">D&amp;D / 5e</span><span class="tag">Prep</span><span class="tag">Tools</span></div></div></header>
+<nav class="tabs" aria-label="Contenido de Sly Flourish"><button class="tab active" data-tab="bio" type="button">Bio</button><button class="tab" data-tab="videos" type="button">Videos</button><button class="tab" data-tab="tools" type="button">Herramientas</button><button class="tab" data-tab="supplements" type="button">Suplementos</button></nav>
+<div class="content">
+<section class="pane active" data-pane="bio"><div class="bio"><aside class="bio-portrait" aria-label="Retrato de Sly Flourish"><div class="bio-frame"><div class="bio-photo has-image" id="slyBioPhoto"><img src="https://drive.google.com/thumbnail?id=1IwT0YQMrmtkA2CFWuLX5JpAghr7qZDzt&sz=w1200" data-fallback="https://lh3.googleusercontent.com/d/1IwT0YQMrmtkA2CFWuLX5JpAghr7qZDzt=w1200" alt="Sly Flourish" onerror="if(this.dataset.fallback){this.onerror=null;this.src=this.dataset.fallback}"><span class="bio-photo-placeholder">Sly Flourish</span></div></div></aside><div class="bio-copy"><h3>Bio</h3><p>Mike Shea es escritor y diseñador de juegos de rol de mesa, conocido por su trabajo como Sly Flourish y por desarrollar una filosofía de preparación ligera para Game Masters. Su enfoque busca concentrar el tiempo de preparación en los elementos que más probablemente mejoren la partida en mesa.</p><p>Su trabajo reúne artículos, videos, podcasts, libros y herramientas prácticas orientadas a dirigir mejores sesiones sin convertir la preparación en una segunda jornada de trabajo. Esta combinación lo convierte en un creador especialmente útil para directores de juego que buscan procesos claros, reutilizables y fáciles de consultar.</p></div></div></section>
+<section class="pane" data-pane="videos"><div class="video-shell"><iframe class="video-frame" id="videoFrame" scrolling="no" title="Archivo de videos de Sly Flourish" loading="lazy" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" referrerpolicy="strict-origin-when-cross-origin"></iframe></div></section>
+<section class="pane" data-pane="tools"><div class="books-head"><small>Biblioteca esencial de Sly Flourish</small><h3>Herramientas</h3></div><div class="books-grid" id="toolsBooksGrid"></div></section>
+<section class="pane" data-pane="supplements"><div class="books-head"><small>Biblioteca de Sly Flourish</small><h3>Suplementos</h3></div><div class="books-grid" id="supplementsGrid"></div></section>
+</div></article></div>
+</div></section>
+</main>
+<textarea id="slyPlayerSource" hidden aria-hidden="true"><!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+/>
+
+<meta
+  name="referrer"
+  content="strict-origin-when-cross-origin"
+/>
+
+<title>
+Sly Flourish · In Fantasy Streams
+</title>
+
+<style>
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root {
+
+  --bg:#090909;
+
+  --panel:#10100f;
+
+  --line:
+    rgba(255,255,255,.08);
+
+  --gold:#c7a86d;
+
+  --gold-soft:#a88b58;
+
+  --text:#e6dfd3;
+
+  --muted:#918a7e;
+
+  --dim:#68635b;
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+  box-sizing:border-box;
+}
+
+
+html,
+body {
+
+  margin:0;
+
+  padding:0;
+
+  width:100%;
+
+  background:
+    transparent;
+
+}
+
+
+body {
+
+  color:
+    var(--text);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+}
+
+
+button {
+  font:inherit;
+}
+
+
+/* =========================================================
+   WRAPPER
+========================================================= */
+
+.page {
+
+  width:100%;
+
+  margin:0;
+
+  background:
+
+    radial-gradient(
+      circle at 30% -20%,
+      rgba(199,168,109,.055),
+      transparent 38%
+    ),
+
+    #090909;
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.creator-header {
+
+  display:flex;
+
+  align-items:flex-end;
+
+  justify-content:
+    space-between;
+
+  gap:20px;
+
+  padding:
+    18px 18px 15px;
+
+}
+
+
+.creator-identity {
+  min-width:0;
+}
+
+
+.eyebrow {
+
+  margin-bottom:6px;
+
+  color:
+    var(--gold-soft);
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:8px;
+
+  font-weight:700;
+
+  letter-spacing:.18em;
+
+  text-transform:uppercase;
+
+}
+
+
+.creator-name {
+
+  margin:0;
+
+  color:#eee7db;
+
+  font-size:
+    clamp(
+      24px,
+      3vw,
+      37px
+    );
+
+  font-weight:400;
+
+  line-height:1;
+
+}
+
+
+.creator-description {
+
+  margin-top:7px;
+
+  color:
+    var(--muted);
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:9px;
+
+  letter-spacing:.035em;
+
+}
+
+
+.database-status {
+
+  flex:0 0 auto;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:7px;
+
+  color:
+    var(--dim);
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:7px;
+
+  letter-spacing:.06em;
+
+  text-transform:uppercase;
+
+}
+
+
+.status-dot {
+
+  width:6px;
+
+  height:6px;
+
+  border-radius:50%;
+
+  background:#59554e;
+
+}
+
+
+.database-status.live
+.status-dot {
+
+  background:
+    var(--gold);
+
+  box-shadow:
+    0 0 10px
+    rgba(199,168,109,.4);
+
+}
+
+
+.database-status.error
+.status-dot {
+
+  background:#a4645e;
+
+}
+
+
+/* =========================================================
+   SERIES BAR
+========================================================= */
+
+.series-bar {
+
+  position:relative;
+
+  overflow:hidden;
+
+  border-top:
+    1px solid
+    var(--line);
+
+  border-bottom:
+    1px solid
+    var(--line);
+
+  background:
+
+    linear-gradient(
+      180deg,
+      #14130f,
+      #0d0d0b
+    );
+
+}
+
+
+.series-tabs {
+
+  display:flex;
+
+  align-items:stretch;
+
+  overflow-x:auto;
+
+  overflow-y:hidden;
+
+  scrollbar-width:none;
+
+}
+
+
+.series-tabs::-webkit-scrollbar {
+  display:none;
+}
+
+
+.series-tab {
+
+  position:relative;
+
+  flex:0 0 auto;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  min-height:42px;
+
+  padding:
+    0 18px;
+
+  border:0;
+
+  border-right:
+    1px solid
+    var(--line);
+
+  background:
+    transparent;
+
+  color:#777168;
+
+  cursor:pointer;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:8px;
+
+  font-weight:700;
+
+  letter-spacing:.095em;
+
+  text-transform:uppercase;
+
+  white-space:nowrap;
+
+}
+
+
+.series-tab:hover {
+
+  color:#c7b99e;
+
+  background:
+    rgba(255,255,255,.018);
+
+}
+
+
+.series-tab.active {
+
+  color:#e2d7c4;
+
+  background:
+
+    linear-gradient(
+      180deg,
+      rgba(199,168,109,.075),
+      rgba(199,168,109,.018)
+    );
+
+}
+
+
+.series-tab.active::after {
+
+  content:"";
+
+  position:absolute;
+
+  left:14px;
+
+  right:14px;
+
+  bottom:0;
+
+  height:2px;
+
+  background:
+    var(--gold);
+
+}
+
+
+.series-count {
+
+  min-width:20px;
+
+  padding:
+    2px 5px;
+
+  border:
+    1px solid
+    rgba(199,168,109,.18);
+
+  border-radius:20px;
+
+  color:#8f7a55;
+
+  font-size:7px;
+
+  text-align:center;
+
+}
+
+
+/* =========================================================
+   CINEMA
+========================================================= */
+
+.cinema {
+
+  display:grid;
+
+  grid-template-columns:
+
+    minmax(
+      0,
+      72%
+    )
+
+    minmax(
+      230px,
+      28%
+    );
+
+  width:100%;
+
+  overflow:hidden;
+
+  background:#080808;
+
+}
+
+
+/* =========================================================
+   PLAYER COLUMN
+========================================================= */
+
+.player-column {
+
+  min-width:0;
+
+  background:#080808;
+
+}
+
+
+/* =========================================================
+   YOUTUBE
+========================================================= */
+
+.stage {
+
+  position:relative;
+
+  width:100%;
+
+  aspect-ratio:
+    16 / 9;
+
+  overflow:hidden;
+
+  background:#000;
+
+}
+
+
+.youtube-frame {
+
+  position:absolute;
+
+  inset:0;
+
+  display:block;
+
+  width:100%;
+
+  height:100%;
+
+  border:0;
+
+  background:#000;
+
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.player-loading {
+
+  position:absolute;
+
+  inset:0;
+
+  z-index:10;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:12px;
+
+  pointer-events:none;
+
+  background:
+
+    radial-gradient(
+      circle at center,
+      #17150f,
+      #050505 70%
+    );
+
+  transition:
+    opacity .25s ease;
+
+}
+
+
+.player-loading.hidden {
+
+  opacity:0;
+
+  visibility:hidden;
+
+}
+
+
+.loading-ring {
+
+  width:28px;
+
+  height:28px;
+
+  border:
+    1px solid
+    rgba(199,168,109,.18);
+
+  border-top-color:
+    var(--gold);
+
+  border-radius:50%;
+
+  animation:
+    spin 1s linear infinite;
+
+}
+
+
+.loading-label {
+
+  color:#8e7a56;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:7px;
+
+  font-weight:700;
+
+  letter-spacing:.15em;
+
+  text-transform:uppercase;
+
+}
+
+
+@keyframes spin {
+
+  to {
+    transform:
+      rotate(360deg);
+  }
+
+}
+
+
+/* =========================================================
+   VIDEO INFO
+========================================================= */
+
+.video-info {
+
+  min-height:102px;
+
+  padding:
+    15px 18px 13px;
+
+  border-top:
+    1px solid
+    var(--line);
+
+  background:
+
+    linear-gradient(
+      180deg,
+      #11110f,
+      #0c0c0b
+    );
+
+}
+
+
+.video-series {
+
+  margin-bottom:6px;
+
+  color:
+    var(--gold-soft);
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:7px;
+
+  font-weight:700;
+
+  letter-spacing:.13em;
+
+  text-transform:uppercase;
+
+}
+
+
+.video-title {
+
+  display:-webkit-box;
+
+  overflow:hidden;
+
+  margin:0;
+
+  min-height:41px;
+
+  max-height:41px;
+
+  color:#e1dbd0;
+
+  font-size:17px;
+
+  font-weight:400;
+
+  line-height:1.18;
+
+  -webkit-line-clamp:2;
+
+  -webkit-box-orient:vertical;
+
+}
+
+
+.video-meta {
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:
+    5px 13px;
+
+  margin-top:10px;
+
+  color:
+    var(--dim);
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:7px;
+
+}
+
+
+.video-meta span {
+
+  position:relative;
+
+}
+
+
+.video-meta
+span:not(:last-child)::after {
+
+  content:"·";
+
+  position:absolute;
+
+  right:-8px;
+
+  color:#4f4b44;
+
+}
+
+
+/* =========================================================
+   CONTROLS
+========================================================= */
+
+.controls {
+
+  display:flex;
+
+  align-items:center;
+
+  min-height:46px;
+
+  padding:
+    0 13px;
+
+  border-top:
+    1px solid
+    var(--line);
+
+  background:#0d0d0c;
+
+}
+
+
+.control-button {
+
+  display:grid;
+
+  place-items:center;
+
+  width:38px;
+
+  height:34px;
+
+  padding:0;
+
+  border:0;
+
+  background:transparent;
+
+  color:#a39b90;
+
+  cursor:pointer;
+
+  font-size:10px;
+
+}
+
+
+.control-button:hover {
+
+  color:
+    var(--gold);
+
+}
+
+
+.control-button:disabled {
+
+  color:#373530;
+
+  cursor:default;
+
+}
+
+
+.controls-spacer {
+  flex:1;
+}
+
+
+.player-state {
+
+  color:#59554e;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:7px;
+
+  letter-spacing:.1em;
+
+  text-transform:uppercase;
+
+}
+
+
+/* =========================================================
+   PLAYLIST
+========================================================= */
+
+.playlist-column {
+
+  min-width:0;
+
+  display:flex;
+
+  flex-direction:column;
+
+  overflow:hidden;
+
+  border-left:
+    1px solid
+    var(--line);
+
+  background:
+
+    linear-gradient(
+      180deg,
+      #13120f,
+      #0b0b0a
+    );
+
+}
+
+
+.playlist-header {
+
+  flex:0 0 auto;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:
+    space-between;
+
+  min-height:49px;
+
+  padding:
+    0 12px;
+
+  border-bottom:
+    1px solid
+    var(--line);
+
+}
+
+
+.playlist-label {
+
+  color:#b7aa94;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:8px;
+
+  font-weight:700;
+
+  letter-spacing:.12em;
+
+  text-transform:uppercase;
+
+}
+
+
+.playlist-series-name {
+
+  overflow:hidden;
+
+  margin-top:3px;
+
+  color:#5f5a52;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:7px;
+
+  text-overflow:ellipsis;
+
+  white-space:nowrap;
+
+}
+
+
+.playlist-count {
+
+  color:#77694f;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:8px;
+
+}
+
+
+.playlist {
+
+  flex:1;
+
+  min-height:0;
+
+  overflow-x:hidden;
+
+  overflow-y:auto;
+
+  scrollbar-width:thin;
+
+  scrollbar-color:
+    #39352d
+    transparent;
+
+}
+
+
+.playlist::-webkit-scrollbar {
+  width:5px;
+}
+
+
+.playlist::-webkit-scrollbar-thumb {
+  background:#38342c;
+}
+
+
+/* =========================================================
+   PLAYLIST ITEM
+========================================================= */
+
+.playlist-item {
+
+  position:relative;
+
+  display:grid;
+
+  grid-template-columns:
+
+    78px
+    minmax(
+      0,
+      1fr
+    );
+
+  gap:9px;
+
+  width:100%;
+
+  min-height:64px;
+
+  padding:10px;
+
+  border:0;
+
+  border-bottom:
+    1px solid
+    rgba(255,255,255,.045);
+
+  background:transparent;
+
+  color:inherit;
+
+  cursor:pointer;
+
+  text-align:left;
+
+  font-family:inherit;
+
+}
+
+
+.playlist-item:hover {
+
+  background:
+    rgba(255,255,255,.025);
+
+}
+
+
+.playlist-item.active {
+
+  background:
+
+    linear-gradient(
+      90deg,
+      rgba(199,168,109,.11),
+      rgba(199,168,109,.015)
+    );
+
+}
+
+
+.playlist-item.active::before {
+
+  content:"";
+
+  position:absolute;
+
+  left:0;
+
+  top:0;
+
+  bottom:0;
+
+  width:2px;
+
+  background:
+    var(--gold);
+
+}
+
+
+/* =========================================================
+   THUMB
+========================================================= */
+
+.thumbnail {
+
+  position:relative;
+
+  width:78px;
+
+  height:44px;
+
+  overflow:hidden;
+
+  background:#000;
+
+}
+
+
+.thumbnail img {
+
+  display:block;
+
+  width:100%;
+
+  height:100%;
+
+  object-fit:cover;
+
+  opacity:.82;
+
+}
+
+
+.playlist-item:hover
+.thumbnail img,
+
+.playlist-item.active
+.thumbnail img {
+
+  opacity:1;
+
+}
+
+
+.thumb-play {
+
+  position:absolute;
+
+  inset:0;
+
+  display:grid;
+
+  place-items:center;
+
+  color:white;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:10px;
+
+  opacity:.8;
+
+  text-shadow:
+    0 2px 10px #000;
+
+}
+
+
+/* =========================================================
+   ITEM COPY
+========================================================= */
+
+.item-copy {
+  min-width:0;
+}
+
+
+.item-number {
+
+  margin-bottom:3px;
+
+  color:#806b43;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:6px;
+
+  font-weight:700;
+
+  letter-spacing:.1em;
+
+  text-transform:uppercase;
+
+}
+
+
+.item-title {
+
+  display:-webkit-box;
+
+  overflow:hidden;
+
+  min-height:23px;
+
+  max-height:23px;
+
+  color:#d8d0c4;
+
+  font-size:9px;
+
+  line-height:1.28;
+
+  -webkit-line-clamp:2;
+
+  -webkit-box-orient:vertical;
+
+}
+
+
+.item-date {
+
+  margin-top:3px;
+
+  overflow:hidden;
+
+  color:
+    var(--dim);
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:7px;
+
+  text-overflow:ellipsis;
+
+  white-space:nowrap;
+
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.error-state {
+
+  display:none;
+
+  padding:30px;
+
+  background:#0d0b0b;
+
+  color:#b9867d;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:11px;
+
+  text-align:center;
+
+}
+
+
+.error-state.visible {
+  display:block;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media
+(max-width:700px) {
+
+  .creator-header {
+
+    align-items:flex-start;
+
+    padding:
+      15px;
+
+  }
+
+
+  .database-status {
+    display:none;
+  }
+
+
+  .series-tab {
+
+    min-height:40px;
+
+    padding:
+      0 14px;
+
+    font-size:7px;
+
+  }
+
+
+  .cinema {
+
+    grid-template-columns:
+      1fr;
+
+  }
+
+
+  .playlist-column {
+
+    height:
+      310px !important;
+
+    border-left:0;
+
+    border-top:
+      1px solid
+      var(--line);
+
+  }
+
+
+  .video-info {
+
+    min-height:96px;
+
+    padding:
+      13px 15px;
+
+  }
+
+
+  .video-title {
+    font-size:15px;
+  }
+
+}
+
+
+@media
+(max-width:450px) {
+
+  .creator-name {
+    font-size:27px;
+  }
+
+
+  .playlist-item {
+
+    grid-template-columns:
+
+      92px
+      minmax(
+        0,
+        1fr
+      );
+
+    min-height:72px;
+
+  }
+
+
+  .thumbnail {
+
+    width:92px;
+
+    height:52px;
+
+  }
+
+}
+
+
+
+/* =========================================================
+   INTEGRACIÓN IN FANTASY STREAMS / CANVA
+   - Sin scroll exterior del módulo.
+   - Las series bajan de fila en vez de generar scroll horizontal.
+   - El único scroll vertical interno es el de la playlist.
+========================================================= */
+html,
+body {
+  overflow:hidden;
+  scrollbar-width:none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display:none;
+}
+
+.series-bar {
+  overflow:visible;
+}
+
+.series-tabs {
+  flex-wrap:wrap;
+  overflow-x:visible;
+  overflow-y:visible;
+}
+
+.series-tab {
+  flex:0 1 auto;
+}
+
+@media (max-width:700px) {
+  .series-tabs {
+    flex-wrap:wrap;
+  }
+
+  .series-tab {
+    flex:1 1 50%;
+    min-width:0;
+    justify-content:center;
+  }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<main class="page">
+
+
+<!-- ========================================================
+     HEADER
+========================================================= -->
+
+<header class="creator-header">
+
+
+  <div class="creator-identity">
+
+    <div class="eyebrow">
+      In Fantasy Streams · Creator Archive
+    </div>
+
+
+    <h1
+      class="creator-name"
+      id="creator-name"
+    >
+      Sly Flourish
+    </h1>
+
+
+    <div
+      class="creator-description"
+      id="creator-description"
+    >
+      Video Archive
+    </div>
+
+  </div>
+
+
+
+  <div
+    class="database-status"
+    id="database-status"
+  >
+
+    <span class="status-dot"></span>
+
+    <span id="database-status-text">
+      Leyendo archivo
+    </span>
+
+  </div>
+
+
+</header>
+
+
+
+<!-- ========================================================
+     SERIES
+========================================================= -->
+
+<div class="series-bar">
+
+  <div
+    class="series-tabs"
+    id="series-tabs"
+  ></div>
+
+</div>
+
+
+
+<!-- ========================================================
+     CINEMA
+========================================================= -->
+
+<section
+  class="cinema"
+  id="cinema"
+>
+
+
+<!-- PLAYER -->
+
+<div
+  class="player-column"
+  id="player-column"
+>
+
+
+  <div class="stage">
+
+
+    <!--
+      ESTE ES EL REPRODUCTOR REAL.
+
+      EXACTAMENTE EL MISMO PRINCIPIO
+      QUE FUNCIONA EN GITHUB.
+
+      NO HAY BOTÓN INTERMEDIO.
+    -->
+
+    <iframe
+      id="youtube-frame"
+      class="youtube-frame"
+      src=""
+      title="In Fantasy Streams Video Player"
+      allow="
+        accelerometer;
+        autoplay;
+        clipboard-write;
+        encrypted-media;
+        gyroscope;
+        picture-in-picture;
+        web-share
+      "
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+    ></iframe>
+
+
+
+    <div
+      class="player-loading"
+      id="player-loading"
+    >
+
+      <div class="loading-ring"></div>
+
+      <div
+        class="loading-label"
+        id="loading-label"
+      >
+        Consultando el Archivo
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+
+  <!-- INFO -->
+
+  <div class="video-info">
+
+
+    <div
+      class="video-series"
+      id="video-series"
+    >
+      Video Archive
+    </div>
+
+
+    <h2
+      class="video-title"
+      id="video-title"
+    >
+      Buscando video...
+    </h2>
+
+
+    <div
+      class="video-meta"
+      id="video-meta"
+    ></div>
+
+
+  </div>
+
+
+
+  <!-- CONTROLS -->
+
+  <div class="controls">
+
+
+    <button
+      class="control-button"
+      id="previous-button"
+      type="button"
+      title="Video anterior"
+    >
+      ◀
+    </button>
+
+
+    <button
+      class="control-button"
+      id="reload-button"
+      type="button"
+      title="Recargar video"
+    >
+      ↻
+    </button>
+
+
+    <button
+      class="control-button"
+      id="next-button"
+      type="button"
+      title="Video siguiente"
+    >
+      ▶
+    </button>
+
+
+    <div class="controls-spacer"></div>
+
+
+    <div class="player-state">
+      Creator Archive
+    </div>
+
+
+  </div>
+
+
+</div>
+
+
+
+<!-- PLAYLIST -->
+
+<aside
+  class="playlist-column"
+  id="playlist-column"
+>
+
+
+  <div class="playlist-header">
+
+
+    <div>
+
+      <div class="playlist-label">
+        Videos
+      </div>
+
+
+      <div
+        class="playlist-series-name"
+        id="playlist-series-name"
+      >
+        Archive
+      </div>
+
+    </div>
+
+
+
+    <div
+      class="playlist-count"
+      id="playlist-count"
+    >
+      0
+    </div>
+
+
+  </div>
+
+
+
+  <div
+    class="playlist"
+    id="playlist"
+  ></div>
+
+
+</aside>
+
+
+</section>
+
+
+
+<div
+  class="error-state"
+  id="error-state"
+></div>
+
+
+</main>
+
+
+
+<script>
+
+/* =========================================================
+   CONFIG
+========================================================= */
+
+const CONFIG = {
+
+  spreadsheetId:
+    "1PIqBgddIbX-z25I1s_-soSkYv3VG0bKv6KHSRVLETWc",
+
+  sheetName:
+    "YouTube",
+
+  /*
+    ESTA INSTANCIA DE CANVA
+    ABRE SLY FLOURISH.
+  */
+
+  defaultCreator:
+    "slyflourish",
+
+  sheetTimeout:
+    12000
+
+};
+
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let allRows =
+  [];
+
+
+let creatorRows =
+  [];
+
+
+let creatorId =
+  CONFIG.defaultCreator;
+
+
+let channelName =
+  "";
+
+
+let seriesMap =
+  new Map();
+
+
+let seriesNames =
+  [];
+
+
+let activeSeries =
+  "";
+
+
+let videos =
+  [];
+
+
+let currentIndex =
+  0;
+
+
+
+/* =========================================================
+   DOM
+========================================================= */
+
+const creatorNameElement =
+  document.getElementById(
+    "creator-name"
+  );
+
+
+const creatorDescription =
+  document.getElementById(
+    "creator-description"
+  );
+
+
+const seriesTabs =
+  document.getElementById(
+    "series-tabs"
+  );
+
+
+const videoSeries =
+  document.getElementById(
+    "video-series"
+  );
+
+
+const videoTitle =
+  document.getElementById(
+    "video-title"
+  );
+
+
+const videoMeta =
+  document.getElementById(
+    "video-meta"
+  );
+
+
+const previousButton =
+  document.getElementById(
+    "previous-button"
+  );
+
+
+const reloadButton =
+  document.getElementById(
+    "reload-button"
+  );
+
+
+const nextButton =
+  document.getElementById(
+    "next-button"
+  );
+
+
+const youtubeFrame =
+  document.getElementById(
+    "youtube-frame"
+  );
+
+
+const playlist =
+  document.getElementById(
+    "playlist"
+  );
+
+
+const playlistCount =
+  document.getElementById(
+    "playlist-count"
+  );
+
+
+const playlistSeriesName =
+  document.getElementById(
+    "playlist-series-name"
+  );
+
+
+const playerColumn =
+  document.getElementById(
+    "player-column"
+  );
+
+
+const playlistColumn =
+  document.getElementById(
+    "playlist-column"
+  );
+
+
+const playerLoading =
+  document.getElementById(
+    "player-loading"
+  );
+
+
+const loadingLabel =
+  document.getElementById(
+    "loading-label"
+  );
+
+
+const cinema =
+  document.getElementById(
+    "cinema"
+  );
+
+
+const errorState =
+  document.getElementById(
+    "error-state"
+  );
+
+
+const databaseStatus =
+  document.getElementById(
+    "database-status"
+  );
+
+
+const databaseStatusText =
+  document.getElementById(
+    "database-status-text"
+  );
+
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function normalizeText(
+  value
+) {
+
+  return String(
+    value ?? ""
+  )
+    .trim()
+    .toLowerCase();
+
+}
+
+
+
+function isTrue(
+  value
+) {
+
+  if (
+    value === true ||
+    value === 1
+  ) {
+
+    return true;
+
+  }
+
+
+  return [
+
+    "true",
+    "1",
+    "si",
+    "sí"
+
+  ].includes(
+    normalizeText(
+      value
+    )
+  );
+
+}
+
+
+
+function getSeriesName(
+  row
+) {
+
+  return (
+
+    String(
+      row.Serie ||
+      "Video Archive"
+    ).trim()
+
+    ||
+
+    "Video Archive"
+
+  );
+
+}
+
+
+
+function thumbnailFor(
+  video
+) {
+
+  const existing =
+    String(
+      video[
+        "Thumbnail URL"
+      ] ||
+      ""
+    ).trim();
+
+
+  if (
+    existing
+  ) {
+
+    return existing;
+
+  }
+
+
+  return (
+
+    "https://i.ytimg.com/vi/" +
+
+    video.Video_ID +
+
+    "/hqdefault.jpg"
+
+  );
+
+}
+
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+function setStatus(
+  mode,
+  text
+) {
+
+  databaseStatus.classList.remove(
+    "live",
+    "error"
+  );
+
+
+  if (
+    mode
+  ) {
+
+    databaseStatus.classList.add(
+      mode
+    );
+
+  }
+
+
+  databaseStatusText.textContent =
+    text;
+
+}
+
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+function showError(
+  message
+) {
+
+  console.error(
+    message
+  );
+
+
+  cinema.style.display =
+    "none";
+
+
+  errorState.classList.add(
+    "visible"
+  );
+
+
+  errorState.textContent =
+    message;
+
+
+  setStatus(
+    "error",
+    "Error"
+  );
+
+}
+
+
+
+/* =========================================================
+   PLAYER HEIGHT
+========================================================= */
+
+function syncPlaylistHeight() {
+
+  if (
+    window.innerWidth <=
+    700
+  ) {
+
+    playlistColumn.style.height =
+      "310px";
+
+    return;
+
+  }
+
+
+  const height =
+    playerColumn
+      .getBoundingClientRect()
+      .height;
+
+
+  playlistColumn.style.height =
+    Math.ceil(
+      height
+    ) +
+    "px";
+
+}
+
+
+
+if (
+  "ResizeObserver"
+  in window
+) {
+
+  new ResizeObserver(
+    syncPlaylistHeight
+  ).observe(
+    playerColumn
+  );
+
+}
+
+
+window.addEventListener(
+  "resize",
+  syncPlaylistHeight
+);
+
+
+
+/* =========================================================
+   GOOGLE SHEETS
+========================================================= */
+
+function loadGoogleSheet() {
+
+  return new Promise(
+    (
+      resolve,
+      reject
+    ) => {
+
+
+      const callbackName =
+
+        "__IFS_CANVA_" +
+
+        Date.now() +
+
+        "_" +
+
+        Math.floor(
+          Math.random() *
+          100000
+        );
+
+
+      const script =
+        document.createElement(
+          "script"
+        );
+
+
+      let completed =
+        false;
+
+
+      function cleanup() {
+
+        try {
+
+          delete window[
+            callbackName
+          ];
+
+        }
+
+        catch (
+          error
+        ) {
+
+          window[
+            callbackName
+          ] =
+            undefined;
+
+        }
+
+
+        if (
+          script.parentNode
+        ) {
+
+          script.parentNode.removeChild(
+            script
+          );
+
+        }
+
+      }
+
+
+
+      const timeout =
+        setTimeout(
+          () => {
+
+
+            if (
+              completed
+            ) {
+
+              return;
+
+            }
+
+
+            completed =
+              true;
+
+
+            cleanup();
+
+
+            reject(
+              new Error(
+                "Google Sheets no respondió."
+              )
+            );
+
+          },
+          CONFIG.sheetTimeout
+        );
+
+
+
+      window[
+        callbackName
+      ] =
+        function (
+          response
+        ) {
+
+
+          if (
+            completed
+          ) {
+
+            return;
+
+          }
+
+
+          completed =
+            true;
+
+
+          clearTimeout(
+            timeout
+          );
+
+
+          try {
+
+
+            if (
+              !response ||
+              !response.table ||
+              !Array.isArray(
+                response.table.cols
+              ) ||
+              !Array.isArray(
+                response.table.rows
+              )
+            ) {
+
+              throw new Error(
+                "La pestaña YouTube no devolvió una tabla válida."
+              );
+
+            }
+
+
+            resolve(
+              tableToRows(
+                response.table
+              )
+            );
+
+          }
+
+
+          catch (
+            error
+          ) {
+
+            reject(
+              error
+            );
+
+          }
+
+
+          finally {
+
+            cleanup();
+
+          }
+
+        };
+
+
+
+      const tqx =
+
+        "out:json;" +
+
+        "responseHandler:" +
+
+        callbackName;
+
+
+
+      script.src =
+
+        "https://docs.google.com/spreadsheets/d/" +
+
+        CONFIG.spreadsheetId +
+
+        "/gviz/tq?" +
+
+        "tqx=" +
+
+        encodeURIComponent(
+          tqx
+        ) +
+
+        "&sheet=" +
+
+        encodeURIComponent(
+          CONFIG.sheetName
+        ) +
+
+        "&_=" +
+
+        Date.now();
+
+
+
+      script.async =
+        true;
+
+
+
+      script.onerror =
+        function () {
+
+
+          if (
+            completed
+          ) {
+
+            return;
+
+          }
+
+
+          completed =
+            true;
+
+
+          clearTimeout(
+            timeout
+          );
+
+
+          cleanup();
+
+
+          reject(
+            new Error(
+              "No fue posible conectar con Google Sheets."
+            )
+          );
+
+        };
+
+
+
+      document.head.appendChild(
+        script
+      );
+
+    }
+  );
+
+}
+
+
+
+/* =========================================================
+   TABLE TO ROWS
+========================================================= */
+
+function tableToRows(
+  table
+) {
+
+  const columns =
+    table.cols.map(
+      (
+        column,
+        index
+      ) =>
+
+        String(
+
+          column.label ||
+
+          column.id ||
+
+          (
+            "COL_" +
+            index
+          )
+
+        ).trim()
+
+    );
+
+
+  return table.rows.map(
+    row => {
+
+
+      const object =
+        {};
+
+
+      columns.forEach(
+        (
+          column,
+          index
+        ) => {
+
+
+          const cell =
+            row.c
+              ? row.c[
+                  index
+                ]
+              : null;
+
+
+          if (
+            !cell
+          ) {
+
+            object[
+              column
+            ] =
+              "";
+
+            return;
+
+          }
+
+
+          object[
+            column
+          ] =
+
+            cell.f ??
+
+            cell.v ??
+
+            "";
+
+        }
+      );
+
+
+      return object;
+
+    }
+  );
+
+}
+
+
+
+/* =========================================================
+   CREATOR ROWS
+========================================================= */
+
+function resolveCreatorRows(
+  rows
+) {
+
+  const activeRows =
+    rows.filter(
+      row => {
+
+
+        const videoId =
+          String(
+            row.Video_ID ||
+            ""
+          ).trim();
+
+
+        return (
+
+          videoId
+
+          &&
+
+          isTrue(
+            row.Disponible
+          )
+
+        );
+
+      }
+    );
+
+
+  creatorRows =
+    activeRows.filter(
+      row =>
+
+        normalizeText(
+          row.Creator_ID
+        )
+
+        ===
+
+        normalizeText(
+          CONFIG.defaultCreator
+        )
+    );
+
+
+  if (
+    !creatorRows.length
+  ) {
+
+    throw new Error(
+      "No se encontraron videos activos para Sly Flourish."
+    );
+
+  }
+
+
+  channelName =
+    String(
+      creatorRows[0].Canal ||
+      "Sly Flourish"
+    ).trim();
+
+}
+
+
+
+/* =========================================================
+   SERIES MAP
+========================================================= */
+
+function buildSeriesMap(
+  rows
+) {
+
+  const groups =
+    new Map();
+
+
+  const canonicalNames =
+    new Map();
+
+
+  const seenBySeries =
+    new Map();
+
+
+
+  rows.forEach(
+    row => {
+
+
+      const videoId =
+        String(
+          row.Video_ID ||
+          ""
+        ).trim();
+
+
+      if (
+        !videoId
+      ) {
+
+        return;
+
+      }
+
+
+      const rawSeries =
+        getSeriesName(
+          row
+        );
+
+
+      const key =
+        normalizeText(
+          rawSeries
+        );
+
+
+      if (
+        !canonicalNames.has(
+          key
+        )
+      ) {
+
+        canonicalNames.set(
+          key,
+          rawSeries
+        );
+
+      }
+
+
+      const seriesName =
+        canonicalNames.get(
+          key
+        );
+
+
+      if (
+        !groups.has(
+          seriesName
+        )
+      ) {
+
+        groups.set(
+          seriesName,
+          []
+        );
+
+
+        seenBySeries.set(
+          seriesName,
+          new Set()
+        );
+
+      }
+
+
+      const seen =
+        seenBySeries.get(
+          seriesName
+        );
+
+
+      /*
+        Un mismo video puede
+        pertenecer a dos series.
+
+        Sólo eliminamos duplicados
+        DENTRO de cada serie.
+      */
+
+      if (
+        seen.has(
+          videoId
+        )
+      ) {
+
+        return;
+
+      }
+
+
+      seen.add(
+        videoId
+      );
+
+
+      groups
+        .get(
+          seriesName
+        )
+        .push(
+          row
+        );
+
+    }
+  );
+
+
+
+  groups.forEach(
+    group => {
+
+
+      group.sort(
+        (
+          a,
+          b
+        ) => {
+
+
+          const orderA =
+            Number(
+              a.Orden
+            );
+
+
+          const orderB =
+            Number(
+              b.Orden
+            );
+
+
+          const safeA =
+            Number.isFinite(
+              orderA
+            )
+              ? orderA
+              : 999999;
+
+
+          const safeB =
+            Number.isFinite(
+              orderB
+            )
+              ? orderB
+              : 999999;
+
+
+          return (
+            safeA -
+            safeB
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+  return groups;
+
+}
+
+
+
+/* =========================================================
+   SERIES
+========================================================= */
+
+function renderSeriesTabs() {
+
+  seriesTabs.innerHTML =
+    "";
+
+
+  seriesNames.forEach(
+    series => {
+
+
+      const button =
+        document.createElement(
+          "button"
+        );
+
+
+      button.type =
+        "button";
+
+
+      button.className =
+        "series-tab";
+
+
+      if (
+        series ===
+        activeSeries
+      ) {
+
+        button.classList.add(
+          "active"
+        );
+
+      }
+
+
+
+      const label =
+        document.createElement(
+          "span"
+        );
+
+
+      label.textContent =
+        series;
+
+
+
+      const count =
+        document.createElement(
+          "span"
+        );
+
+
+      count.className =
+        "series-count";
+
+
+      count.textContent =
+        seriesMap
+          .get(
+            series
+          )
+          .length;
+
+
+
+      button.appendChild(
+        label
+      );
+
+
+      button.appendChild(
+        count
+      );
+
+
+
+      button.addEventListener(
+        "click",
+        () => {
+
+
+          activeSeries =
+            series;
+
+
+          videos =
+            seriesMap.get(
+              series
+            ) || [];
+
+
+          currentIndex =
+            0;
+
+
+          renderSeriesTabs();
+
+
+          renderPlaylist();
+
+
+          loadCurrentVideo(
+            false
+          );
+
+
+          playlist.scrollTop =
+            0;
+
+        }
+      );
+
+
+      seriesTabs.appendChild(
+        button
+      );
+
+    }
+  );
+
+}
+
+
+
+/* =========================================================
+   PLAYLIST
+========================================================= */
+
+function renderPlaylist() {
+
+  playlist.innerHTML =
+    "";
+
+
+  playlistSeriesName.textContent =
+    activeSeries;
+
+
+  playlistCount.textContent =
+    videos.length;
+
+
+
+  const fragment =
+    document.createDocumentFragment();
+
+
+
+  videos.forEach(
+    (
+      video,
+      index
+    ) => {
+
+
+      const button =
+        document.createElement(
+          "button"
+        );
+
+
+      button.type =
+        "button";
+
+
+      button.className =
+        "playlist-item";
+
+
+      button.dataset.index =
+        index;
+
+
+
+      if (
+        index ===
+        currentIndex
+      ) {
+
+        button.classList.add(
+          "active"
+        );
+
+      }
+
+
+
+      /* Thumbnail */
+
+      const thumb =
+        document.createElement(
+          "div"
+        );
+
+
+      thumb.className =
+        "thumbnail";
+
+
+      const image =
+        document.createElement(
+          "img"
+        );
+
+
+      image.src =
+        thumbnailFor(
+          video
+        );
+
+
+      image.alt =
+        "";
+
+
+      image.loading =
+        "lazy";
+
+
+
+      const play =
+        document.createElement(
+          "div"
+        );
+
+
+      play.className =
+        "thumb-play";
+
+
+      play.textContent =
+        "▶";
+
+
+      thumb.appendChild(
+        image
+      );
+
+
+      thumb.appendChild(
+        play
+      );
+
+
+
+      /* Copy */
+
+      const copy =
+        document.createElement(
+          "div"
+        );
+
+
+      copy.className =
+        "item-copy";
+
+
+
+      const number =
+        document.createElement(
+          "div"
+        );
+
+
+      number.className =
+        "item-number";
+
+
+      number.textContent =
+
+        String(
+          index + 1
+        ).padStart(
+          2,
+          "0"
+        )
+
+        +
+
+        " / "
+
+        +
+
+        String(
+          videos.length
+        ).padStart(
+          2,
+          "0"
+        );
+
+
+
+      const title =
+        document.createElement(
+          "div"
+        );
+
+
+      title.className =
+        "item-title";
+
+
+      title.textContent =
+        video.Título ||
+        "Untitled";
+
+
+
+      copy.appendChild(
+        number
+      );
+
+
+      copy.appendChild(
+        title
+      );
+
+
+
+      const date =
+        String(
+          video[
+            "Fecha publicación"
+          ] ||
+          ""
+        ).trim();
+
+
+
+      if (
+        date
+      ) {
+
+
+        const dateElement =
+          document.createElement(
+            "div"
+          );
+
+
+        dateElement.className =
+          "item-date";
+
+
+        dateElement.textContent =
+          date;
+
+
+        copy.appendChild(
+          dateElement
+        );
+
+      }
+
+
+
+      button.appendChild(
+        thumb
+      );
+
+
+      button.appendChild(
+        copy
+      );
+
+
+
+      /*
+        AHORA EL CLIC SÍ
+        CAMBIA EL IFRAME REAL.
+      */
+
+      button.addEventListener(
+        "click",
+        () => {
+
+
+          currentIndex =
+            index;
+
+
+          renderPlaylist();
+
+
+          loadCurrentVideo(
+            true
+          );
+
+        }
+      );
+
+
+      fragment.appendChild(
+        button
+      );
+
+    }
+  );
+
+
+  playlist.appendChild(
+    fragment
+  );
+
+
+  requestAnimationFrame(
+    syncPlaylistHeight
+  );
+
+}
+
+
+
+/* =========================================================
+   VIDEO INFO
+========================================================= */
+
+function updateVideoInfo() {
+
+  const video =
+    videos[
+      currentIndex
+    ];
+
+
+  if (
+    !video
+  ) {
+
+    return;
+
+  }
+
+
+  creatorNameElement.textContent =
+    channelName;
+
+
+  creatorDescription.textContent =
+    activeSeries;
+
+
+  videoSeries.textContent =
+    activeSeries;
+
+
+  videoTitle.textContent =
+    video.Título ||
+    "Untitled";
+
+
+  videoMeta.innerHTML =
+    "";
+
+
+  const date =
+    String(
+      video[
+        "Fecha publicación"
+      ] ||
+      ""
+    ).trim();
+
+
+
+  const metadata = [
+
+    channelName,
+
+    date ||
+    "Fecha no disponible",
+
+    (
+      currentIndex +
+      1
+    )
+
+    +
+
+    " / "
+
+    +
+
+    videos.length
+
+  ];
+
+
+
+  metadata.forEach(
+    value => {
+
+
+      const span =
+        document.createElement(
+          "span"
+        );
+
+
+      span.textContent =
+        value;
+
+
+      videoMeta.appendChild(
+        span
+      );
+
+    }
+  );
+
+
+
+  previousButton.disabled =
+    currentIndex <=
+    0;
+
+
+  nextButton.disabled =
+    currentIndex >=
+    videos.length -
+    1;
+
+}
+
+
+
+/* =========================================================
+   YOUTUBE PLAYER
+
+   ESTA ES LA PRUEBA IMPORTANTE.
+========================================================= */
+
+function loadCurrentVideo(
+  autoplay
+) {
+
+  const video =
+    videos[
+      currentIndex
+    ];
+
+
+  if (
+    !video
+  ) {
+
+    return;
+
+  }
+
+
+
+  updateVideoInfo();
+
+
+
+  playerLoading.classList.remove(
+    "hidden"
+  );
+
+
+  loadingLabel.textContent =
+    "Abriendo video";
+
+
+
+  const query =
+    new URLSearchParams();
+
+
+
+  query.set(
+    "controls",
+    "1"
+  );
+
+
+  query.set(
+    "rel",
+    "0"
+  );
+
+
+  query.set(
+    "playsinline",
+    "1"
+  );
+
+
+
+  /*
+    Sólo intentamos autoplay después
+    de que el usuario haya hecho clic
+    en una fila de la playlist.
+  */
+
+  if (
+    autoplay
+  ) {
+
+    query.set(
+      "autoplay",
+      "1"
+    );
+
+  }
+
+
+
+  youtubeFrame.src =
+
+    "https://www.youtube.com/embed/" +
+
+    encodeURIComponent(
+      video.Video_ID
+    )
+
+    +
+
+    "?" +
+
+    query.toString();
+
+
+
+  clearTimeout(
+    loadCurrentVideo.loadingTimer
+  );
+
+
+
+  loadCurrentVideo.loadingTimer =
+    setTimeout(
+      () => {
+
+        playerLoading.classList.add(
+          "hidden"
+        );
+
+      },
+      2000
+    );
+
+
+
+  const currentItem =
+    playlist.querySelector(
+
+      '.playlist-item[data-index="' +
+
+      currentIndex +
+
+      '"]'
+
+    );
+
+
+
+  if (
+    currentItem
+  ) {
+
+    currentItem.scrollIntoView(
+      {
+        block:"nearest",
+        behavior:"smooth"
+      }
+    );
+
+  }
+
+}
+
+
+
+/* =========================================================
+   IFRAME LOAD
+========================================================= */
+
+youtubeFrame.addEventListener(
+  "load",
+  () => {
+
+    playerLoading.classList.add(
+      "hidden"
+    );
+
+  }
+);
+
+
+
+/* =========================================================
+   PREVIOUS
+========================================================= */
+
+previousButton.addEventListener(
+  "click",
+  () => {
+
+
+    if (
+      currentIndex <=
+      0
+    ) {
+
+      return;
+
+    }
+
+
+    currentIndex--;
+
+
+    renderPlaylist();
+
+
+    loadCurrentVideo(
+      true
+    );
+
+  }
+);
+
+
+
+/* =========================================================
+   NEXT
+========================================================= */
+
+nextButton.addEventListener(
+  "click",
+  () => {
+
+
+    if (
+      currentIndex >=
+      videos.length -
+      1
+    ) {
+
+      return;
+
+    }
+
+
+    currentIndex++;
+
+
+    renderPlaylist();
+
+
+    loadCurrentVideo(
+      true
+    );
+
+  }
+);
+
+
+
+/* =========================================================
+   RELOAD
+========================================================= */
+
+reloadButton.addEventListener(
+  "click",
+  () => {
+
+    loadCurrentVideo(
+      false
+    );
+
+  }
+);
+
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+async function initialize() {
+
+  try {
+
+
+    setStatus(
+      "",
+      "Leyendo archivo"
+    );
+
+
+    loadingLabel.textContent =
+      "Consultando el Archivo";
+
+
+
+    allRows =
+      await loadGoogleSheet();
+
+
+
+    resolveCreatorRows(
+      allRows
+    );
+
+
+
+    seriesMap =
+      buildSeriesMap(
+        creatorRows
+      );
+
+
+
+    seriesNames =
+      Array.from(
+        seriesMap.keys()
+      );
+
+
+
+    if (
+      !seriesNames.length
+    ) {
+
+      throw new Error(
+        "Sly Flourish no tiene series activas."
+      );
+
+    }
+
+
+
+    activeSeries =
+      seriesNames[0];
+
+
+    videos =
+      seriesMap.get(
+        activeSeries
+      ) || [];
+
+
+    currentIndex =
+      0;
+
+
+
+    renderSeriesTabs();
+
+
+    renderPlaylist();
+
+
+
+    /*
+      PRIMER VIDEO SIN AUTOPLAY.
+
+      Debe aparecer el reproductor
+      normal de YouTube con su
+      botón PLAY propio.
+    */
+
+    loadCurrentVideo(
+      false
+    );
+
+
+
+    const total =
+      seriesNames.reduce(
+        (
+          sum,
+          series
+        ) =>
+
+          sum +
+
+          seriesMap
+            .get(
+              series
+            )
+            .length,
+
+        0
+      );
+
+
+
+    setStatus(
+
+      "live",
+
+      seriesNames.length +
+
+      " listas · " +
+
+      total +
+
+      " videos"
+
+    );
+
+
+
+    requestAnimationFrame(
+      syncPlaylistHeight
+    );
+
+
+  }
+
+
+  catch (
+    error
+  ) {
+
+
+    console.error(
+      error
+    );
+
+
+    playerLoading.classList.add(
+      "hidden"
+    );
+
+
+    showError(
+      "No fue posible cargar el Archivo. " +
+      error.message
+    );
+
+  }
+
+}
+
+
+
+initialize();
+
+</script>
+
+
+
+
+<script>
+/* Informa al contenedor principal la altura real del reproductor.
+   Así el iframe no crea una segunda barra vertical. */
+(function(){
+  function reportHeight(){
+    var page=document.querySelector('.page');
+    var height=page
+      ? Math.ceil(Math.max(page.scrollHeight,page.getBoundingClientRect().height))
+      : Math.ceil(Math.max(document.documentElement.scrollHeight,document.body.scrollHeight));
+
+    if(height>0){
+      parent.postMessage({type:'ifs-sly-player-height',height:height},'*');
+    }
+  }
+
+  window.addEventListener('load',function(){
+    setTimeout(reportHeight,60);
+    setTimeout(reportHeight,450);
+    setTimeout(reportHeight,1200);
+  });
+
+  window.addEventListener('resize',reportHeight);
+
+  if('ResizeObserver' in window){
+    var target=document.querySelector('.page') || document.body;
+    if(target){
+      new ResizeObserver(reportHeight).observe(target);
+    }
+  }
+
+  setInterval(reportHeight,1600);
+})();
+</script>
+
+</body>
+</html></textarea>
+<script>
+const BOOKS=[{"title": "The Return of the Lazy Dungeon Master", "description": "Diseñado para ayudar a los directores de juego a sacar más provecho de sus partidas preparando menos.", "kicker": "Lazy DM · Preparación", "chapters": [{"title": "Contents", "url": "https://drive.google.com/file/d/1PJnIzgnlfp0zFc-Bm7wKCAHZ685HIutO/view?usp=drive_link"}, {"title": "Pt. 1 · Preparing for yor Game", "url": "https://drive.google.com/file/d/1qZxkqf4CkxgIHcKJGWvLQX9NrRy57pTK/view?usp=drive_link"}, {"title": "Pt. 2 · Running your game", "url": "https://drive.google.com/file/d/1jvmVwvzrbfMkBkSWTsMeN5f8vME0A-S5/view?usp=drive_link"}, {"title": "Pt. 3 · Thinking of your Game", "url": "https://drive.google.com/file/d/1sK4OehkP_UgU_X9zShZ-Tb7Kwf7UrlxK/view?usp=drive_link"}]}, {"title": "The Lazy DM’s Companion", "description": "Consejos, organización, fundamentos de aventura, exploración, combate, generadores y mapas para agilizar la preparación.", "kicker": "Lazy DM · Referencia", "chapters": [{"title": "Contents", "url": "https://drive.google.com/file/d/1wg6Blekz-xN3fQFeEyN0mA28ABUfgMKo/view?usp=drive_link"}, {"title": "Pt. 1 · Tips & Improv", "url": "https://drive.google.com/file/d/1yyVUea14w8zLgYJwpknpct2ewDtOZOJq/view?usp=drive_link"}, {"title": "Pt. 2 · Organize Games", "url": "https://drive.google.com/file/d/1IY9t4am1saDp37Ta_up_G4PSJKJkj3TR/view?usp=drive_link"}, {"title": "Pt. 3 · Adventure foundations", "url": "https://drive.google.com/file/d/12ZAtN-zaJ-EOWJcfjA263MrQx8QBz2sW/view?usp=drive_link"}, {"title": "Pt. 4 · Exploration Aids", "url": "https://drive.google.com/file/d/1LpfJ6pMl-NJb8m6YUKv2FwBYt4jF3mgw/view?usp=drive_link"}, {"title": "Pt. 5 · Combat Suggestions", "url": "https://drive.google.com/file/d/1SRyaw2skrnr-lHcIaSCJqTNzKTcY9TrU/view?usp=drive_link"}, {"title": "Pt. 6 · Generators", "url": "https://drive.google.com/file/d/1U8lai54zHBcAwOHXF0W1EJarz_mVdEJN/view?usp=drive_link"}, {"title": "Pt. 7 · Maps", "url": "https://drive.google.com/file/d/1x1YxAwjWz611BWnNdDsWS7W1ZNV8KWL2/view?usp=drive_link"}, {"title": "Appendices", "url": "https://drive.google.com/file/d/1R91A6bpXVxqBBc7nrZ93noq-IzDFCqiY/view?usp=drive_link"}]}, {"title": "The Lazy DM's Workbook", "description": "Guías, referencias y generadores para preparar, construir y dirigir mejores partidas de rol.", "kicker": "Lazy DM · Workbook", "chapters": [{"title": "About", "url": "https://drive.google.com/file/d/1iwyU1hvgJK7Wi7XX3l_S9DlNTUBFcgXi/view?usp=drive_link"}, {"title": "Pt. 1 · 5e References", "url": "https://drive.google.com/file/d/1z8QeyL_XY2HuucbPc7Stw_6nEuNu4vWe/view?usp=drive_link"}, {"title": "Pt. 2 · Random Tables", "url": "https://drive.google.com/file/d/1anrxsc0tMV2HOt5t0WVva_2ywf3zKAr1/view?usp=drive_link"}, {"title": "Pt. 3 · Theater-of-the-Mind", "url": "https://drive.google.com/file/d/1DR02O4gMe5oiFKtxVMDXqe8ODtiVpOVa/view?usp=drive_link"}, {"title": "Pt. 4 · Lazy Lairs", "url": "https://drive.google.com/file/d/1pEZ-qljWQIlW1LL3iIQSqWTPL56tXFbg/view?usp=drive_link"}, {"title": "Fill-in Sheets", "url": "https://drive.google.com/file/d/1GzwHoatUa6oEO1_KDqehQSvgWKC0s2yP/view?usp=drive_link"}]}, {"title": "Forge of Foes", "description": "Herramientas y orientación para dirigir monstruos memorables y construir mejores encuentros en tus juegos.", "kicker": "Monstruos · Encuentros", "chapters": [{"title": "Contents + Introduction", "url": "https://drive.google.com/file/d/12ZpFqf7TgrlOb7mw3TavDDsP41ETUURk/view?usp=drive_link"}, {"title": "Ch. 1 · Monster Toolkits", "url": "https://drive.google.com/file/d/1luIDoB5T4bXP-zqSyNGZempv8B71Ea3z/view?usp=drive_link"}, {"title": "Ch. 2 · Monster Tips & Tricks", "url": "https://drive.google.com/file/d/1EnEYz_jWTWWf5XmQ5CZh8RlvQ7nt0IpW/view?usp=drive_link"}, {"title": "Ch. 3 · Building Encounters", "url": "https://drive.google.com/file/d/1CTcStjxhfz5wyKo2zLaryxMChLr0tWQa/view?usp=drive_link"}, {"title": "Ch. 4 · Monster Discussion", "url": "https://drive.google.com/file/d/1FsUpzMs_9NtLlxbstSCSG-nDWrS4p_KN/view?usp=drive_link"}]}, {"title": "City of Arches", "description": "Una ambientación urbana fantástica con facciones, lugares y aventuras listas para llevar a la mesa.", "kicker": "Campaña · Ciudad", "chapters": [{"title": "Contents + Introduction", "url": "https://drive.google.com/file/d/1awS_JJnV63xkNYmfeL_1JvuFMJTp1jgK/view?usp=drive_link"}, {"title": "Ch. 1 · Welcome to the City", "url": "https://drive.google.com/file/d/1e-41FfSza6gDpXMNr-WetFXxM1fkO4QH/view?usp=drive_link"}, {"title": "Ch. 2 · Gazetteer of the City", "url": "https://drive.google.com/file/d/12pFZwReNnbQAwNgKVz0DiDsb2qHrAgeO/view?usp=drive_link"}, {"title": "Ch. 3 · The Lower Reaches", "url": "https://drive.google.com/file/d/1XmoNnSjGVGcT_SwudtExazTcBgGZBPC1/view?usp=drive_link"}, {"title": "Ch. 4 · Cliffs of the Dead", "url": "https://drive.google.com/file/d/1VQor0geUVzVIkBjqAS05t0YFmnSv4KmH/view?usp=drive_link"}, {"title": "Ch. 5 · Endless Warrens", "url": "https://drive.google.com/file/d/1JO2fnPimUyqHx2ggquZEk_w5T6BdX0Ps/view?usp=drive_link"}, {"title": "Ch. 6 · Sunken Revvia", "url": "https://drive.google.com/file/d/1zKCeLk9jdoqJf9EqLRXoNSp92ffQpx6J/view?usp=drive_link"}, {"title": "Ch. 7 · Vaults of Nameless King", "url": "https://drive.google.com/file/d/1si3dfRc5QjZqnsjlaYLIFLO1YnM5nIfE/view?usp=drive_link"}, {"title": "Ch. 8 · Borderlands", "url": "https://drive.google.com/file/d/1UJL74mpG_-RrE1zOAq_joAkZVG2jX028/view?usp=drive_link"}, {"title": "Ch. 9 · Worlds Beyond", "url": "https://drive.google.com/file/d/1nExXE6hwho0i40xx1wZ0jnX2WevZXTZI/view?usp=drive_link"}, {"title": "Ch. 10 · Campaign Arcs", "url": "https://drive.google.com/file/d/1GlrR4rfaShPZpfHLfsA1zqJhBHyi_nxG/view?usp=drive_link"}, {"title": "Ch. 11 · Adventures", "url": "https://drive.google.com/file/d/1DmFHxAz4IxlA-yV31pSsuKLQZFWyiBgK/view?usp=drive_link"}, {"title": "Ch. 12 · Frameworks", "url": "https://drive.google.com/file/d/1zKy9pXj9IJCOTaf56CrDquNEIH88HkWA/view?usp=drive_link"}, {"title": "App. A–B · Monsters & NPC’s", "url": "https://drive.google.com/file/d/1C2jXI-fcpK1ZHcqsv9iAPDKKkB5lNoso/view?usp=drive_link"}, {"title": "App. C–D · Adventure Generators", "url": "https://drive.google.com/file/d/1JqkJ3i7yXUQBJlG8sxr3Cm-oex2vFfgW/view?usp=drive_link"}, {"title": "App. E · Player’s Guide", "url": "https://drive.google.com/file/d/12x_SIKAxI2qyR37a_iLtS_HqV_YRnUhp/view?usp=drive_link"}]}, {"title": "Fantastic Adventures", "description": "Una colección de aventuras listas para usar, fáciles de preparar y rápidas de poner en juego.", "kicker": "Aventuras · 2nd–5th lvl", "chapters": [{"title": "Contents + Summaries", "url": "https://drive.google.com/file/d/1RdcRtbxR_X-Le7SGTlF8JfrNH4VXTd3H/view?usp=drive_link"}, {"title": "Ch. 1 · Whistesparrow Village", "url": "https://drive.google.com/file/d/1ZdsxgRO4pMWwlNMK9rQiWR7e7aHupdmi/view?usp=drive_link"}, {"title": "Ch. 2 · The Night Blade", "url": "https://drive.google.com/file/d/1oWuDwicAkHKS9v_t6HtBMmMBk9fPGDkm/view?usp=drive_link"}, {"title": "Ch. 3 · The Dwarven Vault", "url": "https://drive.google.com/file/d/1656QoZ4B_AKzi-a41b7cupBihv4CaYiZ/view?usp=drive_link"}, {"title": "Ch. 4 · Well of the Black Sun", "url": "https://drive.google.com/file/d/1_UF0VgL6Ryu-xNJCu5fUo-jlqYD_KLW0/view?usp=drive_link"}, {"title": "Ch. 5 · Rosethorn", "url": "https://drive.google.com/file/d/15XfN3AFiftBYX_0hYp6Y7n0MspeU3uTb/view?usp=drive_link"}, {"title": "Ch. 6 · Gleam in King’s Eye", "url": "https://drive.google.com/file/d/1liGt44GfO_XTsIV7BwXnq6PjPY0aVIN7/view?usp=drive_link"}, {"title": "Ch. 7 · The Crashed Palace", "url": "https://drive.google.com/file/d/1ZAyeImN4-UFM8mpK8jnaqSLzS2yDx9Vg/view?usp=drive_link"}, {"title": "Ch. 8 · The Flesh Eaters", "url": "https://drive.google.com/file/d/1q5S_7VKnx6DheKBzAyXXD9QT9MwgTVQF/view?usp=drive_link"}, {"title": "Ch. 9 · Queen of Red Water", "url": "https://drive.google.com/file/d/1jDqDVklgDUWllUcOL5hXCcuY945Igh_g/view?usp=drive_link"}, {"title": "Ch. 10 · Cult of Dusk", "url": "https://drive.google.com/file/d/16ueJkDeT2gYt08L-fNCVbRfF1vNG_xX_/view?usp=drive_link"}, {"title": "Ch. 11 · Gloom", "url": "https://drive.google.com/file/d/1fc7pxPldVbJacOdPQJ1me0_ErNXmX0jN/view?usp=drive_link"}]}, {"title": "Ruins of the Grendleroot", "description": "Libro de aventuras de quinta edición centrado en una campaña subterránea fácil de preparar y de dirigir.", "kicker": "Aventuras · Grendleroot", "chapters": [{"title": "Contents + About", "url": "https://drive.google.com/file/d/1xi_KaeK88-W6prDwhUYvyM-TQ5Ls__Ts/view?usp=drive_link"}, {"title": "Ch. 1 · Deepdelver’s Enclave", "url": "https://drive.google.com/file/d/1aGKeYbWKpG1MwYHcvp_K1Q9doQt4mmqS/view?usp=drive_link"}, {"title": "Ch. 2 · Story of Blackclaw Mtn.", "url": "https://drive.google.com/file/d/1s-Ytw4thXxR6YHPG4K4nPwEAuJKjNLg7/view?usp=drive_link"}, {"title": "Ch. 3 · Call of Starsong Tower", "url": "https://drive.google.com/file/d/1dUSGiwkRD_9CAtmy4tpVdqRp5riaEigm/view?usp=drive_link"}, {"title": "Ch. 4 · Forgotten God’s Temple", "url": "https://drive.google.com/file/d/1nNKoYz_NKSu4RGI93SP7SImX0EkcqWJz/view?usp=drive_link"}, {"title": "Ch. 5 · Spire of Violet Falls", "url": "https://drive.google.com/file/d/1Pge_UEM9mdQYf2MbRjGJIEUesKQxtH1L/view?usp=drive_link"}, {"title": "Ch. 6 · Fistful of Copper", "url": "https://drive.google.com/file/d/10hgsx3UarGIxuc9Xm-bpQYgC9uva7VAM/view?usp=drive_link"}, {"title": "Ch. 7 · Shatter", "url": "https://drive.google.com/file/d/1xTiDx5yfWPoWWXZqS9XhM4UCCToc5q3_/view?usp=drive_link"}, {"title": "Ch. 8 · Chuul", "url": "https://drive.google.com/file/d/197f6T5zSePEpL-Sv4kbx0GNg7UMrEzPt/view?usp=drive_link"}, {"title": "Ch. 9 · The Cell", "url": "https://drive.google.com/file/d/1sIYWtbnnBQFLcvXuNPZtK9MsSFv8BoLq/view?usp=drive_link"}, {"title": "Ch. 10 · White Queen’s Vault", "url": "https://drive.google.com/file/d/1WvzbEWJvz71kCdZh_UJS8braftF4LNbm/view?usp=drive_link"}, {"title": "Ch. 11 · Red Rose’s Children", "url": "https://drive.google.com/file/d/1sIQboSqsh0ZcSo36RAtXyvrBODKXmv9G/view?usp=drive_link"}, {"title": "Ch. 12 · Black Cathedral’s Seed", "url": "https://drive.google.com/file/d/1leA2MWFyHBrbB7uoKMBlJUBWw-JlwRan/view?usp=drive_link"}, {"title": "App. A · Blackclaw Player’s Guide", "url": "https://drive.google.com/file/d/1HfU6gLzbuT7m9L_BBiS5-_bRiL6SqGjY/view?usp=drive_link"}, {"title": "App. B · Blackclaw GM’s Toolkit", "url": "https://drive.google.com/file/d/1WT2toYfKuHJUs2OuNIkzuydMgASmL-6e/view?usp=drive_link"}, {"title": "App. C · Black Star’s Rise", "url": "https://drive.google.com/file/d/1IuVlRG7FS6YyfSeRQY2L9otNybGjmXNg/view?usp=drive_link"}]}, {"title": "Fantastic Locations", "description": "Localizaciones listas para insertar en campaña, cada una basada en un tema fantástico y jugable.", "kicker": "Localizaciones · 5e", "chapters": [{"title": "Contents + Introduction", "url": "https://drive.google.com/file/d/1RkXhxxr4CJAwIU-ko0usIAT_ttH3z13R/view?usp=drive_link"}, {"title": "Ch. 1 · Ziggurats of Doom Priests", "url": "https://drive.google.com/file/d/1nw0d5NSKHlel0G34g7nj8mX419a1UV58/view?usp=drive_link"}, {"title": "Ch. 2 · Pyramid of Night King", "url": "https://drive.google.com/file/d/1y6ZoJDKOA2MaN9q_RgNkmFM2oGkco9Bv/view?usp=drive_link"}, {"title": "Ch. 3 · The Undercity", "url": "https://drive.google.com/file/d/11_9Zv6t6FUMQMYVd3RolHITIdMzIlFLL/view?usp=drive_link"}, {"title": "Ch. 4 · The Dark Abbey", "url": "https://drive.google.com/file/d/1-cBF2niOsqtx9XZDHS4f7ufyT_yRn2Fa/view?usp=drive_link"}, {"title": "Ch. 5 · Moonwillow elf City", "url": "https://drive.google.com/file/d/1oRq3BObWXnao4p3Y5ojWhS7kXh2DLOZ9/view?usp=drive_link"}, {"title": "Ch. 6 · Lich’s Sanctuary", "url": "https://drive.google.com/file/d/1Q8azMs8JSQwqPiyK_UBHZMJeimuMRy47/view?usp=drive_link"}, {"title": "Ch. 7 · Celestial’s Fallen Palace", "url": "https://drive.google.com/file/d/1DlCiJ3K1N7m7ZReGQ4Td4w-mKjHhffbX/view?usp=drive_link"}, {"title": "Ch. 8 · Dungeon of Fire", "url": "https://drive.google.com/file/d/1H750C1vxZrOGdwRY0aifIdz1zB2-4DII/view?usp=drive_link"}, {"title": "Ch. 9 · Stormwatch Tower", "url": "https://drive.google.com/file/d/1IXNLYkPcXLkY3VUuzlU1QhRhu4AHDdT3/view?usp=drive_link"}, {"title": "Ch. 10 · The Red Keep", "url": "https://drive.google.com/file/d/1ijJQ7DmMu6Gvt0cWRI67OcpcU7QzvYu5/view?usp=drive_link"}, {"title": "Ch. 11 · The Dam of Kings", "url": "https://drive.google.com/file/d/1dOst0Ch0uQw_vCRdvr3sVdeZTeKhIjYd/view?usp=drive_link"}, {"title": "Ch. 12 · Forgotten Library", "url": "https://drive.google.com/file/d/1N5gl22V7wZbOV248iabET8Pg34p1A-Qr/view?usp=drive_link"}, {"title": "Ch. 13 · Mad King’s Castle", "url": "https://drive.google.com/file/d/1QkExQPq3bvWa59Ax548zZKwP395HNipZ/view?usp=drive_link"}, {"title": "Ch. 14 · The Obsidian Enclave", "url": "https://drive.google.com/file/d/11pkVPTkxvCq_A4poaPaoE_5LmSKyu--c/view?usp=drive_link"}, {"title": "Ch. 15 · Elemental Lords Earthmote", "url": "https://drive.google.com/file/d/1STZd1CBKHdSgDQvLR2K-jVIxJMLmesvF/view?usp=drive_link"}, {"title": "Ch. 16 · Theater of the Mind", "url": "https://drive.google.com/file/d/1xLsVEHjHTJrmJrtjrLsFRelXOAhBzFj4/view?usp=drive_link"}, {"title": "Ch. 17 · The Primeval Rock", "url": "https://drive.google.com/file/d/13NheHj5ipiri5tbtN46QosihzaGqoaQh/view?usp=drive_link"}, {"title": "Ch. 18 · The Blighted Evertree", "url": "https://drive.google.com/file/d/1oBZ5dQjCfvOxwM2tnTmh9Hff-ytXUSfA/view?usp=drive_link"}, {"title": "Ch. 19 · The Infernal Machine", "url": "https://drive.google.com/file/d/1OoZazfdYSDBMBwASFo4H6WwPn9c-Ohou/view?usp=drive_link"}, {"title": "Ch. 20 · Run & Build Fantastic Locations", "url": "https://drive.google.com/file/d/19lQgVCvy6MY33QQrUnnPY8oeUfmqUEkE/view?usp=drive_link"}]}, {"title": "Fantastic Lairs", "description": "Guaridas y escenarios con mapas, monstruos y situaciones preparadas para encuentros inmediatos.", "kicker": "Encuentros · Lairs", "chapters": [{"title": "Contents + Introduction", "url": "https://drive.google.com/file/d/1Z_V1gDtYmT9vsbiMFzWMarstZN_THQuq/view?usp=drive_link"}, {"title": "Ch. 1 · Caves of the Cockatrice", "url": "https://drive.google.com/file/d/1Yh99fvzg2Sas31_VtEw5fxtnkJRWhmLp/view?usp=drive_link"}, {"title": "Ch. 2 · Temple of Centipede Cult", "url": "https://drive.google.com/file/d/1TsWiQLfx9j0rqPoHCn4NLTJBhQvQhmcc/view?usp=drive_link"}, {"title": "Ch. 3 · Lair of Lord Whiskers", "url": "https://drive.google.com/file/d/1PA_E2ubMR1vlzuTCQgdGXhWvCXkbTRUA/view?usp=drive_link"}, {"title": "Ch. 4 · Last Call at Nevermind", "url": "https://drive.google.com/file/d/1PFzpgWDQzVe77virmSWHJ_kDLWJk8Tky/view?usp=drive_link"}, {"title": "Ch. 5 · Nature’s Rage", "url": "https://drive.google.com/file/d/1HBt_6DlR4FLuosjH05anBgB8kaR_eiXN/view?usp=drive_link"}, {"title": "Ch. 6 · Ashnarl’s Secrets", "url": "https://drive.google.com/file/d/1QCgZgtfXsyDKm8uty-LWFdBQYMYd3mLg/view?usp=drive_link"}, {"title": "Ch. 7 · Sticky Toffee", "url": "https://drive.google.com/file/d/1WoDij4uaZBznRQLIEWbPUtph27Id7I4d/view?usp=drive_link"}, {"title": "Ch. 8 · Bumpy Ride", "url": "https://drive.google.com/file/d/1X3omqwaAvcR4F0yZxOj1xkNwSZlPja2c/view?usp=drive_link"}, {"title": "Ch. 9 · The Lamia Job", "url": "https://drive.google.com/file/d/1G3JHQ0FcsPlsrTL-YNpffHc6dB89eqTY/view?usp=drive_link"}, {"title": "Ch. 10 · Ithrix Blackbile", "url": "https://drive.google.com/file/d/1Am5JyTibXBt-iSdDvyIIasmUuEyKm3Rx/view?usp=drive_link"}, {"title": "Ch. 11 · Those about to Die", "url": "https://drive.google.com/file/d/1Sbr0fEr0Eh55SphUshe3g939l3J1tzg4/view?usp=drive_link"}, {"title": "Ch. 12 · Zengran’s Game", "url": "https://drive.google.com/file/d/1hrGuVqy8HQRjoOxM6_OufCK3V8RmvM0Q/view?usp=drive_link"}, {"title": "Ch. 13 · Blood Palace", "url": "https://drive.google.com/file/d/1-bBcaC7f_KQxpLsIMDt5lQgsjK1CGJPn/view?usp=drive_link"}, {"title": "Ch. 14 · Curse of Black Ice", "url": "https://drive.google.com/file/d/1PRBNwLpJgiK924LbK05MMwn_c6ou0vx4/view?usp=drive_link"}, {"title": "Ch. 15 · Korrington Academy", "url": "https://drive.google.com/file/d/1Fe8TRgHTO_HjHGNRW2uTgnK4lQXlsjlh/view?usp=drive_link"}, {"title": "Ch. 16 · The Remembered Gof", "url": "https://drive.google.com/file/d/1pf4WCmoPuQ9R3ZwhSGlXBKtFDIIwIsKU/view?usp=drive_link"}, {"title": "Ch. 17 · Dragons Mummy’s Rage", "url": "https://drive.google.com/file/d/1q4VMmmAJBx04aLykI9dJAAO8vuQZxEmV/view?usp=drive_link"}, {"title": "Ch. 18 · Valentyne’s Legacy", "url": "https://drive.google.com/file/d/1Iyqf61b2oapKFceQ7v812FqEbmk78DRC/view?usp=drive_link"}, {"title": "Ch. 19 · The World Eater", "url": "https://drive.google.com/file/d/1XArJBli3YehFMGyvuQBmfmfxZ1jKwPxp/view?usp=drive_link"}, {"title": "Ch. 20 · Forge of Sizzle Death", "url": "https://drive.google.com/file/d/1ghOO9wmUwFTZMrC7K-RvMSw0IwWW92RY/view?usp=drive_link"}, {"title": "Ch. 21 · Blade of Queen’s Throne", "url": "https://drive.google.com/file/d/17DADd7kD17SjIcteKHXOL4V24M7Nujtc/view?usp=drive_link"}, {"title": "Ch. 22 · Hells’ Heart", "url": "https://drive.google.com/file/d/1JnIY9y4s4heUriGcLTZvmMTLhvQC5eL2/view?usp=drive_link"}, {"title": "Ch. 23 · Put the Monster Back", "url": "https://drive.google.com/file/d/1Qe0fS3ZSVOYHg1F1xGscDb0CaXL3Ssig/view?usp=drive_link"}, {"title": "Ch. 24 · Building a Boss Lair", "url": "https://drive.google.com/file/d/1w6Hsgx67UqEn8hypgTb3n9mLmIcAxh4L/view?usp=drive_link"}]}];
+const CORE_TOOL_TITLES = new Set([
+  "The Return of the Lazy Dungeon Master",
+  "The Lazy DM’s Companion",
+  "The Lazy DM's Workbook",
+  "Forge of Foes"
+]);
+
+const COVER_IDS = {
+  "The Return of the Lazy Dungeon Master": "1gkGaqf_LUp_n1Q76XwTWI8wh96n6H50l",
+  "The Lazy DM’s Companion": "1PzhY8kaOIj-qy2uU7W8W4Ia6TJ6qgzTZ",
+  "The Lazy DM's Workbook": "1uEUnxzdbERtPmg07LiuJG2dKJmSpbnB9",
+  "Forge of Foes": "1J1pWMVsmL29K2HB2IrtfsnZVtUJWLrqW",
+  "City of Arches": "1ACXlH785OKWVpwK4Tg4hiW_R6G8OyRrH",
+  "Fantastic Adventures": "1aJp47ADIe1jJKp_6bFM14CeBDVWjXCjb",
+  "Fantastic Locations": "1RXy3QJqX990T6yDHzA4p_uNEbgrGXNCk",
+  "Fantastic Lairs": "1TTqccI_hAK5MrIduPRDbad9yz199HuY9"
+};
+
+const playerSource=document.getElementById('slyPlayerSource');
+const directory=document.getElementById('directory'),profileView=document.getElementById('profileView'),workspace=document.getElementById('workspace'),backBtn=document.getElementById('backBtn'),toolsBooksGrid=document.getElementById('toolsBooksGrid'),supplementsGrid=document.getElementById('supplementsGrid'),videoFrame=document.getElementById('videoFrame');let savedY=0,lastMedal=null,playerLoaded=false;
+function resetTabs(){document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab==='bio'));document.querySelectorAll('.pane').forEach(p=>p.classList.toggle('active',p.dataset.pane==='bio'))}
+document.querySelector('[data-creator="sly"]').addEventListener('click',e=>{savedY=scrollY;lastMedal=e.currentTarget;directory.hidden=true;profileView.hidden=false;resetTabs();requestAnimationFrame(()=>{scrollTo({top:Math.max(0,workspace.getBoundingClientRect().top+scrollY-14),behavior:'smooth'});backBtn.focus({preventScroll:true})})});
+backBtn.addEventListener('click',()=>{profileView.hidden=true;directory.hidden=false;requestAnimationFrame(()=>{scrollTo({top:savedY,behavior:'auto'});lastMedal&&lastMedal.focus({preventScroll:true})})});
+document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b===btn));document.querySelectorAll('.pane').forEach(p=>p.classList.toggle('active',p.dataset.pane===btn.dataset.tab));if(btn.dataset.tab==='videos'&&!playerLoaded){videoFrame.srcdoc=playerSource.value;playerLoaded=true}}));
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
+function renderBookCollection(container, collection){
+  if(!container)return;
+  container.innerHTML='';
+  collection.forEach((book,i)=>{
+    const art=document.createElement('article');
+    art.className='book';
+    const panelId=(container.id||'books')+'-chapters-'+i;
+    const coverId=COVER_IDS[book.title]||'';
+    const coverMarkup=coverId
+      ? `<img src="https://drive.google.com/thumbnail?id=${esc(coverId)}&sz=w700" data-fallback="https://lh3.googleusercontent.com/d/${esc(coverId)}=w700" alt="Portada de ${esc(book.title)}" loading="lazy" onerror="if(this.dataset.fallback){this.onerror=null;this.src=this.dataset.fallback}">`
+      : '';
+    art.innerHTML=`<div class="book-main"><span class="book-cover-wrap"><span class="book-cover">${coverMarkup}<span class="book-cover-placeholder"><small>${esc(book.kicker)}</small><strong>${esc(book.title)}</strong></span></span></span><span class="book-meta"><span class="book-title">${esc(book.title)}</span><span class="book-desc">${esc(book.description)}</span><button class="book-index-btn" type="button" aria-expanded="false" aria-controls="${panelId}">Índice <span class="plus" aria-hidden="true">＋</span></button></span></div><aside class="chapters" id="${panelId}" aria-hidden="true" aria-label="Índice de ${esc(book.title)}"><div class="chapters-head"><div><small>Archivo PDF</small><strong>${esc(book.title)}</strong></div><button class="close-book" type="button" aria-label="Cerrar índice">×</button></div><div class="chapter-list">${book.chapters.map(ch=>`<a class="chapter" href="${esc(ch.url)}" target="_blank" rel="noopener noreferrer"><span>${esc(ch.title)}</span><span aria-hidden="true">↗</span></a>`).join('')}</div></aside>`;
+    container.appendChild(art);
+    const trigger=art.querySelector('.book-index-btn'),panel=art.querySelector('.chapters'),close=art.querySelector('.close-book');
+    trigger.addEventListener('click',()=>toggleBook(art,panel,trigger));
+    close.addEventListener('click',()=>closeBook(art,panel,trigger));
+  });
+}
+function closeBook(art,panel,trigger){
+  art.classList.remove('open');
+  panel.setAttribute('aria-hidden','true');
+  trigger.setAttribute('aria-expanded','false');
+}
+function toggleBook(art,panel,trigger){
+  const wasOpen=art.classList.contains('open');
+  document.querySelectorAll('.book.open').forEach(other=>{
+    const p=other.querySelector('.chapters'),t=other.querySelector('.book-index-btn');
+    closeBook(other,p,t);
+  });
+  if(!wasOpen){
+    art.classList.add('open');
+    panel.setAttribute('aria-hidden','false');
+    trigger.setAttribute('aria-expanded','true');
+  }
+}
+
+renderBookCollection(
+  toolsBooksGrid,
+  BOOKS.filter(book=>CORE_TOOL_TITLES.has(book.title))
+);
+
+renderBookCollection(
+  supplementsGrid,
+  BOOKS.filter(book=>!CORE_TOOL_TITLES.has(book.title))
+);
+
+/* parallax */
+(()=>{
+  const root=document.getElementById('parallax');
+  const hero=document.querySelector('.hero');
+  const bg=document.getElementById('pBg');
+  const ves=document.getElementById('pVespera');
+  const desk=document.getElementById('pDesk');
+  const fg=document.getElementById('pFg');
+  const back=document.getElementById('pBack');
+  const steam=document.getElementById('pSteam');
+  const atmo=document.getElementById('pAtmo');
+  const candle=document.getElementById('pCandle');
+  if(!root||!hero)return;
+
+  const mobile=()=>matchMedia('(max-width:900px)').matches;
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+  let tx=0,ty=0,cx=0,cy=0;
+
+  hero.addEventListener('pointermove',e=>{
+    if(mobile()||reduced.matches)return;
+    const r=hero.getBoundingClientRect();
+    tx=Math.max(-1,Math.min(1,((e.clientX-r.left)/r.width-.5)*2));
+    ty=Math.max(-1,Math.min(1,((e.clientY-r.top)/r.height-.5)*2));
+  },{passive:true});
+
+  hero.addEventListener('pointerleave',()=>{
+    if(!mobile()){tx=0;ty=0}
+  });
+
+  function anim(t){
+    let floatY=0;
+    if(reduced.matches){
+      tx=0;ty=0;
+    }else if(mobile()){
+      tx=Math.sin(t*.00052)*.42;
+      ty=Math.cos(t*.00039)*.34;
+      floatY=Math.sin(t*.00105)*3.6;
+    }
+
+    cx+=(tx-cx)*.075;
+    cy+=(ty-cy)*.075;
+
+    bg.style.setProperty('--x',cx*-10+'px');
+    bg.style.setProperty('--y',cy*-7+'px');
+    ves.style.setProperty('--vx',cx*28+'px');
+    ves.style.setProperty('--vy',(cy*17+floatY)+'px');
+    ves.style.setProperty('--vr',cx*.28+'deg');
+    desk.style.setProperty('--x',cx*15+'px');
+    desk.style.setProperty('--y',(cy*9+floatY*.28)+'px');
+    fg.style.setProperty('--x',cx*23+'px');
+    fg.style.setProperty('--y',(cy*13+floatY*.45)+'px');
+    back.style.setProperty('--lx',cx*15+'px');
+    back.style.setProperty('--ly',(cy*10+floatY*.55)+'px');
+    steam.style.setProperty('--sx',cx*16+'px');
+    steam.style.setProperty('--sy',(cy*10-floatY*.5)+'px');
+    atmo.style.setProperty('--cx',cx*8+'px');
+    atmo.style.setProperty('--cy',(cy*6+floatY*.25)+'px');
+    candle.style.setProperty('--cx',cx*9+'px');
+    candle.style.setProperty('--cy',(cy*7+floatY*.3)+'px');
+    requestAnimationFrame(anim);
+  }
+
+  requestAnimationFrame(anim);
+})();
+</script>
+
+<script>
+(function(){
+  const frame=document.getElementById("videoFrame");
+  if(!frame) return;
+  window.addEventListener("message",function(event){
+    if(!event.data || event.data.type!=="ifs-sly-player-height") return;
+    const measured=Math.ceil(Number(event.data.height)||0);
+    if(measured>0){
+      frame.style.height=Math.max(620,measured)+"px";
+    }
+  });
+})();
+</script>
+</body>
+</html>
