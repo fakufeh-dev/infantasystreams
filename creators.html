@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- In Fantasy Streams · Creators v17 · portadas actualizadas + navegación destacada -->
+<!-- In Fantasy Streams · Creators v24 · mobile robusto + assets + descripciones editoriales -->
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -1094,6 +1094,169 @@
 .subcollection-head{margin:28px 0 12px;padding-top:18px;border-top:1px solid rgba(190,151,82,.18)}
 .subcollection-head small{display:block;color:#8f7f68;font-size:9px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:5px}
 .subcollection-head h4{margin:0;color:#d7c7a8;font-family:Georgia,serif;font-size:22px;font-weight:500}
+
+
+/* =========================================================
+   v24 · MOBILE ROBUSTO / MEDALLAS / DESCRIPCIONES
+   - Nunca permitir scroll horizontal.
+   - Sangrado extra en capas del parallax móvil para que
+     ningún desplazamiento revele bordes de las imágenes.
+   - Logos de medallones contenidos dentro del marco.
+   - Descripciones editoriales legibles, no etiquetas técnicas.
+========================================================= */
+html,body{
+  width:100%;
+  max-width:100%;
+  overflow-x:hidden;
+}
+@supports (overflow:clip){
+  html,body{overflow-x:clip}
+}
+.page,
+.banner,
+.hero,
+.hero-inner,
+.parallax-host,
+.parallax,
+.creators,
+.workspace,
+#directory,
+#profileView,
+.profile,
+.content,
+.pane,
+.bio,
+.bio-copy,
+.books-grid,
+.book,
+.book-main,
+.book-meta,
+.chapters,
+.source-link-card,
+.source-link-card-inner{
+  min-width:0;
+  max-width:100%;
+  box-sizing:border-box;
+}
+img,video,iframe,canvas,svg{max-width:100%}
+.profile-sub,
+.book-title,
+.book-desc,
+.chapter,
+.direct-link,
+.archive-note,
+.bio-copy p{
+  overflow-wrap:anywhere;
+  word-break:normal;
+}
+.book-desc{
+  text-transform:none;
+  letter-spacing:.012em;
+  font-weight:600;
+  line-height:1.46;
+  color:#a89f8d;
+}
+@media (min-width:621px){
+  .book-desc{font-size:9.2px}
+}
+
+/* La cara del medallón debe vivir dentro del aro, nunca por debajo. */
+.medal-frame{
+  align-self:start;
+  flex:0 0 auto;
+}
+.medal-frame .logo-mask{
+  inset:18%;
+}
+.medal-frame .logo-mask img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  transform:scale(1.06);
+  transform-origin:center;
+}
+.medal-name{
+  min-width:0;
+  max-width:112px;
+  line-height:1.2;
+  overflow-wrap:anywhere;
+}
+.medal[data-creator="jpcoovert"] .logo-mask,
+.medal[data-creator="indestructoboy"] .logo-mask{
+  background:#0c0b09;
+}
+
+/* Subcolección usada por Dragon Town dentro de Suplementos. */
+.subcollection-head{
+  margin:26px 0 14px;
+  padding:0 3px 11px;
+  border-bottom:1px solid rgba(199,151,49,.18);
+}
+.subcollection-head:first-of-type{margin-top:0}
+.subcollection-head small{
+  color:#88754c;
+  font:700 8px/1 Arial,sans-serif;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.subcollection-head h4{
+  margin:6px 0 0;
+  color:#d9c075;
+  font-size:19px;
+  letter-spacing:.04em;
+}
+
+@media(max-width:900px){
+  .page,.banner,.hero,.hero-inner,.parallax-host,.parallax,
+  .creators,.workspace,#directory,#profileView,.profile{
+    width:100%;
+    max-width:100vw;
+  }
+  .hero-inner{margin-inline:0}
+  .parallax-host,.parallax{overflow:hidden}
+
+  /* El movimiento móvil necesita área invisible alrededor del arte. */
+  .parallax .p-wide{
+    inset:-12% -10%;
+    width:120%;
+    height:124%;
+    max-width:none;
+  }
+  .p-desk{--by:5.5%;--s:.95}
+  .p-fg{--by:-2.4%;--s:1.01}
+  .intro-wrap{max-width:calc(100vw - 24px)}
+}
+
+@media(max-width:620px){
+  .creators{overflow:hidden}
+  .medals{
+    width:100%;
+    max-width:100%;
+    grid-template-columns:repeat(auto-fill,minmax(82px,1fr));
+    gap:18px 6px;
+    padding-inline:4px;
+  }
+  .medal{min-width:0;max-width:100%}
+  .medal-frame{width:86px;max-width:100%}
+  .medal-frame .logo-mask{inset:19%}
+  .medal-frame .logo-mask img{transform:scale(1.03)}
+  .medal-name{max-width:94px;font-size:11px}
+  .tabs{
+    max-width:100%;
+    overflow-x:hidden;
+    flex-wrap:wrap;
+  }
+  .tab{min-width:0;flex:1 1 45%;padding-inline:8px}
+  .content{width:100%;max-width:100%;padding-inline:14px}
+  .book-main{min-width:0}
+  .book-desc{font-size:9.4px;line-height:1.48}
+  .chapter-list,.chapters{max-width:100%}
+  .direct-link{max-width:100%;white-space:normal;line-height:1.25}
+}
+
+/* v24 · assets reales anulan el placeholder visual de v22 */
+.medal[data-creator="indestructoboy"] .logo-mask::after,
+.creator-profile[data-profile="indestructoboy"] .portrait-mask::after{display:none}
 </style>
 </head>
 <body>
@@ -1112,7 +1275,7 @@
 </div></section>
 <div class="chain" aria-hidden="true"></div>
 <section class="creators"><div class="workspace" id="workspace">
-<div id="directory"><div class="directory-head"><small>Índice de voces</small><h2>El Directorio</h2><p>Selecciona un medallón para abrir el archivo de ese creador. El directorio está preparado para crecer automáticamente a varias filas.</p></div><div class="medals" id="medals"><button class="medal" data-creator="sly" type="button"><span class="medal-frame"><span class="logo-mask"><img src="https://drive.google.com/thumbnail?id=1B5eahryTp6w7hwhP5rRfDI5j4U2Ss81t&sz=w700" alt="" aria-hidden="true"></span></span><span class="medal-name">Sly Flourish</span></button><button class="medal" data-creator="mrrhexx" type="button"><span class="medal-frame"><span class="logo-mask"><img src="https://drive.google.com/thumbnail?id=1hw-bJqNUx-QwDrMIdd5EwNFVYHDsBhg6&sz=w700" data-fallback="https://lh3.googleusercontent.com/d/1hw-bJqNUx-QwDrMIdd5EwNFVYHDsBhg6=w700" alt="" aria-hidden="true" onerror="if(this.dataset.fallback){this.onerror=null;this.src=this.dataset.fallback}"></span></span><span class="medal-name">MrRhexx</span></button><button class="medal" data-creator="jpcoovert" type="button"><span class="medal-frame"><span class="logo-mask"><span class="jp-monogram" aria-hidden="true">JP</span></span></span><span class="medal-name">JP Coovert</span></button><button class="medal" data-creator="indestructoboy" type="button"><span class="medal-frame"><span class="logo-mask" aria-hidden="true"></span></span><span class="medal-name">Indestructoboy</span></button><button class="medal" data-creator="giffyglyph" type="button"><span class="medal-frame"><span class="logo-mask" aria-hidden="true"></span></span><span class="medal-name">Giffyglyph</span></button><button class="medal" data-creator="enworld" type="button"><span class="medal-frame"><span class="logo-mask" aria-hidden="true"></span></span><span class="medal-name">EN World</span></button><button class="medal" data-creator="darrington" type="button"><span class="medal-frame"><span class="logo-mask" aria-hidden="true"></span></span><span class="medal-name">Darrington Press</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button></div></div>
+<div id="directory"><div class="directory-head"><small>Índice de voces</small><h2>El Directorio</h2><p>Selecciona un medallón para abrir el archivo de ese creador. El directorio está preparado para crecer automáticamente a varias filas.</p></div><div class="medals" id="medals"><button class="medal" data-creator="sly" type="button"><span class="medal-frame"><span class="logo-mask"><img src="https://drive.google.com/thumbnail?id=1B5eahryTp6w7hwhP5rRfDI5j4U2Ss81t&sz=w700" alt="" aria-hidden="true"></span></span><span class="medal-name">Sly Flourish</span></button><button class="medal" data-creator="mrrhexx" type="button"><span class="medal-frame"><span class="logo-mask"><img src="https://drive.google.com/thumbnail?id=1hw-bJqNUx-QwDrMIdd5EwNFVYHDsBhg6&sz=w700" data-fallback="https://lh3.googleusercontent.com/d/1hw-bJqNUx-QwDrMIdd5EwNFVYHDsBhg6=w700" alt="" aria-hidden="true" onerror="if(this.dataset.fallback){this.onerror=null;this.src=this.dataset.fallback}"></span></span><span class="medal-name">MrRhexx</span></button><button class="medal" data-creator="jpcoovert" type="button"><span class="medal-frame"><span class="logo-mask"><img src="https://drive.google.com/thumbnail?id=1xYmIohGu-gk-X8VjBawV6vAabvURt96E&sz=w700" data-fallback="https://lh3.googleusercontent.com/d/1xYmIohGu-gk-X8VjBawV6vAabvURt96E=w700" alt="" aria-hidden="true" onerror="if(this.dataset.fallback){this.onerror=null;this.src=this.dataset.fallback}"></span></span><span class="medal-name">JP Coovert</span></button><button class="medal" data-creator="indestructoboy" type="button"><span class="medal-frame"><span class="logo-mask"><img src="https://drive.google.com/thumbnail?id=1Koy8Gz2c89x85bLXFphkdCGqmq38y1hR&sz=w700" data-fallback="https://lh3.googleusercontent.com/d/1Koy8Gz2c89x85bLXFphkdCGqmq38y1hR=w700" alt="" aria-hidden="true" onerror="if(this.dataset.fallback){this.onerror=null;this.src=this.dataset.fallback}"></span></span><span class="medal-name">Indestructoboy</span></button><button class="medal" data-creator="giffyglyph" type="button"><span class="medal-frame"><span class="logo-mask" aria-hidden="true"></span></span><span class="medal-name">Giffyglyph</span></button><button class="medal" data-creator="enworld" type="button"><span class="medal-frame"><span class="logo-mask" aria-hidden="true"></span></span><span class="medal-name">EN World</span></button><button class="medal" data-creator="darrington" type="button"><span class="medal-frame"><span class="logo-mask" aria-hidden="true"></span></span><span class="medal-name">Darrington Press</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button><button class="medal placeholder" type="button" disabled><span class="medal-frame"><span class="logo-mask">+</span></span><span class="medal-name">Próximo</span></button></div></div>
 <div id="profileView" hidden>
 <div class="creator-profile" data-profile="sly">
 <article class="profile"><div class="backbar"><button class="back creator-back" type="button"><span class="back-arrow" aria-hidden="true">←</span><span>Volver al directorio</span></button></div><header class="profile-head"><div class="portrait-frame"><div class="portrait-mask"><img src="https://drive.google.com/thumbnail?id=1B5eahryTp6w7hwhP5rRfDI5j4U2Ss81t&sz=w900" alt="" aria-hidden="true"></div></div><div><small>Archivo de creador</small><h3>Sly Flourish</h3><div class="profile-sub">Mike Shea · Consejos para Game Masters · Preparación de partidas · Herramientas</div><div class="tags"><span class="tag">GM Advice</span><span class="tag">D&amp;D / 5e</span><span class="tag">Prep</span><span class="tag">Tools</span></div></div></header>
@@ -1137,22 +1300,22 @@
 </div>
 
 <div class="creator-profile" data-profile="jpcoovert" hidden>
-<article class="profile"><div class="backbar"><button class="back creator-back" type="button"><span class="back-arrow" aria-hidden="true">←</span><span>Volver al directorio</span></button></div><header class="profile-head"><div class="portrait-frame"><div class="portrait-mask"><span class="jp-monogram" aria-hidden="true">JP</span></div></div><div><small>Archivo de creador</small><h3>JP Coovert</h3><div class="profile-sub">Ilustración · Cartografía · Zines · Aventuras system-neutral</div><div class="tags"><span class="tag">Maps</span><span class="tag">Drawing</span><span class="tag">Zines</span><span class="tag">Adventures</span></div></div></header>
+<article class="profile"><div class="backbar"><button class="back creator-back" type="button"><span class="back-arrow" aria-hidden="true">←</span><span>Volver al directorio</span></button></div><header class="profile-head"><div class="portrait-frame"><div class="portrait-mask"><img src="https://drive.google.com/thumbnail?id=1xYmIohGu-gk-X8VjBawV6vAabvURt96E&sz=w900" data-fallback="https://lh3.googleusercontent.com/d/1xYmIohGu-gk-X8VjBawV6vAabvURt96E=w900" alt="" aria-hidden="true" onerror="if(this.dataset.fallback){this.onerror=null;this.src=this.dataset.fallback}"></div></div><div><small>Archivo de creador</small><h3>JP Coovert</h3><div class="profile-sub">Ilustración · Cartografía · Zines · Aventuras system-neutral</div><div class="tags"><span class="tag">Maps</span><span class="tag">Drawing</span><span class="tag">Zines</span><span class="tag">Adventures</span></div></div></header>
 <nav class="tabs" aria-label="Contenido de JP Coovert"><button class="tab active" data-tab="bio" type="button">Bio</button><button class="tab" data-tab="videos" type="button">Videos</button><button class="tab" data-tab="books" type="button">Libros</button><button class="tab" data-tab="supplements" type="button">Suplementos</button></nav>
 <div class="content">
-<section class="pane active" data-pane="bio"><div class="bio"><aside class="bio-portrait" aria-label="Identidad de JP Coovert"><div class="bio-frame"><div class="bio-photo"><span class="jp-monogram" aria-hidden="true">JP</span><span class="bio-photo-placeholder">JP Coovert</span></div></div></aside><div class="bio-copy"><h3>Bio</h3><p>JP Coovert es dibujante, ilustrador, creador de videos y Game Master. Su trabajo gira alrededor de convertir el acto de crear una partida en algo visual, inmediato y divertido mediante mapas dibujados a mano, monstruos extraños, objetos, personajes y aventuras listas para llevar a la mesa.</p><p>En el Archivo, su obra se ordena con la misma lógica que el resto de creadores: <em>Creating for D&amp;D</em> reúne su archivo de videos, <em>Dragon Town and the Darkness Below</em> ocupa la sección de libros como su gran campaña recopilatoria, y sus zines, guías de dibujo, cartografía y aventuras independientes se conservan como suplementos.</p></div></div></section>
+<section class="pane active" data-pane="bio"><div class="bio"><aside class="bio-portrait" aria-label="Retrato de JP Coovert"><div class="bio-frame"><div class="bio-photo has-image"><img src="https://drive.google.com/thumbnail?id=1oIIDBnEQUDJgejW5FoYERUuaDJkSjOlV&sz=w1200" data-fallback="https://lh3.googleusercontent.com/d/1oIIDBnEQUDJgejW5FoYERUuaDJkSjOlV=w1200" alt="JP Coovert" onerror="if(this.dataset.fallback){this.onerror=null;this.src=this.dataset.fallback}"><span class="bio-photo-placeholder">JP Coovert</span></div></div></aside><div class="bio-copy"><h3>Bio</h3><p>JP Coovert es dibujante, ilustrador, creador de videos y Game Master. Su trabajo gira alrededor de convertir el acto de crear una partida en algo visual, inmediato y divertido mediante mapas dibujados a mano, monstruos extraños, objetos, personajes y aventuras listas para llevar a la mesa.</p><p>En el Archivo, su obra se ordena con la misma lógica que el resto de creadores: <em>Creating for D&amp;D</em> reúne su archivo de videos, <em>Dragon Town and the Darkness Below</em> ocupa la sección de libros como su gran campaña recopilatoria, y sus zines, guías de dibujo, cartografía y aventuras independientes se conservan como suplementos.</p></div></div></section>
 <section class="pane" data-pane="videos"><div class="video-shell"><iframe class="video-frame" id="jpcoovertVideoFrame" scrolling="no" title="Archivo de videos de JP Coovert · Creating for D&amp;D" loading="lazy" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" referrerpolicy="strict-origin-when-cross-origin"></iframe></div></section>
 <section class="pane" data-pane="books"><div class="books-head"><small>Campaña de JP Coovert</small><h3>Libros</h3></div><div class="books-grid" id="jpcoovertBooksGrid"></div></section>
-<section class="pane" data-pane="supplements"><div class="books-head"><small>Zines, aventuras y herramientas de JP Coovert</small><h3>Suplementos</h3></div><div class="books-grid" id="jpcoovertSupplementsGrid"></div></section>
+<section class="pane" data-pane="supplements"><div class="books-head"><small>Zines, aventuras y herramientas de JP Coovert</small><h3>Suplementos</h3></div><div class="subcollection-head"><small>Suplemento con material asociado</small><h4>Dragon Town</h4></div><div class="books-grid" id="jpcoovertResourceBooksGrid"></div><div class="subcollection-head"><small>Archivo adicional</small><h4>Zines, aventuras y guías</h4></div><div class="books-grid" id="jpcoovertSupplementsGrid"></div></section>
 </div></article>
 </div>
 
 <div class="creator-profile" data-profile="indestructoboy" hidden>
-<article class="profile"><div class="backbar"><button class="back creator-back" type="button"><span class="back-arrow" aria-hidden="true">←</span><span>Volver al directorio</span></button></div><header class="profile-head"><div class="portrait-frame"><div class="portrait-mask" aria-hidden="true"></div></div><div><small>Archivo de creador</small><h3>Indestructoboy</h3><div class="profile-sub">D&amp;D Builds &amp; Tier List · Vagabond</div><div class="tags"><span class="tag">Vagabond</span><span class="tag">TTRPG</span></div></div></header>
+<article class="profile"><div class="backbar"><button class="back creator-back" type="button"><span class="back-arrow" aria-hidden="true">←</span><span>Volver al directorio</span></button></div><header class="profile-head"><div class="portrait-frame"><div class="portrait-mask"><img src="https://drive.google.com/thumbnail?id=1Koy8Gz2c89x85bLXFphkdCGqmq38y1hR&sz=w900" data-fallback="https://lh3.googleusercontent.com/d/1Koy8Gz2c89x85bLXFphkdCGqmq38y1hR=w900" alt="" aria-hidden="true" onerror="if(this.dataset.fallback){this.onerror=null;this.src=this.dataset.fallback}"></div></div><div><small>Archivo de creador</small><h3>Indestructoboy</h3><div class="profile-sub">Taron Pounds · Game Design · YouTube · Vagabond</div><div class="tags"><span class="tag">Game Design</span><span class="tag">Vagabond</span><span class="tag">Pulp Fantasy</span><span class="tag">YouTube</span></div></div></header>
 <nav class="tabs" aria-label="Contenido de Indestructoboy"><button class="tab active" data-tab="bio" type="button">Bio</button><button class="tab" data-tab="videos" type="button">Videos</button><button class="tab" data-tab="books" type="button">Libros</button><button class="tab" data-tab="supplements" type="button">Suplementos</button></nav>
 <div class="content">
-<section class="pane active" data-pane="bio"><div class="bio"><aside class="bio-portrait" aria-label="Espacio reservado para retrato de Indestructoboy"><div class="bio-frame"><div class="bio-photo" aria-hidden="true"></div></div></aside><div class="bio-copy"><h3>Bio</h3><p>En el diseño original de Canva, Indestructoboy aparece como creador vinculado a <em>D&amp;D Builds &amp; Tier List</em>. Su archivo reúne los materiales de <em>Vagabond</em> y sus recursos complementarios tal como aparecen en el diseño de Canva.</p><p>Esta base conserva únicamente la información y los enlaces presentes en el archivo original; el espacio de retrato y las portadas se mantienen vacíos para la siguiente etapa visual.</p></div></div></section>
-<section class="pane" data-pane="videos"><div class="source-link-card"><div class="source-link-card-inner"><small>Fuente de Canva</small><h3>Canal de Indestructoboy</h3><p>El diseño original enlaza directamente al canal de YouTube del creador. El reproductor interno queda reservado para una futura carga de videos curados.</p><a class="direct-link" href="https://www.youtube.com/@Indestructoboy" target="_blank" rel="noopener noreferrer">Abrir canal de YouTube <span class="direct-arrow" aria-hidden="true">↗</span></a></div></div></section>
+<section class="pane active" data-pane="bio"><div class="bio"><aside class="bio-portrait" aria-label="Retrato de Indestructoboy"><div class="bio-frame"><div class="bio-photo has-image"><img src="https://drive.google.com/thumbnail?id=1zqimbOD9I0-UJ3Cl_KjWM3l1fpNXLJe5&sz=w1200" data-fallback="https://lh3.googleusercontent.com/d/1zqimbOD9I0-UJ3Cl_KjWM3l1fpNXLJe5=w1200" alt="Indestructoboy" onerror="if(this.dataset.fallback){this.onerror=null;this.src=this.dataset.fallback}"><span class="bio-photo-placeholder">Indestructoboy</span></div></div></aside><div class="bio-copy"><h3>Bio</h3><p>Taron “Indestructoboy” Pounds es diseñador de juegos y creador de contenido de TTRPG, conocido por sus análisis de D&amp;D, construcción de personajes y diseño de reglas. Tras años trabajando sobre 5e —y con reconocimiento ENnie como diseñador— llevó esa experiencia a Land of the Blind para construir un sistema propio.</p><p><em>Vagabond // Pulp Fantasy RPG</em> mezcla sensibilidad old-school con expresión de personaje moderna: combate y exploración rápidos, un motor d20 pensado para reducir fricción en mesa y una fuerte compatibilidad con aventuras clásicas y material system-neutral. Entre sus influencias declaradas aparecen B/X, Dragonbane, Mörk Borg, Into the Odd y The Black Hack.</p></div></div></section>
+<section class="pane" data-pane="videos"><div class="source-link-card"><div class="source-link-card-inner"><small>YouTube</small><h3>Canal de Indestructoboy</h3><p>Análisis de sistemas, diseño de reglas, builds y desarrollo de Vagabond, con una mirada muy centrada en cómo las mecánicas se sienten realmente durante una partida.</p><a class="direct-link" href="https://www.youtube.com/@Indestructoboy" target="_blank" rel="noopener noreferrer">Abrir canal de YouTube <span class="direct-arrow" aria-hidden="true">↗</span></a></div></div></section>
 <section class="pane" data-pane="books"><div class="books-head"><small>Material organizado por capítulos</small><h3>Libros</h3></div><div class="books-grid" id="indestructoboyBooksGrid"></div></section>
 <section class="pane" data-pane="supplements"><div class="books-head"><small>Material complementario</small><h3>Suplementos</h3></div><div class="books-grid" id="indestructoboySupplementsGrid"></div></section>
 </div></article>
@@ -12486,8 +12649,26 @@ const JPCOOVERT_BOOKS = [
   }
 ];
 
+
+const JPCOOVERT_RESOURCE_BOOKS = [
+  {
+    title:"Dragon Town",
+    kicker:"Flik Silverpen · Adventure",
+    description:"El zine que abre la campaña: el alcalde dragón ha desaparecido y la investigación convierte el pueblo, sus habitantes y sus alrededores en el primer gran misterio de Dragon Town.",
+    coverId:"1_OQaF4Uohh3cKDen5Hn6AeavSdt89qS-",
+    indexLabel:"Recursos",
+    panelLabel:"Recursos de Dragon Town",
+    chapters:[
+      {title:"Abrir Dragon Town",url:"https://drive.google.com/file/d/1_OQaF4Uohh3cKDen5Hn6AeavSdt89qS-/view?usp=drive_link"},
+      {title:"Paper Minis",url:"https://drive.google.com/file/d/1rb3YZXexMRyP6P7EjUdhVO1BtuBbRecL/view?usp=drive_link"},
+      {title:"Map of Malumir Valley",url:"https://drive.google.com/file/d/11gOwPVyZf0Bkt_byB7fDPKnARXdHQ8P6/view?usp=drive_link"},
+      {title:"Map of Dragon Town",url:"https://drive.google.com/file/d/1Eyl1KMA6bG15RO1ZbnZxVEnsLxV1xvwM/view?usp=drive_link"},
+      {title:"Tokens",url:"https://drive.google.com/drive/folders/1gVZPeTpcDQRu_iBYsPlwOPo-2Ju5ONYA?usp=drive_link"}
+    ]
+  }
+];
+
 const JPCOOVERT_SUPPLEMENTS = [
-  {title:"Dragon Town",collection:"Flik Silverpen · Adventures",description:"El zine original de Dragon Town: la desaparición del alcalde dragón, el pueblo, sus habitantes y el inicio de la campaña.",url:"https://drive.google.com/file/d/1_OQaF4Uohh3cKDen5Hn6AeavSdt89qS-/view?usp=drive_link",coverId:"1_OQaF4Uohh3cKDen5Hn6AeavSdt89qS-"},
   {title:"Ravenwood",collection:"Flik Silverpen · Adventures",description:"Sandbox de bosque oscuro con criaturas extrañas, caballeros élficos, fantasmas y amenazas listas para mesa.",url:"https://drive.google.com/file/d/19h-A-DnmxwdwSk5PjHUd3fa7uywfX4NN/view?usp=drive_link",coverId:"19h-A-DnmxwdwSk5PjHUd3fa7uywfX4NN"},
   {title:"The City of Eternal Night",collection:"Flik Silverpen · Adventures",description:"Una ciudad en ruinas tomada por una secta y por las señales de la Darkness Below.",url:"https://drive.google.com/file/d/1PajuFlomYLPX-bN5XVsYmZPAXn1fGyX1/view?usp=drive_link",coverId:"1PajuFlomYLPX-bN5XVsYmZPAXn1fGyX1"},
   {title:"The Great Goblin Flight",collection:"Flik Silverpen · Adventures",description:"Aventura system-neutral protagonizada por goblins, encuentros extraños y exploración fantástica.",url:"https://drive.google.com/file/d/1gGp4-nENNOebTkQl1KCwD3IYHRjI144o/view?usp=drive_link",coverId:"1gGp4-nENNOebTkQl1KCwD3IYHRjI144o"},
@@ -12516,20 +12697,15 @@ const JPCOOVERT_SUPPLEMENTS = [
   {title:"Making Maps",collection:"Flik Silverpen · Creation Guides",description:"Técnicas y proceso para dibujar mapas útiles para partidas de rol.",url:"https://drive.google.com/file/d/17gjGZfwXVDzAD1ORFnMu7YwwR9OpdnTf/view?usp=drive_link",coverId:"17gjGZfwXVDzAD1ORFnMu7YwwR9OpdnTf"},
   {title:"Unscrupulous Emporiums",collection:"Flik Silverpen · Creation Guides",description:"Tiendas dudosas, comerciantes memorables y lugares de ciudad listos para insertar en una sesión.",url:"https://drive.google.com/file/d/1qNqKIYOoPOoeirE1x8jj1DoFcbp6xQvi/view?usp=drive_link",coverId:"1qNqKIYOoPOoeirE1x8jj1DoFcbp6xQvi"},
   {title:"Bustling Streets & Unsavory Alleyways",collection:"Flik Silverpen · Creation Guides",description:"Calles, callejones y situaciones urbanas para dar vida a una ciudad de fantasía.",url:"https://drive.google.com/file/d/1iRXyV_xXqhmqU1cZXPhn4NDqxNsbjUId/view?usp=drive_link",coverId:"1iRXyV_xXqhmqU1cZXPhn4NDqxNsbjUId"},
-
-  {title:"Paper Minis",collection:"Dragon Town · Extras",description:"Miniaturas de papel complementarias para usar en la mesa junto a Dragon Town.",url:"https://drive.google.com/file/d/1rb3YZXexMRyP6P7EjUdhVO1BtuBbRecL/view?usp=drive_link",coverId:""},
-  {title:"Map of Malumir Valley",collection:"Dragon Town · Extras",description:"Mapa complementario del valle de Malumir para la campaña de Dragon Town.",url:"https://drive.google.com/file/d/11gOwPVyZf0Bkt_byB7fDPKnARXdHQ8P6/view?usp=drive_link",coverId:""},
-  {title:"Map of Dragon Town",collection:"Dragon Town · Extras",description:"Mapa de referencia de Dragon Town para exploración y preparación de sesión.",url:"https://drive.google.com/file/d/1Eyl1KMA6bG15RO1ZbnZxVEnsLxV1xvwM/view?usp=drive_link",coverId:""},
-  {title:"Tokens",collection:"Dragon Town · Extras",description:"Carpeta de tokens virtuales preparados para utilizar con Dragon Town.",url:"https://drive.google.com/drive/folders/1gVZPeTpcDQRu_iBYsPlwOPo-2Ju5ONYA?usp=drive_link",coverId:""}
 ];
 
 
 const INDESTRUCTOBOY_BOOKS = [
   {
     title:"Vagabond",
-    kicker:"Core Rulebook · Archivo de Canva",
-    description:"Libro organizado en seis capítulos, un apéndice y hojas de apoyo en el diseño original.",
-    coverId:"",
+    kicker:"Pulp Fantasy RPG · Core Rulebook",
+    description:"Fantasía pulp con espíritu old-school y personalización moderna. Su motor d20 busca combate y exploración ágiles, compatibilidad con aventuras clásicas y menos carga mental durante la partida.",
+    coverId:"19HvUzT4PM6URyr1C4eGUpog_dZaUNdss",
     chapters:[
       {title:"Presentation · YouTube",url:"https://www.youtube.com/watch?v=GSaZTP_RVsQ"},
       {title:"Contents + Introduction",url:"https://drive.google.com/file/d/1-QoMlXdmjS0PD8bKJQFZ_tUEuRCVEAot/view?usp=drive_link"},
@@ -12552,24 +12728,24 @@ const INDESTRUCTOBOY_SUPPLEMENTS = [
   {
     title:"The Rook & The Crook",
     collection:"Vagabond · Supplement",
-    description:"Suplemento de Vagabond identificado en el mismo archivo de Indestructoboy.",
+    description:"Dos torres imposibles aparecen tras una explosión y anuncian una catástrofe. Una aventura de misterio y dungeon crawling escrita para Vagabond, pero planteada para funcionar también con otros juegos de fantasía d20.",
     url:"https://drive.google.com/file/d/1lnehAfFOyAusAng-g_XSRYhZ1ZRU3Tbd/view?usp=drive_link",
-    coverId:""
+    coverId:"1oMoDpgJsDYyIKILrSNRPNQkbQjtjmkwz"
   }
 ];
 
 const GIFFYGLYPH_BOOKS = [
-  {title:"Class Compendium",collection:"Giffyglyph",description:"Obra listada como Class Compendium en el diseño original.",url:"https://drive.google.com/file/d/1CRsorGHoXnMHaxwkRjtoqUpqL4CnGFYH/view?usp=drive_link",coverId:"",actionLabel:"Abrir libro"},
-  {title:"Monster Maker",collection:"Giffyglyph",description:"Obra listada como Monster Maker en el diseño original.",url:"https://drive.google.com/file/d/1D5sCtBfcRFREHRmBqSs57BgpxNlOX87T/view?usp=drive_link",coverId:"",actionLabel:"Abrir libro"},
-  {title:"Darker Dungeons",collection:"Giffyglyph",description:"Obra listada como Darker Dungeons en el diseño original.",url:"https://drive.google.com/file/d/1DJK9Elc-3haeFBMIA4GNS_SaB3fZVjOn/view?usp=drive_link",coverId:"",actionLabel:"Abrir libro"},
-  {title:"Card Codex",collection:"Giffyglyph",description:"Obra listada como Card Codex en el diseño original.",url:"https://drive.google.com/file/d/12A7S46BbuYegh76th7SB7WstPg2eAUzS/view?usp=drive_link",coverId:"",actionLabel:"Abrir libro"}
+  {title:"Class Compendium",collection:"Giffyglyph",description:"Reescritura y rebalanceo de las 12 clases base de 5e para niveles 1–10, con recursos propios, nuevas subclases y capstones que refuerzan la identidad de cada arquetipo.",url:"https://drive.google.com/file/d/1CRsorGHoXnMHaxwkRjtoqUpqL4CnGFYH/view?usp=drive_link",coverId:"",actionLabel:"Abrir libro"},
+  {title:"Monster Maker",collection:"Giffyglyph",description:"Herramientas para crear monstruos y encuentros en segundos, usando rangos, roles y plantillas que van desde minions hasta élites y jefes solitarios.",url:"https://drive.google.com/file/d/1D5sCtBfcRFREHRmBqSs57BgpxNlOX87T/view?usp=drive_link",coverId:"",actionLabel:"Abrir libro"},
+  {title:"Darker Dungeons",collection:"Giffyglyph",description:"Más de 150 páginas de reglas modulares para campañas más duras: heridas, estrés, enfermedades, campamento, crafteo, gemas engarzadas y otros sistemas opcionales.",url:"https://drive.google.com/file/d/1DJK9Elc-3haeFBMIA4GNS_SaB3fZVjOn/view?usp=drive_link",coverId:"",actionLabel:"Abrir libro"},
+  {title:"Card Codex",collection:"Giffyglyph",description:"Colección de cartas imprimibles para llevar condiciones y referencias de 5e a la mesa de forma física, rápida y visual.",url:"https://drive.google.com/file/d/12A7S46BbuYegh76th7SB7WstPg2eAUzS/view?usp=drive_link",coverId:"",actionLabel:"Abrir libro"}
 ];
 
 const GIFFYGLYPH_REBALANCES = [
   {
     title:"Class Rebalances",
     kicker:"Colección · Clases",
-    description:"Colección de rebalances de clases y recursos relacionados listados individualmente en Canva.",
+    description:"Revisiones de las clases de 5e con nuevas progresiones, recursos y habilidades para dar a cada arquetipo una identidad más marcada en mesa.",
     coverId:"",
     chapters:[
       {title:"The Brilliant Bard",url:"https://drive.google.com/file/d/1f0EjDn9O0UqP4FtOTwbSBOOKZeTi1c5b/view?usp=drive_link"},
@@ -12590,23 +12766,23 @@ const GIFFYGLYPH_REBALANCES = [
 ];
 
 const GIFFYGLYPH_SUPPLEMENTS = [
-  {title:"Giffyglyph's Quick Quest",collection:"Giffyglyph",description:"Recurso listado como Giffyglyph's Quick Quest en Canva.",url:"https://drive.google.com/file/d/18LgY83z0Kt24RVJw7f6na8IWXASPbNa2/view?usp=drive_link",coverId:""},
-  {title:"Darker Dungeons · Hoja de Personaje",collection:"Darker Dungeons",description:"Hoja de personaje enlazada junto a Darker Dungeons en el diseño original.",url:"https://drive.google.com/file/d/1T9tG7uHHTB27rHss_O_Wp3bH0njmCF3S/view?usp=drive_link",coverId:""}
+  {title:"Giffyglyph's Quick Quest",collection:"Giffyglyph",description:"Sistema ligero para convertir una idea en una aventura breve, con herramientas enfocadas en poner personajes y situaciones en juego con muy poca preparación.",url:"https://drive.google.com/file/d/18LgY83z0Kt24RVJw7f6na8IWXASPbNa2/view?usp=drive_link",coverId:""},
+  {title:"Darker Dungeons · Hoja de Personaje",collection:"Darker Dungeons",description:"Hoja de personaje adaptada a Darker Dungeons para seguir sus recursos y subsistemas adicionales sin perder una lectura rápida en mesa.",url:"https://drive.google.com/file/d/1T9tG7uHHTB27rHss_O_Wp3bH0njmCF3S/view?usp=drive_link",coverId:""}
 ];
 
 
 const ENWORLD_BOOKS = [
-  {title:"Adventurer’s Guide",collection:"Level Up: Advanced 5th Edition",description:"Contenido + Introduction conservado en el diseño de Canva.",url:"https://drive.google.com/file/d/12ZpFqf7TgrlOb7mw3TavDDsP41ETUURk/view?usp=drive_link",coverId:"",actionLabel:"Abrir archivo"},
-  {title:"Monstrous Menagerie",collection:"Level Up: Advanced 5th Edition",description:"Contenido + Introduction conservado en el diseño de Canva.",url:"https://drive.google.com/file/d/1rdb1Iw-t9tRmPilx21Y8RuuM63qLVg8U/view?usp=drive_link",coverId:"",actionLabel:"Abrir archivo"},
-  {title:"Adventures in Zeitgeist",collection:"Level Up: Advanced 5th Edition",description:"Contenido + Introduction conservado en el diseño de Canva.",url:"https://drive.google.com/file/d/1v-j2bHc52YIW7roQdCcYCdoYePLE-rK0/view?usp=drive_link",coverId:"",actionLabel:"Abrir archivo"},
-  {title:"Trials & Treasures",collection:"Level Up: Advanced 5th Edition",description:"Contenido + Introduction conservado en el diseño de Canva.",url:"https://drive.google.com/file/d/1qvnyIJZT0yZwRUMT0ENHTyKWzhK5yLZm/view?usp=drive_link",coverId:"",actionLabel:"Abrir archivo"},
-  {title:"Mythological Figures & Magnificent Monsters",collection:"Level Up: Advanced 5th Edition",description:"Contenido + Introduction conservado en el diseño de Canva.",url:"https://drive.google.com/file/d/1Uf8b4SNK5PZIadVnLWlSKvbG_wBjY2Fr/view?usp=drive_link",coverId:"",actionLabel:"Abrir archivo"},
-  {title:"Monstrous Menagerie II",collection:"Level Up: Advanced 5th Edition",description:"Contenido + Introduction conservado en el diseño de Canva.",url:"https://drive.google.com/file/d/1oZJG3kd0D-JmqzObLCwizE89bP1U1xI8/view?usp=drive_link",coverId:"",actionLabel:"Abrir archivo"},
-  {title:"Voidrunners Codex",collection:"Level Up: Advanced 5th Edition",description:"Contenido + Introduction conservado en el diseño de Canva.",url:"https://drive.google.com/file/d/13uyj8rXeHZ248mFVOI1EleZDeuHDHY_q/view?usp=drive_link",coverId:"",actionLabel:"Abrir archivo"}
+  {title:"Adventurer’s Guide",collection:"Level Up: Advanced 5th Edition",description:"El núcleo para jugadores de Level Up: creación de personajes, clases rediseñadas, orígenes, maniobras, equipo y reglas base con más opciones y profundidad que 5e tradicional.",url:"https://drive.google.com/file/d/12ZpFqf7TgrlOb7mw3TavDDsP41ETUURk/view?usp=drive_link",coverId:"",actionLabel:"Abrir libro"},
+  {title:"Monstrous Menagerie",collection:"Level Up: Advanced 5th Edition",description:"Bestiario rediseñado para encuentros más dinámicos, con nueva matemática de monstruos, variantes, comportamiento y herramientas para construir amenazas propias.",url:"https://drive.google.com/file/d/1rdb1Iw-t9tRmPilx21Y8RuuM63qLVg8U/view?usp=drive_link",coverId:"",actionLabel:"Abrir libro"},
+  {title:"Adventures in Zeitgeist",collection:"Level Up: Advanced 5th Edition",description:"Ambientación de fantasía industrial donde magia, pólvora, trenes y grandes máquinas conviven mientras naciones y facciones compiten por definir una nueva era.",url:"https://drive.google.com/file/d/1v-j2bHc52YIW7roQdCcYCdoYePLE-rK0/view?usp=drive_link",coverId:"",actionLabel:"Abrir libro"},
+  {title:"Trials & Treasures",collection:"Level Up: Advanced 5th Edition",description:"Herramientas para Narradores centradas en viajes y exploración, encuentros, recompensas y más de quinientos objetos mágicos, además de reglas para crearlos.",url:"https://drive.google.com/file/d/1qvnyIJZT0yZwRUMT0ENHTyKWzhK5yLZm/view?usp=drive_link",coverId:"",actionLabel:"Abrir libro"},
+  {title:"Mythological Figures & Magnificent Monsters",collection:"Level Up: Advanced 5th Edition",description:"Héroes, villanos y criaturas legendarias inspiradas en mitos e historia, adaptadas para aparecer como aliados, rivales o encuentros en campañas 5e/A5E.",url:"https://drive.google.com/file/d/1Uf8b4SNK5PZIadVnLWlSKvbG_wBjY2Fr/view?usp=drive_link",coverId:"",actionLabel:"Abrir libro"},
+  {title:"Monstrous Menagerie II",collection:"Level Up: Advanced 5th Edition",description:"Un segundo gran bestiario con cientos de amenazas adicionales, nuevas formas de presentar grupos y criaturas heroicas, y desafíos pensados para campañas de mayor escala.",url:"https://drive.google.com/file/d/1oZJG3kd0D-JmqzObLCwizE89bP1U1xI8/view?usp=drive_link",coverId:"",actionLabel:"Abrir libro"},
+  {title:"Voidrunners Codex",collection:"Level Up: Advanced 5th Edition",description:"Expansión de ciencia ficción para A5E con clases, poderes psiónicos, equipo futurista, exploración espacial y amenazas alienígenas para llevar 5e más allá de la fantasía clásica.",url:"https://drive.google.com/file/d/13uyj8rXeHZ248mFVOI1EleZDeuHDHY_q/view?usp=drive_link",coverId:"",actionLabel:"Abrir libro"}
 ];
 
 const ENWORLD_ARCHIVE = [
-  {title:"Level Up · Archivo detallado",kicker:"Enlaces preservados sin reasignar",description:"Canva intercala varias columnas de Level Up. Este índice conserva sus etiquetas y enlaces exactamente sin atribuirlos a un libro distinto del indicado por la propia etiqueta.",coverId:"",chapters:[
+  {title:"Level Up · Archivo detallado",kicker:"Enlaces preservados sin reasignar",description:"Índice transversal de reglas y ayudas de Level Up: creación de personajes, equipo, exploración, criaturas, psiónica, objetos mágicos y material de ambientación. Los enlaces ambiguos se mantienen sin reasignar para no inventar su procedencia.",coverId:"",chapters:[
     {title:"Presentation",url:"https://www.youtube.com/watch?v=9_GTDruNkZk"},
     {title:"Ch. 1 · Character Creation",url:"https://drive.google.com/file/d/1luIDoB5T4bXP-zqSyNGZempv8B71Ea3z/view?usp=drive_link"},
     {title:"Ch. 1 · GM Troubleshooting",url:"https://drive.google.com/file/d/105oUshQxaGQKFds1J3GeOCif0JuFeg5k/view?usp=drive_link"},
@@ -12683,7 +12859,7 @@ const ENWORLD_ARCHIVE = [
 ];
 
 const ENWORLD_DUNGEON_BOOKS = [
-  {title:"Dungeon Delver’s Guide",kicker:"Level Up · Archivo detallado",description:"Material para explorar, construir y dirigir dungeons, preservado con sus enlaces individuales del Canva.",coverId:"",chapters:[
+  {title:"Dungeon Delver’s Guide",kicker:"Level Up · Archivo detallado",description:"Guía integral para crear, explorar y dirigir dungeons: nuevas opciones de personaje, trampas y puzzles, generadores, aventuras listas para usar y herramientas para construir complejos memorables.",coverId:"",chapters:[
     {title:"Presentation",url:"https://www.youtube.com/watch?v=9_GTDruNkZk"},
     {title:"Contents + Introduction",url:"https://drive.google.com/file/d/1BIqvcrMaAwQIOuX0wuZnckxQZ8yhXtYR/view?usp=drive_link"},
     {title:"Ch. 1 · Exploring the Dungeon",url:"https://drive.google.com/file/d/1I07UdU2O-6qd_XdBbhw5bvYknf-rMIl2/view?usp=drive_link"},
@@ -12701,7 +12877,7 @@ const ENWORLD_DUNGEON_BOOKS = [
 ];
 
 const ENWORLD_GATEPASS = [
-  {title:"Gatepass Gazette",kicker:"Annuals + Issues 00–40",description:"Colección periódica conservada en el Canva. Los Annual 2024 y 2025 mantienen los enlaces exactamente como aparecen en la fuente.",coverId:"",chapters:[
+  {title:"Gatepass Gazette",kicker:"Annuals + Issues 00–40",description:"Revista periódica de Level Up con nuevas opciones, monstruos, reglas, escenarios y material listo para incorporar a campañas A5E. Los enlaces anuales se conservan tal como estaban archivados.",coverId:"",chapters:[
       {title:"Annual 2022",url:"https://drive.google.com/file/d/1EXMC-cM5xM37x79iBnhi1S8R0hHkHjQA/view?usp=drive_link"},
       {title:"Annual 2023",url:"https://drive.google.com/file/d/1eVW-1vjNREakI28Cfmfjh7089XF1AwAr/view?usp=drive_link"},
       {title:"Annual 2024 · enlace de Canva",url:"https://drive.google.com/file/d/1EXMC-cM5xM37x79iBnhi1S8R0hHkHjQA/view?usp=drive_link"},
@@ -12751,11 +12927,11 @@ const ENWORLD_GATEPASS = [
 ];
 
 const ENWORLD_SUPPLEMENTS = [
-  {title:"Memories of Holdenshire",collection:"Level Up · Extra",description:"Suplemento conservado en la sección de EN World del diseño original.",url:"https://drive.google.com/file/d/1-yMPaqbDIckt7MqFwdg7tk97YuORn_Io/view?usp=drive_link",coverId:"",actionLabel:"Abrir archivo"}
+  {title:"Memories of Holdenshire",collection:"Level Up · Extra",description:"Aventura inicial de niveles 1–3 que introduce gradualmente las reglas de Level Up mientras los héroes intentan recuperar sus recuerdos y escapar de una acusación de asesinato.",url:"https://drive.google.com/file/d/1-yMPaqbDIckt7MqFwdg7tk97YuORn_Io/view?usp=drive_link",coverId:"",actionLabel:"Abrir archivo"}
 ];
 
 const DARRINGTON_BOOKS = [
-  {title:"Tal’Dorei Reborn",kicker:"Critical Role · Exandria",description:"Archivo de Tal’Dorei organizado a partir de los encabezados y capítulos visibles en Canva.",coverId:"",chapters:[
+  {title:"Tal’Dorei Reborn",kicker:"Critical Role · Exandria",description:"Guía definitiva del continente de Tal’Dorei: regiones y ganchos de aventura, opciones de personaje, Vestiges of Divergence, criaturas y lore actualizado de Vox Machina.",coverId:"",chapters:[
     {title:"Contents + Index",url:"https://drive.google.com/file/d/12mEEYU3sQvNMIgrV5EgGsR5CU01qoef7/view?usp=drive_link"},
     {title:"Ch. 1 · Bienvenido a Tal’Dorei",url:"https://drive.google.com/file/d/1Epi5lJwXC1nYUXlgR7mboY0gmwYGKXmF/view?usp=drive_link"},
     {title:"Ch. 2 · Alianzas de Tal’Dorei",url:"https://drive.google.com/file/d/1X-nMGHCfDZ4mYMUR5xXHsCwUfoBqL8SQ/view?usp=drive_link"},
@@ -12764,7 +12940,7 @@ const DARRINGTON_BOOKS = [
     {title:"Ch. 5 · Herramientas del GM",url:"https://drive.google.com/file/d/17Mtb62YLg6b3calAQ6au51p0H8qPPzxk/view?usp=drive_link"},
     {title:"Ch. 6 · Aliados y Adversarios",url:"https://drive.google.com/file/d/1yuXtAl3RJXtfn5j7a3OajLeLP5tsXHOY/view?usp=drive_link"}
   ]},
-  {title:"Explorer's Guide to Wildemount",kicker:"Critical Role · Exandria",description:"Capítulos de Wildemount conservados desde la fuente Canva.",coverId:"",chapters:[
+  {title:"Explorer's Guide to Wildemount",kicker:"Critical Role · Exandria",description:"Guía para crear campañas en Wildemount, el continente de Campaign 2: historia, facciones, opciones de personaje, aventuras iniciales, tesoros y criaturas en plena tensión entre grandes potencias.",coverId:"",chapters:[
     {title:"Contents",url:"https://drive.google.com/file/d/1iRAm3PHemnwFPD-vwnQl-rqWFSj3cBtq/view?usp=drive_link"},
     {title:"Ch. 1 · Story of Wildemount",url:"https://drive.google.com/file/d/1BLWCyYd5qhZJB5HUBPKXfnnktPDiitrS/view?usp=drive_link"},
     {title:"Ch. 2 · Factions & Societies",url:"https://drive.google.com/file/d/1ScrlNxo8xbwx1P2WxneC2tAnTKxDEfSn/view?usp=drive_link"},
@@ -12774,7 +12950,7 @@ const DARRINGTON_BOOKS = [
     {title:"Ch. 6 · Wildemount Treasures",url:"https://drive.google.com/file/d/1WqeZT1aeW7tK6p_JbuDgmyxvOkwPT30o/view?usp=drive_link"},
     {title:"Ch. 7 · Wildemount Bestiary",url:"https://drive.google.com/file/d/19Ro9s5PBsA-OUinxzPGT_rrzmUVbC7fl/view?usp=drive_link"}
   ]},
-  {title:"Call of the Netherdeep",kicker:"Critical Role · Campaign",description:"Campaña archivada por capítulos visibles en el Canva.",coverId:"",chapters:[
+  {title:"Call of the Netherdeep",kicker:"Critical Role · Campaign",description:"Campaña épica por Exandria en la que un grupo rival acompaña a los héroes desde Jigow y Bazzoxan hasta Ank’Harel, la ciudad hundida de Cael Morrow y las profundidades del Netherdeep.",coverId:"",chapters:[
     {title:"Glossary + Index",url:"https://drive.google.com/file/d/1_xZibNQSsnqKSx-rUI9rbGmlOnn9_15T/view?usp=drive_link"},
     {title:"Ch. 1 · A Fateful Competition",url:"https://drive.google.com/file/d/1tbe-nS8m3Qn5FsIHm81O8A8W2wCHnNaz/view?usp=drive_link"},
     {title:"Ch. 2 · The Leave-Taking",url:"https://drive.google.com/file/d/1nDIxhm5bXXaalFPtocyr0MrcXcPqFyzA/view?usp=drive_link"},
@@ -12784,7 +12960,7 @@ const DARRINGTON_BOOKS = [
     {title:"Ch. 6 · The Netherdeep",url:"https://drive.google.com/file/d/1brsg8gD1NKd9sijD7Ga0v3q_dlpvuqIn/view?usp=drive_link"},
     {title:"Ch. 7 · The Heart of Despair",url:"https://drive.google.com/file/d/1ZIITN5rBuaGs3g6WglLlyO2BJ9Ex70a7/view?usp=drive_link"}
   ]},
-  {title:"Candela Obscura",kicker:"Darrington Press",description:"Material de Candela Obscura preservado según los capítulos y apéndices visibles en Canva.",coverId:"",chapters:[
+  {title:"Candela Obscura",kicker:"Darrington Press",description:"Juego de horror investigativo en las Fairelands: una sociedad secreta enfrenta incursiones sobrenaturales mientras el libro reúne reglas, creación de investigadores y círculos, ambientación y assignments.",coverId:"",chapters:[
     {title:"Contents + Index",url:"https://drive.google.com/file/d/1BEHG3I7Fl15xKYW_GspBmT87YbqIyEc6/view?usp=drive_link"},
     {title:"Ch. 1 · The Core System",url:"https://drive.google.com/file/d/1VGjqQAMzIV88rRxJU0v9C17pc_wcGrZo/view?usp=drive_link"},
     {title:"Ch. 2 · Making a Character",url:"https://drive.google.com/file/d/1QUvrpywfbBjorrI4wiyrcwvF5AKUpmRd/view?usp=drive_link"},
@@ -12805,7 +12981,7 @@ const DARRINGTON_BOOKS = [
 ];
 
 const DARRINGTON_DAGGERHEART = [
-  {title:"Daggerheart Core",kicker:"Core + Beta Playtest",description:"Reglas, guías y materiales imprimibles preservados desde la sección Darrington Press del Canva.",coverId:"",chapters:[
+  {title:"Daggerheart Core",kicker:"Core + Beta Playtest",description:"Fantasy RPG centrado en historias de personajes y mundos construidos en conjunto. Hope y Fear, Duality Dice y cartas sostienen la creación, el combate, la dirección y campañas de largo recorrido.",coverId:"",chapters:[
     {title:"Contents + Intro",url:"https://drive.google.com/file/d/16o4VA2Dy3-pm5TKZe-HBumbd2d1VRfVg/view?usp=drive_link"},
     {title:"Index",url:"https://drive.google.com/file/d/1AJ81Wjewey6V7N7j8urwDFu9Osz1WdW_/view?usp=drive_link"},
     {title:"Ch. 1 · Preparing for Adventure",url:"https://drive.google.com/file/d/1-C5Lej3AFz0RSguIFX7GG1Xt_faJKk70/view?usp=drive_link"},
@@ -12828,16 +13004,16 @@ const DARRINGTON_DAGGERHEART = [
 ];
 
 const DARRINGTON_CLASSES = [
-  {title:"Ranger",collection:"Daggerheart · Character Class",description:"Archivo individual de clase.",url:"https://drive.google.com/file/d/1jylscqN9Brpd2tY1mFhPV58S4XHtt_WK/view?usp=drive_link",coverId:"",actionLabel:"Abrir clase"},
-  {title:"Warrior",collection:"Daggerheart · Character Class",description:"Archivo individual de clase.",url:"https://drive.google.com/file/d/1wT3mt2XVRGcqTBvk52YI48I4mnEfxizV/view?usp=drive_link",coverId:"",actionLabel:"Abrir clase"},
-  {title:"Guardian",collection:"Daggerheart · Character Class",description:"Archivo individual de clase.",url:"https://drive.google.com/file/d/1vJs-IO-8RainX00UFJWR7bhBaSFtT22N/view?usp=drive_link",coverId:"",actionLabel:"Abrir clase"},
-  {title:"Seraph",collection:"Daggerheart · Character Class",description:"Archivo individual de clase.",url:"https://drive.google.com/file/d/16kycMMIxKJg7oYPo1au1O1UquYW5rmG6/view?usp=drive_link",coverId:"",actionLabel:"Abrir clase"},
-  {title:"Bard",collection:"Daggerheart · Character Class",description:"Archivo individual de clase.",url:"https://drive.google.com/file/d/1qreANF-X9dlZKlpcGqsUb5NEPBCNm1hE/view?usp=drive_link",coverId:"",actionLabel:"Abrir clase"},
-  {title:"Druid",collection:"Daggerheart · Character Class",description:"Archivo individual de clase.",url:"https://drive.google.com/file/d/1aES3RUnMNwATasUm08GQk_JiY_nH2to1/view?usp=drive_link",coverId:"",actionLabel:"Abrir clase"},
-  {title:"Sorcerer",collection:"Daggerheart · Character Class",description:"Archivo individual de clase.",url:"https://drive.google.com/file/d/1OexB0-uqzCsH2N6sFTTFbD3Ys5GreOMJ/view?usp=drive_link",coverId:"",actionLabel:"Abrir clase"},
-  {title:"Wizard",collection:"Daggerheart · Character Class",description:"Archivo individual de clase.",url:"https://drive.google.com/file/d/1XLSanQ9dkxd-ScDZuxL0r9PtkcMAc6NU/view?usp=drive_link",coverId:"",actionLabel:"Abrir clase"},
-  {title:"Rogue",collection:"Daggerheart · Character Class",description:"Archivo individual de clase.",url:"https://drive.google.com/file/d/1Cw5WenGpKOIpZ2fZ-0LRFC7kE78szXSm/view?usp=drive_link",coverId:"",actionLabel:"Abrir clase"},
-  {title:"Multiclass",collection:"Daggerheart · Character Class",description:"Archivo individual de clase.",url:"https://drive.google.com/file/d/1UgSUX_hfh0AMZRXCHKeAW9Z8zFauKGbC/view?usp=drive_link",coverId:"",actionLabel:"Abrir clase"}
+  {title:"Ranger",collection:"Daggerheart · Character Class",description:"Explorador ágil que combina dominio físico y conexión con la naturaleza; Bone y Sage favorecen movilidad, supervivencia y control del entorno.",url:"https://drive.google.com/file/d/1jylscqN9Brpd2tY1mFhPV58S4XHtt_WK/view?usp=drive_link",coverId:"",actionLabel:"Abrir clase"},
+  {title:"Warrior",collection:"Daggerheart · Character Class",description:"Especialista marcial de Blade y Bone, centrado en dominio de armas, posicionamiento y lectura táctica del combate.",url:"https://drive.google.com/file/d/1wT3mt2XVRGcqTBvk52YI48I4mnEfxizV/view?usp=drive_link",coverId:"",actionLabel:"Abrir clase"},
+  {title:"Guardian",collection:"Daggerheart · Character Class",description:"Defensor de primera línea que une Blade y Valor para resistir golpes, proteger aliados y controlar el frente.",url:"https://drive.google.com/file/d/1vJs-IO-8RainX00UFJWR7bhBaSFtT22N/view?usp=drive_link",coverId:"",actionLabel:"Abrir clase"},
+  {title:"Seraph",collection:"Daggerheart · Character Class",description:"Campeón de vida y protección: Splendor y Valor mezclan curación, poder radiante y capacidad para sostener al grupo.",url:"https://drive.google.com/file/d/16kycMMIxKJg7oYPo1au1O1UquYW5rmG6/view?usp=drive_link",coverId:"",actionLabel:"Abrir clase"},
+  {title:"Bard",collection:"Daggerheart · Character Class",description:"Narrador carismático que combina Codex y Grace: magia estudiada, palabra, presencia y herramientas para alterar el rumbo de una escena.",url:"https://drive.google.com/file/d/1qreANF-X9dlZKlpcGqsUb5NEPBCNm1hE/view?usp=drive_link",coverId:"",actionLabel:"Abrir clase"},
+  {title:"Druid",collection:"Daggerheart · Character Class",description:"Canaliza magia instintiva y naturaleza mediante Arcana y Sage, alternando poder elemental, transformación y vínculo con el mundo vivo.",url:"https://drive.google.com/file/d/1aES3RUnMNwATasUm08GQk_JiY_nH2to1/view?usp=drive_link",coverId:"",actionLabel:"Abrir clase"},
+  {title:"Sorcerer",collection:"Daggerheart · Character Class",description:"Magia innata y secretos: Arcana y Midnight combinan poder elemental con sombras, engaño y capacidades sobrenaturales imprevisibles.",url:"https://drive.google.com/file/d/1OexB0-uqzCsH2N6sFTTFbD3Ys5GreOMJ/view?usp=drive_link",coverId:"",actionLabel:"Abrir clase"},
+  {title:"Wizard",collection:"Daggerheart · Character Class",description:"Estudioso de lo imposible; Codex y Splendor ofrecen una magia versátil que mezcla conocimiento arcano con poderes ligados a vida y muerte.",url:"https://drive.google.com/file/d/1XLSanQ9dkxd-ScDZuxL0r9PtkcMAc6NU/view?usp=drive_link",coverId:"",actionLabel:"Abrir clase"},
+  {title:"Rogue",collection:"Daggerheart · Character Class",description:"Especialista en astucia, movilidad y secretos. Grace y Midnight permiten mentir, infiltrarse, evadir y manipular la percepción.",url:"https://drive.google.com/file/d/1Cw5WenGpKOIpZ2fZ-0LRFC7kE78szXSm/view?usp=drive_link",coverId:"",actionLabel:"Abrir clase"},
+  {title:"Multiclass",collection:"Daggerheart · Character Class",description:"Guía para combinar dos clases de Daggerheart, cruzando rasgos y dominios para construir un héroe híbrido sin perder su identidad.",url:"https://drive.google.com/file/d/1UgSUX_hfh0AMZRXCHKeAW9Z8zFauKGbC/view?usp=drive_link",coverId:"",actionLabel:"Abrir clase"}
 ];
 
 const DARRINGTON_SOURCE_LINKS = [
@@ -12846,16 +13022,16 @@ const DARRINGTON_SOURCE_LINKS = [
 ];
 
 const DARRINGTON_SUPPLEMENTS = [
-  {title:"Gunslinger",collection:"Critical Role Classes",description:"Clase homebrew archivada en Canva.",url:"https://drive.google.com/file/d/1ahzeypKSAYU6RctUnhI8wjfuQDLlYKM6/view?usp=drive_link",coverId:"",actionLabel:"Abrir archivo"},
-  {title:"Blood Hunter",collection:"Critical Role Classes",description:"Clase homebrew archivada en Canva.",url:"https://drive.google.com/file/d/1PtGuS1aah6XLVKJD80kmVpVRbflJT1KR/view?usp=drive_link",coverId:"",actionLabel:"Abrir archivo"},
-  {title:"GM’s Material",collection:"Critical Role Classes",description:"Material para Game Masters conservado en la fuente.",url:"https://drive.google.com/file/d/1iHGz3Kb-yeNmrE2XYCKBEQP603K6-6J9/view?usp=drive_link",coverId:"",actionLabel:"Abrir archivo"},
-  {title:"Players Material",collection:"Critical Role Classes",description:"El enlace se conserva exactamente como aparece en Canva.",url:"https://drive.google.com/file/d/1PtGuS1aah6XLVKJD80kmVpVRbflJT1KR/view?usp=drive_link",coverId:"",actionLabel:"Abrir archivo"},
-  {title:"Sablewood Location",collection:"Darrington Press",description:"Localización archivada en la sección original.",url:"https://drive.google.com/file/d/1qaWgVyRBaDMzxZ19y9sOX7JmUQ6vMaSi/view?usp=drive_link",coverId:"",actionLabel:"Abrir archivo"},
-  {title:"Beta Playtest Manuscript",collection:"Daggerheart",description:"Manuscrito de playtest enlazado desde Canva.",url:"https://drive.google.com/file/d/1AzLdnIra2SQKfzLesRCdVyVaw45H31V9/view?usp=drive_link",coverId:"",actionLabel:"Abrir archivo"},
-  {title:"System Reference Document",collection:"Daggerheart",description:"Documento de referencia del sistema.",url:"https://drive.google.com/file/d/1i8QpFM0XTfyHRnzaxBwgRtye_89Bh0Bw/view?usp=drive_link",coverId:"",actionLabel:"Abrir archivo"},
-  {title:"Errata, May 2025",collection:"Daggerheart",description:"Errata enlazada en el diseño original.",url:"https://drive.google.com/file/d/1Q3zTJS4LrzbAHcxhsSclHPWCxicaamb7/view?usp=drive_link",coverId:"",actionLabel:"Abrir archivo"},
-  {title:"Community Gaming License",collection:"Daggerheart",description:"Licencia comunitaria enlazada en el diseño original.",url:"https://drive.google.com/file/d/1RyQ3JWDoYA0DnD5WYWpfawVtzNH2nKH0/view?usp=drive_link",coverId:"",actionLabel:"Abrir archivo"},
-  {title:"Quickstart Guide",collection:"Darrington Press",description:"Guía rápida conservada en el archivo Canva.",url:"https://drive.google.com/file/d/15Mb_Dx33ORdMH-EMqbhKvQxTKd08I5vW/view?usp=drive_link",coverId:"",actionLabel:"Abrir archivo"}
+  {title:"Gunslinger",collection:"Critical Role Classes",description:"Clase de pistolero asociada a Critical Role, enfocada en armas de fuego, precisión y maniobras arriesgadas.",url:"https://drive.google.com/file/d/1ahzeypKSAYU6RctUnhI8wjfuQDLlYKM6/view?usp=drive_link",coverId:"",actionLabel:"Abrir archivo"},
+  {title:"Blood Hunter",collection:"Critical Role Classes",description:"Clase de cazador sobrenatural que sacrifica parte de sí mismo para perseguir monstruos y convertir poderes oscuros en herramientas.",url:"https://drive.google.com/file/d/1PtGuS1aah6XLVKJD80kmVpVRbflJT1KR/view?usp=drive_link",coverId:"",actionLabel:"Abrir archivo"},
+  {title:"GM’s Material",collection:"Critical Role Classes",description:"Ayudas de dirección vinculadas al material de Critical Role para preparar encuentros y llevar sus opciones a la mesa con menos fricción.",url:"https://drive.google.com/file/d/1iHGz3Kb-yeNmrE2XYCKBEQP603K6-6J9/view?usp=drive_link",coverId:"",actionLabel:"Abrir archivo"},
+  {title:"Players Material",collection:"Critical Role Classes",description:"Material de jugador asociado a las clases de Critical Role, reunido como apoyo de consulta y creación de personaje.",url:"https://drive.google.com/file/d/1PtGuS1aah6XLVKJD80kmVpVRbflJT1KR/view?usp=drive_link",coverId:"",actionLabel:"Abrir archivo"},
+  {title:"Sablewood Location",collection:"Darrington Press",description:"Extensión de Sablewood para Daggerheart, con nuevos landmarks, asentamientos, facciones, adversarios y material para seguir explorando el bosque después del Quickstart.",url:"https://drive.google.com/file/d/1qaWgVyRBaDMzxZ19y9sOX7JmUQ6vMaSi/view?usp=drive_link",coverId:"",actionLabel:"Abrir archivo"},
+  {title:"Beta Playtest Manuscript",collection:"Daggerheart",description:"Versión de pruebas de Daggerheart utilizada para jugar, tensionar y evaluar el sistema antes de su edición definitiva.",url:"https://drive.google.com/file/d/1AzLdnIra2SQKfzLesRCdVyVaw45H31V9/view?usp=drive_link",coverId:"",actionLabel:"Abrir archivo"},
+  {title:"System Reference Document",collection:"Daggerheart",description:"Reglas de referencia de Daggerheart para consultar sus mecánicas base y crear contenido compatible bajo la licencia comunitaria.",url:"https://drive.google.com/file/d/1i8QpFM0XTfyHRnzaxBwgRtye_89Bh0Bw/view?usp=drive_link",coverId:"",actionLabel:"Abrir archivo"},
+  {title:"Errata, May 2025",collection:"Daggerheart",description:"Correcciones oficiales para la primera edición de Daggerheart, reunidas para mantener reglas, cartas y referencias de juego al día.",url:"https://drive.google.com/file/d/1Q3zTJS4LrzbAHcxhsSclHPWCxicaamb7/view?usp=drive_link",coverId:"",actionLabel:"Abrir archivo"},
+  {title:"Community Gaming License",collection:"Daggerheart",description:"Licencia de Darrington Press para crear, compartir y publicar contenido compatible con Daggerheart bajo sus condiciones.",url:"https://drive.google.com/file/d/1RyQ3JWDoYA0DnD5WYWpfawVtzNH2nKH0/view?usp=drive_link",coverId:"",actionLabel:"Abrir archivo"},
+  {title:"Quickstart Guide",collection:"Darrington Press",description:"Aventura guiada para aprender Daggerheart jugando: personajes pregenerados, reglas esenciales, adversarios y una misión en Sablewood para GM y 2–5 jugadores.",url:"https://drive.google.com/file/d/15Mb_Dx33ORdMH-EMqbhKvQxTKd08I5vW/view?usp=drive_link",coverId:"",actionLabel:"Abrir archivo"}
 ];
 
 const playerSources={
@@ -12877,6 +13053,7 @@ const slySupplementsGrid=document.getElementById('slySupplementsGrid');
 const mrrhexxBooksGrid=document.getElementById('mrrhexxBooksGrid');
 const mrrhexxSupplementsGrid=document.getElementById('mrrhexxSupplementsGrid');
 const jpcoovertBooksGrid=document.getElementById('jpcoovertBooksGrid');
+const jpcoovertResourceBooksGrid=document.getElementById('jpcoovertResourceBooksGrid');
 const jpcoovertSupplementsGrid=document.getElementById('jpcoovertSupplementsGrid');
 const indestructoboyBooksGrid=document.getElementById('indestructoboyBooksGrid');
 const indestructoboySupplementsGrid=document.getElementById('indestructoboySupplementsGrid');
@@ -12974,7 +13151,9 @@ function renderBookCollection(container, collection){
       ? `<img src="https://drive.google.com/thumbnail?id=${esc(coverId)}&sz=w700" data-fallback="https://lh3.googleusercontent.com/d/${esc(coverId)}=w700" alt="Portada de ${esc(book.title)}" loading="lazy" onerror="if(this.dataset.fallback){this.onerror=null;this.src=this.dataset.fallback}">`
       : '';
     const desktopHidden=window.innerWidth<=620?'true':'false';
-    art.innerHTML=`<div class="book-main"><span class="book-cover-wrap"><span class="book-cover">${coverMarkup}<span class="book-cover-placeholder"><small>${esc(book.kicker)}</small><strong>${esc(book.title)}</strong></span></span></span><span class="book-meta"><span class="book-title">${esc(book.title)}</span><span class="book-desc">${esc(book.description)}</span><button class="book-index-btn" type="button" aria-expanded="false" aria-controls="${panelId}">Índice <span class="plus" aria-hidden="true">＋</span></button></span></div><aside class="chapters" id="${panelId}" aria-hidden="${desktopHidden}" aria-label="Índice de ${esc(book.title)}"><div class="chapters-head"><div><small>Archivo PDF</small><strong>${esc(book.title)}</strong></div><button class="close-book" type="button" aria-label="Cerrar índice">×</button></div><div class="chapter-list">${book.chapters.map(ch=>`<a class="chapter" href="${esc(ch.url)}" target="_blank" rel="noopener noreferrer"><span>${esc(ch.title)}</span><span aria-hidden="true">↗</span></a>`).join('')}</div></aside>`;
+    const indexLabel=book.indexLabel||'Índice';
+    const panelLabel=book.panelLabel||'Archivo PDF';
+    art.innerHTML=`<div class="book-main"><span class="book-cover-wrap"><span class="book-cover">${coverMarkup}<span class="book-cover-placeholder"><small>${esc(book.kicker)}</small><strong>${esc(book.title)}</strong></span></span></span><span class="book-meta"><span class="book-title">${esc(book.title)}</span><span class="book-desc">${esc(book.description)}</span><button class="book-index-btn" type="button" aria-expanded="false" aria-controls="${panelId}">${esc(indexLabel)} <span class="plus" aria-hidden="true">＋</span></button></span></div><aside class="chapters" id="${panelId}" aria-hidden="${desktopHidden}" aria-label="${esc(indexLabel)} de ${esc(book.title)}"><div class="chapters-head"><div><small>${esc(panelLabel)}</small><strong>${esc(book.title)}</strong></div><button class="close-book" type="button" aria-label="Cerrar panel">×</button></div><div class="chapter-list">${book.chapters.map(ch=>`<a class="chapter" href="${esc(ch.url)}" target="_blank" rel="noopener noreferrer"><span>${esc(ch.title)}</span><span aria-hidden="true">↗</span></a>`).join('')}</div></aside>`;
     container.appendChild(art);
     const trigger=art.querySelector('.book-index-btn');
     const panel=art.querySelector('.chapters');
@@ -13038,6 +13217,7 @@ renderBookCollection(slySupplementsGrid,BOOKS.filter(book=>!CORE_TOOL_TITLES.has
 renderBookCollection(mrrhexxBooksGrid,MRRHEXX_BOOKS);
 renderDirectCollection(mrrhexxSupplementsGrid,MRRHEXX_SUPPLEMENTS);
 renderBookCollection(jpcoovertBooksGrid,JPCOOVERT_BOOKS);
+renderBookCollection(jpcoovertResourceBooksGrid,JPCOOVERT_RESOURCE_BOOKS);
 renderDirectCollection(jpcoovertSupplementsGrid,JPCOOVERT_SUPPLEMENTS);
 renderBookCollection(indestructoboyBooksGrid,INDESTRUCTOBOY_BOOKS);
 renderDirectCollection(indestructoboySupplementsGrid,INDESTRUCTOBOY_SUPPLEMENTS);
@@ -13088,9 +13268,9 @@ renderDirectCollection(darringtonSupplementsGrid,[...DARRINGTON_SOURCE_LINKS,...
     if(reduced.matches){
       tx=0;ty=0;
     }else if(mobile()){
-      tx=Math.sin(t*.00052)*.42;
-      ty=Math.cos(t*.00039)*.34;
-      floatY=Math.sin(t*.00105)*3.6;
+      tx=Math.sin(t*.00052)*.24;
+      ty=Math.cos(t*.00039)*.18;
+      floatY=Math.sin(t*.00105)*2.2;
     }
 
     cx+=(tx-cx)*.075;
