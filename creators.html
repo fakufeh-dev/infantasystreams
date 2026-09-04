@@ -24541,467 +24541,420 @@ renderBookCollection(criticalRoleOtherGrid,DARRINGTON_OTHERS);
 })();
 </script>
 
+VISOR DE PDFS
+  
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>In Fantasy Streams — Elfo</title>
 
-visor de pdf
-  <style>
+<style>
+* { box-sizing: border-box; }
 
-  * {
-    box-sizing: border-box;
-  }
+html, body {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+}
 
-  body {
-    margin: 0;
-    min-height: 100vh;
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 50% 35%, #30271e 0%, #17120f 40%, #080706 75%, #020202 100%);
+  color: #ead9ae;
+  font-family: Georgia, "Times New Roman", serif;
+}
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+body.cinema-open {
+  overflow: hidden;
+}
 
-    background: #15120f;
+#openElf {
+  appearance: none;
+  border: 1px solid rgba(217,183,109,.72);
+  border-radius: 8px;
+  padding: 16px 28px;
+  background: linear-gradient(180deg, #362c21, #201913);
+  color: #ecdcb7;
+  font: 18px Georgia, "Times New Roman", serif;
+  cursor: pointer;
+  box-shadow: 0 12px 35px rgba(0,0,0,.55);
+  transition: .18s ease;
+}
 
-    font-family: Georgia, serif;
-  }
+#openElf:hover {
+  transform: translateY(-2px);
+  border-color: #e4c67e;
+}
 
+#cinema {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  width: 100vw;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(circle at center, #24201b 0%, #0b0a09 64%, #000 100%);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .24s ease, visibility .24s ease;
+}
 
-  /* ===============================
-     BOTÓN DE PRUEBA
-     =============================== */
+#cinema.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
 
-  .open-book {
-    padding: 15px 28px;
+.toolbar {
+  flex: 0 0 auto;
+  min-height: 64px;
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding:
+    max(9px, env(safe-area-inset-top))
+    16px
+    9px;
+  border-bottom: 1px solid rgba(220,186,108,.18);
+  background: rgba(9,8,7,.97);
+  box-shadow: 0 10px 32px rgba(0,0,0,.5);
+}
 
-    border: 1px solid #a88c55;
-    border-radius: 8px;
+.book-title {
+  min-width: 0;
+}
 
-    background: #231d17;
-    color: #e6d4a9;
+.book-main {
+  color: #ead9ae;
+  font-size: 17px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
-    font-family: Georgia, serif;
-    font-size: 18px;
+.book-sub {
+  margin-top: 4px;
+  color: rgba(235,220,183,.48);
+  font: 10px Arial, sans-serif;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
 
-    cursor: pointer;
-  }
+.close-wrap {
+  display: flex;
+  justify-content: flex-end;
+}
 
-  .open-book:hover {
-    background: #30271d;
-  }
+.tool {
+  appearance: none;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(220,186,108,.2);
+  border-radius: 7px;
+  background: rgba(255,255,255,.035);
+  color: rgba(240,225,190,.9);
+  font-size: 24px;
+  cursor: pointer;
+}
 
+.tool:hover {
+  background: rgba(220,186,108,.11);
+  border-color: rgba(220,186,108,.42);
+}
 
-  /* ===============================
-     MODO CINE
-     =============================== */
+#stage {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 12px;
+  overflow: hidden;
+}
 
-  #cinema {
-    position: fixed;
-    inset: 0;
+#pdfFrame {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 5px;
+  background: #111;
+  box-shadow: 0 22px 70px rgba(0,0,0,.84);
+}
 
-    z-index: 999999;
+#loader {
+  position: absolute;
+  inset: 12px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  background:
+    radial-gradient(circle at center, rgba(30,25,20,.99), rgba(4,4,4,.995));
+  color: rgba(233,215,174,.82);
+  pointer-events: none;
+  transition: opacity .2s ease;
+}
 
-    display: flex;
-    flex-direction: column;
+#loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
 
-    background:
-      radial-gradient(
-        circle at center,
-        #211d18 0%,
-        #080808 75%,
-        #000 100%
-      );
+.spinner {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2px solid rgba(220,186,108,.14);
+  border-top-color: rgba(220,186,108,.92);
+  animation: spin .8s linear infinite;
+}
 
-    opacity: 0;
-    visibility: hidden;
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
 
-    transition:
-      opacity 0.3s ease,
-      visibility 0.3s ease;
-  }
+.footer {
+  height: 30px;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #060606;
+  color: rgba(220,205,170,.32);
+  font: 9px Arial, sans-serif;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
 
-
-  #cinema.open {
-    opacity: 1;
-    visibility: visible;
-  }
-
-
-  /* ===============================
-     BARRA SUPERIOR
-     =============================== */
-
+@media (max-width: 700px) {
   .toolbar {
-    height: 64px;
-
-    flex-shrink: 0;
-
-    display: flex;
-    align-items: center;
-
-    padding: 0 18px;
-
-    background: rgba(10, 9, 8, 0.96);
-
-    border-bottom:
-      1px solid rgba(200, 170, 100, 0.22);
-
-    box-shadow:
-      0 5px 20px rgba(0,0,0,0.6);
+    padding-left: 9px;
+    padding-right: 9px;
   }
 
-
-  .book-info {
-    flex: 1;
-    min-width: 0;
+  .book-sub {
+    display: none;
   }
 
-
-  .title {
-    color: #ead9ae;
-
-    font-size: 17px;
-
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  #stage {
+    padding: 5px;
   }
 
-
-  .subtitle {
-    margin-top: 3px;
-
-    color: rgba(230,215,180,0.55);
-
-    font-family: Arial, sans-serif;
-    font-size: 10px;
-
-    text-transform: uppercase;
-    letter-spacing: 1.3px;
+  #loader {
+    inset: 5px;
   }
-
-
-  /* ===============================
-     CERRAR
-     =============================== */
-
-  .close-button {
-
-    width: 42px;
-    height: 42px;
-
-    border-radius: 50%;
-
-    border:
-      1px solid rgba(220,195,135,0.28);
-
-    background:
-      rgba(255,255,255,0.04);
-
-    color: #ead9ae;
-
-    font-size: 27px;
-
-    cursor: pointer;
-  }
-
-
-  .close-button:hover {
-    background:
-      rgba(220,195,135,0.12);
-  }
-
-
-  /* ===============================
-     VISOR
-     =============================== */
-
-  .viewer {
-    position: relative;
-
-    flex: 1;
-
-    min-height: 0;
-
-    padding: 15px;
-  }
-
-
-  iframe {
-    width: 100%;
-    height: 100%;
-
-    border: 0;
-
-    border-radius: 5px;
-
-    background: #111;
-
-    box-shadow:
-      0 15px 50px rgba(0,0,0,0.75);
-  }
-
-
-  /* ===============================
-     TEXTO INFERIOR
-     =============================== */
-
-  .footer {
-    height: 35px;
-
-    flex-shrink: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    color:
-      rgba(220,205,170,0.45);
-
-    background: #080808;
-
-    font-family: Arial, sans-serif;
-    font-size: 10px;
-
-    letter-spacing: 1.3px;
-    text-transform: uppercase;
-  }
-
-
-  body.cinema-open {
-    overflow: hidden;
-  }
-
-
-  @media(max-width:600px) {
-
-    .toolbar {
-      height: 58px;
-      padding: 0 10px;
-    }
-
-    .viewer {
-      padding: 5px;
-    }
-
-    .subtitle {
-      display: none;
-    }
-
-  }
-
+}
 </style>
 </head>
 
-
 <body>
 
+<button id="openElf">Abrir Elfo</button>
 
-<!-- BOTÓN -->
-
-<button
-  class="open-book"
-  id="openElfo"
->
-  Abrir Elfo
-</button>
-
-
-
-<!-- MODO CINE -->
-
-<div id="cinema">
-
-  <div class="toolbar">
-
-    <div class="book-info">
-
-      <div class="title">
-        Elfo
-      </div>
-
-      <div class="subtitle">
-        Player's Handbook 2024 · Orígenes de personaje
-      </div>
-
+<div id="cinema" aria-hidden="true">
+  <header class="toolbar">
+    <div class="book-title">
+      <div class="book-main">Elfo</div>
+      <div class="book-sub">Player's Handbook 2024 · Orígenes de personaje · página 188</div>
     </div>
 
+    <div class="close-wrap">
+      <button id="closeCinema" class="tool" title="Cerrar" aria-label="Cerrar">×</button>
+    </div>
+  </header>
 
-    <button
-      class="close-button"
-      id="closeCinema"
-      aria-label="Cerrar"
-    >
-      ×
-    </button>
-
-  </div>
-
-
-  <div class="viewer">
-
+  <main id="stage">
     <iframe
-      id="driveViewer"
+      id="pdfFrame"
+      title="Player's Handbook 2024 — Elfo"
       allow="fullscreen"
-      allowfullscreen
-    ></iframe>
+      allowfullscreen>
+    </iframe>
 
-  </div>
+    <div id="loader">
+      <div class="spinner"></div>
+      <div>Consultando el Archivo de Vespera…</div>
+    </div>
+  </main>
 
-
-  <div class="footer">
-    Archivo de Vespera
-  </div>
-
+  <footer class="footer">Archivo de Vespera</footer>
 </div>
 
-
-
 <script>
-
-const cinema =
-  document.getElementById("cinema");
-
-const iframe =
-  document.getElementById("driveViewer");
-
-const openButton =
-  document.getElementById("openElfo");
-
-const closeButton =
-  document.getElementById("closeCinema");
-
-
 /*
-  PDF REAL EN TU DRIVE:
+  REGLAS DE ESTA PRUEBA
+  ---------------------
+  - Todo el código está dentro de este único HTML.
+  - El PDF NO está insertado en el código.
+  - El PDF permanece en Google Drive.
+  - No hay backend.
+  - No hay archivos .js o .css externos.
 
-  17 - Chapter 4 -
-  Orígenes de personaje - Especies.pdf
+  Archivo de Drive:
+  17 - Chapter 4 - Orígenes de personaje - Especies.pdf
+
+  Página interna 3 = página impresa 188 = inicio de ELFO.
+
+  Google Docs Viewer usa índices internos de página comenzando en 0:
+  página interna 3 -> :0.page.2
 */
 
-const DRIVE_FILE_ID =
-  "1-VAh9Pd3-yMrv7Phb3IscJBCorsk5upt";
+const DRIVE_FILE_ID = "1-VAh9Pd3-yMrv7Phb3IscJBCorsk5upt";
+const INTERNAL_PAGE_INDEX = 2; // página interna 3
+const PAGE_HASH = "#:0.page." + INTERNAL_PAGE_INDEX;
 
+/*
+  Usamos el visor embebido de Google Docs con el ID real del archivo.
+  Esto evita tener que descargar el PDF mediante JavaScript.
+*/
+const VIEWER_BASE =
+  "https://docs.google.com/viewer" +
+  "?srcid=" + encodeURIComponent(DRIVE_FILE_ID) +
+  "&pid=explorer" +
+  "&efh=false" +
+  "&a=v" +
+  "&chrome=false" +
+  "&embedded=true";
 
-const DRIVE_PREVIEW =
-  "https://drive.google.com/file/d/" +
-  DRIVE_FILE_ID +
-  "/preview";
+const openElf = document.getElementById("openElf");
+const cinema = document.getElementById("cinema");
+const closeCinema = document.getElementById("closeCinema");
+const pdfFrame = document.getElementById("pdfFrame");
+const loader = document.getElementById("loader");
 
+let pageJumpAttempts = 0;
+let pageJumpTimers = [];
 
-async function openCinema() {
-
-  /*
-    Cargamos Drive únicamente cuando
-    el usuario pulsa el botón.
-  */
-
-  iframe.src = DRIVE_PREVIEW;
-
-  cinema.classList.add("open");
-
-  document.body.classList.add(
-    "cinema-open"
-  );
-
-
-  /*
-    Intentamos activar pantalla completa real.
-    Si el visor HTML no lo permite,
-    igualmente queda como overlay de 100%.
-  */
-
-  try {
-
-    if (
-      cinema.requestFullscreen &&
-      !document.fullscreenElement
-    ) {
-
-      await cinema.requestFullscreen();
-
-    }
-
-  }
-
-  catch(error) {
-
-    console.log(
-      "Fullscreen nativo no permitido.",
-      error
-    );
-
-  }
-
+function clearJumpTimers() {
+  pageJumpTimers.forEach(clearTimeout);
+  pageJumpTimers = [];
 }
 
+function forceElfPage() {
+  /*
+    No intentamos leer el contenido del iframe (eso estaría bloqueado
+    por seguridad del navegador). Únicamente cambiamos SU URL,
+    algo que sí puede hacer la página padre.
+  */
+  pdfFrame.src = VIEWER_BASE + PAGE_HASH;
+}
 
-async function closeCinema() {
+function schedulePageJump() {
+  clearJumpTimers();
+
+  /*
+    Google crea internamente las páginas después de cargar el visor.
+    Repetimos el salto varias veces porque en algunas versiones del
+    visor el primer hash se procesa antes de que la página exista.
+  */
+  [700, 1600, 2800].forEach((delay) => {
+    pageJumpTimers.push(
+      setTimeout(() => {
+        forceElfPage();
+      }, delay)
+    );
+  });
+}
+
+async function openCinemaMode() {
+  cinema.classList.add("open");
+  cinema.setAttribute("aria-hidden", "false");
+  document.body.classList.add("cinema-open");
+
+  loader.classList.remove("hidden");
+  pageJumpAttempts = 0;
+
+  /*
+    Primero abrimos directamente con el hash de la página de Elfo.
+  */
+  pdfFrame.src = VIEWER_BASE + PAGE_HASH;
+
+  /*
+    Después programamos repeticiones del salto.
+  */
+  schedulePageJump();
+
+  /*
+    Modo cine real si el navegador lo permite.
+    Si no, el overlay sigue ocupando toda la ventana.
+  */
+  try {
+    if (cinema.requestFullscreen && !document.fullscreenElement) {
+      await cinema.requestFullscreen();
+    }
+  } catch (_) {}
+}
+
+async function closeCinemaMode() {
+  clearJumpTimers();
 
   cinema.classList.remove("open");
+  cinema.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("cinema-open");
 
-  document.body.classList.remove(
-    "cinema-open"
-  );
+  pdfFrame.src = "about:blank";
+  loader.classList.remove("hidden");
 
-
-  /*
-    Quitamos el PDF para que no siga
-    consumiendo recursos.
-  */
-
-  iframe.src = "";
-
-
-  if (
-    document.fullscreenElement &&
-    document.exitFullscreen
-  ) {
-
+  if (document.fullscreenElement && document.exitFullscreen) {
     try {
-
       await document.exitFullscreen();
-
-    }
-
-    catch(error) {}
-
+    } catch (_) {}
   }
-
 }
 
+pdfFrame.addEventListener("load", () => {
+  /*
+    Esperamos un poco antes de ocultar el loader.
+  */
+  setTimeout(() => {
+    loader.classList.add("hidden");
+  }, 650);
 
-openButton.addEventListener(
-  "click",
-  openCinema
-);
+  /*
+    Una repetición adicional solo en las primeras cargas.
+  */
+  if (pageJumpAttempts < 2 && cinema.classList.contains("open")) {
+    pageJumpAttempts++;
 
+    pageJumpTimers.push(
+      setTimeout(() => {
+        pdfFrame.src = VIEWER_BASE + PAGE_HASH;
+      }, 900)
+    );
+  }
+});
 
-closeButton.addEventListener(
-  "click",
-  closeCinema
-);
-
+openElf.addEventListener("click", openCinemaMode);
+closeCinema.addEventListener("click", closeCinemaMode);
 
 /*
-  ESC para cerrar
+  ESC:
+  si el navegador sale primero del fullscreen, el usuario puede
+  volver a pulsar ESC o usar la X para cerrar el visor.
 */
-
-document.addEventListener(
-  "keydown",
-  event => {
-
-    if(event.key === "Escape") {
-
-      closeCinema();
-
-    }
-
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && cinema.classList.contains("open")) {
+    closeCinemaMode();
   }
-);
-
+});
 </script>
-
 
 </body>
 </html>
-
 
 
 
