@@ -24540,5 +24540,474 @@ renderBookCollection(criticalRoleOtherGrid,DARRINGTON_OTHERS);
   });
 })();
 </script>
+
+
+visor de pdf
+  <style>
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #15120f;
+
+    font-family: Georgia, serif;
+  }
+
+
+  /* ===============================
+     BOTÓN DE PRUEBA
+     =============================== */
+
+  .open-book {
+    padding: 15px 28px;
+
+    border: 1px solid #a88c55;
+    border-radius: 8px;
+
+    background: #231d17;
+    color: #e6d4a9;
+
+    font-family: Georgia, serif;
+    font-size: 18px;
+
+    cursor: pointer;
+  }
+
+  .open-book:hover {
+    background: #30271d;
+  }
+
+
+  /* ===============================
+     MODO CINE
+     =============================== */
+
+  #cinema {
+    position: fixed;
+    inset: 0;
+
+    z-index: 999999;
+
+    display: flex;
+    flex-direction: column;
+
+    background:
+      radial-gradient(
+        circle at center,
+        #211d18 0%,
+        #080808 75%,
+        #000 100%
+      );
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+      opacity 0.3s ease,
+      visibility 0.3s ease;
+  }
+
+
+  #cinema.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+
+  /* ===============================
+     BARRA SUPERIOR
+     =============================== */
+
+  .toolbar {
+    height: 64px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 18px;
+
+    background: rgba(10, 9, 8, 0.96);
+
+    border-bottom:
+      1px solid rgba(200, 170, 100, 0.22);
+
+    box-shadow:
+      0 5px 20px rgba(0,0,0,0.6);
+  }
+
+
+  .book-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+
+  .title {
+    color: #ead9ae;
+
+    font-size: 17px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+
+  .subtitle {
+    margin-top: 3px;
+
+    color: rgba(230,215,180,0.55);
+
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+  }
+
+
+  /* ===============================
+     CERRAR
+     =============================== */
+
+  .close-button {
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    border:
+      1px solid rgba(220,195,135,0.28);
+
+    background:
+      rgba(255,255,255,0.04);
+
+    color: #ead9ae;
+
+    font-size: 27px;
+
+    cursor: pointer;
+  }
+
+
+  .close-button:hover {
+    background:
+      rgba(220,195,135,0.12);
+  }
+
+
+  /* ===============================
+     VISOR
+     =============================== */
+
+  .viewer {
+    position: relative;
+
+    flex: 1;
+
+    min-height: 0;
+
+    padding: 15px;
+  }
+
+
+  iframe {
+    width: 100%;
+    height: 100%;
+
+    border: 0;
+
+    border-radius: 5px;
+
+    background: #111;
+
+    box-shadow:
+      0 15px 50px rgba(0,0,0,0.75);
+  }
+
+
+  /* ===============================
+     TEXTO INFERIOR
+     =============================== */
+
+  .footer {
+    height: 35px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color:
+      rgba(220,205,170,0.45);
+
+    background: #080808;
+
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+  }
+
+
+  body.cinema-open {
+    overflow: hidden;
+  }
+
+
+  @media(max-width:600px) {
+
+    .toolbar {
+      height: 58px;
+      padding: 0 10px;
+    }
+
+    .viewer {
+      padding: 5px;
+    }
+
+    .subtitle {
+      display: none;
+    }
+
+  }
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- BOTÓN -->
+
+<button
+  class="open-book"
+  id="openElfo"
+>
+  Abrir Elfo
+</button>
+
+
+
+<!-- MODO CINE -->
+
+<div id="cinema">
+
+  <div class="toolbar">
+
+    <div class="book-info">
+
+      <div class="title">
+        Elfo
+      </div>
+
+      <div class="subtitle">
+        Player's Handbook 2024 · Orígenes de personaje
+      </div>
+
+    </div>
+
+
+    <button
+      class="close-button"
+      id="closeCinema"
+      aria-label="Cerrar"
+    >
+      ×
+    </button>
+
+  </div>
+
+
+  <div class="viewer">
+
+    <iframe
+      id="driveViewer"
+      allow="fullscreen"
+      allowfullscreen
+    ></iframe>
+
+  </div>
+
+
+  <div class="footer">
+    Archivo de Vespera
+  </div>
+
+</div>
+
+
+
+<script>
+
+const cinema =
+  document.getElementById("cinema");
+
+const iframe =
+  document.getElementById("driveViewer");
+
+const openButton =
+  document.getElementById("openElfo");
+
+const closeButton =
+  document.getElementById("closeCinema");
+
+
+/*
+  PDF REAL EN TU DRIVE:
+
+  17 - Chapter 4 -
+  Orígenes de personaje - Especies.pdf
+*/
+
+const DRIVE_FILE_ID =
+  "1-VAh9Pd3-yMrv7Phb3IscJBCorsk5upt";
+
+
+const DRIVE_PREVIEW =
+  "https://drive.google.com/file/d/" +
+  DRIVE_FILE_ID +
+  "/preview";
+
+
+async function openCinema() {
+
+  /*
+    Cargamos Drive únicamente cuando
+    el usuario pulsa el botón.
+  */
+
+  iframe.src = DRIVE_PREVIEW;
+
+  cinema.classList.add("open");
+
+  document.body.classList.add(
+    "cinema-open"
+  );
+
+
+  /*
+    Intentamos activar pantalla completa real.
+    Si el visor HTML no lo permite,
+    igualmente queda como overlay de 100%.
+  */
+
+  try {
+
+    if (
+      cinema.requestFullscreen &&
+      !document.fullscreenElement
+    ) {
+
+      await cinema.requestFullscreen();
+
+    }
+
+  }
+
+  catch(error) {
+
+    console.log(
+      "Fullscreen nativo no permitido.",
+      error
+    );
+
+  }
+
+}
+
+
+async function closeCinema() {
+
+  cinema.classList.remove("open");
+
+  document.body.classList.remove(
+    "cinema-open"
+  );
+
+
+  /*
+    Quitamos el PDF para que no siga
+    consumiendo recursos.
+  */
+
+  iframe.src = "";
+
+
+  if (
+    document.fullscreenElement &&
+    document.exitFullscreen
+  ) {
+
+    try {
+
+      await document.exitFullscreen();
+
+    }
+
+    catch(error) {}
+
+  }
+
+}
+
+
+openButton.addEventListener(
+  "click",
+  openCinema
+);
+
+
+closeButton.addEventListener(
+  "click",
+  closeCinema
+);
+
+
+/*
+  ESC para cerrar
+*/
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if(event.key === "Escape") {
+
+      closeCinema();
+
+    }
+
+  }
+);
+
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+  
 </body>
 </html>
