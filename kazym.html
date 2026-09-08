@@ -3,5250 +3,1740 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Codex de Campaña — Kazym Garnithor</title>
-
+<title>Kazym Garnithor — Campaign Codex v0.9</title>
 <style>
-:root{
-  --bg:#0c0d12;
-  --panel:#171923;
-  --panel2:#20232f;
-  --line:#3b3e4c;
-  --ink:#ece5d8;
-  --muted:#a9a295;
-  --gold:#b89a67;
-  --ok:#8fb288;
-  --warn:#d2aa73;
-  --bad:#c2787c;
-  --paper:#e6dcc4;
-  --paperInk:#171512
-}
-
-*{box-sizing:border-box}
-
-html{scroll-behavior:smooth}
-
-body{
-  margin:0;
-  background:
-    radial-gradient(circle at 20% -10%,#2b2138 0,transparent 32%),
-    linear-gradient(#0b0c11,#11131a);
-  color:var(--ink);
-  font-family:Georgia,"Times New Roman",serif
-}
-
-.top{
-  position:sticky;
-  top:0;
-  z-index:40;
-  background:#0d0f16ec;
-  border-bottom:1px solid #30323e;
-  backdrop-filter:blur(10px)
-}
-
-nav{
-  max-width:1400px;
-  margin:auto;
-  padding:10px 18px;
-  display:flex;
-  align-items:center;
-  gap:7px;
-  flex-wrap:wrap
-}
-
-.brand{
-  font-weight:900;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  margin-right:auto
-}
-
-nav a,
-.btn,
-.badge{
-  border:1px solid #3d4050;
-  background:#171923;
-  color:#d9d1c4;
-  border-radius:8px;
-  padding:7px 9px;
-  text-decoration:none;
-  font-size:.75rem
-}
-
-.btn{cursor:pointer}
-
-.btn:hover,
-nav a:hover{background:#242735}
-
-.badge.live{
-  border-color:#49664c;
-  color:#a7d5a2
-}
-
-.badge.err{
-  border-color:#78484d;
-  color:#e69da3
-}
-
-.hero,
-main{
-  max-width:1400px;
-  margin:auto;
-  padding-left:18px;
-  padding-right:18px
-}
-
-.hero{
-  padding-top:50px;
-  padding-bottom:22px;
-  display:grid;
-  grid-template-columns:1.5fr .75fr;
-  gap:20px
-}
-
-.eyebrow{
-  color:var(--gold);
-  text-transform:uppercase;
-  letter-spacing:.18em;
-  font-size:.72rem
-}
-
-.hero h1{
-  font-size:clamp(2.5rem,7vw,5.6rem);
-  line-height:.9;
-  margin:.14em 0
-}
-
-.hero p{
-  color:#c6c0b5;
-  line-height:1.65;
-  max-width:850px
-}
-
-.panel,
-.card,
-details{
-  background:linear-gradient(180deg,#1c1f2bfa,#14161ffa);
-  border:1px solid #343746;
-  border-radius:12px
-}
-
-.kpis{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:9px;
-  padding:16px
-}
-
-.kpi{
-  background:#10121a;
-  border:1px solid #343746;
-  border-radius:8px;
-  padding:11px
-}
-
-.kpi b{
-  font-size:1.6rem;
-  display:block
-}
-
-.kpi span{
-  color:#948f87;
-  font-size:.72rem
-}
-
-section{padding:31px 0}
-
-.head{
-  display:flex;
-  gap:14px;
-  align-items:end;
-  margin-bottom:16px
-}
-
-.head h2{
-  margin:0;
-  font-size:2rem
-}
-
-.head p{
-  margin:0;
-  color:var(--muted);
-  max-width:700px
-}
-
-.search{
-  margin-left:auto;
-  background:#11131b;
-  color:#eee;
-  border:1px solid #353847;
-  border-radius:8px;
-  padding:9px 11px;
-  min-width:210px
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(210px,1fr));
-  gap:13px
-}
-
-.avatars{
-  grid-template-columns:repeat(auto-fill,minmax(145px,1fr));
-  gap:16px
-}
-
-.avatar{
-  border:0;
-  background:none;
-  color:inherit;
-  text-align:center;
-  cursor:pointer;
-  padding:0
-}
-
-.portrait{
-  aspect-ratio:1;
-  border:1px solid #404351;
-  border-radius:13px;
-  overflow:hidden;
-  background:radial-gradient(circle,#29293a,#0d0f16 70%)
-}
-
-.portrait img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  transition:.2s
-}
-
-.avatar:hover img{transform:scale(1.045)}
-
-.avatar b{
-  display:block;
-  margin-top:7px
-}
-
-.avatar small{color:#969188}
-
-.card{padding:14px}
-
-.card h3{margin:.25em 0}
-
-.status{
-  font-size:.66rem;
-  text-transform:uppercase;
-  letter-spacing:.08em;
-  color:#b9b0a3
-}
-
-.chip{
-  display:inline-block;
-  border:1px solid #404351;
-  background:#222532;
-  border-radius:999px;
-  padding:4px 7px;
-  font-size:.68rem;
-  color:#c1baaf;
-  margin:2px
-}
-
-.ok{color:var(--ok)}
-.warn{color:var(--warn)}
-.bad{color:var(--bad)}
-
-details{
-  margin-bottom:8px;
-  overflow:hidden
-}
-
-summary{
-  cursor:pointer;
-  padding:14px 16px;
-  font-weight:800;
-  list-style:none
-}
-
-summary:before{
-  content:"+";
-  color:var(--gold);
-  margin-right:9px
-}
-
-details[open] summary:before{content:"–"}
-
-.body{
-  padding:0 16px 16px;
-  color:#c9c2b7;
-  line-height:1.62
-}
-
-.two{
-  display:grid;
-  grid-template-columns:1.1fr .9fr;
-  gap:15px
-}
-
-.map{
-  width:100%;
-  border-radius:12px;
-  border:1px solid #353845;
-  background:#08090d;
-  object-fit:contain
-}
-
-.list{
-  margin:.25rem 0;
-  padding-left:1.1rem
-}
-
-.list li{margin:.23rem 0}
-
-.progress{
-  height:9px;
-  border:1px solid #393c48;
-  border-radius:999px;
-  background:#11131a;
-  overflow:hidden
-}
-
-.progress i{
-  display:block;
-  height:100%;
-  background:linear-gradient(90deg,#6e5c83,#b08f72)
-}
-
-.quote{
-  border-left:3px solid var(--gold);
-  background:#12141c;
-  padding:9px 12px;
-  margin:9px 0;
-  font-style:italic
-}
-
-.rolls{
-  display:flex;
-  flex-wrap:wrap;
-  gap:6px
-}
-
-.roll{
-  font-size:.7rem;
-  border:1px solid #454754;
-  border-radius:999px;
-  padding:5px 8px;
-  background:#171923
-}
-
-.modal{
-  position:fixed;
-  inset:0;
-  z-index:100;
-  display:none;
-  background:#050609e8;
-  padding:18px;
-  overflow:auto
-}
-
-.modal.open{display:block}
-
-.shell{
-  max-width:1550px;
-  margin:auto;
-  background:#0f1118;
-  border:1px solid #3d4050;
-  border-radius:14px;
-  overflow:hidden
-}
-
-.modalbar{
-  position:sticky;
-  top:0;
-  z-index:6;
-  background:#171923;
-  border-bottom:1px solid #343746;
-  padding:10px 12px;
-  display:flex;
-  align-items:center
-}
-
-.modalbar h2{
-  margin:0 auto 0 0;
-  font-size:1.1rem
-}
-
-.charLayout{
-  display:grid;
-  grid-template-columns:minmax(900px,1.5fr) minmax(300px,.5fr);
-  gap:14px;
-  padding:14px
-}
-
-.sheet{
-  position:relative;
-  aspect-ratio:1672/941;
-  min-width:900px;
-  background:#090a0e;
-  border-radius:10px;
-  overflow:hidden
-}
-
-.sheet>img.bg{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:fill
-}
-
-.sheet .pic{
-  position:absolute;
-  left:78.7%;
-  top:10.5%;
-  width:10.7%;
-  height:18.8%;
-  display:grid;
-  place-items:center;
-  overflow:hidden
-}
-
-.sheet .pic img{
-  max-width:100%;
-  max-height:100%
-}
-
-.sv,
-.stat,
-.combat,
-.skill,
-.box{
-  position:absolute;
-  z-index:2;
-  color:var(--paperInk);
-  font-weight:800;
-  overflow:hidden
-}
-
-.sv{
-  font-size:clamp(7px,.68vw,12px);
-  white-space:nowrap;
-  text-overflow:ellipsis
-}
-
-.f-name{
-  left:16%;
-  top:16.5%;
-  width:16.5%
-}
-
-.f-race{
-  left:16%;
-  top:20.1%;
-  width:16.5%
-}
-
-.f-class{
-  left:16%;
-  top:23.8%;
-  width:16.5%
-}
-
-.f-sub{
-  left:41.1%;
-  top:16.5%;
-  width:14.8%
-}
-
-.f-bg{
-  left:41.1%;
-  top:20.1%;
-  width:14.8%
-}
-
-.f-lvl{
-  left:37.4%;
-  top:23.8%;
-  width:4.2%;
-  text-align:center
-}
-
-.f-xp{
-  left:49.5%;
-  top:23.8%;
-  width:6.2%;
-  text-align:center
-}
-
-.f-align{
-  left:64.5%;
-  top:16.5%;
-  width:10.2%
-}
-
-.f-pb{
-  left:69.8%;
-  top:23.6%;
-  width:3%;
-  text-align:center
-}
-
-.stat{
-  left:3%;
-  width:11%;
-  font-size:clamp(8px,.75vw,14px)
-}
-
-.a1{top:34.4%}
-.a2{top:42%}
-.a3{top:49.6%}
-.a4{top:57.2%}
-.a5{top:64.8%}
-.a6{top:72.4%}
-
-.combat{
-  top:37%;
-  font-size:clamp(9px,.86vw,17px);
-  text-align:center
-}
-
-.ac{
-  left:31.9%;
-  width:3.6%
-}
-
-.init{
-  left:39.5%;
-  width:3.7%
-}
-
-.spd{
-  left:47%;
-  width:3.8%
-}
-
-.hpmax{
-  left:55.4%;
-  width:5.8%
-}
-
-.hpcur{
-  left:61.9%;
-  width:5.8%
-}
-
-.hd{
-  left:70.9%;
-  width:4.6%
-}
-
-.skill{
-  font-size:clamp(5px,.47vw,8px);
-  width:12.5%;
-  line-height:1.25
-}
-
-.skillsL{
-  left:35%;
-  top:48.7%;
-  height:19.5%
-}
-
-.skillsR{
-  left:50.5%;
-  top:48.7%;
-  height:19.5%
-}
-
-.box{
-  font-size:clamp(5px,.47vw,8.4px);
-  line-height:1.14;
-  font-weight:600
-}
-
-.raceBox{
-  left:78.5%;
-  top:32.2%;
-  width:11%;
-  height:11%
-}
-
-.classBox{
-  left:78.5%;
-  top:46.6%;
-  width:11%;
-  height:10%
-}
-
-.otherBox{
-  left:78.5%;
-  top:59.5%;
-  width:11%;
-  height:9.5%
-}
-
-.attacks{
-  left:15.4%;
-  top:78%;
-  width:25%;
-  height:16.5%
-}
-
-.equip{
-  left:41.1%;
-  top:76.8%;
-  width:14%;
-  height:17.5%
-}
-
-.inventory{
-  left:56.2%;
-  top:76.8%;
-  width:18%;
-  height:17.5%
-}
-
-.notes{
-  left:76.1%;
-  top:75.1%;
-  width:13.2%;
-  height:19%
-}
-
-.side{min-width:0}
-
-.side .card{margin-bottom:8px}
-
-.side details{font-size:.88rem}
-
-.tipTarget{cursor:help}
-
-.tipDot{border-bottom:1px dotted #8f7b59}
-
-.tipTarget:hover{filter:brightness(1.08)}
-
-#tip{
-  display:none;
-  position:fixed;
-  z-index:9999;
-  pointer-events:none;
-  width:min(430px,calc(100vw - 24px));
-  max-height:min(520px,calc(100vh - 24px));
-  overflow:auto;
-  background:#141721f7;
-  border:1px solid #5a5066;
-  border-radius:11px;
-  padding:13px 14px;
-  box-shadow:0 20px 60px #0008
-}
-
-#tip.show{display:block}
-
-#tip .k{
-  color:var(--gold);
-  font-size:.64rem;
-  letter-spacing:.12em;
-  text-transform:uppercase
-}
-
-#tip h4{
-  margin:3px 0 7px;
-  font-size:1rem
-}
-
-#tip p{
-  margin:0;
-  color:#cec6ba;
-  font-size:.82rem;
-  line-height:1.45;
-  white-space:pre-line
-}
-
-#tip dl{
-  display:grid;
-  grid-template-columns:auto 1fr;
-  gap:4px 9px;
-  margin:9px 0 0;
-  padding-top:8px;
-  border-top:1px solid #373a46;
-  font-size:.73rem
-}
-
-#tip dt{
-  color:#9f978c;
-  font-weight:700
-}
-
-#tip dd{
-  margin:0;
-  color:#ddd5c8
-}
-
-footer{
-  text-align:center;
-  color:#89847c;
-  border-top:1px solid #2e303b;
-  padding:26px 18px;
-  font-size:.75rem
-}
-
-@media(max-width:1050px){
-  .hero,.two{grid-template-columns:1fr}
-  .charLayout{
-    display:block;
-    overflow-x:auto
-  }
-  .side{margin-top:14px}
-  .head{
-    align-items:start;
-    flex-direction:column
-  }
-  .search{margin-left:0}
-  .top nav{
-    overflow:auto;
-    flex-wrap:nowrap
-  }
-  .brand{min-width:max-content}
-}
-
-@media(max-width:650px){
-  .hero{padding-top:28px}
-  .grid{grid-template-columns:1fr}
-  .avatars{grid-template-columns:repeat(2,1fr)}
-}
+:root{--bg:#0d0e14;--panel:#171923;--line:#3d4050;--ink:#ece5d8;--muted:#a9a295;--gold:#b89a67;--paper:#171512}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 25% -10%,#2a2139 0,transparent 34%),linear-gradient(#0b0c11,#11131a);color:var(--ink);font-family:Georgia,"Times New Roman",serif}
+button,input{font:inherit}.top{position:sticky;top:0;z-index:50;background:#0d0f16ed;border-bottom:1px solid #30323e;backdrop-filter:blur(10px)}nav{max-width:1380px;margin:auto;padding:10px 18px;display:flex;gap:7px;align-items:center;flex-wrap:wrap}.brand{font-weight:900;letter-spacing:.12em;text-transform:uppercase;margin-right:auto}nav a,.btn,.badge{border:1px solid #3d4050;background:#171923;color:#d9d1c4;border-radius:8px;padding:7px 9px;text-decoration:none;font-size:.74rem}.btn{cursor:pointer}.btn:hover,nav a:hover{background:#242735}.badge.live{border-color:#4e6a50;color:#a8d3a0}.badge.err{border-color:#70464a;color:#d99a9d}
+.hero,main{max-width:1380px;margin:auto;padding-left:18px;padding-right:18px}.hero{padding-top:45px;padding-bottom:20px;display:grid;grid-template-columns:1.45fr .65fr;gap:20px}.eyebrow{color:var(--gold);text-transform:uppercase;letter-spacing:.17em;font-size:.72rem}.hero h1{font-size:clamp(2.5rem,7vw,5.5rem);line-height:.9;margin:.15em 0}.hero p{color:#c6c0b5;line-height:1.65;max-width:850px}.panel,.card,details{background:linear-gradient(180deg,#1c1f2bfa,#14161ffa);border:1px solid #343746;border-radius:12px}.kpis{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:15px}.kpi{background:#10121a;border:1px solid #343746;border-radius:8px;padding:11px}.kpi b{display:block;font-size:1.55rem}.kpi span{color:#948f87;font-size:.71rem}
+section{padding:30px 0}.head{display:flex;gap:14px;align-items:end;margin-bottom:15px}.head h2{margin:0;font-size:2rem}.head p{margin:0;color:var(--muted);max-width:730px}.search{margin-left:auto;background:#11131b;color:#eee;border:1px solid #353847;border-radius:8px;padding:9px 11px;min-width:210px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:13px}.avatars{grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:16px}.avatar{border:0;background:none;color:inherit;text-align:center;cursor:pointer;padding:0}.portrait{aspect-ratio:1;border:1px solid #404351;border-radius:13px;overflow:hidden;background:radial-gradient(circle,#29293a,#0d0f16 70%)}.portrait img{width:100%;height:100%;object-fit:contain;transition:.2s}.avatar:hover img{transform:scale(1.045)}.avatar b{display:block;margin-top:7px}.avatar small{color:#969188}.status{font-size:.66rem;text-transform:uppercase;letter-spacing:.08em;color:#b9b0a3}.chip,.pill{display:inline-block;border:1px solid #404351;background:#222532;border-radius:999px;padding:4px 7px;font-size:.68rem;color:#c1baaf;margin:2px}
+details{margin-bottom:8px;overflow:hidden}summary{cursor:pointer;padding:14px 16px;font-weight:800;list-style:none}summary:before{content:"+";color:var(--gold);margin-right:9px}details[open] summary:before{content:"–"}.body{padding:0 16px 16px;color:#c9c2b7;line-height:1.62}.long{white-space:pre-line}.quote{border-left:3px solid var(--gold);background:#12141c;padding:10px 13px;margin:10px 0;font-style:italic}.list{margin:.3rem 0;padding-left:1.15rem}.list li{margin:.25rem 0}.two{display:grid;grid-template-columns:1.1fr .9fr;gap:15px}.map{width:100%;border:1px solid #353845;border-radius:12px;background:#08090d;object-fit:contain}.progress{height:9px;border:1px solid #393c48;border-radius:999px;background:#11131a;overflow:hidden}.progress i{display:block;height:100%;background:linear-gradient(90deg,#6e5c83,#b08f72)}.monster img{width:100%;aspect-ratio:16/9;object-fit:contain;background:#090a0e;border-radius:9px}.monster h3,.card h3{margin:.3em 0}
+.modal{position:fixed;inset:0;z-index:100;display:none;background:#050609e8;padding:16px;overflow:auto}.modal.open{display:block}.shell{max-width:1580px;margin:auto;background:#0f1118;border:1px solid #3d4050;border-radius:14px;overflow:hidden}.bar{position:sticky;top:0;z-index:8;background:#171923;border-bottom:1px solid #343746;padding:10px 12px;display:flex;align-items:center}.bar h2{margin:0 auto 0 0;font-size:1.15rem}.char{display:grid;grid-template-columns:minmax(1000px,1.55fr) minmax(330px,.45fr);gap:14px;padding:14px}.sheet{position:relative;aspect-ratio:1672/941;min-width:1000px;background:#090a0e;border-radius:10px;overflow:hidden}.sheet>.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:fill}.pic{position:absolute;left:78.7%;top:10.6%;width:10.7%;height:18.7%;display:grid;place-items:center;overflow:hidden;z-index:3}.pic img{max-width:100%;max-height:100%}
+.f,.score,.mod,.combat,.skill,.save,.box,.pb{position:absolute;z-index:4;color:var(--paper)}.f{font-weight:700;font-size:clamp(8px,.7vw,13px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.f-name{left:16%;top:16.55%;width:16.7%}.f-race{left:16%;top:20.15%;width:16.7%}.f-class{left:16%;top:23.85%;width:16.7%}.f-sub{left:41.15%;top:16.55%;width:14.6%}.f-bg{left:41.15%;top:20.15%;width:14.6%}.f-level{left:37.55%;top:23.85%;width:4.15%;text-align:center}.f-xp{left:49.55%;top:23.85%;width:6.15%;text-align:center}.f-align{left:64.55%;top:16.55%;width:10.25%}.f-pb{left:69.95%;top:23.75%;width:2.85%;text-align:center}
+.score,.mod,.combat,.pb{font-weight:900;text-align:center}.score{left:3.15%;width:2.7%;font-size:clamp(12px,1vw,19px)}.mod{left:11.55%;width:2.45%;font-size:clamp(10px,.85vw,16px)}.a1{top:34.55%}.a2{top:42.15%}.a3{top:49.75%}.a4{top:57.35%}.a5{top:64.95%}.a6{top:72.55%}.pb{left:10.85%;top:74.15%;width:2.9%;font-size:clamp(11px,.9vw,17px)}
+.save{left:23.1%;width:4.4%;font-weight:800;text-align:center;font-size:clamp(7px,.58vw,10px)}.sv1{top:34.55%}.sv2{top:37.65%}.sv3{top:40.75%}.sv4{top:43.85%}.sv5{top:46.95%}.sv6{top:50.05%}.combat{top:37.1%;font-size:clamp(12px,1vw,20px)}.ac{left:32.05%;width:3.15%}.ini{left:39.75%;width:3.15%}.spd{left:47.2%;width:3.45%}.hpm{left:55.7%;width:5.2%}.hpc{left:62.2%;width:5.2%}.hd{left:71.15%;width:4.15%}
+.skill{font-weight:800;font-size:clamp(6px,.5vw,9px);text-align:right;width:3%}.sl{left:43.75%}.sr{left:58.05%}.sk1{top:49.42%}.sk2{top:51.72%}.sk3{top:54.02%}.sk4{top:56.32%}.sk5{top:58.62%}.sk6{top:60.92%}.sk7{top:63.22%}.sk8{top:65.52%}.sk9{top:67.82%}
+.box{font-size:clamp(6px,.48vw,9px);line-height:1.12;overflow:hidden;padding:2px 4px}.box ul{margin:0;padding-left:12px}.box li{margin:0 0 2px}.raceBox{left:78.65%;top:32.55%;width:10.7%;height:10.5%}.classBox{left:78.65%;top:47%;width:10.7%;height:9.6%}.otherBox{left:78.65%;top:59.95%;width:10.7%;height:9.2%}.langBox{left:62.25%;top:48.35%;width:14.6%;height:19.1%}.attacks{left:15.75%;top:78.3%;width:24.1%;height:16.4%}.equip{left:41%;top:75.25%;width:11.8%;height:19.8%}.inv{left:53.55%;top:75.25%;width:13.9%;height:19.8%}.notes{left:74.15%;top:86.4%;width:15.05%;height:9%}.atkrow{display:grid;grid-template-columns:31% 17% 20% 16% 16%;align-items:center;height:20%}.atkrow span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px}.side{display:flex;flex-direction:column;gap:9px}.side .card{padding:15px}.mechanics{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:8px}.mini{background:#11131b;border:1px solid #353845;border-radius:8px;padding:10px;color:#c8c1b5}.mini b{display:block;color:#e5dccd;margin-bottom:5px}
+.tipTarget{cursor:help}.tipDot{border-bottom:1px dotted #8e7656}#tip{display:none;position:fixed;z-index:9999;pointer-events:none;width:min(430px,calc(100vw - 24px));max-height:min(520px,calc(100vh - 24px));overflow:auto;background:#141721f8;border:1px solid #5a5066;border-radius:11px;padding:13px 14px;box-shadow:0 20px 60px #0008}#tip.show{display:block}#tip .k{color:var(--gold);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase}#tip h4{margin:3px 0 7px}#tip p{margin:0;color:#cec6ba;font-size:.82rem;line-height:1.45;white-space:pre-line}#tip dl{display:grid;grid-template-columns:auto 1fr;gap:4px 9px;margin:9px 0 0;padding-top:8px;border-top:1px solid #373a46;font-size:.73rem}#tip dt{color:#9f978c;font-weight:700}#tip dd{margin:0;color:#ddd5c8}
+footer{text-align:center;color:#89847c;border-top:1px solid #2e303b;padding:25px 18px;font-size:.74rem}@media(max-width:1100px){.hero,.two{grid-template-columns:1fr}.char{display:block;overflow-x:auto}.side{margin-top:14px}.head{align-items:start;flex-direction:column}.search{margin-left:0}.top nav{overflow:auto;flex-wrap:nowrap}.brand{min-width:max-content}}@media(max-width:650px){.grid{grid-template-columns:1fr}.avatars{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
-
 <body>
-
-<header class="top">
-<nav>
-<div class="brand">Kazym · Campaign Codex</div>
-
-<a href="#personajes">Personajes</a>
-<a href="#historia">Historia</a>
-<a href="#npcs">PNJ</a>
-<a href="#base">Base</a>
-<a href="#bestiario">Bestiario</a>
-<a href="#lore">Lore</a>
-<a href="#misterios">Misterios</a>
-<a href="#objetos">Objetos</a>
-<a href="#reglas">Reglas</a>
-<a href="#checkpoint">Checkpoint</a>
-
-<button class="btn" id="cfg">Configurar Sheet</button>
-<button class="btn" id="refresh">Actualizar</button>
-
-<span class="badge" id="mode">Datos locales</span>
-</nav>
-</header>
-
-<div class="hero">
-
-<div>
-<div class="eyebrow">D&D 5e 2014 · Campaign Bible</div>
-
-<h1>Kazym Garnithor</h1>
-
-<p>
-Sitio vivo alimentado por Google Sheets.
-Cada nueva fila crea automáticamente un nuevo bloque en la sección correspondiente.
-Google Drive aloja los assets; Google Sheets contiene los datos;
-GitHub Pages solo muestra la interfaz.
-</p>
-</div>
-
-<div class="panel kpis">
-
-<div class="kpi">
-<b id="kLvl">4</b>
-<span>Nivel Kazym</span>
-</div>
-
-<div class="kpi">
-<b id="kXp">3550</b>
-<span>PX</span>
-</div>
-
-<div class="kpi">
-<b id="kAllies">6</b>
-<span>Aliados / residentes</span>
-</div>
-
-<div class="kpi">
-<b id="kBase">5/5</b>
-<span>Funciones base</span>
-</div>
-
-</div>
-</div>
-
+<header class="top"><nav><div class="brand">Kazym · Campaign Codex</div><a href="#personajes">Personajes</a><a href="#historia">Historia</a><a href="#npcsSec">PNJ</a><a href="#baseSec">Base</a><a href="#bestiarioSec">Bestiario</a><a href="#loreSec">Lore</a><a href="#misteriosSec">Misterios</a><a href="#objetosSec">Objetos</a><a href="#reglasSec">Reglas</a><a href="#checkpointSec">Checkpoint</a><button class="btn" id="cfg">Configurar Sheet</button><button class="btn" id="refresh">Actualizar</button><span class="badge live">v0.9 · ficha corregida</span><span class="badge" id="mode">Datos locales</span></nav></header>
+<div class="hero"><div><div class="eyebrow">D&D 5e 2014 · Campaign Bible viva</div><h1>Kazym Garnithor</h1><p>Fichas exhaustivas, crónica completa, PNJ, base, bestiario, lore, misterios, objetos, reglas y checkpoint. Las filas nuevas de Google Sheets crean nuevos bloques automáticamente; el canon local se conserva si una fila del Sheet llega incompleta.</p></div><div class="panel kpis"><div class="kpi"><b id="kLvl">4</b><span>Nivel Kazym</span></div><div class="kpi"><b id="kXp">3550</b><span>PX</span></div><div class="kpi"><b id="kAllies">6</b><span>Aliados / residentes</span></div><div class="kpi"><b id="kBase">5/5</b><span>Funciones base</span></div></div></div>
 <main>
-
-<section id="personajes">
-
-<div class="head">
-
-<div>
-<h2>Personajes</h2>
-<p>
-Nueva fila en <b>characters</b> = nueva tarjeta.
-Las pestañas relacionadas completan automáticamente la ficha.
-</p>
-</div>
-
-<input
-  id="search"
-  class="search"
-  placeholder="Buscar personaje…"
->
-
-</div>
-
-<div class="grid avatars" id="characters"></div>
-
-</section>
-
-
-<section id="historia">
-
-<div class="head">
-<div>
-<h2>Historia</h2>
-<p>
-Nueva fila en <b>history</b> = nuevo capítulo desplegable.
-</p>
-</div>
-</div>
-
-<div id="history"></div>
-
-</section>
-
-
-<section id="npcs">
-
-<div class="head">
-<div>
-<h2>PNJ y contactos</h2>
-<p>Personas relevantes conocidas por Kazym.</p>
-</div>
-</div>
-
-<div class="grid" id="npcsGrid"></div>
-
-</section>
-
-
-<section id="base">
-
-<div class="head">
-<div>
-<h2>Base y facción</h2>
-<p>
-Habitaciones, proyectos, protocolos y miembros se agregan por filas.
-</p>
-</div>
-</div>
-
-<div class="two">
-
-<img
-  class="map"
-  id="baseMap"
-  alt="Mapa de la base"
->
-
-<div class="panel" style="padding:15px">
-
-<div class="eyebrow">Puesto de Enlace</div>
-
-<h3 id="baseName"></h3>
-
-<p
-  id="basePurpose"
-  style="color:#c8c1b5;line-height:1.55"
-></p>
-
-<div class="progress">
-<i id="baseProgress"></i>
-</div>
-
-<div
-  id="baseRooms"
-  style="margin-top:12px"
-></div>
-
-</div>
-</div>
-
-</section>
-
-
-<section id="bestiario">
-
-<div class="head">
-<div>
-<h2>Bestiario</h2>
-<p>
-Nueva fila en <b>bestiary</b> = nueva criatura.
-</p>
-</div>
-</div>
-
-<div class="grid" id="bestiary"></div>
-
-</section>
-
-
-<section id="lore">
-
-<div class="head">
-<div>
-<h2>Lore</h2>
-<p>Conocimiento confirmado para el jugador.</p>
-</div>
-</div>
-
-<div id="loreList"></div>
-
-</section>
-
-
-<section id="misterios">
-
-<div class="head">
-<div>
-<h2>Misterios</h2>
-<p>Evidencias, hipótesis y preguntas todavía abiertas.</p>
-</div>
-</div>
-
-<div class="grid" id="mysteries"></div>
-
-</section>
-
-
-<section id="objetos">
-
-<div class="head">
-<div>
-<h2>Objetos, documentos y pistas</h2>
-<p>
-Hover para ver propiedades técnicas, fuente, cargas,
-sintonización y estado.
-</p>
-</div>
-</div>
-
-<div class="grid" id="items"></div>
-
-</section>
-
-
-<section id="reglas">
-
-<div class="head">
-<div>
-<h2>Manual de campaña</h2>
-<p>Reglas oficiales, opcionales y adaptaciones.</p>
-</div>
-</div>
-
-<div id="rules"></div>
-
-</section>
-
-
-<section id="checkpoint">
-
-<div class="head">
-<div>
-<h2>Checkpoint exacto</h2>
-<p>Estado desde el cual continúa la próxima sesión.</p>
-</div>
-</div>
-
-<div id="checkpointBox"></div>
-
-</section>
-
-
-<section id="changelog">
-
-<div class="head">
-<div>
-<h2>Changelog</h2>
-<p>Historial de cambios del canon y del sitio.</p>
-</div>
-</div>
-
-<div id="changes"></div>
-
-</section>
-
+<section id="personajes"><div class="head"><div><h2>Personajes</h2><p>Haz clic para abrir la hoja horizontal. En los atributos se dibujan únicamente puntuación y modificador: nunca FUE/DES/CON/INT/SAB/CAR sobre la plantilla.</p></div><input id="search" class="search" placeholder="Buscar personaje…"></div><div class="grid avatars" id="characters"></div></section>
+<section id="historia"><div class="head"><div><h2>Historia</h2><p>Capítulos exhaustivos; las filas nuevas de <b>history</b> aparecen automáticamente.</p></div></div><div id="history"></div></section>
+<section id="npcsSec"><div class="head"><div><h2>PNJ y contactos</h2><p>Estado, información conocida, apariencia y relación.</p></div></div><div class="grid" id="npcs"></div></section>
+<section id="baseSec"><div class="head"><div><h2>Base y facción</h2><p>Habitaciones, sistemas y progreso.</p></div></div><div class="two"><img class="map" id="baseMap"><div class="panel" style="padding:15px"><div class="eyebrow">Puesto de Enlace</div><h3 id="baseName"></h3><p id="basePurpose"></p><div class="progress"><i id="baseProgress"></i></div><div id="baseRooms" style="margin-top:12px"></div></div></div></section>
+<section id="bestiarioSec"><div class="head"><div><h2>Bestiario</h2><p>Encuentros, rasgos y acciones conocidas o reconstruidas.</p></div></div><div class="grid" id="bestiary"></div></section>
+<section id="loreSec"><div class="head"><div><h2>Lore</h2><p>Religión, culturas, lugares, rutas y organizaciones.</p></div></div><div id="lore"></div></section>
+<section id="misteriosSec"><div class="head"><div><h2>Misterios</h2><p>Evidencias, hipótesis y preguntas abiertas.</p></div></div><div class="grid" id="mysteries"></div></section>
+<section id="objetosSec"><div class="head"><div><h2>Objetos, documentos y pistas</h2><p>Hover/focus para descripción técnica y estado.</p></div></div><div class="grid" id="items"></div></section>
+<section id="reglasSec"><div class="head"><div><h2>Manual de campaña</h2><p>Reglas oficiales, opcionales y adaptaciones.</p></div></div><div id="rules"></div></section>
+<section id="checkpointSec"><div class="head"><div><h2>Checkpoint exacto</h2><p>Estado canónico desde el que continúa la sesión.</p></div></div><div id="checkpoint"></div></section>
+<section><div class="head"><div><h2>Changelog</h2></div></div><div id="changes"></div></section>
 </main>
-
-
-<div class="modal" id="modal">
-
-<div class="shell">
-
-<div class="modalbar">
-<h2 id="modalTitle"></h2>
-<button class="btn" id="close">Cerrar ×</button>
-</div>
-
-<div class="charLayout">
-
-<div
-  class="sheet"
-  id="sheet"
-></div>
-
-<aside
-  class="side"
-  id="side"
-></aside>
-
-</div>
-</div>
-</div>
-
-
+<div class="modal" id="modal"><div class="shell"><div class="bar"><h2 id="modalTitle"></h2><button class="btn" id="close">Cerrar ×</button></div><div class="char"><div class="sheet" id="sheet"></div><aside class="side" id="side"></aside></div></div></div>
 <div id="tip"></div>
-
-
-<footer>
-Google Sheets → datos · Google Drive → imágenes ·
-GitHub Pages → interfaz · actualización automática cada 60 segundos.
-</footer>
-
-
+<footer>v0.9 · Google Sheets → datos · Google Drive → assets · actualización automática cada 60 segundos.</footer>
 <script>
-
-const TEMPLATE_ID =
-"1BL2HgMvFevmgfhcvYTF6rk6ZVU8VoNbi";
-
-
-const KNOWN_ASSETS = {
-
-  kazym:
-  "1m7rLWYeVe6W0KKom-v-05Uy95ypsaabf",
-
-  maera:
-  "1jusHfpyBssW6cRtHN9I9cj8PubJPQXkA",
-
-  tomas:
-  "1bdEy6MZ2DKYY31z2jnTQYx2Wxbo_Zw_Y",
-
-  pipik:
-  "1S1u722rwLgmdp9s2M51EK15tTlMSzOgf",
-
-  bran:
-  "1S0vRnN3zI56My_pX2mxulSWbLnfYF8nl",
-
-  sarrik:
-  "1sp6Ki-tpC9s1jxo5XMmsXaN4_wN0Lx_d",
-
-  constructo:
-  "1CKurQTETQfdkXVOzgRLjYCOsbwQJgORQ",
-
-  base:
-  "1yyB-3H2p774C8lJEtl3yHKki5vbXmJhp",
-
-  santuario:
-  "1IhpnJtrJVlolqoX-e7SelHBj2_9goIyE",
-
-  cultistas:
-  "1LQlb0UES60YHCdgqfXUbD8wwaDcLydmU",
-
-  espectro:
-  "1k86lc6Xfp2z86in6cFsW4Ve8mRfTluHA",
-
-  guardian:
-  "1cRKj0eLE3lAVcqhAxAoVl-AC87HUvZyH"
-
+const DEMO_DATA={
+"characters":[
+{"character_id":"PC_KAZYM","name":"Kazym Garnithor","kind":"PJ","role":"Custodio / líder táctico","race":"Shadar-kai","class":"Pícaro","subclass":"Fantasma","level":4,"alignment":"Caótico Bueno","xp":3550,"background":"Viajero / perseguidor de un rastro antiguo","portrait":"https://drive.google.com/thumbnail?id=1m7rLWYeVe6W0KKom-v-05Uy95ypsaabf&sz=w2000","flavor":"La muerte justa no es aquella que se quita, es aquella que se da.","short":"Shadar-kai que ha seguido durante siglos el rastro de su madre y que acaba de reclamar una antigua casa de guardia como refugio y puesto de enlace.","history":"Kazym nació en una sociedad Shadar-kai del Shadowfell. Su madre rechazó en secreto una ortodoxia que normalizaba crueldad, obediencia y sufrimiento, y sostuvo una lectura distinta de la Reina Cuervo: la muerte debía tener sentido, la memoria debía ser preservada y la voluntad no debía ser esclavizada. Cuando ella huyó hacia el Plano Material creyendo dejar a su hijo atrás por su seguridad, Kazym ya había comprendido parte de la verdad y decidió seguirla sin revelarse. La persecución se prolongó durante siglos. En ese tiempo aprendió a rastrear, infiltrarse, sobrevivir, leer intenciones y matar a quienes insistían en utilizarlo como camino hacia ella. No la busca para exigir explicaciones ni para reclamar una deuda: quiere que ella sepa que sobrevivió, que eligió seguirla y que no necesita una disculpa.","appearance":"Piel gris ceniza de tono oscuro y cálido; cabello negro medio, semiondulado y cuidado; ojos castaño rojizos; cicatriz en el labio; porte elegante, sobrio y peligroso. Usa ropa de viajero y pícaro con elementos Shadar-kai, lleva armas dentadas a la vista y transmite la impresión de alguien silencioso, noble y quebrado que lleva demasiado tiempo caminando.","personality":"Intuitivo, sigiloso, protector con víctimas y despiadado con perseguidores persistentes. La libertad de elección es central para él. Su espiritualidad está profundamente ligada a su madre y a la Reina Cuervo, pero acepta que su intuición puede ser memoria, deseo, sesgo, coincidencia o verdadera guía. Su mayor temor espiritual sería obtener una prueba irrefutable de que aquello que creyó una señal divina nunca lo fue.","state":"31/31 PG. Sin condiciones conocidas. Base reclamada 5/5. Control de Tránsito restaurado. Última escena: posible alianza futura con el hombre de la máscara de hueso.","stats":{"str":13,"dex":18,"con":15,"int":10,"wis":12,"cha":8,"ac":15,"hp_max":31,"hp_current":31,"initiative":4,"speed":30,"pb":2,"hit_dice":"4d8","passive_perception":13},"saves":{"DES":"+6","INT":"+2"},"skills":{"Sigilo":"+8","Percepción":"+3","Investigación":"+2","Engaño":"+1","Herramientas de ladrón":"+8"},"passives":["Percepción pasiva 13","Investigación pasiva 12","Perspicacia pasiva 11"],"proficiencies":["Armaduras ligeras","Armas simples","Ballesta de mano","Espada larga","Estoque","Espada corta","Herramientas de ladrón (pericia)"],"languages":["Común","Élfico (dialecto Shadar-kai)"],"traits":["Shadar-kai (MotM): visión en la oscuridad 60 pies, Fey Ancestry, Keen Senses, resistencia necrótica, Trance","Bendición de la Reina Cuervo: acción adicional, teletransporte 30 pies; 2 usos por descanso largo; desde nivel 3 concede resistencia a todo daño hasta el inicio del siguiente turno","Ataque Furtivo 2d6 una vez por turno si se cumplen las condiciones","Pericia: Sigilo y herramientas de ladrón","Jerga de ladrones","Acción Astuta: Correr, Destrabarse u Ocultarse como acción adicional","Susurros de los Muertos: competencia temporal en habilidad o herramienta tras descanso corto/largo","Lamentos desde la Tumba: tras Ataque Furtivo, 1d6 necrótico a una segunda criatura visible a 30 pies; 2 usos por descanso largo","Precisión Élfica: DES 17→18; cuando tiene ventaja con DES/INT/SAB/CAR puede repetir uno de los d20"],"resources":["Bendición de la Reina Cuervo 2/2","Lamentos desde la Tumba 2/2","Competencia temporal de Susurros de los Muertos: pendiente elección"],"attacks":["Espada corta dentada +6 — 1d6+4 perforante","Daga dentada +6 — 1d4+4 perforante","Arco corto +6 — 1d6+4","Ballesta ligera +6 — 1d8+4"],"equipment":["Espada corta dentada","2 dagas dentadas","Arco corto y flechas","Ballesta ligera","Herramientas de ladrón","Armadura de cuero","Equipo de viajero","Pedernal/encendido","Gancho y cuerda","Agua bendita","Pergamino de su madre con mapa al reverso","Pieza de hueso oscuro REGRESO","Pieza metálica CAMINO: estado físico exacto pendiente","3 fragmentos de gema del mnemófago","Pluma negra","Registro metálico de tránsito: PUESTO DE ENLACE → AGUJA QUEBRADA / CAMINO DE CENIZA"],"relationships":["Maera: confianza creciente y compañera táctica","Tomás: confianza en su criterio ritual y moral","Pipik: respeto por su autonomía y sus motivos","Sarrik: vínculo fundado explícitamente en libertad, no propiedad","Bran: residente informal; 'Equipo Bran'","Madre: eje de búsqueda, fe, culpa y elección"],"pending":["Reemplazo de competencia duplicada en Percepción por rasgo racial: pendiente elección del jugador","Dinero exacto: pendiente","Munición exacta: pendiente","Inspiración: pendiente","Estado exacto de CAMINO tras mecanismo: pendiente","Ubicación exacta del medallón de las Agujas tras usarlo en la puerta: pendiente"]},
+{"character_id":"ALLY_MAERA","name":"Maera Voss","kind":"Aliada","role":"Inteligencia / infiltración / coordinación táctica","race":"Humana","class":"Pícara","subclass":"Mente Maestra","level":3,"alignment":"—","xp":"","background":"Espía / criminal adaptado","portrait":"https://drive.google.com/thumbnail?id=1jusHfpyBssW6cRtHN9I9cj8PubJPQXkA&sz=w2000","flavor":"Siempre hay otra salida si sabes dónde mirar.","short":"Ex agente de las Agujas del Cuervo Roto. Empezó como antagonista y terminó convirtiéndose en una de las personas en quienes Kazym más confía.","history":"Kazym la derrotó en la posada y decidió no matarla. Más tarde, las órdenes del propio culto demostraron que Velka y las Agujas la consideraban desechable. La relación pasó de cautela y utilidad mutua a confianza real. Maera aporta lectura social, infiltración, falsificación, coordinación táctica y conocimiento práctico de células criminales y cultistas.","appearance":"Humana de unos treinta y tantos años, alta y delgada, rostro anguloso, cicatriz fina desde la ceja hacia la mejilla, cabello oscuro recogido, ojos grises o avellana apagada, capa gris oscura y cuero ligero negro.","personality":"Estratégica, irónica, pragmática y desconfiada. Prefiere información, contingencias, rutas de salida y entender a la gente antes de actuar.","state":"Activa en el núcleo del grupo y de la futura facción. Presente en Control de Tránsito.","stats":{"str":9,"dex":16,"con":13,"int":14,"wis":12,"cha":15,"ac":15,"hp_max":21,"hp_current":21,"initiative":3,"speed":30,"pb":2,"hit_dice":"3d8","passive_perception":13},"saves":{"DES":"+5","INT":"+4"},"skills":{"Engaño":"+6","Perspicacia":"+5","Investigación":"+4","Percepción":"+3","Persuasión":"+4","Sigilo":"+5"},"passives":["Percepción pasiva 13","Perspicacia pasiva 15"],"proficiencies":["Armaduras ligeras","Armas simples","Ballesta de mano","Espada larga","Estoque","Espada corta","Herramientas de ladrón","Kit de disfraz","Kit de falsificación"],"languages":["Común","Jerga de ladrones","Dos idiomas adicionales de Master of Intrigue: pendientes fijación exacta"],"traits":["Ataque Furtivo 2d6","Pericia: Engaño y Perspicacia","Acción Astuta","Master of Intrigue","Master of Tactics: puede ayudar a distancia como acción adicional en condiciones apropiadas"],"resources":[],"attacks":["Espada corta +5 — 1d6+3","Daga +5 — 1d4+3","Arco corto +5 — 1d6+3"],"equipment":["Cuero tachonado oscuro","Espada corta","Daga","Arco corto y flechas","Herramientas de ladrón","Kit de disfraz","Kit de falsificación","Documentos falsos","Material de escritura","Capa gris"],"relationships":["Kazym: alianza convertida en confianza","Tomás: respeto por su criterio","Pipik: cooperación práctica","Agujas del Cuervo Roto: antigua organización hostil"],"pending":["Idiomas exactos de Master of Intrigue: pendientes"]},
+{"character_id":"ALLY_TOMAS","name":"Tomás","kind":"Aliado","role":"Rituales / curación / investigación religiosa","race":"Humano","class":"Clérigo","subclass":"Dominio de la Tumba","level":2,"alignment":"—","xp":"","background":"Acólito / estudiante del templo","portrait":"https://drive.google.com/thumbnail?id=1bdEy6MZ2DKYY31z2jnTQYx2Wxbo_Zw_Y&sz=w2000","flavor":"Puedo decirte lo que sé; y también cuando no lo sé.","short":"Clérigo muy joven con una memoria ritual extraordinaria y una honestidad poco común respecto de sus propios límites.","history":"Creció alrededor del templo y de sus archivos, copiando textos y aprendiendo funerales, criptas, sellos y rituales. Su maestra confía en su capacidad para notar anomalías y le dio espacio para desarrollar juicio propio. Se unió a Kazym como apoyo religioso y médico. Ha intervenido en la identificación de fuego profano, magia de memoria y sistemas rituales antiguos.","appearance":"Muy joven, aproximadamente 16–18 años, delgado, cerca de 1,65 m, cabello castaño desordenado, ojos grandes y atentos, dedos manchados de tinta; parece más estudioso que soldado.","personality":"Honesto, directo, estudioso y humilde. Su virtud es decir 'no sé' cuando corresponde. Su riesgo personal es convertir responsabilidad en autosacrificio.","state":"Activo; apoyo ritual y médico de la base. Presente en Control de Tránsito.","stats":{"str":8,"dex":12,"con":13,"int":15,"wis":16,"cha":10,"ac":15,"hp_max":15,"hp_current":15,"initiative":1,"speed":30,"pb":2,"hit_dice":"2d8","passive_perception":13},"saves":{"SAB":"+5","CAR":"+2"},"skills":{"Religión":"+4","Medicina":"+5","Perspicacia":"+5","Investigación":"+4"},"passives":["Percepción pasiva 13","Perspicacia pasiva 15"],"proficiencies":["Armadura ligera","Armadura media","Escudos","Armas simples"],"languages":["Común","Celestial","Élfico"],"traits":["Lanzamiento de conjuros de clérigo","Circle of Mortality","Eyes of the Grave","Channel Divinity: Path to the Grave"],"resources":["3 espacios de conjuro de nivel 1 por descanso largo","1 uso de Canalizar Divinidad por descanso corto/largo"],"attacks":["Llama Sagrada — CD 13","Arma sencilla de respaldo"],"equipment":["Símbolo sagrado","Libro/diario","Ropa clerical","Protección discreta","Vendas","Útiles de escritura","Arma sencilla de respaldo"],"spells":["Trucos: Guidance, Sacred Flame, Thaumaturgy, Spare the Dying","Preparados/base: Cure Wounds, Healing Word, Detect Magic, Sanctuary, Protection from Evil and Good","Dominio: Bane, False Life"],"relationships":["Sacerdotisa anciana: maestra y referente","Kazym: confianza basada en coherencia moral","Maera: compañera de campo"],"pending":[]},
+{"character_id":"ALLY_PIPIK","name":"Pipik","kind":"Aliado","role":"Exploración / ingeniería / trampas / reparaciones","race":"Kobold","class":"Ranger","subclass":"—","level":2,"alignment":"—","xp":"","background":"Explorador refugiado / trampero","portrait":"https://drive.google.com/thumbnail?id=1S1u722rwLgmdp9s2M51EK15tTlMSzOgf&sz=w2000","flavor":"Un lugar seguro vale más que una montaña de monedas.","short":"Kobold explorador que busca rutas y un lugar seguro para su gente, y que encontró en la casa de guardia una oportunidad real.","history":"Proviene de Las Grietas de Cobre, al este. Su comunidad sigue allí y no ha revelado su ubicación. Llegó a la casa de guardia seis días antes que Kazym; vio cultistas de capa oscura, incluido uno con máscara de hueso, y había abierto una de las primeras trampillas sin lograr penetrar todo el complejo. Kazym le ofreció un lugar seguro sin exigir información sobre su gente y Pipik aceptó una membresía provisional.","appearance":"Kobold joven adulto, 0,90–1,05 m, pequeño, ligero y ágil; escamas cobrizas o rojo parduzco apagado, ojos ámbar, hocico corto, dientes pequeños, cola expresiva y chaleco cargado de herramientas.","personality":"Astuto, práctico, sarcástico, protector con los suyos y muy sensible a promesas de seguridad que impliquen control o deuda.","state":"Miembro provisional. Reparador natural de la base. Presente en Control de Tránsito.","stats":{"str":7,"dex":16,"con":14,"int":13,"wis":15,"cha":10,"ac":15,"hp_max":20,"hp_current":20,"initiative":3,"speed":30,"pb":2,"hit_dice":"2d10","passive_perception":14},"saves":{"FUE":"+0","DES":"+5"},"skills":{"Supervivencia":"+6","Percepción":"+4","Investigación":"+3","Sigilo":"+5","Herramientas de ladrón":"+5"},"passives":["Percepción pasiva 14"],"proficiencies":["Armaduras ligeras","Armaduras medias","Escudos","Armas simples","Armas marciales","Herramientas de ladrón"],"languages":["Común","Dracónico"],"traits":["Visión en la oscuridad","Draconic Cry: usos = bonificador de competencia por descanso largo","Kobold Legacy: Craftiness","Favored Foe","Deft Explorer / Canny: pericia en Supervivencia","Fighting Style: Archery","Lanzamiento de conjuros de ranger"],"resources":["2 espacios de conjuro de nivel 1","Draconic Cry: 2 usos por descanso largo"],"attacks":["Ballesta pequeña +7 — 1d6+3","Daga +5 — 1d4+3"],"equipment":["Ballesta pequeña","Virotes","Daga","Herramientas de ladrón","Kit de reparación/trampas","Cuerda y ganchos","Mochila","Repuestos"],"spells":["Goodberry","Hunter's Mark"],"relationships":["Kazym: confianza naciente basada en autonomía","Bran: rivalidad cómica","Sarrik: cooperación práctica"],"pending":[]},
+{"character_id":"ALLY_SARRIK","name":"Sarrik","kind":"Aliado / residente","role":"Sistemas térmicos / residente libre","race":"Elemental menor de aspecto reptiliano","class":"—","subclass":"—","level":"","alignment":"Neutral Bueno","xp":"","background":"Prisionero liberado","portrait":"https://drive.google.com/thumbnail?id=1sp6Ki-tpC9s1jxo5XMmsXaN4_wN0Lx_d&sz=w2000","flavor":"Sarrik encendió fuego porque Sarrik quiso.","short":"Criatura del fuego bajo liberada de un mecanismo del culto y que eligió quedarse en la base por voluntad propia.","history":"Los cultistas lo mantuvieron encadenado al sistema térmico, obligándolo a consumir un fuego verde corrupto. Kazym y Pipik abrieron la restricción y Tomás separó la contaminación ritual. Cuando Kazym explicó que Sarrik no tenía dueño, la idea se convirtió en el centro de su nueva relación con el grupo. Eligió encender los seis braseros y llamó al lugar 'refugio'.","appearance":"Criatura pequeña, cerca de un metro, cuerpo reptiliano delgado, placas o escamas negras como carbón y brillo naranja en articulaciones y fisuras. Durante su corrupción el brillo se volvió verde/púrpura; al ser liberado regresó al naranja.","personality":"Literal, directo y profundamente sensible a los conceptos de cadena, dueño, elección y refugio.","state":"Libre. Residente voluntario. Permanece en la Sala de la Llama.","stats":{"str":10,"dex":14,"con":14,"int":8,"wis":12,"cha":10,"ac":14,"hp_max":22,"hp_current":22,"initiative":2,"speed":30,"pb":2,"hit_dice":"5d6","passive_perception":11},"saves":{},"skills":{},"passives":["Percepción pasiva 11"],"proficiencies":[],"languages":["Común fragmentario","Lengua de fuego no especificada"],"traits":["Inmunidad al fuego","Resistencia necrótica","Visión en la oscuridad 60 pies","Cuerpo de Ascua","Sentir Fuego","Guardián del Hogar"],"resources":[],"attacks":["Garra +4 — 1d6+2 cortante + 1d4 fuego","Ascua +4 — alcance 30 pies, 1d6+2 fuego"],"equipment":[],"relationships":["Kazym: libertad explícita como fundamento del vínculo","Tomás: ayudó a separarlo de la corrupción","Pipik: cooperación de reparación"],"pending":[]},
+{"character_id":"ALLY_BRAN","name":"Bran","kind":"Residente","role":"Cuervo / observador informal","race":"Cuervo","class":"—","subclass":"—","level":"","alignment":"—","xp":"","background":"Residente de la casa de guardia","portrait":"https://drive.google.com/thumbnail?id=1S0vRnN3zI56My_pX2mxulSWbLnfYF8nl&sz=w2000","flavor":"Equipo Bran.","short":"Cuervo grande, sano y extraordinariamente observador que ya vivía en la casa de guardia.","history":"Kazym lo encontró en la superficie durante la primera exploración. Bran llevaba una anilla de bronce con su nombre. Kazym prometió protección si quería quedarse y lo integró informalmente al naciente grupo.","appearance":"Cuervo grande de plumaje negro con reflejos azulados y anilla de bronce o verdín grabada con BRAN.","personality":"Territorial, curioso, oportunista, inteligente e insolente.","state":"Libre en superficie y torre.","stats":{"str":2,"dex":14,"con":8,"int":2,"wis":12,"cha":6,"ac":12,"hp_max":1,"hp_current":1,"initiative":2,"speed":10,"pb":2,"hit_dice":"1d4","passive_perception":13},"saves":{},"skills":{"Percepción":"+3"},"passives":["Percepción pasiva 13"],"proficiencies":[],"languages":[],"traits":["Vuelo 50 pies","Mimicry"],"resources":[],"attacks":["Pico +4 — 1 perforante"],"equipment":["Anilla de bronce marcada BRAN"],"relationships":["Kazym: 'Equipo Bran'","Pipik: rivalidad cómica"],"pending":[]},
+{"character_id":"ALLY_RAVEN_CONSTRUCT","name":"Cuervo constructo","kind":"Activo de base","role":"Mensajería / archivo de rutas","race":"Constructo","class":"—","subclass":"—","level":"","alignment":"—","xp":"","background":"Nodo antiguo de mensajería","portrait":"https://drive.google.com/thumbnail?id=1CKurQTETQfdkXVOzgRLjYCOsbwQJgORQ&sz=w2000","flavor":"Nodo de mensajería operativo.","short":"Cuervo mecánico de metal oscuro y bronce con una lente roja, parte de una antigua red de mensajería y tránsito.","history":"Fue encontrado dañado en la Sala del Cuervo. Pipik reparó su ala y mecanismos. Reconoció a Kazym como custodio provisional y recuperó funcionalidad cuando el archivo de tránsito identificó Aguja Quebrada.","appearance":"Cuervo mecánico de metal oscuro/bronce, una lente roja, compartimentos para cilindros de mensaje y alas articuladas.","personality":"Habla con voz mecánica fragmentaria y prioriza la función del nodo.","state":"Operativo en la Sala del Cuervo; mensajería restaurada.","stats":{"str":4,"dex":15,"con":12,"int":6,"wis":12,"cha":5,"ac":15,"hp_max":10,"hp_current":10,"initiative":2,"speed":10,"pb":2,"hit_dice":"—","passive_perception":11},"saves":{},"skills":{},"passives":["Percepción pasiva 11"],"proficiencies":[],"languages":["Comprende/produce mensajes mecánicos limitados"],"traits":["Visión en la oscuridad 60 pies","Inmunidades típicas de constructo a necesidades biológicas","Nodo de mensajes","Cilindros de mensaje","Memoria parcial de rutas","Vuelo 40 pies; 50 pies si queda completamente reparado"],"resources":[],"attacks":["Picotazo +4 — 1d4+2 perforante"],"equipment":["Cilindros de mensaje"],"relationships":["Pipik: reparador principal","Kazym: custodio reconocido"],"pending":[]}
+],
+"history":[
+{"chapter_id":"CH01","order":1,"title":"La posada cubierta de ceniza","summary":"Primer gran enfrentamiento. Kazym descubre una operación armada, salva rehenes y convierte a Maera de enemiga derrotada en futura aliada.","image":"https://drive.google.com/thumbnail?id=1LQlb0UES60YHCdgqfXUbD8wwaDcLydmU&sz=w2000","full_text":"Kazym exploró una posada tomada por hombres armados que retenían al posadero y a una joven. Desactivó una alarma del sótano, eliminó silenciosamente a Rusk y Bren y logró reducir a Maera sin matarla. Un segundo grupo incluía dos humanos, un Heraldo enmascarado y una criatura llamada 'sabueso del duelo'. Kazym utilizó fuego, trampas, sigilo y el entorno para evacuar a los inocentes, salvar a Maera y abatir al Heraldo que intentaba escapar. Después entregó dinero al posadero para la reconstrucción.","events":["Desactivación de la alarma del sótano","Rusk y Bren eliminados en silencio","Maera reducida de forma no letal","Evacuación de civiles","Heraldo abatido durante la fuga","Maera salvada a pesar de haber sido enemiga"],"decisions":["Kazym decide no matar a Maera","Entrega dinero al posadero para reconstrucción","Confía a Maera la moneda/llave negra que había aparecido en una caravana masacrada"],"loot":["Máscara blanca","Medallón de hierro de las Agujas","Dinero","Órdenes cultistas","Moneda/llave negra"],"rolls":["Encuentro muy por encima de lo normal para nivel 1 resuelto mediante sigilo, estrategia y entorno","600 PX obtenidos; suficiente para alcanzar nivel 2 tras descanso seguro"],"consequences":["Maera queda viva y disponible para una futura alianza","Primeras pruebas de una red mayor","Kazym empieza a ser identificado por enemigos como objetivo vivo"]},
+{"chapter_id":"CH02","order":2,"title":"El pueblo y la capilla","summary":"La capilla conecta la campaña con una doctrina que Kazym reconoce como cercana a la de su madre y Tomás se une al grupo.","image":"https://drive.google.com/thumbnail?id=1bdEy6MZ2DKYY31z2jnTQYx2Wxbo_Zw_Y&sz=w2000","full_text":"Tras descansar con seguridad, Kazym alcanza nivel 2. En el pueblo conoce a una sacerdotisa anciana que reconoce principios vinculados a la doctrina que su madre difundía. La capilla ofrece ayuda, agua bendita y presenta a Tomás, un joven clérigo excepcionalmente atento a anomalías rituales.","events":["Descanso seguro","Subida de Kazym a nivel 2","Reconocimiento doctrinal de la sacerdotisa","Tomás se une al grupo"],"decisions":["Kazym acepta la ayuda religiosa sin revelar todo sobre su relación con la mujer que inspira esa tradición"],"loot":["Agua bendita","Apoyo de la capilla"],"rolls":["Nivel 2 obtenido tras descanso"],"consequences":["Se establece un punto seguro","Tomás se convierte en aliado permanente","La religión de la campaña deja de ser solo trasfondo y pasa a producir pistas concretas"]},
+{"chapter_id":"CH03","order":3,"title":"El molino, el ritual y las ruinas","summary":"Asalto táctico, rescate, captura de un cultista y descubrimiento de una estructura de células más amplia.","image":"https://drive.google.com/thumbnail?id=1k86lc6Xfp2z86in6cFsW4Ve8mRfTluHA&sz=w2000","full_text":"El grupo ataca el molino mediante sigilo coordinado. Kazym elimina guardias discretamente, Tomás apoya y Maera ayuda en la lectura táctica. Interrumpen un ritual, rescatan a una prisionera y capturan a un cultista vivo. Recuperan un libro cifrado, cartas selladas, un mapa marcado, un anillo-sello y una llave extraña. Las pruebas sugieren que no enfrentan a una sola banda sino a múltiples células conectadas.","events":["Infiltración por el arroyo y flancos","Guardias neutralizados","Ritual interrumpido","Prisionera rescatada","Cultista capturado vivo","Exploración de camino secreto / ruinas"],"decisions":["Mantener al menos un enemigo con vida para obtener información","Coordinar combate y sigilo como grupo"],"loot":["Libro cifrado","Cartas selladas","Mapa marcado","Anillo-sello","Llave extraña"],"rolls":["Combate táctico y sigilo coordinado","Aparición y derrota del Espectro del Corazón Carmesí en el camino secreto"],"consequences":["Kazym alcanza Pícaro 3 Fantasma","Maera queda fijada como Pícara 3 Mente Maestra","Tomás continúa como Clérigo 2","El culto queda confirmado como red multicelular"]},
+{"chapter_id":"CH04","order":4,"title":"El granero y el santuario antiguo","summary":"Kazym entra en un santuario funerario ajeno al culto y es obligado a poner en palabras sus principios sobre muerte, memoria y voluntad.","image":"https://drive.google.com/thumbnail?id=1IhpnJtrJVlolqoX-e7SelHBj2_9goIyE&sz=w2000","full_text":"Unas huellas recientes conducen a un granero cubierto de hiedra. Kazym oye a agentes del culto hablar de 'el Cuervo', 'el heredero' y del deseo de Velka de capturarlo vivo. Detrás existe una puerta funeraria mucho más antigua que la célula cultista. Dentro, Kazym encuentra una estatua femenina sin rostro, un cuervo de piedra, una pluma negra, una campana y un espejo de marco negro. La figura del espejo se presenta como alguien a quien una vez llamaron Eiravel. El santuario exige respuestas: qué es una muerte justa, qué se recuerda y qué se entrega por voluntad propia. Kazym responde que 'la muerte justa no es aquella que se quita, es aquella que se da'. El lugar acepta la respuesta como incompleta pero verdadera.","events":["Escucha de conversación cultista","Acceso a puerta funeraria antigua","Encuentro con Eiravel","Prueba de los tres símbolos","Kazym inscribe el símbolo Shadar-kai de 'madre'","Apertura de ruta inferior"],"decisions":["Kazym reconoce que sigue el rastro por elección propia","Entrega simbólicamente su propia voluntad al destino, no por obligación"],"loot":["Pluma negra","Acceso al nivel inferior"],"rolls":["Investigación y percepción para descubrir rutas y mecanismos"],"quotes":["«La muerte justa no es aquella que se quita, es aquella que se da.»","«Lo recordado no muere mientras alguien elija llevarlo.»","«Quien sigue una sombra debe aprender algún día a caminar sin ella.»"],"consequences":["Se establece el tema de la devoción elegida como posible cadena","Eiravel advierte que Kazym no debe matar al hombre de la máscara de hueso sin preguntar primero"]},
+{"chapter_id":"CH05","order":5,"title":"El mnemófago y la falsa madre","summary":"Una criatura intenta usar la memoria y el deseo de Kazym contra él; el grupo destruye su ancla.","image":"https://drive.google.com/thumbnail?id=1IhpnJtrJVlolqoX-e7SelHBj2_9goIyE&sz=w2000","full_text":"Kazym encuentra una figura que parece su madre, intacta tras siglos. La escena contiene pequeños errores: la lámpara no produce sombras, la ropa no responde al ambiente, el perfume es demasiado exacto, no hay respiración. Kazym rechaza la ilusión y exige que la criatura se revele. Surge un parásito de memoria ligado al Shadowfell. Tras recibir 11 puntos de daño psíquico, Kazym y Maera lo flanquean mientras Tomás ayuda a exponer su núcleo. Kazym identifica que una gema física actúa como ancla y la destruye.","events":["Falsa aparición de la madre","Detección de inconsistencias","Revelación del mnemófago","Combate alrededor de la gema-ancla","Destrucción del núcleo"],"decisions":["Kazym confía en observación concreta por encima del deseo de creer","El grupo prioriza el ancla física del enemigo"],"loot":["3 fragmentos de gema del mnemófago","Pluma negra","Pieza metálica CAMINO"],"rolls":["Percepción 19","Salvación de SAB 11: fallo parcial / glitch revelador","Arcana 19","Ataque flanqueado 22 → 21 daño final"],"quotes":["«Tú no eres mi madre… demonio, revélate.»","Pensamiento de Kazym: «No era el encarcelado… era el carcelero.»"],"consequences":["Kazym distingue de manera más clara entre memoria, deseo y evidencia","CAMINO permite abrir el siguiente mecanismo"]},
+{"chapter_id":"CH06","order":6,"title":"La mujer de cabello blanco y el mensaje de la madre","summary":"Kazym recibe una prueba de que su madre dejó deliberadamente una ruta, pero también una instrucción para no seguirla por deuda.","image":"https://drive.google.com/thumbnail?id=1IhpnJtrJVlolqoX-e7SelHBj2_9goIyE&sz=w2000","full_text":"Tras superar el mecanismo CAMINO, el grupo desciende a una cámara con varias personas inmóviles y una mujer de cabello blanco. Ella examina la razón por la que Kazym sigue buscando. Kazym afirma que quiere liberar a su madre de culpa, no exigirle una deuda. La mujer le entrega un paquete gris con una pieza de hueso oscuro llamada REGRESO y un pergamino escrito por su madre. Al reverso hay un mapa simple con río, elevación y una aguja rota. El grupo sale por una ruta de agua y regresa al pueblo.","events":["Descenso a cámara inferior","Prueba de motivación","Entrega de REGRESO","Lectura del pergamino","Descubrimiento del mapa","Escape por agua"],"decisions":["Kazym expresa que busca a su madre por elección, no por deuda"],"loot":["REGRESO","Pergamino de la madre","Mapa hacia una región con aguja rota"],"rolls":["Investigación 18","Percepción 17","Supervivencia 16","Sigilo 23","Tomás cura 8 PG"],"quotes":["«Si todavía quieres encontrarme, hazlo solo porque tu corazón eligió hacerlo.»","«Ven como el hombre que eligió seguir caminando.»"],"consequences":["950 PX obtenidos","Kazym llega a 3550 PX y nivel 4","Precisión Élfica elegida; DES 17→18"]},
+{"chapter_id":"CH07","order":7,"title":"Fundación de la base: superficie y Pipik","summary":"La búsqueda personal de Kazym empieza a transformarse en una organización capaz de proteger a otros.","image":"https://drive.google.com/thumbnail?id=1yyB-3H2p774C8lJEtl3yHKki5vbXmJhp&sz=w2000","full_text":"Kazym propone ampliar el grupo y crear una facción. La sacerdotisa ofrece una antigua casa de guardia al norte con la condición de que sea usada para proteger la región. En la superficie el complejo está deteriorado: muros, pozo, establo, edificio lateral, torre rota y patio. Kazym conoce a Bran y luego descubre a Pipik dentro de la torre. Pipik relata la presencia reciente de cultistas y del hombre con máscara de hueso. Kazym le ofrece refugio sin exigir la ubicación de su comunidad.","events":["Oferta de la casa de guardia","Primera inspección","Encuentro con Bran","Encuentro y conversación con Pipik"],"decisions":["Crear una facción orientada a protección","Reconocer a Bran como residente","Ofrecer refugio a Pipik sin condicionar la seguridad de su gente"],"loot":["Acceso a la casa de guardia"],"rolls":["Sigilo 9 tras 1 natural","Percepción 20","Trato con Animales 17","Persuasión a Pipik 16"],"consequences":["Pipik acepta membresía provisional","La base pasa de posibilidad a proyecto real"]},
+{"chapter_id":"CH08","order":8,"title":"El guardián y la reclamación provisional","summary":"Kazym descubre que el lugar tiene sistemas mucho más antiguos que el culto y que reconoce propósito, marcas y autoridad.","image":"https://drive.google.com/thumbnail?id=1yyB-3H2p774C8lJEtl3yHKki5vbXmJhp&sz=w2000","full_text":"Bajo la casa de guardia hay una puerta de piedra y un guardián humanoide alterado con seis dedos, grapas de hierro y señales de coerción. El medallón de las Agujas permite la entrada pero no concede mando. Más abajo aparece un antiguo puesto de enlace con una rueda de hierro, tuberías, cisterna y puertas dedicadas a Llama, Escudo y Cuervo. Tras liberar a Edran, Kazym coloca la mano sobre un mecanismo que pregunta qué debe proteger el puesto. Su respuesta —'proteger a los débiles de los injustos'— es aceptada como propósito compatible y le concede custodia provisional.","events":["Encuentro con el guardián alterado","Uso del medallón","Descubrimiento del puesto de enlace","Rescate de Edran","Declaración del propósito del puesto"],"decisions":["No atacar al guardián mientras esté pasivo","Definir la misión de la base en términos morales, no de propiedad"],"loot":["Acceso a funciones internas"],"rolls":["Percepción y lectura del entorno"],"quotes":["«Este puesto debe dedicarse a proteger a los débiles de los injustos.»"],"consequences":["Custodia provisional concedida","Función 1/5 restaurada"]},
+{"chapter_id":"CH09","order":9,"title":"Sala de la Llama: liberación de Sarrik","summary":"El grupo restaura el sistema térmico sin convertir al ser que lo alimenta en herramienta o propiedad.","image":"https://drive.google.com/thumbnail?id=1sp6Ki-tpC9s1jxo5XMmsXaN4_wN0Lx_d&sz=w2000","full_text":"Sarrik está encadenado a un sistema térmico y obligado a consumir fuego verde contaminado. Tomás identifica la profanación, Kazym y Pipik abren la restricción y Tomás corta la corrupción. Kazym deja claro que Sarrik no tiene dueño, ni siquiera él. La criatura decide encender voluntariamente los seis braseros y permanecer 'por ahora'.","events":["Diagnóstico de fuego profano","Liberación física","Separación de contaminación","Declaración de autonomía","Restauración de seis braseros"],"decisions":["Ninguna deuda, propiedad u obligación se impone a Sarrik"],"loot":["Sistema térmico funcional"],"rolls":["Herramientas con ayuda 21","Persuasión 17"],"quotes":["«Tú dices que Sarrik tiene dueño… Sarrik.»","«Sarrik encendió fuego porque Sarrik quiso.»","«Entonces es refugio.»"],"consequences":["Función 2/5 restaurada","Sarrik se convierte en residente voluntario"]},
+{"chapter_id":"CH10","order":10,"title":"Sala del Cuervo y Archivo de Tránsito","summary":"Se restaura la mensajería y aparece la primera ruta concreta hacia Aguja Quebrada.","image":"https://drive.google.com/thumbnail?id=1CKurQTETQfdkXVOzgRLjYCOsbwQJgORQ&sz=w2000","full_text":"La Sala del Cuervo contiene nichos, cilindros, un árbol mecánico de bronce y un cuervo constructo dañado. Pipik comienza a repararlo mientras Kazym, Maera y Tomás entran al archivo de tránsito. Un cilindro marcado con CAMINO y el dibujo de cuervo de la madre contiene un registro metálico: ORIGEN PUESTO DE ENLACE, DESTINO AGUJA QUEBRADA, RUTA CAMINO DE CENIZA, RETORNO NO DECLARADO. REGRESO abre el cilindro y vuelve a la palma de Kazym.","events":["Reparación del cuervo constructo","Acceso al archivo","Identificación de marcas Shadar-kai","Lectura del registro de tránsito"],"decisions":["Kazym conserva físicamente el registro"],"loot":["Registro metálico de tránsito","Nueva confirmación escrita de la madre"],"rolls":["Investigación 18"],"quotes":["«Si llegas hasta aquí, ya sabes que no te estaba pidiendo que me siguieras.»","«Pero sabrás dónde continué.»"],"consequences":["Función 3/5 restaurada","Aguja Quebrada queda fijada como destino concreto"]},
+{"chapter_id":"CH11","order":11,"title":"Custodia Interior: proteger antes de destruir","summary":"Kazym modifica protocolos rígidos del puesto para que el sistema evalúe coerción, intención y peligro antes de castigar.","image":"https://drive.google.com/thumbnail?id=1yyB-3H2p774C8lJEtl3yHKki5vbXmJhp&sz=w2000","full_text":"La Custodia Interior clasifica amenazas mediante cinco arcos: RECUERDO, CUERPO, NOMBRE, VOLUNTAD y SOMBRA. Kazym rechaza reglas binarias. El sistema acepta que sus directivas fundamentales no pueden cambiar pero sus protocolos sí. Se crean estados ADMITIR, PROTEGER-CONTENER y RECHAZAR, acompañados de alerta silenciosa y juicio del custodio o delegado.","events":["Reprogramación de VOLUNTAD","Reprogramación de NOMBRE","Reprogramación de RECUERDO","Reprogramación de CUERPO","Reprogramación de SOMBRA"],"decisions":["Falta de voluntad no equivale a culpa","Ocultar un nombre no equivale a hostilidad","Memorias extranjeras no justifican ataque automático","Alteración corporal no equivale a monstruosidad","Naturaleza desconocida no equivale a culpabilidad"],"loot":["Sistema de seguridad contextual"],"rolls":[],"quotes":["«Principio rector identificado: proteger antes de destruir.»"],"consequences":["Función 4/5 restaurada","El guardián de seis dedos queda reclasificado para protección/contención y evaluación"]},
+{"chapter_id":"CH12","order":12,"title":"Control de Tránsito y el hombre de la máscara de hueso","summary":"La reclamación del puesto se completa y un enemigo ambiguo revela que Velka también lo quiere muerto.","image":"https://drive.google.com/thumbnail?id=1cRKj0eLE3lAVcqhAxAoVl-AC87HUvZyH&sz=w2000","full_text":"Control de Tránsito contiene un anillo de piedra negra y cinco pedestales. Una pieza cultista está forzando un destino externo. En la imagen del portal aparece el hombre de la máscara de hueso luchando contra algo. Mientras Pipik desmonta la interferencia y Tomás estabiliza el sistema, una masa sombría cruza parcialmente. Kazym y Maera la flanquean. Kazym obtiene un crítico mediante Precisión Élfica y el grupo destruye tanto la criatura como el dispositivo. El destino original vuelve a Aguja Quebrada y el puesto reconoce a Kazym como custodio pleno. El hombre enmascarado, herido, advierte que antes de matarse deberían hablar y que Velka también lo quiere muerto.","events":["Descubrimiento de interferencia cultista","Aparición del hombre de la máscara","Manifestación de sombra","Combate con flanqueo","Desmontaje del dispositivo","Restauración del destino original","Custodia completa"],"decisions":["No tratar automáticamente al hombre enmascarado como aliado ni como enemigo","Conservar la posibilidad de diálogo"],"loot":["Pieza cultista desmontada: pendiente estudio"],"rolls":["Iniciativa 20","Crítico con Precisión Élfica: 20/5/1 +6 → 26 daño","Segundo ataque 24 → 15 daño"],"quotes":["«Eso espero. Porque la próxima vez tendremos que hablar antes de que alguno de los dos cometa un error irreversible.»","«Pregunta primero por qué Velka también me quiere muerto.»"],"consequences":["Función 5/5 restaurada","Reclamación completada","Kazym reconocido como custodio","Última conclusión de Kazym: «Entonces sí podría tratarse de un aliado…»"]}
+],
+"npcs":[
+{"id":"NPC_EDRAN","name":"Edran","role":"Aprendiz de agrimensor / contacto protegido","status":"Vivo; recuperándose en la base","known":"Humano de 17–19 años, delgado y civil. Viajaba solo siguiendo viejos registros de caminos, puentes y límites. Vio cultistas cerca de la casa de guardia y escuchó descripciones de Kazym como 'el hijo que sigue el rastro'. Oyó que Velka lo quiere vivo y que 'el de la máscara de hueso' se dirigía al lugar. Quedó atrapado varios días bajo una pieza de armadura y fue rescatado por el grupo.","appearance":"1,72 m aprox.; cabello castaño claro/rubio oscuro desordenado; ojos marrón o verde apagado.","relationship":"Contacto potencial; no miembro formal."},
+{"id":"NPC_PRIESTESS","name":"Sacerdotisa anciana","role":"Maestra de Tomás / apoyo religioso","status":"Aliada local","known":"Mujer de más de 70 años, lúcida y firme. Reconoció elementos doctrinales vinculados a la madre de Kazym, ofreció agua bendita, presentó a Tomás y cedió el uso de la casa de guardia con la condición de que protegiera la región.","appearance":"Baja y delgada, cabello blanco/gris ordenado, ropas sobrias grises, hueso, beige o azul apagado.","relationship":"Aliada y punto de legitimidad local."},
+{"id":"NPC_WHITE","name":"Mujer de cabello blanco","role":"Guardiana / evaluadora del santuario","status":"Identidad no resuelta","known":"Figura real encontrada en la cámara inferior, sentada entre personas inmóviles. Extremadamente delgada, cabello blanco muy largo, ropas antiguas grises/ivorio/ceniza. Preguntó por qué Kazym busca a su madre y le entregó REGRESO y el mensaje escrito. Conocía el nombre completo de Kazym.","appearance":"Aproximadamente 1,70 m, cabello blanco muy largo, austeridad antigua.","relationship":"Neutral / evaluadora. Naturaleza exacta desconocida."},
+{"id":"NPC_EIRAVEL","name":"Eiravel","role":"Figura del espejo / guía ambigua","status":"Identidad no resuelta","known":"Apareció en un espejo de marco negro entre niebla. Figura femenina de tono íntimo, maternal y melancólico. Dijo que alguna vez la llamaron Eiravel, que los nombres verdaderos tienen peso y abren puertas, y que Kazym debe aprender a confiar en lo que es, no solo en aquello que cree que lo guía. Advirtió que no mate al hombre de la máscara de hueso antes de preguntar.","appearance":"Silueta femenina parcialmente velada; imagen exacta abierta.","relationship":"Guía o testigo; naturaleza desconocida."},
+{"id":"NPC_MOTHER","name":"Madre de Kazym","role":"Objetivo central de la búsqueda","status":"Paradero desconocido; dejó ruta hacia Aguja Quebrada","known":"Shadar-kai que rechazó la crueldad doctrinal de su sociedad y difundió una lectura compasiva de la Reina Cuervo basada en memoria, muerte significativa, justicia y rechazo de la coerción. Dejó mensajes explícitos para que Kazym no la siguiera por deuda. Su dibujo personal de un cuervo tiene un ala ligeramente mayor que la otra.","appearance":"Kazym la recuerda; no hay retrato definitivo actual.","relationship":"Madre de Kazym; centro emocional y espiritual de la campaña."},
+{"id":"NPC_BONEMASK","name":"Hombre de la máscara de hueso","role":"Posible aliado / rival","status":"Vivo; contacto incompleto","known":"Hombre alto con máscara de hueso y capa. Habla con voz grave, áspera y cansada, pero controlada. Fue visto por Pipik cerca de la base y luego apareció en el portal mientras combatía algo. Terminó herido y reveló que Velka también lo quiere muerto. Eiravel pidió a Kazym que no lo mate antes de preguntar.","appearance":"Alto; máscara de hueso; capa dañada; porte de combatiente experimentado.","relationship":"No amigo. Posible aliado circunstancial. Requiere conversación antes de confiar."}
+],
+"bestiary":[
+{"enemy_id":"EN_AGUJAS","name":"Agentes de las Agujas del Cuervo Roto","type":"Humanoides","status":"Varios derrotados, capturados o dispersos","ac":"12–14","hp":"9–32","image":"https://drive.google.com/thumbnail?id=1LQlb0UES60YHCdgqfXUbD8wwaDcLydmU&sz=w2000","desc":"Exploradores, matones, infiltradores y especialistas rituales vinculados a una célula regional. Sus órdenes muestran que la organización considera desechables incluso a sus propios agentes.","traits":["Coordinación de célula","Uso de marcas, máscaras y documentos","Tendencia a operar con rehenes, rituales o puntos de tránsito"],"encounter":"Posada, molino y entorno de la casa de guardia.","outcome":"Células locales dañadas pero no eliminadas.","canon_status":"Parte de los bloques individuales exactos no se conservaron; tratar valores como rango/reconstrucción."},
+{"enemy_id":"EN_ESPECTRO","name":"Espectro del Corazón Carmesí","type":"Aberración / no-muerto aparente","status":"Destruido","ac":"14","hp":"36","image":"https://drive.google.com/thumbnail?id=1k86lc6Xfp2z86in6cFsW4Ve8mRfTluHA&sz=w2000","desc":"Criatura encontrada en un camino secreto bajo el molino. Un núcleo carmesí ligado a la zona ritual sostenía su regeneración.","traits":["Resistencia necrótica","Regeneración 3 mientras el núcleo siga activo en la zona contaminada","Pulso Carmesí: recarga 5–6, CON CD 13, 2d6 necrótico, mitad en éxito"],"actions":["Garra +5 — 1d8+3 necrótico"],"encounter":"Ruinas/camino secreto del molino.","outcome":"Destruido.","canon_status":"[RECONSTRUIDO] para continuidad futura; no altera resultados jugados."},
+{"enemy_id":"EN_MNEMO","name":"Mnemófago","type":"Aberración del Shadowfell","status":"Destruido","ac":"14","hp":"45","image":"https://drive.google.com/thumbnail?id=1IhpnJtrJVlolqoX-e7SelHBj2_9goIyE&sz=w2000","desc":"Parásito psíquico de memoria capaz de utilizar recuerdos, deseo y familiaridad para fabricar apariencias convincentes. Su gema era un ancla física.","traits":["Resistencia psíquica y necrótica","Máscara de memoria / ilusión","Presión de memoria: salvación de SAB CD 13","Gema-ancla física"],"actions":["Latigazo Psíquico +5 — 2d6+4 psíquico"],"encounter":"Santuario inferior, usando la apariencia de la madre de Kazym.","outcome":"Destruido; gema rota en tres fragmentos.","canon_status":"[RECONSTRUIDO] para continuidad futura."},
+{"enemy_id":"EN_GUARDIAN","name":"Guardián alterado de seis dedos","type":"Humanoide alterado","status":"Vivo; contenido/protegido","ac":"14","hp":"38","image":"https://drive.google.com/thumbnail?id=1F76evgQsM5SNM7hRV_XzzzQD1fhobmLW&sz=w2000","desc":"Figura alargada con grapas de hierro, seis dedos y signos de coerción. Reconoce marcas y autoridad de acceso. No atacó cuando el grupo presentó una marca válida.","traits":["Reconocimiento de Marca","Condicionamiento o coerción implantada","Fuerza elevada"],"actions":["Golpe +6 — 1d10+4"],"encounter":"Puerta inferior de la casa de guardia.","outcome":"Vivo. Reclasificado por Custodia Interior como candidato a protección/contención y evaluación.","canon_status":"[RECONSTRUIDO]."},
+{"enemy_id":"EN_PORTAL","name":"Masa sombría de interferencia","type":"Aberración sombría","status":"Destruida","ac":"14","hp":"40","image":"https://drive.google.com/thumbnail?id=1cRKj0eLE3lAVcqhAxAoVl-AC87HUvZyH&sz=w2000","desc":"Masa oscura atada al dispositivo cultista que forzaba el destino del portal. No se confirmó que obedeciera al hombre de la máscara de hueso.","traits":["Resistencia necrótica","Tether al dispositivo: resistencia adicional o regeneración 5 mientras la interferencia siga instalada"],"actions":["Garra +5 — 2d6+3 necrótico/psíquico"],"encounter":"Control de Tránsito.","outcome":"Destruida tras desmontar el dispositivo.","canon_status":"[RECONSTRUIDO]. No se clasifica retroactivamente como demonio/infernal."}
+],
+"lore":[
+{"lore_id":"LORE_SHADAR","category":"Cultura","title":"Shadar-kai de Kazym","body":"La sociedad de origen de Kazym pertenece al Shadowfell y normaliza una obediencia dura, sufrimiento y ortodoxia. La madre de Kazym rompió con esa lectura. Kazym sigue siendo Shadar-kai y su identidad élfica importa mecánica y culturalmente, pero su ética se ha separado de aquello que considera una deformación cruel de su pueblo."},
+{"lore_id":"LORE_MOTHER_DOCTRINE","category":"Religión","title":"Doctrina compasiva de la madre","body":"La muerte tiene valor cuando forma parte del orden natural o de una elección significativa; la muerte tomada por crueldad, ambición o esclavización viola ese orden. La memoria debe conservar dignidad, no convertirse en prisión. La no-muerte forzada es profana. Justicia y ley civil no son equivalentes. La libertad de voluntad es una medida moral central."},
+{"lore_id":"LORE_RQ","category":"Religión","title":"La Reina Cuervo","body":"Kazym interpreta muchos símbolos —especialmente plumas negras, tránsito, memoria y muerte— a través de la Reina Cuervo. La campaña mantiene deliberadamente abierta la diferencia entre señal divina, memoria, intuición, deseo y coincidencia. Kazym puede tener razón o equivocarse."},
+{"lore_id":"LORE_CULT","category":"Organizaciones","title":"Agujas del Cuervo Roto","body":"Célula regional hostil vinculada a la red de Velka. Opera mediante agentes, documentos, máscaras, rutas, rituales, puntos de enlace y órdenes compartimentadas. No representa necesariamente la totalidad del poder de Velka."},
+{"lore_id":"LORE_VELKA","category":"Antagonistas","title":"Velka de los Hilos Cortados","body":"Nombre recurrente en órdenes y conversaciones enemigas. Se sabe que quiere a Kazym vivo y que el hombre de la máscara de hueso afirma que Velka también lo quiere muerto. La extensión real de su poder y el objetivo final de sus rituales siguen abiertos desde la perspectiva de Kazym."},
+{"lore_id":"LORE_BASE","category":"Lugares","title":"Antigua Casa de Guardia / Puesto de Enlace","body":"Instalación antigua anterior al uso reciente del culto. Combina funciones de refugio, custodia, mensajería, archivo de tránsito y control de rutas. Tras restaurar cinco funciones, reconoce a Kazym como custodio completo. Sus protocolos actuales fueron modificados con el principio rector 'proteger antes de destruir'."},
+{"lore_id":"LORE_ASH","category":"Rutas","title":"Camino de Ceniza","body":"Ruta registrada entre el Puesto de Enlace y Aguja Quebrada. Aparece en el registro de tránsito vinculado al rastro de la madre de Kazym. El retorno quedó registrado como 'NO DECLARADO'."},
+{"lore_id":"LORE_SPIRE","category":"Lugares","title":"Aguja Quebrada","body":"Destino registrado en el archivo de tránsito y sugerido por el mapa del pergamino de la madre. Es el próximo gran objetivo geográfico del rastro, pero el grupo aún no ha viajado hasta allí."},
+{"lore_id":"LORE_SANCT","category":"Lugares","title":"Santuario funerario antiguo","body":"Complejo ajeno a la célula cultista moderna. Sus pruebas se articulan alrededor de camino, memoria, regreso, voluntad y una relación no utilitaria con la muerte. Eiravel y la mujer de cabello blanco están vinculadas a este espacio, aunque sus naturalezas exactas permanecen sin resolver."}
+],
+"mysteries":[
+{"mystery_id":"M01","title":"Madre de Kazym","status":"Activo","progress":65,"known":"Ha dejado mensajes deliberados, un mapa, REGRESO y una ruta registrada hacia Aguja Quebrada. Sus rastros sugieren que no quiere que Kazym la siga por obligación.","suspicion":"Kazym cree que ella continúa actuando por elección propia y que necesita saber que él sobrevivió sin resentimiento.","evidence":["Pergamino con mensaje personal","Mapa al reverso","Dibujo de cuervo con un ala mayor","Registro PUESTO DE ENLACE → AGUJA QUEBRADA","Mensajes en santuario"],"questions":["¿Dónde está ahora?","¿Por qué Aguja Quebrada?","¿Qué relación exacta tiene con los cambios doctrinales que inspira?"]},
+{"mystery_id":"M02","title":"Plumas negras","status":"Parcialmente resuelto","progress":70,"known":"Aparecen repetidamente en momentos espirituales y de tránsito. Una pluma se fusionó con Kazym al despertar su arquetipo Fantasma.","suspicion":"Kazym las relaciona con su madre y/o con la Reina Cuervo, pero no puede probar qué parte es divina y qué parte es memoria o interpretación.","evidence":["Santuario","Despertar Fantasma","Eiravel","Escenas vinculadas a memoria y muerte"],"questions":["¿Son una señal externa real?","¿Por qué aparecen alrededor de decisiones de voluntad?"]},
+{"mystery_id":"M03","title":"Hombre de la máscara de hueso","status":"Abierto","progress":40,"known":"Fue visto por Pipik y Edran, apareció herido en Control de Tránsito y afirma que Velka también lo quiere muerto. Eiravel pidió que Kazym no lo mate antes de preguntar.","suspicion":"Puede ser un aliado circunstancial, rival o exmiembro de la red enemiga con información útil.","evidence":["Testimonio de Pipik","Testimonio de Edran","Aparición en portal","Advertencia de Eiravel","Frase sobre Velka"],"questions":["¿Quién es?","¿Por qué Velka lo quiere muerto?","¿Qué sabe de Aguja Quebrada y las rutas?"]},
+{"mystery_id":"M04","title":"Luna negra","status":"Amenaza futura","progress":15,"known":"Aparece en órdenes antiguas del culto: 'La luna negra se acerca'.","suspicion":"Podría corresponder a una alineación, fecha ritual o condición planar.","evidence":["Órdenes cultistas"],"questions":["¿Cuándo ocurre?","¿Qué permite?","¿Qué relación tiene con Kazym, su madre o el tránsito planar?"]},
+{"mystery_id":"M05","title":"REGRESO y CAMINO","status":"Parcialmente resuelto","progress":60,"known":"CAMINO abrió mecanismos del santuario; REGRESO abrió un cilindro de tránsito y volvió a la mano de Kazym. Ambas piezas parecen parte de una gramática ritual/tecnológica antigua.","suspicion":"Podrían ser llaves conceptuales de una red de tránsito vinculada a memoria, decisión y retorno.","evidence":["Mecanismo del santuario","Archivo de tránsito","Cilindro de Aguja Quebrada"],"questions":["¿Existe una tercera pieza equivalente?","¿Qué abre REGRESO fuera del archivo?","¿CAMINO sigue físicamente con Kazym?"]},
+{"mystery_id":"M06","title":"Guardián alterado de seis dedos","status":"Pendiente evaluación","progress":25,"known":"No atacó cuando se presentó una marca válida. Presenta alteraciones físicas y signos de coerción. Custodia Interior lo considera posible víctima y candidato a protección/contención.","suspicion":"Podría ser una persona transformada o condicionada para servir al puesto o a un ocupante posterior.","evidence":["Grapas de hierro","Seis dedos","Lenguaje de reconocimiento de marca"],"questions":["¿Puede recuperar voluntad?","¿Quién lo alteró?","¿Es seguro liberarlo?"]}
+],
+"items":[
+{"id":"ITEM_REGRESO","name":"REGRESO","type":"Llave / pieza ritual","status":"En posesión de Kazym","description":"Pieza de hueso oscuro entregada por la mujer de cabello blanco. Abrió el cilindro de tránsito en la Sala del Cuervo y volvió a la palma de Kazym.","links":"Madre · Santuario · Aguja Quebrada"},
+{"id":"ITEM_CAMINO","name":"CAMINO","type":"Llave / pieza ritual","status":"Estado físico exacto pendiente","description":"Pieza metálica oscura recuperada tras destruir al mnemófago. Encajó en el mecanismo 'camino — memoria — regreso' y abrió la siguiente sección del santuario.","links":"Mnemófago · Santuario"},
+{"id":"ITEM_PARCH","name":"Pergamino de la madre","type":"Mensaje / mapa","status":"En posesión de Kazym","description":"Mensaje personal que rechaza la idea de deuda entre madre e hijo. El reverso contiene río, elevación y una aguja rota.","links":"Madre · Aguja Quebrada"},
+{"id":"ITEM_TRANSIT","name":"Registro metálico de tránsito","type":"Documento / pista","status":"En posesión de Kazym","description":"ORIGEN: PUESTO DE ENLACE. DESTINO: AGUJA QUEBRADA. RUTA: CAMINO DE CENIZA. RETORNO: NO DECLARADO.","links":"Base · Aguja Quebrada · Camino de Ceniza"},
+{"id":"ITEM_GEMS","name":"Fragmentos de gema del mnemófago","type":"Restos de criatura / foco","status":"3 fragmentos en posesión de Kazym","description":"Restos del ancla física usada por el mnemófago para sostener su máscara y presencia.","links":"Mnemófago"},
+{"id":"ITEM_FEATHER","name":"Pluma negra","type":"Símbolo / pista","status":"En posesión de Kazym","description":"Pluma asociada a momentos de memoria, tránsito y espiritualidad. Su significado exacto permanece abierto.","links":"Reina Cuervo · Madre · Santuario"},
+{"id":"ITEM_COIN","name":"Moneda/llave negra","type":"Llave ritual","status":"Dejada en el santuario salvo recuperación posterior","description":"Llave vinculada originalmente a una caravana masacrada. Encajó en uno de los símbolos del santuario.","links":"Santuario"},
+{"id":"ITEM_MEDAL","name":"Medallón de hierro de las Agujas","type":"Marca / acceso","status":"Ubicación actual pendiente","description":"Marca recuperada en la posada. Permitió abrir la primera puerta del puesto y fue reconocida como autoridad de entrada, no de mando.","links":"Agujas · Base"},
+{"id":"ITEM_DEVICE","name":"Dispositivo cultista de interferencia","type":"Tecnología/ritual hostil","status":"Desmontado; pendiente estudio","description":"Pieza reciente con marcas de herramientas y cera negra que forzaba un destino externo en Control de Tránsito.","links":"Control de Tránsito · Hombre de máscara · Velka"}
+],
+"base":{
+"name":"Antigua Casa de Guardia / Puesto de Enlace",
+"faction":"Nombre formal pendiente",
+"purpose":"Proteger a los débiles de los injustos",
+"functions_restored":5,
+"functions_total":5,
+"integrity":"Superficie parcialmente dañada; la restauración mágica 5/5 no equivale a reparación física",
+"habitability":"Limitada pero utilizable",
+"security":"Custodia Interior operativa con protocolos contextuales",
+"messaging":"Sala del Cuervo y archivo de tránsito operativos",
+"renown":"Local y naciente",
+"map":"https://drive.google.com/thumbnail?id=1yyB-3H2p774C8lJEtl3yHKki5vbXmJhp&sz=w2000",
+"rooms":[
+{"name":"Propósito / Custodia inicial","status":"OPERATIVA","owner":"Kazym","desc":"Reconoce la misión del puesto y la autoridad del custodio."},
+{"name":"Sala de la Llama","status":"OPERATIVA","owner":"Sarrik","desc":"Sistema térmico purificado. Sarrik participa por elección propia."},
+{"name":"Sala del Cuervo","status":"OPERATIVA","owner":"Pipik / cuervo constructo","desc":"Mensajería, cilindros y archivo de rutas."},
+{"name":"Custodia Interior","status":"OPERATIVA","owner":"Kazym / delegados","desc":"Admitir, proteger-contener o rechazar; alerta silenciosa y juicio contextual."},
+{"name":"Control de Tránsito","status":"OPERATIVA","owner":"Kazym / grupo","desc":"Destino original a Aguja Quebrada recuperado."},
+{"name":"Torre exterior","status":"DAÑADA","owner":"—","desc":"Prioridad de reparación y vigilancia."},
+{"name":"Establo","status":"DAÑADO / UTILIZABLE","owner":"—","desc":"Requiere revisión y reparación."},
+{"name":"Edificio lateral","status":"DAÑADO","owner":"—","desc":"Techo colapsado; posible taller, alojamiento o archivo futuro."}
+],
+"phases":["Fase 0 — Núcleo informal: COMPLETA","Fase 1 — Base encontrada y asegurada: COMPLETA","Fase 2 — Habitabilidad y reparación: ACTIVA","Fase 3 — Legitimidad local y red de apoyo: INICIADA","Fase 4 — Red operativa, misiones y rotaciones: PENDIENTE","Fase 5 — Organización consolidada: PENDIENTE"],
+"protocols":["VOLUNTAD: dominado, engañado o coaccionado → proteger/contener; intención confirmada de esclavizar, profanar o someter → rechazar","NOMBRE: ocultar nombre no es culpa; ocultamiento + intención desconocida → retener/evaluar; ocultamiento + hostilidad confirmada → rechazar","RECUERDO: memorias extranjeras → admitir + alerta silenciosa; no intervención automática","CUERPO: cuerpo alterado → evaluar coerción, contaminación y voluntad; víctima → proteger/tratar; amenaza → contener; letal solo ante peligro inmediato y fallo de contención","SOMBRA: naturaleza desconocida → retener + alerta silenciosa; evaluar; amenaza → contener/rechazar; no hostil → proteger/admitir"],
+"members":["Kazym — custodio","Maera — inteligencia/infiltración","Tomás — rituales/curación","Pipik — miembro provisional, exploración/reparación","Sarrik — residente aliado libre","Bran — residente informal","Cuervo constructo — activo de mensajería","Edran — contacto protegido, no miembro"],
+"projects":["Reparar torre exterior","Acondicionar establo","Reparar edificio lateral","Crear taller de Pipik","Crear área médica/archivo para Tomás","Evaluar al guardián alterado","Cuantificar tesorería y suministros","Definir nombre y estructura formal de la facción"],
+"pending":["Tesorería exacta","Suministros exactos","Nombre formal de la facción","Roles formales de mando/delegación","Plan hacia Aguja Quebrada","Evaluación del dispositivo de interferencia"]
+},
+"rules":[
+{"rule_id":"R01","title":"Reglas base de PJ","source":"Player's Handbook 2014","status":"OFICIAL","body":"Clases, progresión, atributos, bonificador de competencia, combate, descansos y mecánicas de personaje se resuelven con D&D 5e 2014.","application":"No se sustituyen silenciosamente por reglas 2024."},
+{"rule_id":"R02","title":"Flanqueo","source":"Dungeon Master's Guide 2014, p. 251","status":"OPCIONAL ADOPTADA","body":"Cuando Kazym y un aliado flanquean correctamente a un objetivo, los ataques cuerpo a cuerpo correspondientes tienen ventaja. Los enemigos también pueden usar esta regla.","application":"Puede habilitar Ataque Furtivo y combina de manera fuerte con Precisión Élfica."},
+{"rule_id":"R03","title":"Precisión Élfica","source":"Xanathar's Guide to Everything","status":"OFICIAL","body":"Dote elegida por Kazym a nivel 4. Aumentó DES 17→18. Cuando tiene ventaja en un ataque con DES, INT, SAB o CAR puede repetir uno de los d20.","application":"En mesa se representa habitualmente como tirar tres d20 y conservar el resultado apropiado."},
+{"rule_id":"R04","title":"Pícaro Fantasma","source":"Tasha's Cauldron of Everything","status":"OFICIAL","body":"Kazym usa Susurros de los Muertos y Lamentos desde la Tumba según su nivel real.","application":"Lamentos: 2 usos por descanso largo en nivel 4."},
+{"rule_id":"R05","title":"Shadar-kai","source":"Mordenkainen Presents: Monsters of the Multiverse","status":"OFICIAL","body":"La versión racial canónica es MotM: resistencia necrótica, Trance, Keen Senses, Fey Ancestry y Bendición de la Reina Cuervo.","application":"Usos de Bendición = bonificador de competencia por descanso largo."},
+{"rule_id":"R06","title":"Agencia del jugador","source":"Protocolo de mesa","status":"ADAPTACIÓN","body":"El jugador controla solo a Kazym. El DM controla PNJ, enemigos, entorno, consecuencias e incertidumbre.","application":"Un plan discutido o evaluado no se ejecuta hasta que el jugador declara la acción."},
+{"rule_id":"R07","title":"Agencia de PNJ","source":"Protocolo de mesa","status":"ADAPTACIÓN","body":"Los aliados pueden discrepar, rechazar reclutamiento, cometer errores, herirse, irse, formar vínculos y perseguir objetivos fuera de cámara.","application":"No son extensiones automáticas de Kazym."},
+{"rule_id":"R08","title":"PX y progresión","source":"PHB 2014 + protocolo de campaña","status":"OFICIAL / ADAPTACIÓN","body":"El PX debe llevarse de forma rigurosa. Kazym tiene 3550 PX; nivel 5 requiere 6500, por lo que faltan 2950 PX.","application":"Aliados no escalan automáticamente al mismo nivel que Kazym."},
+{"rule_id":"R09","title":"Base y facción","source":"DMG 2014 + inspiración Bastions 2024","status":"ADAPTACIÓN","body":"Se usan ideas de bastiones, instalaciones, órdenes y proyectos como estructura de DM. No se reemplazan reglas de PJ 2014.","application":"Cada proyecto debe poder registrar responsable, costo, tiempo, estado y resultado."},
+{"rule_id":"R10","title":"Integridad de continuidad","source":"Protocolo interno","status":"ADAPTACIÓN","body":"Jerarquía ante conflictos: decisión explícita del usuario > ficha confirmada > resultado jugado > log previo > inferencia del DM.","application":"Datos no preservados deben marcarse [PENDIENTE] o [RECONSTRUIDO], nunca inventarse silenciosamente."},
+{"rule_id":"R11","title":"Intuición de Kazym","source":"Protocolo narrativo","status":"ADAPTACIÓN","body":"La intuición es central y puede ser significativa, pero no es infalible.","application":"Una sensación puede provenir de señal divina, memoria, deseo, sesgo o coincidencia."},
+{"rule_id":"R12","title":"Monstruos y fuentes","source":"MM 2014 + biblioteca de campaña","status":"PROTOCOLO DM","body":"Preferir criaturas inusuales apropiadas al entorno y tema. Se pueden usar fuentes oficiales y material compatible de terceros cuando ayude.","application":"Los bloques reconstruidos deben etiquetarse como tales."}
+],
+"checkpoint":{
+"title":"Checkpoint actual — Control de Tránsito",
+"location":"Cámara de Control de Tránsito, bajo la Antigua Casa de Guardia",
+"present":["Kazym","Maera","Tomás","Pipik"],
+"elsewhere":["Sarrik — Sala de la Llama","Edran — área de Escudo / descansando","Bran — superficie / torre","Cuervo constructo — Sala del Cuervo"],
+"state":["Base 5/5","Kazym reconocido como custodio","Ruta a Aguja Quebrada restaurada","Interferencia cultista destruida","Hombre de máscara desapareció del portal tras conversación"],
+"kazym":["Nivel 4","3550 PX","31/31 PG","Bendición de la Reina Cuervo 2/2","Lamentos desde la Tumba 2/2","Sin condiciones conocidas"],
+"last_line":"Última conclusión de Kazym: «Entonces sí podría tratarse de un aliado…»",
+"pending":["Evaluar al guardián alterado","Reunión con residentes / estructura de la facción","Descansar y reorganizar","Revisar mapas, registro y dispositivo desmontado","Comenzar reparaciones","Interrogar al cultista capturado","Planificar viaje a Aguja Quebrada","Buscar forma de volver a contactar al hombre de la máscara","Cualquier otra acción libre del jugador"]
+},
+"changelog":[
+{"version":"v0.1","date":"2026-09-07","change":"Se crea el prototipo del micrositio y el esquema inicial de base de datos."},
+{"version":"v0.2","date":"2026-09-07","change":"Se reemplaza la plantilla vertical por una hoja horizontal 16:9 y se recalibran overlays."},
+{"version":"v0.3","date":"2026-09-07","change":"La página deja de ser un resumen y pasa a funcionar como Campaign Bible exhaustiva: personajes, crónica, PNJ, bestiario, lore, misterios, objetos, base, reglas y checkpoint."}
+]
 };
 
+const TEMPLATE="1BL2HgMvFevmgfhcvYTF6rk6ZVU8VoNbi";
+const CFG={
+refresh:60000,
+tabs:[
+"assets",
+"characters",
+"character_stats",
+"character_saves",
+"character_skills",
+"character_proficiencies",
+"character_traits",
+"character_attacks",
+"character_equipment",
+"character_spells",
+"character_spell_slots",
+"relationships",
+"history",
+"history_rolls",
+"npcs",
+"bestiary",
+"enemy_traits",
+"base_overview",
+"base_rooms",
+"base_projects",
+"base_protocols",
+"faction_members",
+"lore",
+"mysteries",
+"items",
+"rules",
+"checkpoint",
+"changelog"
+]
+};
 
-const TABS = [
+let DATA=null,TIMER=null,ACTIVE=null;
 
-  "assets",
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+const norm=s=>String(s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim();
+const arr=v=>Array.isArray(v)?v:String(v||"").split(/\r?\n|;;|\s*\|\s*/).map(x=>x.trim()).filter(Boolean);
+const num=(v,d="")=>String(v??"").trim()!==""&&Number.isFinite(Number(String(v).replace(",",".")))?Number(String(v).replace(",",".")):d;
+const drive=id=>id?`https://drive.google.com/thumbnail?id=${encodeURIComponent(id)}&sz=w2000`:"";
 
-  "characters",
-  "character_stats",
-  "character_skills",
-  "character_traits",
-  "character_attacks",
-  "character_equipment",
-  "character_spells",
-  "relationships",
-
-  "history",
-  "history_rolls",
-
-  "npcs",
-
-  "bestiary",
-  "enemy_traits",
-
-  "base_overview",
-  "base_rooms",
-  "base_projects",
-  "base_protocols",
-  "faction_members",
-
-  "lore",
-  "mysteries",
-  "items",
-  "rules",
-  "checkpoint",
-  "changelog"
-
-];
-
-
-const FALLBACK = {
-
-characters:[
-
-{
-id:"PC_KAZYM",
-name:"Kazym Garnithor",
-kind:"PJ",
-role:"Custodio / líder táctico",
-race:"Shadar-kai",
-class:"Pícaro",
-subclass:"Fantasma",
-level:4,
-xp:3550,
-background:"Viajero",
-alignment:"Caótico Bueno",
-portrait:KNOWN_ASSETS.kazym,
-
-short:
-"Shadar-kai que ha seguido durante siglos el rastro de su madre y acaba de reclamar una antigua casa de guardia como refugio y puesto de enlace.",
-
-history:
-"Su madre rechazó una ortodoxia cruel Shadar-kai y sostuvo una lectura compasiva de la Reina Cuervo. Kazym la siguió durante siglos, no para exigir una explicación sino para liberarla de culpa y decirle que eligió continuar por voluntad propia.",
-
-appearance:
-"Piel gris ceniza, cabello negro semiondulado, ojos castaño rojizos, cicatriz en el labio; elegante, sobrio y peligroso.",
-
-personality:
-"Intuitivo, sigiloso, protector con víctimas y hostil con quienes buscan esclavizar o utilizar a otros. Su intuición importa, pero no es infalible.",
-
-state:
-"31/31 PG · base 5/5 · Control de Tránsito restaurado.",
-
-stats:{
-str:13,
-dex:18,
-con:15,
-int:10,
-wis:12,
-cha:8,
-ac:15,
-hp_current:31,
-hp_max:31,
-initiative:4,
-speed:30,
-pb:2,
-hit_dice:"4d8"
-},
-
-skills:[
-{
-name:"Sigilo",
-bonus:"+8",
-ability:"DES"
-},
-{
-name:"Percepción",
-bonus:"+3",
-ability:"SAB"
-},
-{
-name:"Investigación",
-bonus:"+2",
-ability:"INT"
-},
-{
-name:"Engaño",
-bonus:"+1",
-ability:"CAR"
-},
-{
-name:"Herramientas de ladrón",
-bonus:"+8",
-ability:"DES"
+function sheetId(){
+let u=new URLSearchParams(location.search).get("sheet")||"";
+let l=localStorage.getItem("kazym_sheet_id")||"";
+return(u||l).trim().replace(/^.*\/spreadsheets\/d\//,"").replace(/\/.*$/,"")
 }
-],
 
-traits:[
-"Bendición de la Reina Cuervo",
+function csv(t){
+let R=[],r=[],c="",q=false;
+for(let i=0;i<t.length;i++){
+let x=t[i],n=t[i+1];
+if(x=='"'&&q&&n=='"'){c+='"';i++;continue}
+if(x=='"'){q=!q;continue}
+if(x==","&&!q){r.push(c);c="";continue}
+if((x=="\n"||x=="\r")&&!q){
+if(x=="\r"&&n=="\n")i++;
+r.push(c);
+if(r.some(v=>v.trim()))R.push(r);
+r=[];
+c="";
+continue
+}
+c+=x
+}
+r.push(c);
+if(r.some(v=>v.trim()))R.push(r);
+if(!R.length)return[];
+let h=R[0].map(x=>x.trim());
+return R.slice(1).map(a=>Object.fromEntries(h.map((x,i)=>[x,a[i]??""])))
+}
+
+async function tab(name){
+let id=sheetId();
+if(!id)throw Error("sin sheet");
+let r=await fetch(`https://docs.google.com/spreadsheets/d/${id}/gviz/tq?tqx=out:csv&headers=1&sheet=${encodeURIComponent(name)}&_=${Date.now()}`,{cache:"no-store"});
+if(!r.ok)throw Error(name+":"+r.status);
+let t=await r.text();
+if(/<html|<!doctype/i.test(t))throw Error(name+":privado/inexistente");
+return csv(t).filter(x=>!["dm","secret","secreto","private","privado"].includes(norm(x.visibility||x.scope||"both")))
+}
+
+function group(rows,key){
+let m=new Map;
+(rows||[]).forEach(r=>{
+let k=r[key]||"";
+if(!m.has(k))m.set(k,[]);
+m.get(k).push(r)
+});
+return m
+}
+
+function first(rows,key){
+let m=new Map;
+(rows||[]).forEach(r=>{
+let k=r[key]||"";
+if(k&&!m.has(k))m.set(k,r)
+});
+return m
+}
+
+function asset(v,A){
+v=String(v||"").trim();
+if(!v)return"";
+if(/^https?:/.test(v))return v;
+if(/^[\w-]{20,}$/.test(v))return drive(v);
+let a=A.get(v);
+return a?drive(a.drive_file_id||a.id):v
+}
+
+function mergeName(live,base){
+let m=new Map;
+[...(base||[]),...(live||[])].forEach(x=>{
+let k=norm(typeof x==="string"?x:(x.name||x.title||x.item||x.skill||""));
+if(k)m.set(k,x)
+});
+return[...m.values()]
+}
+
+function longer(a,b){
+a=String(a||"").trim();
+b=String(b||"").trim();
+return a.length>=b.length?a:b
+}
+
+function build(T){
+let A=new Map((T.assets||[]).map(x=>[x.asset_id,x]));
+let st=first(T.character_stats,"character_id");
+let sv=group(T.character_saves,"character_id");
+let sk=group(T.character_skills,"character_id");
+let pf=group(T.character_proficiencies,"character_id");
+let tr=group(T.character_traits,"character_id");
+let at=group(T.character_attacks,"character_id");
+let eq=group(T.character_equipment,"character_id");
+let sp=group(T.character_spells,"character_id");
+let rel=group(T.relationships,"subject_id");
+
+let chars=(T.characters||[]).map(c=>{
+let id=c.character_id;
+let s=st.get(id)||{};
+let base=DEMO_DATA.characters.find(x=>x.character_id===id)||{};
+
+let live={
+...c,
+character_id:id,
+name:c.name,
+kind:c.kind||c.type,
+role:c.role,
+race:c.race||c.species,
+class:c.class,
+subclass:c.subclass,
+level:num(c.level),
+xp:num(c.xp),
+alignment:c.alignment,
+background:c.background,
+portrait:asset(c.portrait_asset_id||c.portrait_drive_id||c.portrait,A),
+short:c.short_description||c.description,
+history:c.public_history||c.history,
+appearance:c.appearance,
+personality:c.personality,
+state:c.current_state||c.status,
+stats:{
+str:num(s.str),
+dex:num(s.dex),
+con:num(s.con),
+int:num(s.int),
+wis:num(s.wis),
+cha:num(s.cha),
+ac:num(s.ac),
+hp_current:num(s.hp_current),
+hp_max:num(s.hp_max),
+initiative:num(s.initiative),
+speed:num(s.speed_ft||s.speed),
+pb:num(s.proficiency_bonus||s.pb),
+hit_dice:s.hit_dice,
+passive_perception:num(s.passive_perception)
+},
+saves:Object.fromEntries((sv.get(id)||[]).map(x=>[x.ability||x.save||x.name,x.bonus||x.value])),
+skills:(sk.get(id)||[]).map(x=>({
+name:x.name||x.skill,
+bonus:x.bonus||x.value,
+ability:x.ability,
+description:x.description,
+technical_details:x.technical_details,
+source:x.source
+})),
+proficiencies:(pf.get(id)||[]).map(x=>x.name||x.proficiency).filter(Boolean),
+languages:(pf.get(id)||[]).filter(x=>/idioma|language/i.test(x.category||"")).map(x=>x.name||x.proficiency),
+traits:(tr.get(id)||[]).map(x=>({
+name:x.name,
+category:x.category||x.trait_type,
+description:x.description||x.summary,
+technical_details:x.technical_details,
+source:x.source||x.source_book,
+action_type:x.action_type,
+range:x.range,
+duration:x.duration,
+uses:x.uses||x.uses_current,
+recharge:x.recharge
+})),
+attacks:(at.get(id)||[]).map(x=>({
+name:x.name||x.attack,
+attack_bonus:x.attack_bonus||x.bonus,
+damage:x.damage,
+damage_type:x.damage_type||x.type,
+range:x.range,
+properties:x.properties||x.notes,
+description:x.description,
+source:x.source
+})),
+equipment:(eq.get(id)||[]).map(x=>({
+name:x.name||x.item,
+type:x.type,
+description:x.description||x.notes,
+technical_details:x.technical_details||x.mechanics,
+status:x.status,
+source:x.source,
+quantity:x.quantity
+})),
+spells:(sp.get(id)||[]).map(x=>({
+name:x.name||x.spell_name,
+level:x.level,
+description:x.description||x.rules_text,
+action_type:x.action_type,
+range:x.range,
+duration:x.duration,
+concentration:x.concentration,
+source:x.source||x.source_book
+})),
+relationships:(rel.get(id)||[]).map(x=>`${x.object_name||x.object_id}${x.public_summary?": "+x.public_summary:""}`),
+pending:arr(c.pending||c.continuity_pending),
+passives:[],
+resources:[]
+};
+
+if(!base.character_id)return live;
+
+let o={
+...base,
+...live,
+stats:{...(base.stats||{}),...(live.stats||{})},
+saves:Object.keys(live.saves).length?{...(base.saves||{}),...live.saves}:base.saves
+};
+
+["skills","traits","attacks","equipment","spells","relationships","proficiencies","languages"].forEach(k=>{
+let b=k==="skills"?Object.entries(base.skills||{}).map(([name,bonus])=>({name,bonus})):base[k]||[];
+o[k]=mergeName(live[k],b)
+});
+
+["history","appearance","personality","state","short"].forEach(k=>{
+o[k]=longer(live[k],base[k])
+});
+
+["passives","resources","pending"].forEach(k=>{
+o[k]=live[k]?.length?mergeName(live[k],base[k]||[]):base[k]||[]
+});
+
+return o
+});
+
+let ids=new Set(chars.map(x=>x.character_id));
+DEMO_DATA.characters.forEach(x=>{
+if(!ids.has(x.character_id))chars.push(x)
+});
+
+let hist=(T.history||[]).map((x,i)=>({
+chapter_id:x.chapter_id,
+order:num(x.sort_order,i+1),
+title:x.title,
+summary:x.summary,
+full_text:x.full_text||x.detailed_text,
+events:arr(x.events),
+decisions:arr(x.decisions||x.decision_summary),
+loot:arr(x.loot||x.clues),
+consequences:arr(x.consequences),
+quotes:arr(x.quotes),
+image:asset(x.image_asset_id||x.image_drive_id||x.image,A)
+}));
+
+let hm=new Map(DEMO_DATA.history.map(x=>[x.chapter_id||norm(x.title),x]));
+
+hist.forEach(x=>{
+let k=x.chapter_id||norm(x.title);
+let b=hm.get(k)||{};
+hm.set(k,{
+...b,
+...x,
+full_text:longer(x.full_text,b.full_text),
+events:mergeName(x.events,b.events),
+decisions:mergeName(x.decisions,b.decisions),
+loot:mergeName(x.loot,b.loot),
+consequences:mergeName(x.consequences,b.consequences),
+quotes:mergeName(x.quotes,b.quotes)
+})
+});
+
+hist=[...hm.values()].sort((a,b)=>(a.order||999)-(b.order||999));
+
+return{
+characters:chars,
+history:hist,
+npcs:(T.npcs||[]).length?T.npcs:DEMO_DATA.npcs,
+bestiary:(T.bestiary||[]).length?(T.bestiary||[]).map(x=>({...x,image:asset(x.image_asset_id||x.image,A)})):DEMO_DATA.bestiary,
+lore:(T.lore||[]).length?T.lore:DEMO_DATA.lore,
+mysteries:(T.mysteries||[]).length?T.mysteries.map(x=>({...x,progress:num(x.progress_pct||x.progress,0),evidence:arr(x.evidence),questions:arr(x.questions||x.open_questions)})):DEMO_DATA.mysteries,
+items:(T.items||[]).length?T.items:DEMO_DATA.items,
+rules:(T.rules||[]).length?T.rules:DEMO_DATA.rules,
+base:(T.base_overview||[]).length?{
+...DEMO_DATA.base,
+...(T.base_overview[0]||{}),
+rooms:(T.base_rooms||[]).length?T.base_rooms.map(r=>({
+name:r.name,
+status:r.status,
+owner:r.owner_id||r.owner,
+desc:r.description||r.function
+})):DEMO_DATA.base.rooms
+}:DEMO_DATA.base,
+checkpoint:(T.checkpoint||[])[0]||DEMO_DATA.checkpoint,
+changelog:(T.changelog||[]).length?T.changelog:DEMO_DATA.changelog
+}
+}
+
+async function load(){
+if(!sheetId())return DEMO_DATA;
+setMode("Conectando…");
+let T={};
+await Promise.all(CFG.tabs.map(async x=>{
+try{T[x]=await tab(x)}
+catch(e){T[x]=[]}
+}));
+return build(T)
+}
+
+const TRAITS={
+PC_KAZYM:{
+species:[
+"Visión en la oscuridad 60 pies",
+"Fey Ancestry",
+"Keen Senses",
+"Resistencia necrótica",
+"Trance",
+"Bendición de la Reina Cuervo"
+],
+class:[
 "Ataque Furtivo 2d6",
+"Pericia",
+"Jerga de ladrones",
 "Acción Astuta",
 "Susurros de los Muertos",
-"Lamentos desde la Tumba",
-"Precisión Élfica",
-"Fey Ancestry",
-"Resistencia necrótica",
-"Trance"
+"Lamentos desde la Tumba"
 ],
-
-attacks:[
-"Espada corta dentada +6 — 1d6+4 perforante",
-"Daga dentada +6 — 1d4+4 perforante",
-"Arco corto +6 — 1d6+4 perforante",
-"Ballesta ligera +6 — 1d8+4 perforante"
-],
-
-equipment:[
-"Espada corta dentada",
-"2 dagas dentadas",
-"Arco corto y flechas",
-"Ballesta ligera",
-"Herramientas de ladrón",
-"Armadura de cuero",
-"Agua bendita",
-"Pergamino de su madre",
-"REGRESO",
-"CAMINO [estado pendiente]",
-"3 fragmentos de gema del mnemófago",
-"Pluma negra",
-"Registro de tránsito a Aguja Quebrada"
-]
-
+other:["Precisión Élfica"]
 },
-
-
-{
-id:"ALLY_MAERA",
-name:"Maera Voss",
-kind:"Aliada",
-role:"Inteligencia / infiltración",
-race:"Humana",
-class:"Pícara",
-subclass:"Mente Maestra",
-level:3,
-portrait:KNOWN_ASSETS.maera,
-
-short:
-"Ex agente de las Agujas del Cuervo Roto convertida en una de las aliadas más confiables de Kazym.",
-
-state:
-"Activa · presente en Control de Tránsito",
-
-stats:{
-str:9,
-dex:16,
-con:13,
-int:14,
-wis:12,
-cha:15,
-ac:15,
-hp_current:21,
-hp_max:21,
-initiative:3,
-speed:30,
-pb:2,
-hit_dice:"3d8"
-},
-
-skills:[
-{
-name:"Engaño",
-bonus:"+6",
-ability:"CAR"
-},
-{
-name:"Perspicacia",
-bonus:"+5",
-ability:"SAB"
-},
-{
-name:"Investigación",
-bonus:"+4",
-ability:"INT"
-},
-{
-name:"Percepción",
-bonus:"+3",
-ability:"SAB"
-},
-{
-name:"Persuasión",
-bonus:"+4",
-ability:"CAR"
-},
-{
-name:"Sigilo",
-bonus:"+5",
-ability:"DES"
-}
-],
-
-traits:[
+ALLY_MAERA:{
+species:["Humana"],
+class:[
 "Ataque Furtivo 2d6",
+"Pericia: Engaño y Perspicacia",
+"Jerga de ladrones",
 "Acción Astuta",
 "Master of Intrigue",
 "Master of Tactics"
 ],
-
-attacks:[
-"Espada corta +5 — 1d6+3 perforante",
-"Daga +5 — 1d4+3 perforante",
-"Arco corto +5 — 1d6+3 perforante"
-],
-
-equipment:[
-"Cuero tachonado",
-"Espada corta",
-"Daga",
-"Arco corto",
-"Herramientas de ladrón",
-"Kit de disfraz",
-"Kit de falsificación"
-]
-
+other:[]
 },
-
-
-{
-id:"ALLY_TOMAS",
-name:"Tomás",
-kind:"Aliado",
-role:"Rituales / curación",
-race:"Humano",
-class:"Clérigo",
-subclass:"Dominio de la Tumba",
-level:2,
-portrait:KNOWN_ASSETS.tomas,
-
-short:
-"Clérigo muy joven, estudioso y honesto respecto de los límites de su conocimiento.",
-
-state:
-"Activo · presente en Control de Tránsito",
-
-stats:{
-str:8,
-dex:12,
-con:13,
-int:15,
-wis:16,
-cha:10,
-ac:15,
-hp_current:15,
-hp_max:15,
-initiative:1,
-speed:30,
-pb:2,
-hit_dice:"2d8"
-},
-
-skills:[
-{
-name:"Religión",
-bonus:"+4",
-ability:"INT"
-},
-{
-name:"Medicina",
-bonus:"+5",
-ability:"SAB"
-},
-{
-name:"Perspicacia",
-bonus:"+5",
-ability:"SAB"
-},
-{
-name:"Investigación",
-bonus:"+4",
-ability:"INT"
-}
-],
-
-traits:[
+ALLY_TOMAS:{
+species:["Humano"],
+class:[
+"Lanzamiento de conjuros de clérigo",
+"Dominio de la Tumba",
 "Circle of Mortality",
 "Eyes of the Grave",
-"Path to the Grave"
+"Channel Divinity: Path to the Grave"
 ],
-
-spells:[
-"Guidance",
-"Sacred Flame",
-"Thaumaturgy",
-"Spare the Dying",
-"Cure Wounds",
-"Healing Word",
-"Detect Magic",
-"Sanctuary",
-"Protection from Evil and Good",
-"Bane",
-"False Life"
-],
-
-equipment:[
-"Símbolo sagrado",
-"Libro / diario",
-"Vendas",
-"Útiles de escritura"
-]
-
+other:[]
 },
-
-
-{
-id:"ALLY_PIPIK",
-name:"Pipik",
-kind:"Aliado",
-role:"Exploración / ingeniería",
-race:"Kobold",
-class:"Ranger",
-level:2,
-portrait:KNOWN_ASSETS.pipik,
-
-short:
-"Kobold explorador que busca rutas y un lugar seguro para su gente.",
-
-state:
-"Miembro provisional · presente en Control de Tránsito",
-
-stats:{
-str:7,
-dex:16,
-con:14,
-int:13,
-wis:15,
-cha:10,
-ac:15,
-hp_current:20,
-hp_max:20,
-initiative:3,
-speed:30,
-pb:2,
-hit_dice:"2d10"
-},
-
-skills:[
-{
-name:"Supervivencia",
-bonus:"+6",
-ability:"SAB"
-},
-{
-name:"Percepción",
-bonus:"+4",
-ability:"SAB"
-},
-{
-name:"Investigación",
-bonus:"+3",
-ability:"INT"
-},
-{
-name:"Sigilo",
-bonus:"+5",
-ability:"DES"
-}
-],
-
-traits:[
+ALLY_PIPIK:{
+species:[
+"Visión en la oscuridad 60 pies",
 "Draconic Cry",
-"Craftiness",
+"Kobold Legacy: Craftiness"
+],
+class:[
 "Favored Foe",
-"Canny",
-"Archery"
+"Deft Explorer: Canny",
+"Fighting Style: Archery",
+"Lanzamiento de conjuros de Ranger"
 ],
-
-spells:[
-"Goodberry",
-"Hunter's Mark"
-],
-
-attacks:[
-"Ballesta pequeña +7 — 1d6+3 perforante",
-"Daga +5 — 1d4+3 perforante"
-],
-
-equipment:[
-"Ballesta pequeña",
-"Virotes",
-"Daga",
-"Herramientas de ladrón",
-"Kit de reparación / trampas"
-]
-
+other:[]
 },
-
-
-{
-id:"ALLY_SARRIK",
-name:"Sarrik",
-kind:"Residente",
-role:"Sistemas térmicos",
-race:"Elemental menor",
-class:"—",
-portrait:KNOWN_ASSETS.sarrik,
-
-short:
-"Criatura liberada de un mecanismo del culto que eligió quedarse en la base por voluntad propia.",
-
-state:
-"Libre · Sala de la Llama",
-
-stats:{
-str:10,
-dex:14,
-con:14,
-int:8,
-wis:12,
-cha:10,
-ac:14,
-hp_current:22,
-hp_max:22,
-initiative:2,
-speed:30,
-pb:2,
-hit_dice:"5d6"
-},
-
-traits:[
+ALLY_SARRIK:{
+species:[
+"Visión en la oscuridad 60 pies",
 "Inmunidad al fuego",
 "Resistencia necrótica",
-"Sentir Fuego",
-"Guardián del Hogar"
+"Cuerpo de Ascua",
+"Sentir Fuego"
 ],
-
-attacks:[
-"Garra +4 — 1d6+2 cortante + 1d4 fuego",
-"Ascua +4 — 1d6+2 fuego"
-]
-
+class:[],
+other:["Guardián del Hogar"]
 },
-
-
-{
-id:"ALLY_BRAN",
-name:"Bran",
-kind:"Residente",
-role:"Cuervo / observador",
-race:"Cuervo",
-class:"—",
-portrait:KNOWN_ASSETS.bran,
-
-short:
-"Cuervo grande y observador que ya vivía en la casa de guardia.",
-
-state:
-"Libre · superficie / torre",
-
-stats:{
-str:2,
-dex:14,
-con:8,
-int:2,
-wis:12,
-cha:6,
-ac:12,
-hp_current:1,
-hp_max:1,
-initiative:2,
-speed:10,
-pb:2,
-hit_dice:"1d4"
+ALLY_BRAN:{
+species:["Vuelo 50 pies","Mimicry"],
+class:[],
+other:[]
 },
-
-skills:[
-{
-name:"Percepción",
-bonus:"+3",
-ability:"SAB"
-}
+ALLY_RAVEN_CONSTRUCT:{
+species:[
+"Constructo",
+"Visión en la oscuridad 60 pies",
+"Vuelo 40 pies"
 ],
-
-traits:[
-"Vuelo 50 pies",
-"Mimicry"
-],
-
-attacks:[
-"Pico +4 — 1 perforante"
-],
-
-equipment:[
-"Anilla de bronce marcada BRAN"
-]
-
-}
-
-],
-
-
-history:[
-
-[
-1,
-"La posada cubierta de ceniza",
-"Kazym desactiva una alarma, elimina guardias, reduce a Maera sin matarla, salva rehenes y derrota a un Heraldo. Gana 600 PX."
-],
-
-[
-2,
-"El pueblo y la capilla",
-"Tras un descanso seguro sube a nivel 2. La sacerdotisa reconoce principios vinculados a la doctrina de su madre y Tomás se une al grupo."
-],
-
-[
-3,
-"El molino, el ritual y las ruinas",
-"El grupo interrumpe un ritual, rescata a una prisionera, captura a un cultista y descubre que enfrenta una red de células. Kazym llega a Pícaro 3 Fantasma."
-],
-
-[
-4,
-"El granero y el santuario antiguo",
-"Kazym descubre un santuario funerario anterior al culto, conoce a Eiravel y responde pruebas sobre muerte, memoria y voluntad."
-],
-
-[
-5,
-"El mnemófago y la falsa madre",
-"Una aberración usa la memoria de Kazym para adoptar la apariencia de su madre. El grupo identifica y destruye su gema-ancla."
-],
-
-[
-6,
-"La mujer de cabello blanco y el mensaje",
-"Kazym recibe REGRESO, un pergamino y un mapa. El mensaje de su madre insiste en que la siga solo por elección. Kazym llega a nivel 4."
-],
-
-[
-7,
-"Fundación de la base",
-"La sacerdotisa ofrece una antigua casa de guardia. Kazym conoce a Bran y a Pipik y propone convertir el lugar en refugio y facción protectora."
-],
-
-[
-8,
-"El guardián y la reclamación provisional",
-"Bajo la base aparece un antiguo puesto de enlace. Kazym declara que debe proteger a los débiles de los injustos y recibe custodia provisional."
-],
-
-[
-9,
-"Sala de la Llama",
-"Kazym, Tomás y Pipik liberan a Sarrik de una restricción y de fuego corrupto. Sarrik decide quedarse voluntariamente."
-],
-
-[
-10,
-"Sala del Cuervo y Archivo de Tránsito",
-"Se repara un cuervo constructo y aparece un registro: PUESTO DE ENLACE → AGUJA QUEBRADA / CAMINO DE CENIZA."
-],
-
-[
-11,
-"Custodia Interior",
-"Kazym reprograma protocolos para evaluar coerción, intención y peligro. Principio rector: proteger antes de destruir."
-],
-
-[
-12,
-"Control de Tránsito",
-"El grupo destruye una interferencia cultista, restaura Aguja Quebrada como destino y completa la reclamación 5/5. El hombre de la máscara de hueso revela que Velka también lo quiere muerto."
-]
-
-].map(x=>({
-
-order:x[0],
-
-title:x[1],
-
-summary:x[2],
-
-full_text:x[2],
-
-events:[],
-
-decisions:[],
-
-loot:[],
-
-consequences:[],
-
-rolls:[]
-
-})),
-
-
-npcs:[
-
-{
-name:"Edran",
-role:"Agrimensor / contacto",
-status:"Vivo; recuperándose",
-known:
-"Vio cultistas cerca de la casa de guardia y oyó que Velka quiere a Kazym vivo."
-},
-
-{
-name:"Sacerdotisa anciana",
-role:"Maestra de Tomás",
-status:"Aliada local",
-known:
-"Reconoció elementos doctrinales vinculados a la madre de Kazym y cedió la casa de guardia para proteger la región."
-},
-
-{
-name:"Eiravel",
-role:"Figura del espejo",
-status:"Identidad no resuelta",
-known:
-"Advirtió a Kazym que no mate al hombre de la máscara de hueso antes de preguntar."
-},
-
-{
-name:"Madre de Kazym",
-role:"Objetivo central",
-status:"Paradero desconocido",
-known:
-"Dejó mensajes, REGRESO, un mapa y una ruta hacia Aguja Quebrada."
-},
-
-{
-name:"Hombre de la máscara de hueso",
-role:"Posible aliado / rival",
-status:"Vivo",
-known:
-"Afirma que Velka también lo quiere muerto. No es aliado confirmado."
-}
-
-],
-
-
-bestiary:[
-
-{
-name:"Agentes de las Agujas",
-type:"Humanoides",
-status:"Células dañadas",
-desc:"Agentes regionales vinculados a la red de Velka.",
-image:KNOWN_ASSETS.cultistas
-},
-
-{
-name:"Espectro del Corazón Carmesí",
-type:"Aberración / no-muerto aparente",
-status:"Destruido",
-desc:"Criatura ritual con núcleo carmesí y regeneración vinculada a la zona contaminada.",
-image:KNOWN_ASSETS.espectro
-},
-
-{
-name:"Mnemófago",
-type:"Aberración del Shadowfell",
-status:"Destruido",
-desc:"Parásito de memoria que utilizó la apariencia de la madre de Kazym.",
-image:KNOWN_ASSETS.santuario
-},
-
-{
-name:"Masa sombría de interferencia",
-type:"Aberración sombría",
-status:"Destruida",
-desc:"Entidad vinculada al dispositivo cultista en Control de Tránsito.",
-image:KNOWN_ASSETS.guardian
-}
-
-],
-
-
-lore:[
-
-{
-category:"Religión",
-title:"Doctrina de la madre",
-body:
-"La muerte debe tener sentido; la memoria debe conservar dignidad; la no-muerte forzada y la coerción son profanas. Justicia y ley civil no son equivalentes."
-},
-
-{
-category:"Organizaciones",
-title:"Agujas del Cuervo Roto",
-body:
-"Célula regional hostil vinculada a Velka. Opera con agentes, documentos, rutas y rituales compartimentados."
-},
-
-{
-category:"Lugares",
-title:"Puesto de Enlace",
-body:
-"Instalación antigua de refugio, custodia, mensajería y tránsito. Reconoce a Kazym como custodio completo."
-},
-
-{
-category:"Rutas",
-title:"Camino de Ceniza",
-body:
-"Ruta registrada desde el Puesto de Enlace hacia Aguja Quebrada."
-}
-
-],
-
-
-mysteries:[
-
-{
-title:"Madre de Kazym",
-status:"Activo",
-progress:65,
-known:
-"Dejó una ruta deliberada hacia Aguja Quebrada.",
-questions:[
-"¿Dónde está ahora?",
-"¿Por qué Aguja Quebrada?"
-]
-},
-
-{
-title:"Hombre de la máscara de hueso",
-status:"Abierto",
-progress:40,
-known:
-"Velka también lo quiere muerto.",
-questions:[
-"¿Quién es?",
-"¿Qué sabe de la red de tránsito?"
-]
-},
-
-{
-title:"REGRESO y CAMINO",
-status:"Parcial",
-progress:60,
-known:
-"Funcionan como llaves conceptuales en sistemas antiguos.",
-questions:[
-"¿Qué otras funciones tienen?"
+class:[],
+other:[
+"Nodo de mensajes",
+"Memoria parcial de rutas"
 ]
 }
-
-],
-
-
-items:[
-
-{
-name:"REGRESO",
-type:"Llave ritual",
-status:"Con Kazym",
-description:
-"Pieza de hueso oscuro entregada por la mujer de cabello blanco.",
-technical_details:
-"Abrió el cilindro de tránsito y volvió a la palma de Kazym. Mecánica completa aún no determinada.",
-source:"Objeto de campaña"
-},
-
-{
-name:"CAMINO",
-type:"Llave ritual",
-status:"Estado físico pendiente",
-description:
-"Pieza metálica recuperada tras el mnemófago.",
-technical_details:
-"Encajó en el mecanismo camino–memoria–regreso y abrió la siguiente sección del santuario.",
-source:"Objeto de campaña"
-},
-
-{
-name:"Pergamino de la madre",
-type:"Documento",
-status:"Con Kazym",
-description:
-"Mensaje personal y mapa al reverso.",
-technical_details:
-"Sin bonificador numérico confirmado; es una pista geográfica y emocional.",
-source:"Handout de campaña"
-},
-
-{
-name:"Registro de tránsito",
-type:"Documento / pista",
-status:"Con Kazym",
-description:
-"ORIGEN PUESTO DE ENLACE · DESTINO AGUJA QUEBRADA · RUTA CAMINO DE CENIZA · RETORNO NO DECLARADO.",
-source:"Archivo del Puesto de Enlace"
-}
-
-],
-
-
-rules:[
-
-{
-title:"Reglas base",
-status:"OFICIAL",
-source:"Player's Handbook 2014",
-body:
-"Personajes y combate usan D&D 5e 2014."
-},
-
-{
-title:"Flanqueo",
-status:"OPCIONAL ADOPTADA",
-source:"DMG 2014 p.251",
-body:
-"Flanqueo válido concede ventaja a ataques cuerpo a cuerpo; enemigos también pueden usarlo."
-},
-
-{
-title:"Agencia",
-status:"PROTOCOLO",
-source:"Mesa",
-body:
-"El jugador controla solo a Kazym. Los PNJ mantienen agencia propia y un plan discutido no se ejecuta hasta ser declarado."
-}
-
-],
-
-
-base:{
-
-name:
-"Antigua Casa de Guardia / Puesto de Enlace",
-
-purpose:
-"Proteger a los débiles de los injustos",
-
-functions_restored:5,
-
-functions_total:5,
-
-map:KNOWN_ASSETS.base,
-
-rooms:[
-
-{
-name:"Sala de la Llama",
-status:"OPERATIVA",
-owner:"Sarrik",
-desc:
-"Sistema térmico purificado."
-},
-
-{
-name:"Sala del Cuervo",
-status:"OPERATIVA",
-owner:"Pipik / constructo",
-desc:
-"Mensajería y archivo de rutas."
-},
-
-{
-name:"Custodia Interior",
-status:"OPERATIVA",
-owner:"Kazym",
-desc:
-"Protocolos contextuales."
-},
-
-{
-name:"Control de Tránsito",
-status:"OPERATIVA",
-owner:"Kazym",
-desc:
-"Ruta a Aguja Quebrada restaurada."
-}
-
-]
-
-},
-
-
-checkpoint:{
-
-title:
-"Checkpoint actual",
-
-location:
-"Control de Tránsito, bajo la base",
-
-present:[
-"Kazym",
-"Maera",
-"Tomás",
-"Pipik"
-],
-
-state:[
-"Base 5/5",
-"Kazym custodio completo",
-"Ruta a Aguja Quebrada restaurada",
-"Interferencia cultista destruida"
-],
-
-last_line:
-"Entonces sí podría tratarse de un aliado…",
-
-pending:[
-"Decidir siguiente acción",
-"Evaluar al guardián alterado",
-"Organizar la facción",
-"Estudiar el dispositivo",
-"Planificar Aguja Quebrada"
-]
-
-},
-
-
-changelog:[
-
-{
-version:"v0.4",
-date:"2026-09-07",
-change:
-"Sitio vivo desde Google Sheets y reseñas técnicas por hover."
-}
-
-]
-
 };
 
-
-const TECH = {
-
-"bendicion de la reina cuervo":{
-
-k:"Rasgo racial",
-
-t:"Bendición de la Reina Cuervo",
-
-d:
-"Teletransporte Shadar-kai. Desde nivel 3 concede resistencia a todo daño hasta el inicio del siguiente turno.",
-
-r:[
-["Tipo","Acción adicional"],
-["Distancia","30 pies"],
-["Usos","PB por descanso largo; Kazym 2/2"]
-],
-
-s:
-"Mordenkainen Presents: Monsters of the Multiverse"
-
-},
-
-
-"ataque furtivo 2d6":{
-
-k:"Rasgo de clase",
-
-t:"Ataque Furtivo",
-
-d:
-"Una vez por turno añade daño si el ataque usa arma sutil o a distancia y se cumplen las condiciones del rasgo.",
-
-r:[
-["Kazym nivel 4","2d6"],
-["Frecuencia","1/turno"]
-],
-
-s:
-"Player's Handbook 2014"
-
-},
-
-
-"accion astuta":{
-
-k:"Rasgo de clase",
-
-t:"Acción Astuta",
-
-d:
-"Correr, Destrabarse u Ocultarse como acción adicional.",
-
-r:[
-["Tipo","Acción adicional"]
-],
-
-s:
-"Player's Handbook 2014"
-
-},
-
-
-"susurros de los muertos":{
-
-k:"Rasgo Phantom",
-
-t:"Susurros de los Muertos",
-
-d:
-"Tras descanso corto o largo obtiene temporalmente una competencia en habilidad o herramienta no poseída.",
-
-r:[
-["Elección actual","Pendiente"]
-],
-
-s:
-"Tasha's Cauldron of Everything"
-
-},
-
-
-"lamentos desde la tumba":{
-
-k:"Rasgo Phantom",
-
-t:"Lamentos desde la Tumba",
-
-d:
-"Después de aplicar Ataque Furtivo puede dañar a una segunda criatura visible cercana con daño necrótico.",
-
-r:[
-["Kazym","1d6 necrótico"],
-["Alcance","30 pies del primer objetivo"],
-["Usos","2/descanso largo"]
-],
-
-s:
-"Tasha's Cauldron of Everything"
-
-},
-
-
-"precision elfica":{
-
-k:"Dote",
-
-t:"Precisión Élfica",
-
-d:
-"Cuando ya tiene ventaja con DES/INT/SAB/CAR puede repetir uno de los d20.",
-
-r:[
-["Kazym","DES 17→18"]
-],
-
-s:
-"Xanathar's Guide to Everything"
-
-},
-
-
-"master of tactics":{
-
-k:"Rasgo Mastermind",
-
-t:"Master of Tactics",
-
-d:
-"Permite usar Ayudar como acción adicional y apoyar ataques desde mayor distancia bajo las condiciones del rasgo.",
-
-r:[
-["Tipo","Acción adicional"]
-],
-
-s:
-"Mastermind Rogue"
-
-},
-
-
-"path to the grave":{
-
-k:"Canalizar Divinidad",
-
-t:"Path to the Grave",
-
-d:
-"Maldice temporalmente a una criatura para que el siguiente impacto que reciba sea tratado como vulnerable a todo el daño de ese ataque.",
-
-r:[
-["Recurso","Channel Divinity"]
-],
-
-s:
-"Xanathar's Guide to Everything"
-
-},
-
-
-"draconic cry":{
-
-k:"Rasgo racial",
-
-t:"Draconic Cry",
-
-d:
-"Grito como acción adicional que facilita ataques de aliados contra enemigos cercanos durante un breve periodo.",
-
-r:[
-["Usos Pipik","2/descanso largo"]
-],
-
-s:
-"Mordenkainen Presents: Monsters of the Multiverse"
-
-},
-
-
-"canny":{
-
-k:"Rasgo Ranger",
-
-t:"Canny",
-
-d:
-"Concede pericia en una habilidad conocida. Pipik la tiene en Supervivencia.",
-
-r:[
-["Pipik","Supervivencia +6"]
-],
-
-s:
-"Tasha's Cauldron of Everything"
-
-},
-
-
-"archery":{
-
-k:"Estilo de combate",
-
-t:"Archery",
-
-d:
-"+2 a las tiradas de ataque con armas a distancia.",
-
-r:[
-["Pipik","Incluido en su ballesta +7"]
-],
-
-s:
-"Player's Handbook 2014"
-
-},
-
-
-"guidance":{
-
-k:"Conjuro",
-
-t:"Guidance",
-
-d:
-"El objetivo añade 1d4 a una prueba de característica elegida antes de que termine el conjuro.",
-
-r:[
-["Nivel","Truco"],
-["Concentración","Sí, hasta 1 minuto"]
-],
-
-s:
-"PHB 2014"
-
-},
-
-
-"healing word":{
-
-k:"Conjuro",
-
-t:"Healing Word",
-
-d:
-"Curación a distancia como acción adicional.",
-
-r:[
-["Nivel","1"],
-["Curación","1d4 + modificador"],
-["Alcance","60 pies"]
-],
-
-s:
-"PHB 2014"
-
-},
-
-
-"hunters mark":{
-
-k:"Conjuro",
-
-t:"Hunter's Mark",
-
-d:
-"Marca a una criatura; los impactos de arma infligen 1d6 adicional mientras mantengas concentración.",
-
-r:[
-["Nivel","1"],
-["Tipo","Acción adicional"],
-["Concentración","Sí"]
-],
-
-s:
-"PHB 2014"
-
-},
-
-
-"regreso":{
-
-k:"Objeto de campaña",
-
-t:"REGRESO",
-
-d:
-"Llave conceptual de hueso oscuro.",
-
-r:[
-["Uso confirmado","Abrió el cilindro de tránsito"],
-["Comportamiento","Volvió a la palma de Kazym"],
-["Mecánica completa","No determinada"]
-],
-
-s:
-"Campaign Bible"
-
-},
-
-
-"camino":{
-
-k:"Objeto de campaña",
-
-t:"CAMINO",
-
-d:
-"Llave metálica vinculada al santuario.",
-
-r:[
-["Uso confirmado","Abrió el mecanismo camino–memoria–regreso"],
-["Estado actual","Pendiente"]
-],
-
-s:
-"Campaign Bible"
-
-},
-
-
-"espada corta dentada":{
-
-k:"Arma",
-
-t:"Espada corta dentada",
-
-d:
-"La descripción dentada no añade regla extra por sí sola.",
-
-r:[
-["Daño","1d6 perforante"],
-["Propiedades","Finesse, Light"],
-["Kazym","+6; 1d6+4"]
-],
-
-s:
-"PHB 2014"
-
-},
-
-
-"daga dentada":{
-
-k:"Arma",
-
-t:"Daga dentada",
-
-d:
-"Arma sencilla sutil y arrojadiza, válida para Ataque Furtivo.",
-
-r:[
-["Daño","1d4 perforante"],
-["Propiedades","Finesse, Light, Thrown"],
-["Alcance","20/60 pies"]
-],
-
-s:
-"PHB 2014"
-
-},
-
-
-"arco corto":{
-
-k:"Arma",
-
-t:"Arco corto",
-
-d:
-"Arma a distancia válida para Ataque Furtivo.",
-
-r:[
-["Daño","1d6 perforante"],
-["Alcance","80/320 pies"]
-],
-
-s:
-"PHB 2014"
-
-},
-
-
-"ballesta ligera":{
-
-k:"Arma",
-
-t:"Ballesta ligera",
-
-d:
-"Arma a distancia con propiedad Loading.",
-
-r:[
-["Daño","1d8 perforante"],
-["Alcance","80/320 pies"],
-["Propiedades","Ammunition, Loading, Two-Handed"]
-],
-
-s:
-"PHB 2014"
-
-},
-
-
-"herramientas de ladron":{
-
-k:"Herramienta",
-
-t:"Herramientas de ladrón",
-
-d:
-"Usadas para cerraduras y trampas; el atributo depende de la situación. Kazym tiene pericia.",
-
-r:[
-["Kazym","Normalmente +8 con DES"]
-],
-
-s:
-"PHB 2014"
-
-}
-
+const DESC={
+"Bendición de la Reina Cuervo":"Acción adicional: teletransporte hasta 30 pies. Desde nivel 3 concede resistencia a todo daño hasta el inicio del siguiente turno. Kazym dispone de 2 usos por descanso largo.",
+"Ataque Furtivo 2d6":"Una vez por turno añade 2d6 de daño a un impacto válido con arma sutil o a distancia si cumple las condiciones de Ataque Furtivo.",
+"Acción Astuta":"Permite Correr, Destrabarse u Ocultarse como acción adicional.",
+"Susurros de los Muertos":"Tras un descanso corto o largo obtiene competencia temporal en una habilidad o herramienta no poseída.",
+"Lamentos desde la Tumba":"Tras aplicar Ataque Furtivo puede infligir 1d6 necrótico a una segunda criatura visible a 30 pies del primer objetivo; 2 usos por descanso largo.",
+"Precisión Élfica":"Cuando ya tiene ventaja en un ataque con DES, INT, SAB o CAR puede repetir uno de los d20. La dote elevó DES 17→18.",
+"Master of Intrigue":"Competencias y capacidades de infiltración, disfraz, falsificación, idiomas y reproducción de patrones de habla.",
+"Master of Tactics":"Puede usar Ayudar como acción adicional y asistir ataques desde mayor distancia según el arquetipo.",
+"Circle of Mortality":"Maximiza los dados de curación de conjuros dirigidos a criaturas a 0 PG y mejora Spare the Dying.",
+"Eyes of the Grave":"Permite detectar presencia de no-muertos dentro del alcance del rasgo.",
+"Channel Divinity: Path to the Grave":"Marca a una criatura para que el siguiente impacto antes del final del siguiente turno de Tomás la trate como vulnerable a todo el daño de ese ataque.",
+"Draconic Cry":"Acción adicional; concede ventaja ofensiva contra enemigos cercanos según la versión MotM. Pipik: 2 usos por descanso largo.",
+"Deft Explorer: Canny":"Concede pericia; Pipik la tiene en Supervivencia, que queda en +6.",
+"Fighting Style: Archery":"+2 a ataques con armas a distancia; ya está incluido en la ballesta +7 de Pipik.",
+"Inmunidad al fuego":"El daño de fuego no reduce los PG de Sarrik.",
+"Mimicry":"Bran puede imitar sonidos simples que haya oído.",
+"REGRESO":"Pieza de hueso oscuro. Abrió el cilindro de tránsito y volvió a la palma de Kazym. Mecánica total aún desconocida.",
+"CAMINO":"Pieza metálica vinculada al mecanismo camino–memoria–regreso; estado físico actual pendiente.",
+"Herramientas de ladrón":"Herramientas para cerraduras y trampas. Kazym tiene pericia y normalmente usa +8 con Destreza."
 };
 
+const SKILLDESC={
+"sigilo":"Evitar ser visto u oído; suele enfrentarse a Percepción activa o pasiva.",
+"percepcion":"Detectar mediante los sentidos lo que está presente: movimiento, sonido, detalles y emboscadas.",
+"investigacion":"Deducir patrones y reconstruir información a partir de pistas.",
+"engano":"Mentir o crear una impresión falsa de manera convincente.",
+"perspicacia":"Leer lenguaje corporal, emociones y motivos.",
+"supervivencia":"Rastrear, orientarse y reconocer peligros del entorno.",
+"medicina":"Estabilizar o aplicar conocimiento práctico de salud.",
+"persuasion":"Influir mediante diplomacia y argumento.",
+"religion":"Recordar o interpretar conocimiento religioso y ritual."
+};
 
-let DATA = null;
-
-let ACTIVE = null;
-
-let TIMER = null;
-
-
-const $ =
-s => document.querySelector(s);
-
-
-const esc =
-s => String(s ?? "").replace(
-  /[&<>"']/g,
-  m => ({
-    "&":"&amp;",
-    "<":"&lt;",
-    ">":"&gt;",
-    '"':"&quot;",
-    "'":"&#39;"
-  }[m])
-);
-
-
-const norm =
-s => String(s || "")
-  .toLowerCase()
-  .normalize("NFD")
-  .replace(/[\u0300-\u036f]/g,"")
-  .trim();
-
-
-const drive =
-id => id
-  ? `https://drive.google.com/thumbnail?id=${encodeURIComponent(id)}&sz=w2000`
-  : "";
-
-
-const list =
-a => `
-<ul class="list">
-${(a || []).map(
-  x => `<li>${esc(x)}</li>`
-).join("")}
-</ul>
-`;
-
-
-function csv(t){
-
-  let R = [];
-
-  let r = [];
-
-  let c = "";
-
-  let q = false;
-
-
-  for(let i=0;i<t.length;i++){
-
-    let x = t[i];
-
-    let n = t[i+1];
-
-
-    if(x === '"' && q && n === '"'){
-
-      c += '"';
-
-      i++;
-
-      continue;
-
-    }
-
-
-    if(x === '"'){
-
-      q = !q;
-
-      continue;
-
-    }
-
-
-    if(x === ',' && !q){
-
-      r.push(c);
-
-      c = "";
-
-      continue;
-
-    }
-
-
-    if((x === '\n' || x === '\r') && !q){
-
-      if(x === '\r' && n === '\n') i++;
-
-      r.push(c);
-
-      if(r.some(v => v.trim())) R.push(r);
-
-      r = [];
-
-      c = "";
-
-      continue;
-
-    }
-
-
-    c += x;
-
-  }
-
-
-  r.push(c);
-
-
-  if(r.some(v => v.trim())) R.push(r);
-
-
-  if(!R.length) return [];
-
-
-  let h =
-  R[0].map(x => x.trim());
-
-
-  return R.slice(1).map(
-    a => Object.fromEntries(
-      h.map(
-        (x,i) => [x,a[i] ?? ""]
-      )
-    )
-  );
-
+function setMode(t,c=""){
+let e=$("#mode");
+e.textContent=t;
+e.className="badge "+c
 }
-
-
-function sheetId(){
-
-  let u =
-  new URLSearchParams(location.search).get("sheet") || "";
-
-
-  let l =
-  localStorage.getItem("kazym_sheet_id") || "";
-
-
-  return (u || l)
-    .trim()
-    .replace(/^.*\/spreadsheets\/d\//,"")
-    .replace(/\/.*$/,"");
-
-}
-
-
-function visible(r){
-
-  return ![
-    "dm",
-    "secret",
-    "secreto",
-    "private",
-    "privado"
-  ].includes(
-    norm(
-      r.visibility ||
-      r.scope ||
-      "both"
-    )
-  );
-
-}
-
-
-async function tab(name){
-
-  let id = sheetId();
-
-
-  if(!id) throw Error("sin sheet");
-
-
-  let u =
-  `https://docs.google.com/spreadsheets/d/${id}/gviz/tq?tqx=out:csv&headers=1&sheet=${encodeURIComponent(name)}&_=${Date.now()}`;
-
-
-  let res =
-  await fetch(
-    u,
-    {cache:"no-store"}
-  );
-
-
-  if(!res.ok)
-    throw Error(name + ":" + res.status);
-
-
-  let tx =
-  await res.text();
-
-
-  if(/<html|<!doctype/i.test(tx))
-    throw Error(name + ":privado/inexistente");
-
-
-  return csv(tx).filter(visible);
-
-}
-
-
-function group(rows,key){
-
-  let m = new Map;
-
-
-  rows.forEach(r=>{
-
-    let k = r[key] || "";
-
-
-    if(!m.has(k))
-      m.set(k,[]);
-
-
-    m.get(k).push(r);
-
-  });
-
-
-  return m;
-
-}
-
-
-function first(rows,key){
-
-  let m = new Map;
-
-
-  rows.forEach(r=>{
-
-    let k = r[key] || "";
-
-
-    if(k && !m.has(k))
-      m.set(k,r);
-
-  });
-
-
-  return m;
-
-}
-
-
-function arr(v){
-
-  return Array.isArray(v)
-  ? v
-  : String(v || "")
-      .split(/\r?\n|;;|\s*\|\s*/)
-      .map(x=>x.trim())
-      .filter(Boolean);
-
-}
-
-
-function n(v,d=""){
-
-  let x =
-  Number(
-    String(v).replace(",",".")
-  );
-
-
-  return String(v).trim() !== "" &&
-  Number.isFinite(x)
-  ? x
-  : d;
-
-}
-
-
-function resolveAsset(v,A){
-
-  v =
-  String(v || "").trim();
-
-
-  if(!v) return "";
-
-
-  if(/^https?:/.test(v))
-    return v;
-
-
-  if(/^[\w-]{20,}$/.test(v))
-    return drive(v);
-
-
-  let a =
-  A.get(v);
-
-
-  return a
-  ? drive(
-      a.drive_file_id ||
-      a.id
-    )
-  : v;
-
-}
-
-
-function build(T){
-
-  let A =
-  new Map(
-    (T.assets || []).map(
-      x => [x.asset_id,x]
-    )
-  );
-
-
-  let st =
-  first(
-    T.character_stats || [],
-    "character_id"
-  );
-
-
-  let sk =
-  group(
-    T.character_skills || [],
-    "character_id"
-  );
-
-
-  let tr =
-  group(
-    T.character_traits || [],
-    "character_id"
-  );
-
-
-  let at =
-  group(
-    T.character_attacks || [],
-    "character_id"
-  );
-
-
-  let eq =
-  group(
-    T.character_equipment || [],
-    "character_id"
-  );
-
-
-  let sp =
-  group(
-    T.character_spells || [],
-    "character_id"
-  );
-
-
-  let chars =
-  (T.characters || []).map(c=>{
-
-    let id =
-    c.character_id ||
-    c.id;
-
-
-    let s =
-    st.get(id) || {};
-
-
-    return {
-
-      id,
-
-      name:c.name,
-
-      kind:
-      c.kind ||
-      c.type,
-
-      role:c.role,
-
-      race:
-      c.race ||
-      c.species,
-
-      class:c.class,
-
-      subclass:c.subclass,
-
-      level:n(c.level),
-
-      xp:n(c.xp),
-
-      background:c.background,
-
-      alignment:c.alignment,
-
-      portrait:resolveAsset(
-        c.portrait_asset_id ||
-        c.portrait_drive_id ||
-        c.portrait,
-        A
-      ),
-
-      short:
-      c.short_description ||
-      c.description,
-
-      history:
-      c.public_history ||
-      c.history,
-
-      appearance:c.appearance,
-
-      personality:c.personality,
-
-      state:
-      c.current_state ||
-      c.status,
-
-
-      stats:{
-
-        str:n(s.str),
-
-        dex:n(s.dex),
-
-        con:n(s.con),
-
-        int:n(s.int),
-
-        wis:n(s.wis),
-
-        cha:n(s.cha),
-
-        ac:n(s.ac),
-
-        hp_current:n(s.hp_current),
-
-        hp_max:n(s.hp_max),
-
-        initiative:n(s.initiative),
-
-        speed:n(
-          s.speed_ft ||
-          s.speed
-        ),
-
-        pb:n(
-          s.proficiency_bonus ||
-          s.pb
-        ),
-
-        hit_dice:s.hit_dice
-
-      },
-
-
-      skills:
-      (sk.get(id) || []).map(x=>({
-
-        name:
-        x.name ||
-        x.skill,
-
-        bonus:
-        x.bonus ||
-        x.value,
-
-        ability:x.ability,
-
-        description:x.description,
-
-        technical_details:
-        x.technical_details,
-
-        source:x.source
-
-      })),
-
-
-      traits:
-      (tr.get(id) || []).map(x=>
-        Object.assign(
-          {
-            name:x.name,
-            description:
-            x.description ||
-            x.summary
-          },
-          x
-        )
-      ),
-
-
-      attacks:
-      (at.get(id) || []).map(x=>
-        Object.assign(
-          {
-            name:
-            x.name ||
-            x.attack
-          },
-          x
-        )
-      ),
-
-
-      equipment:
-      (eq.get(id) || []).map(x=>
-        Object.assign(
-          {
-            name:
-            x.name ||
-            x.item
-          },
-          x
-        )
-      ),
-
-
-      spells:
-      (sp.get(id) || []).map(x=>
-        Object.assign(
-          {
-            name:
-            x.name ||
-            x.spell_name
-          },
-          x
-        )
-      )
-
-    };
-
-  });
-
-
-  let hist =
-  (T.history || []).map(
-    (x,i)=>({
-
-      order:n(
-        x.sort_order,
-        i+1
-      ),
-
-      title:x.title,
-
-      summary:x.summary,
-
-      full_text:
-      x.full_text ||
-      x.detailed_text ||
-      x.summary,
-
-      events:arr(x.events),
-
-      decisions:
-      arr(x.decisions),
-
-      loot:
-      arr(
-        x.loot ||
-        x.clues
-      ),
-
-      consequences:
-      arr(x.consequences),
-
-      rolls:[]
-
-    })
-  ).sort(
-    (a,b)=>a.order-b.order
-  );
-
-
-  let roll =
-  group(
-    T.history_rolls || [],
-    "chapter_id"
-  );
-
-
-  (T.history || []).forEach(
-    (x,i)=>{
-
-      if(hist[i]){
-
-        hist[i].rolls =
-        (roll.get(x.chapter_id) || []).map(
-          r => [
-
-            r.label ||
-            r.type,
-
-            r.total &&
-            `Total ${r.total}`,
-
-            r.result,
-
-            r.consequence
-
-          ].filter(Boolean).join(" · ")
-        );
-
-      }
-
-    }
-  );
-
-
-  let b0 =
-  (T.base_overview || [])[0] ||
-  {};
-
-
-  let base = {
-
-    name:b0.name,
-
-    purpose:b0.purpose,
-
-    functions_restored:
-    n(
-      b0.functions_restored,
-      0
-    ),
-
-    functions_total:
-    n(
-      b0.functions_total,
-      0
-    ),
-
-    map:resolveAsset(
-      b0.map_asset_id ||
-      b0.map_drive_id,
-      A
-    ),
-
-    rooms:
-    (T.base_rooms || []).map(
-      r=>({
-
-        name:r.name,
-
-        status:r.status,
-
-        owner:
-        r.owner_id ||
-        r.owner,
-
-        desc:
-        r.description ||
-        r.function
-
-      })
-    )
-
-  };
-
-
-  return {
-
-    characters:chars,
-
-    history:hist,
-
-    npcs:T.npcs || [],
-
-    bestiary:
-    (T.bestiary || []).map(
-      x=>Object.assign(
-        {},
-        x,
-        {
-          image:
-          resolveAsset(
-            x.image_asset_id ||
-            x.asset_id ||
-            x.image,
-            A
-          )
-        }
-      )
-    ),
-
-    lore:T.lore || [],
-
-    mysteries:
-    (T.mysteries || []).map(
-      x=>Object.assign(
-        {},
-        x,
-        {
-
-          questions:
-          arr(
-            x.questions ||
-            x.open_questions
-          ),
-
-          progress:
-          n(
-            x.progress_pct ||
-            x.progress,
-            0
-          )
-
-        }
-      )
-    ),
-
-    items:T.items || [],
-
-    rules:T.rules || [],
-
-    base,
-
-    checkpoint:
-    (T.checkpoint || [])[0] ||
-    null,
-
-    changelog:
-    T.changelog || []
-
-  };
-
-}
-
-
-async function load(){
-
-  let id =
-  sheetId();
-
-
-  if(!id)
-    return FALLBACK;
-
-
-  mode(
-    "Conectando…"
-  );
-
-
-  let out = {};
-
-
-  await Promise.all(
-    TABS.map(
-      async x=>{
-
-        try{
-
-          out[x] =
-          await tab(x);
-
-        }
-
-        catch(e){
-
-          out[x] = [];
-
-        }
-
-      }
-    )
-  );
-
-
-  let b =
-  build(out);
-
-
-  return {
-
-    characters:
-    b.characters.length
-    ? b.characters
-    : FALLBACK.characters,
-
-    history:
-    b.history.length
-    ? b.history
-    : FALLBACK.history,
-
-    npcs:
-    b.npcs.length
-    ? b.npcs
-    : FALLBACK.npcs,
-
-    bestiary:
-    b.bestiary.length
-    ? b.bestiary
-    : FALLBACK.bestiary,
-
-    lore:
-    b.lore.length
-    ? b.lore
-    : FALLBACK.lore,
-
-    mysteries:
-    b.mysteries.length
-    ? b.mysteries
-    : FALLBACK.mysteries,
-
-    items:
-    b.items.length
-    ? b.items
-    : FALLBACK.items,
-
-    rules:
-    b.rules.length
-    ? b.rules
-    : FALLBACK.rules,
-
-    base:
-    (out.base_overview || []).length
-    ? b.base
-    : FALLBACK.base,
-
-    checkpoint:
-    b.checkpoint ||
-    FALLBACK.checkpoint,
-
-    changelog:
-    b.changelog.length
-    ? b.changelog
-    : FALLBACK.changelog
-
-  };
-
-}
-
-
-function mode(t,c=""){
-
-  let e =
-  $("#mode");
-
-
-  e.textContent =
-  t;
-
-
-  e.className =
-  "badge " + c;
-
-}
-
-
-function key(o){
-
-  return norm(
-    typeof o === "string"
-    ? o
-    : o?.name
-  );
-
-}
-
-
-function tooltip(
-  o,
-  kind="",
-  owner=""
-){
-
-  let k =
-  key(o);
-
-
-  let z =
-  TECH[k] ||
-  null;
-
-
-  let name =
-  typeof o === "string"
-  ? o
-  : o?.name || "";
-
-
-  let desc =
-  typeof o === "object"
-  ? (
-      o.technical_details ||
-      o.description ||
-      o.mechanics ||
-      ""
-    )
-  : "";
-
-
-  let rows = [];
-
-
-  if(
-    o &&
-    typeof o === "object"
-  ){
-
-    [
-
-      [
-        "Bonificador",
-        o.bonus ||
-        o.attack_bonus
-      ],
-
-      [
-        "Daño",
-        o.damage
-      ],
-
-      [
-        "Tipo",
-        o.damage_type ||
-        o.type
-      ],
-
-      [
-        "Acción",
-        o.action_type
-      ],
-
-      [
-        "Alcance",
-        o.range
-      ],
-
-      [
-        "Duración",
-        o.duration
-      ],
-
-      [
-        "Usos",
-        o.uses
-      ],
-
-      [
-        "Recarga",
-        o.recharge
-      ],
-
-      [
-        "Cargas",
-        o.charges
-      ],
-
-      [
-        "Sintonización",
-        o.attunement
-      ],
-
-      [
-        "Estado",
-        o.status
-      ]
-
-    ].forEach(
-      x => x[1] &&
-      rows.push(x)
-    );
-
-  }
-
-
-  if(z){
-
-    desc =
-    desc ||
-    z.d;
-
-
-    rows = [
-      ...(z.r || []),
-      ...rows
-    ];
-
-  }
-
-
-  if(owner)
-    rows.push(
-      ["Personaje",owner]
-    );
-
-
-  return {
-
-    kind:
-    z?.k ||
-    kind ||
-    "Detalle",
-
-    title:
-    z?.t ||
-    name,
-
-    desc:
-    desc ||
-    name,
-
-    rows,
-
-    source:
-    (
-      typeof o === "object" &&
-      (
-        o.source ||
-        o.source_book
-      )
-    )
-    ||
-    z?.s
-    ||
-    "Campaign Bible"
-
-  };
-
-}
-
-
-function tipAttr(
-  o,
-  kind,
-  owner
-){
-
-  return `
-data-tip='${esc(
-  JSON.stringify(
-    tooltip(
-      o,
-      kind,
-      owner
-    )
-  )
-)}'
-tabindex="0"
-`;
-
-}
-
-
-function renderTip(t){
-
-  let e =
-  $("#tip");
-
-
-  let r =
-  (t.rows || []).map(
-    x=>`
-<dt>${esc(x[0])}</dt>
-<dd>${esc(x[1])}</dd>
-`
-  ).join("");
-
-
-  e.innerHTML = `
-
-<div class="k">
-${esc(t.kind)}
-</div>
-
-<h4>
-${esc(t.title)}
-</h4>
-
-<p>
-${esc(t.desc)}
-</p>
-
-${r
-? `<dl>${r}</dl>`
-: ""
-}
-
-<div
-style="
-margin-top:8px;
-color:#8f8990;
-font-size:.68rem
-"
->
-Fuente:
-${esc(t.source || "—")}
-</div>
-
-`;
-
-
-  e.classList.add(
-    "show"
-  );
-
-}
-
-
-function posTip(ev){
-
-  let e =
-  $("#tip");
-
-
-  if(
-    !e.classList.contains(
-      "show"
-    )
-  ) return;
-
-
-  let x =
-  ev.clientX + 15;
-
-
-  let y =
-  ev.clientY + 15;
-
-
-  let r =
-  e.getBoundingClientRect();
-
-
-  if(
-    x + r.width >
-    innerWidth - 10
-  )
-    x =
-    ev.clientX -
-    r.width -
-    15;
-
-
-  if(
-    y + r.height >
-    innerHeight - 10
-  )
-    y =
-    innerHeight -
-    r.height -
-    10;
-
-
-  e.style.left =
-  Math.max(
-    10,
-    x
-  ) + "px";
-
-
-  e.style.top =
-  Math.max(
-    10,
-    y
-  ) + "px";
-
-}
-
-
-document.addEventListener(
-  "mouseover",
-  e=>{
-
-    let x =
-    e.target.closest?.(
-      "[data-tip]"
-    );
-
-
-    if(!x) return;
-
-
-    try{
-
-      renderTip(
-        JSON.parse(
-          x.dataset.tip
-        )
-      );
-
-
-      posTip(e);
-
-    }
-
-    catch(_){}
-
-  }
-);
-
-
-document.addEventListener(
-  "mousemove",
-  e=>posTip(e)
-);
-
-
-document.addEventListener(
-  "mouseout",
-  e=>{
-
-    if(
-      e.target.closest?.(
-        "[data-tip]"
-      )
-    )
-      $("#tip")
-      .classList
-      .remove("show");
-
-  }
-);
-
-
-document.addEventListener(
-  "focusin",
-  e=>{
-
-    let x =
-    e.target.closest?.(
-      "[data-tip]"
-    );
-
-
-    if(x){
-
-      try{
-
-        renderTip(
-          JSON.parse(
-            x.dataset.tip
-          )
-        );
-
-
-        let r =
-        x.getBoundingClientRect();
-
-
-        posTip({
-
-          clientX:r.right,
-
-          clientY:r.top
-
-        });
-
-      }
-
-      catch(_){}
-
-    }
-
-  }
-);
-
-
-document.addEventListener(
-  "focusout",
-  ()=>$("#tip")
-    .classList
-    .remove("show")
-);
-
-
-function liTech(
-  a,
-  kind,
-  owner
-){
-
-  return `
-<ul class="list">
-${(a || []).map(x=>{
-
-  let name =
-  typeof x === "string"
-  ? x
-  : x.name;
-
-
-  return `
-<li
-class="tipTarget tipDot"
-${tipAttr(
-  x,
-  kind,
-  owner
-)}
->
-${esc(name)}
-</li>
-`;
-
-}).join("")}
-</ul>
-`;
-
-}
-
-
-function renderCharacters(){
-
-  let q =
-  norm(
-    $("#search").value
-  );
-
-
-  let root =
-  $("#characters");
-
-
-  root.innerHTML = "";
-
-
-  DATA.characters
-  .filter(
-    c => norm(
-      [
-        c.name,
-        c.role,
-        c.race,
-        c.class
-      ].join(" ")
-    ).includes(q)
-  )
-  .forEach(c=>{
-
-    let b =
-    document.createElement(
-      "button"
-    );
-
-
-    b.className =
-    "avatar tipTarget";
-
-
-    b.setAttribute(
-      "data-tip",
-      JSON.stringify({
-
-        kind:
-        c.kind ||
-        "Personaje",
-
-        title:c.name,
-
-        desc:
-        c.short ||
-        c.history ||
-        "",
-
-        rows:[
-
-          [
-            "Raza",
-            c.race ||
-            "—"
-          ],
-
-          [
-            "Clase",
-            [
-              c.class,
-              c.subclass
-            ].filter(Boolean)
-            .join(" — ")
-            ||
-            "—"
-          ],
-
-          [
-            "Nivel",
-            c.level ||
-            "—"
-          ],
-
-          [
-            "Rol",
-            c.role ||
-            "—"
-          ],
-
-          [
-            "Estado",
-            c.state ||
-            "—"
-          ]
-
-        ],
-
-        source:
-        "Campaign Bible"
-
-      })
-    );
-
-
-    b.innerHTML = `
-
-<div class="portrait">
-
-<img
-src="${image(c.portrait)}"
-alt="${esc(c.name)}"
->
-
-</div>
-
-<b>
-${esc(c.name)}
-</b>
-
-<small>
-${esc(c.role || "")}
-</small>
-
-`;
-
-
-    b.onclick =
-    ()=>openChar(c);
-
-
-    root.appendChild(b);
-
-  });
-
-}
-
 
 function image(v){
-
-  if(!v) return "";
-
-
-  if(/^https?:/.test(v))
-    return v;
-
-
-  if(KNOWN_ASSETS[v])
-    return drive(
-      KNOWN_ASSETS[v]
-    );
-
-
-  if(/^[\w-]{20,}$/.test(v))
-    return drive(v);
-
-
-  return v;
-
+if(!v)return"";
+if(/^https?:/.test(v))return v;
+if(/^[\w-]{20,}$/.test(v))return drive(v);
+return v
 }
 
-
-function fmt(x){
-
-  return x === undefined ||
-  x === ""
-  ? "—"
-  : x;
-
+function val(v){
+return v===undefined||v===null||v===""?"—":v
 }
-
 
 function mod(v){
-
-  let x =
-  Math.floor(
-    (Number(v)-10)/2
-  );
-
-
-  return Number.isFinite(x)
-  ? (
-      x >= 0
-      ? "+"
-      : ""
-    ) + x
-  : "—";
-
+let x=Math.floor((Number(v)-10)/2);
+return Number.isFinite(x)?(x>=0?"+":"")+x:"—"
 }
 
+function displayName(x){
+return typeof x==="string"?x:(x?.name||x?.title||"")
+}
+
+function toObj(x){
+return typeof x==="string"?{name:x}:x||{}
+}
+
+function traitsFor(c){
+let base=TRAITS[c.character_id]||{species:[],class:[],other:[]};
+let all=(c.traits||[]).map(displayName);
+
+let cat={
+species:[...base.species],
+class:[...base.class],
+other:[...base.other]
+};
+
+all.forEach(x=>{
+let k=norm(x);
+
+if(
+cat.species.some(y=>norm(y)==k)||
+cat.class.some(y=>norm(y)==k)||
+cat.other.some(y=>norm(y)==k)
+)return;
+
+if(/shadar|raven queen|fey ancestry|vision|resistencia|trance|draconic|kobold|mimicry|vuelo|inmunidad|constructo|cuerpo de ascua|sentir fuego/.test(k))
+cat.species.push(x);
+
+else if(/precision elfica|guardian del hogar|nodo de mensajes|memoria parcial/.test(k))
+cat.other.push(x);
+
+else
+cat.class.push(x)
+});
+
+return cat
+}
+
+const SKPOS={
+"acrobacias":["sl",1],
+"atletismo":["sl",2],
+"arcanos":["sl",4],
+"engano":["sl",5],
+"historia":["sl",6],
+"interpretacion":["sl",7],
+"intimidacion":["sl",8],
+"investigacion":["sl",9],
+"medicina":["sr",1],
+"naturaleza":["sr",2],
+"percepcion":["sr",3],
+"perspicacia":["sr",4],
+"juego de manos":["sr",5],
+"sigilo":["sr",6],
+"supervivencia":["sr",7],
+"trato con animales":["sr",8]
+};
+
+function skillsArray(c){
+if(Array.isArray(c.skills))return c.skills;
+return Object.entries(c.skills||{}).map(([name,bonus])=>({name,bonus}))
+}
+
+function saves(c){
+return c.saves||{}
+}
+
+function skillOverlay(c){
+return skillsArray(c).map(x=>{
+let p=SKPOS[norm(x.name)];
+return p
+?`<span class="skill ${p[0]} sk${p[1]} tipTarget" ${tipAttr(x,"Habilidad",c.name)}>${esc(x.bonus||"")}</span>`
+:""
+}).join("")
+}
+
+function saveOverlay(c){
+let a=["FUE","DES","CON","INT","SAB","CAR"];
+let S=saves(c);
+
+return a.map((k,i)=>
+S[k]
+?`<span class="save sv${i+1}">${esc(S[k])}</span>`
+:""
+).join("")
+}
+
+function tipData(o,kind,owner=""){
+o=toObj(o);
+
+let name=o.name||"";
+
+let desc=
+o.technical_details||
+o.description||
+DESC[name]||
+SKILLDESC[norm(name)]||
+name;
+
+let rows=[];
+
+[
+["Atributo",o.ability],
+["Bonificador",o.bonus||o.attack_bonus],
+["Daño",o.damage],
+["Tipo",o.damage_type||o.type],
+["Acción",o.action_type],
+["Alcance",o.range],
+["Duración",o.duration],
+["Concentración",o.concentration],
+["Usos",o.uses],
+["Recarga",o.recharge],
+["Estado",o.status]
+].forEach(x=>{
+if(x[1])rows.push(x)
+});
+
+if(owner)rows.push(["Personaje",owner]);
+
+return{
+kind,
+title:name,
+desc,
+rows,
+source:o.source||o.source_book||"Campaign Bible"
+}
+}
+
+function tipAttr(o,k,owner=""){
+return`data-tip='${esc(JSON.stringify(tipData(o,k,owner)))}' tabindex="0"`
+}
+
+function techList(a,k,owner=""){
+return`<ul class="list">${(a||[]).map(x=>`<li class="tipTarget tipDot" ${tipAttr(x,k,owner)}>${esc(displayName(x))}</li>`).join("")}</ul>`
+}
+
+function showTip(t,e){
+let x=$("#tip");
+
+let r=(t.rows||[]).map(v=>
+`<dt>${esc(v[0])}</dt><dd>${esc(v[1])}</dd>`
+).join("");
+
+x.innerHTML=
+`<div class="k">${esc(t.kind)}</div>
+<h4>${esc(t.title)}</h4>
+<p>${esc(t.desc)}</p>
+${r?`<dl>${r}</dl>`:""}
+<div style="margin-top:8px;color:#8f8990;font-size:.68rem">
+Fuente: ${esc(t.source||"—")}
+</div>`;
+
+x.classList.add("show");
+posTip(e)
+}
+
+function posTip(e){
+let x=$("#tip");
+
+if(!x.classList.contains("show"))return;
+
+let px=e.clientX+15;
+let py=e.clientY+15;
+
+let r=x.getBoundingClientRect();
+
+if(px+r.width>innerWidth-10)
+px=e.clientX-r.width-15;
+
+if(py+r.height>innerHeight-10)
+py=innerHeight-r.height-10;
+
+x.style.left=Math.max(10,px)+"px";
+x.style.top=Math.max(10,py)+"px"
+}
+
+document.addEventListener("mouseover",e=>{
+let x=e.target.closest?.("[data-tip]");
+
+if(x)
+try{
+showTip(JSON.parse(x.dataset.tip),e)
+}catch(_){}
+});
+
+document.addEventListener("mousemove",posTip);
+
+document.addEventListener("mouseout",e=>{
+if(e.target.closest?.("[data-tip]"))
+$("#tip").classList.remove("show")
+});
+
+document.addEventListener("focusin",e=>{
+let x=e.target.closest?.("[data-tip]");
+
+if(x)
+try{
+let r=x.getBoundingClientRect();
+
+showTip(
+JSON.parse(x.dataset.tip),
+{
+clientX:r.right,
+clientY:r.top
+}
+)
+}catch(_){}
+});
+
+document.addEventListener("focusout",()=>{
+$("#tip").classList.remove("show")
+});
+
+function renderCharacters(){
+let q=norm($("#search").value);
+let root=$("#characters");
+
+root.innerHTML="";
+
+DATA.characters
+.filter(c=>
+norm([c.name,c.role,c.race,c.class].join(" ")).includes(q)
+)
+.forEach(c=>{
+
+let b=document.createElement("button");
+
+b.className="avatar tipTarget";
+
+b.setAttribute(
+"data-tip",
+JSON.stringify({
+kind:c.kind||"Personaje",
+title:c.name,
+desc:c.short||c.history||"",
+rows:[
+["Raza",c.race||"—"],
+["Clase",[c.class,c.subclass].filter(Boolean).join(" — ")||"—"],
+["Nivel",c.level||"—"],
+["Rol",c.role||"—"],
+["Estado",c.state||"—"]
+],
+source:"Campaign Bible"
+})
+);
+
+b.innerHTML=
+`<div class="portrait">
+<img src="${image(c.portrait)}" alt="${esc(c.name)}">
+</div>
+<b>${esc(c.name)}</b>
+<small>${esc(c.role||"")}</small>`;
+
+b.onclick=()=>openChar(c);
+
+root.appendChild(b)
+})
+}
+
+function attackParts(a){
+a=toObj(a);
+
+if(a.attack_bonus||a.damage)
+return{
+name:a.name,
+bonus:a.attack_bonus||a.bonus||"",
+damage:a.damage||"",
+type:a.damage_type||a.type||"",
+props:a.properties||""
+};
+
+let t=a.name||"";
+
+let m=t.match(/^(.*?)\s([+-]\d+)\s+[—-]\s+(.+)$/);
+
+return{
+name:m?m[1]:t,
+bonus:m?m[2]:"",
+damage:m?m[3]:"",
+type:"",
+props:""
+}
+}
+
+function attackRows(c){
+return(c.attacks||[])
+.slice(0,4)
+.map(a=>{
+let p=attackParts(a);
+
+return`<div class="atkrow tipTarget" ${tipAttr(a,"Ataque",c.name)}>
+<span>${esc(p.name)}</span>
+<span>${esc(p.bonus)}</span>
+<span>${esc(p.damage)}</span>
+<span>${esc(p.type)}</span>
+<span>${esc(p.props)}</span>
+</div>`
+})
+.join("")
+}
 
 function openChar(c){
+ACTIVE=c.character_id;
 
-  ACTIVE =
-  c.id;
+$("#modalTitle").textContent=c.name;
 
+let s=c.stats||{};
+let t=traitsFor(c);
+let eq=c.equipment||[];
+let skills=skillsArray(c);
+let langs=(c.languages||[]).join(", ")||"—";
+let profs=(c.proficiencies||[]).join("; ")||"—";
 
-  $("#modalTitle")
-  .textContent =
-  c.name;
+$("#sheet").innerHTML=
+`<img class="bg" src="${drive(TEMPLATE)}&v=090">
 
-
-  let s =
-  c.stats || {};
-
-
-  let skills =
-  c.skills || [];
-
-
-  let L =
-  skills.slice(
-    0,
-    Math.ceil(
-      skills.length/2
-    )
-  );
-
-
-  let R =
-  skills.slice(
-    Math.ceil(
-      skills.length/2
-    )
-  );
-
-
-  let traits =
-  (c.traits || []).map(
-    x => typeof x === "string"
-    ? x
-    : x.name
-  );
-
-
-  let att =
-  c.attacks || [];
-
-
-  let eq =
-  c.equipment || [];
-
-
-  $("#sheet").innerHTML = `
-
-<img
-class="bg"
-src="${drive(TEMPLATE_ID)}"
->
-
-<div
-class="pic tipTarget"
-${tipAttr(
-  {
-    name:c.name,
-    description:c.short
-  },
-  "Personaje",
-  ""
-)}
->
-
-<img
-src="${image(c.portrait)}"
->
-
+<div class="pic tipTarget" ${tipAttr({name:c.name,description:c.short},"Personaje")}>
+<img src="${image(c.portrait)}">
 </div>
 
+<span class="f f-name">${esc(c.name)}</span>
+<span class="f f-race">${esc(c.race||"")}</span>
+<span class="f f-class">${esc(c.class||"")}</span>
+<span class="f f-sub">${esc(c.subclass||"")}</span>
+<span class="f f-bg">${esc(c.background||"")}</span>
+<span class="f f-level">${esc(c.level||"")}</span>
+<span class="f f-xp">${esc(c.xp||"")}</span>
+<span class="f f-align">${esc(c.alignment||"")}</span>
+<span class="f f-pb">+${esc(s.pb||"")}</span>
 
-<span class="sv f-name">
-${esc(c.name)}
-</span>
-
-<span class="sv f-race">
-${esc(c.race || "")}
-</span>
-
-<span class="sv f-class">
-${esc(c.class || "")}
-</span>
-
-<span class="sv f-sub">
-${esc(c.subclass || "")}
-</span>
-
-<span class="sv f-bg">
-${esc(c.background || "")}
-</span>
-
-<span class="sv f-lvl">
-${esc(c.level || "")}
-</span>
-
-<span class="sv f-xp">
-${esc(c.xp || "")}
-</span>
-
-<span class="sv f-align">
-${esc(c.alignment || "")}
-</span>
-
-<span class="sv f-pb">
-+${esc(s.pb || "")}
-</span>
-
-
-${[
-
-["FUE",s.str],
-
-["DES",s.dex],
-
-["CON",s.con],
-
-["INT",s.int],
-
-["SAB",s.wis],
-
-["CAR",s.cha]
-
-].map(
-  (a,i)=>`
-<div class="stat a${i+1}">
-${a[0]} ${fmt(a[1])}
-(${mod(a[1])})
-</div>
-`
+${["str","dex","con","int","wis","cha"].map((k,i)=>
+`<span class="score a${i+1}">${esc(val(s[k]))}</span>
+<span class="mod a${i+1}">${esc(mod(s[k]))}</span>`
 ).join("")}
 
+<span class="pb">+${esc(s.pb||"")}</span>
 
-<div class="combat ac">
-${fmt(s.ac)}
-</div>
+${saveOverlay(c)}
 
-<div class="combat init">
-${Number(s.initiative)>=0
-? "+"
-: ""
-}${fmt(s.initiative)}
-</div>
+<span class="combat ac">${esc(val(s.ac))}</span>
+<span class="combat ini">${Number(s.initiative)>=0?"+":""}${esc(val(s.initiative))}</span>
+<span class="combat spd">${esc(val(s.speed))}</span>
+<span class="combat hpm">${esc(val(s.hp_max))}</span>
+<span class="combat hpc">${esc(val(s.hp_current))}</span>
+<span class="combat hd">${esc(val(s.hit_dice))}</span>
 
-<div class="combat spd">
-${fmt(s.speed)}
-</div>
-
-<div class="combat hpmax">
-${fmt(s.hp_max)}
-</div>
-
-<div class="combat hpcur">
-${fmt(s.hp_current)}
-</div>
-
-<div class="combat hd">
-${fmt(s.hit_dice)}
-</div>
-
-
-<div class="skill skillsL">
-
-${L.map(
-x=>`
-<div
-class="tipTarget tipDot"
-${tipAttr(
-  x,
-  "Habilidad",
-  c.name
-)}
->
-${esc(x.name)}
-${esc(x.bonus || "")}
-</div>
-`
-).join("")}
-
-</div>
-
-
-<div class="skill skillsR">
-
-${R.map(
-x=>`
-<div
-class="tipTarget tipDot"
-${tipAttr(
-  x,
-  "Habilidad",
-  c.name
-)}
->
-${esc(x.name)}
-${esc(x.bonus || "")}
-</div>
-`
-).join("")}
-
-</div>
-
+${skillOverlay(c)}
 
 <div class="box raceBox">
-
-${liTech(
-  traits.slice(0,3),
-  "Poder",
-  c.name
-)}
-
+${techList(t.species,"Rasgo de especie",c.name)}
 </div>
-
 
 <div class="box classBox">
-
-${liTech(
-  traits.slice(3,7),
-  "Poder",
-  c.name
-)}
-
+${techList(t.class,"Rasgo de clase",c.name)}
 </div>
-
 
 <div class="box otherBox">
-
-${liTech(
-  traits.slice(7),
-  "Poder",
-  c.name
-)}
-
+${techList(t.other,"Dote / otro rasgo",c.name)}
 </div>
 
+<div class="box langBox">
+<b>Idiomas</b><br>
+${esc(langs)}
+<br><br>
+<b>Competencias</b><br>
+${esc(profs)}
+</div>
 
 <div class="box attacks">
-
-${liTech(
-  att,
-  "Ataque",
-  c.name
-)}
-
+${attackRows(c)}
 </div>
-
 
 <div class="box equip">
-
-${liTech(
-  eq.slice(0,6),
-  "Objeto",
-  c.name
-)}
-
+${techList(eq.slice(0,6),"Objeto",c.name)}
 </div>
 
-
-<div class="box inventory">
-
-${liTech(
-  eq.slice(6),
-  "Objeto",
-  c.name
-)}
-
+<div class="box inv">
+${techList(eq.slice(6),"Objeto",c.name)}
 </div>
-
 
 <div class="box notes">
+${esc(c.state||c.short||"")}
+</div>`;
 
-${esc(
-  c.state ||
-  c.short ||
-  ""
-)}
-
-</div>
-
-`;
-
-
-  $("#side").innerHTML = `
-
-<div class="card">
-
+$("#side").innerHTML=
+`<div class="card">
 <div class="status">
-${esc(c.kind || "")}
-·
-${esc(c.role || "")}
+${esc(c.kind||"")} · ${esc(c.role||"")}
 </div>
 
-<h3>
-${esc(c.name)}
-</h3>
+<h3>${esc(c.name)}</h3>
 
-<p>
-${esc(c.short || "")}
+<p class="long">
+${esc(c.short||"")}
 </p>
 
+<span class="pill">${esc(c.race||"—")}</span>
+
+<span class="pill">
+${esc(c.class||"—")} ${esc(c.subclass||"")}
+</span>
+
+<span class="pill">
+Nivel ${esc(c.level||"—")}
+</span>
 </div>
 
-
-${c.history
-? `
 <details open>
-
-<summary>
-Historia conocida
-</summary>
-
-<div class="body">
-${esc(c.history)}
+<summary>Historia completa conocida</summary>
+<div class="body long">
+${esc(c.history||"—")}
 </div>
-
 </details>
-`
-: ""
-}
-
-
-${c.appearance
-? `
-<details>
-
-<summary>
-Apariencia
-</summary>
-
-<div class="body">
-${esc(c.appearance)}
-</div>
-
-</details>
-`
-: ""
-}
-
-
-${c.personality
-? `
-<details>
-
-<summary>
-Personalidad
-</summary>
-
-<div class="body">
-${esc(c.personality)}
-</div>
-
-</details>
-`
-: ""
-}
-
 
 <details>
-
-<summary>
-Habilidades
-</summary>
-
-<div class="body">
-
-${liTech(
-  c.skills,
-  "Habilidad",
-  c.name
-)}
-
+<summary>Apariencia</summary>
+<div class="body long">
+${esc(c.appearance||"—")}
 </div>
-
 </details>
-
 
 <details>
+<summary>Personalidad, motivaciones y riesgos</summary>
+<div class="body long">
+${esc(c.personality||"—")}
+</div>
+</details>
 
-<summary>
-Rasgos y poderes
-</summary>
+<details open>
+<summary>Mecánicas completas</summary>
 
 <div class="body">
 
-${liTech(
-  c.traits,
-  "Poder",
-  c.name
-)}
+<div class="mechanics">
+
+<div class="mini">
+<b>Atributos</b>
+FUE ${val(s.str)} (${mod(s.str)}) ·
+DES ${val(s.dex)} (${mod(s.dex)}) ·
+CON ${val(s.con)} (${mod(s.con)}) ·
+INT ${val(s.int)} (${mod(s.int)}) ·
+SAB ${val(s.wis)} (${mod(s.wis)}) ·
+CAR ${val(s.cha)} (${mod(s.cha)})
+</div>
+
+<div class="mini">
+<b>Combate</b>
+CA ${val(s.ac)} ·
+iniciativa ${Number(s.initiative)>=0?"+":""}${val(s.initiative)} ·
+velocidad ${val(s.speed)} ·
+PG ${val(s.hp_current)}/${val(s.hp_max)} ·
+dados ${val(s.hit_dice)}
+</div>
+
+<div class="mini">
+<b>Salvaciones</b>
+${Object.entries(saves(c)).map(([k,v])=>`${k} ${v}`).join(" · ")||"—"}
+</div>
+
+<div class="mini">
+<b>Habilidades</b>
+${skills.map(x=>`${x.name} ${x.bonus||""}`).join(" · ")||"—"}
+</div>
 
 </div>
 
+${c.resources?.length
+?`<h4>Recursos</h4>${list(c.resources)}`
+:""}
+
+</div>
 </details>
 
+<details open>
+<summary>Rasgos de especie</summary>
+<div class="body">
+${techList(t.species,"Rasgo de especie",c.name)}
+</div>
+</details>
+
+<details open>
+<summary>Rasgos de clase</summary>
+<div class="body">
+${techList(t.class,"Rasgo de clase",c.name)}
+</div>
+</details>
+
+${t.other.length
+?`<details>
+<summary>Dotes y otros rasgos</summary>
+<div class="body">
+${techList(t.other,"Dote / rasgo",c.name)}
+</div>
+</details>`
+:""}
+
+<details>
+<summary>Habilidades</summary>
+<div class="body">
+${techList(skills,"Habilidad",c.name)}
+</div>
+</details>
+
+<details>
+<summary>Idiomas y competencias</summary>
+<div class="body">
+
+<h4>Idiomas</h4>
+${list(c.languages||[])}
+
+<h4>Competencias</h4>
+${list(c.proficiencies||[])}
+
+</div>
+</details>
 
 ${c.spells?.length
-? `
-<details>
-
-<summary>
-Conjuros
-</summary>
-
+?`<details open>
+<summary>Conjuros</summary>
 <div class="body">
-
-${liTech(
-  c.spells,
-  "Conjuro",
-  c.name
-)}
-
+${techList(c.spells,"Conjuro",c.name)}
 </div>
+</details>`
+:""}
 
+<details>
+<summary>Ataques</summary>
+<div class="body">
+${techList(c.attacks,"Ataque",c.name)}
+</div>
 </details>
-`
-: ""
+
+<details>
+<summary>Equipo e inventario</summary>
+<div class="body">
+${techList(c.equipment,"Objeto",c.name)}
+</div>
+</details>
+
+${c.relationships?.length
+?`<details>
+<summary>Relaciones</summary>
+<div class="body">
+${list(c.relationships)}
+</div>
+</details>`
+:""}
+
+<details>
+<summary>Estado actual</summary>
+<div class="body long">
+${esc(c.state||"—")}
+</div>
+</details>
+
+${c.pending?.length
+?`<details>
+<summary>Pendientes de continuidad</summary>
+<div class="body">
+${list(c.pending)}
+</div>
+</details>`
+:""}`;
+
+$("#modal").classList.add("open");
+document.body.style.overflow="hidden"
 }
 
-
-<details>
-
-<summary>
-Ataques
-</summary>
-
-<div class="body">
-
-${liTech(
-  c.attacks,
-  "Ataque",
-  c.name
-)}
-
-</div>
-
-</details>
-
-
-<details>
-
-<summary>
-Equipo
-</summary>
-
-<div class="body">
-
-${liTech(
-  c.equipment,
-  "Objeto",
-  c.name
-)}
-
-</div>
-
-</details>
-
-`;
-
-
-  $("#modal")
-  .classList
-  .add("open");
-
-
-  document.body.style.overflow =
-  "hidden";
-
+function list(a){
+return`<ul class="list">${(a||[]).map(x=>`<li>${esc(displayName(x))}</li>`).join("")}</ul>`
 }
-
 
 function renderHistory(){
-
-  let root =
-  $("#history");
-
-
-  root.innerHTML =
-  DATA.history.map(
-    h=>`
-
-<details>
+$("#history").innerHTML=
+DATA.history.map(h=>
+`<details>
 
 <summary>
-${String(h.order).padStart(2,"0")}
-—
-${esc(h.title)}
+${String(h.order).padStart(2,"0")} — ${esc(h.title)}
 </summary>
 
 <div class="body">
 
-<p>
-<b>
-${esc(h.summary || "")}
-</b>
-</p>
+${h.image
+?`<img class="map" style="max-height:360px" src="${image(h.image)}">`
+:""}
 
 <p>
-${esc(h.full_text || "")}
+<b>${esc(h.summary||"")}</b>
 </p>
 
+<p class="long">
+${esc(h.full_text||"")}
+</p>
+
+${h.quotes?.map(q=>
+`<div class="quote">${esc(q)}</div>`
+).join("")||""}
 
 ${h.events?.length
-? `
-<h4>Eventos</h4>
-${list(h.events)}
-`
-: ""
-}
-
+?`<h4>Eventos</h4>${list(h.events)}`
+:""}
 
 ${h.decisions?.length
-? `
-<h4>Decisiones</h4>
-${list(h.decisions)}
-`
-: ""
-}
-
+?`<h4>Decisiones</h4>${list(h.decisions)}`
+:""}
 
 ${h.loot?.length
-? `
-<h4>Objetos / pistas</h4>
-${list(h.loot)}
-`
-: ""
-}
+?`<h4>Objetos / pistas</h4>${list(h.loot)}`
+:""}
 
-
-<div class="rolls">
-
-${(h.rolls || []).map(
-  x=>`
-<span class="roll">
-${esc(x)}
-</span>
-`
-).join("")}
+${h.consequences?.length
+?`<h4>Consecuencias</h4>${list(h.consequences)}`
+:""}
 
 </div>
-
-</div>
-
-</details>
-
-`
-  ).join("");
-
+</details>`
+).join("")
 }
-
 
 function renderNpcs(){
-
-  $("#npcsGrid").innerHTML =
-  DATA.npcs.map(
-    n=>`
-
-<article
-class="card tipTarget"
-${tipAttr(
-  {
-    name:n.name,
-    description:
-    n.known ||
-    n.description,
-    technical_details:
-    n.relationship,
-    source:
-    "Campaign Bible"
-  },
-  "PNJ",
-  ""
-)}
->
+$("#npcs").innerHTML=
+(DATA.npcs||[]).map(n=>
+`<article class="card">
 
 <div class="status">
-${esc(n.status || "")}
+${esc(n.status||"")}
 </div>
 
-<h3>
-${esc(n.name)}
-</h3>
+<h3>${esc(n.name)}</h3>
 
 <span class="chip">
-${esc(n.role || "")}
+${esc(n.role||"")}
 </span>
 
-<p>
-${esc(
-  n.known ||
-  n.description ||
-  ""
-)}
+<p class="long">
+${esc(n.known||n.known_info||n.description||"")}
 </p>
 
-</article>
+${n.appearance
+?`<details>
+<summary>Apariencia</summary>
+<div class="body">${esc(n.appearance)}</div>
+</details>`
+:""}
 
-`
-  ).join("");
+${n.relationship
+?`<details>
+<summary>Relación</summary>
+<div class="body">${esc(n.relationship)}</div>
+</details>`
+:""}
 
+</article>`
+).join("")
 }
-
 
 function renderBase(){
+let b=DATA.base||DEMO_DATA.base;
 
-  let b =
-  DATA.base ||
-  FALLBACK.base;
+$("#baseName").textContent=b.name||"Base";
 
+$("#basePurpose").textContent=
+(b.purpose||"")+" · "+(b.integrity||"");
 
-  $("#baseName").textContent =
-  b.name ||
-  "Base";
+$("#baseMap").src=
+image(
+b.map||
+"https://drive.google.com/thumbnail?id=1yyB-3H2p774C8lJEtl3yHKki5vbXmJhp&sz=w2000"
+);
 
+let total=Number(b.functions_total)||1;
+let done=Number(b.functions_restored)||0;
 
-  $("#basePurpose").textContent =
-  b.purpose ||
-  "";
+$("#baseProgress").style.width=
+100*done/total+"%";
 
+$("#baseRooms").innerHTML=
+(b.rooms||[]).map(r=>
+`<div class="card" style="margin:7px 0">
 
-  $("#baseMap").src =
-  image(
-    b.map ||
-    KNOWN_ASSETS.base
-  );
-
-
-  let total =
-  Number(
-    b.functions_total
-  ) || 1;
-
-
-  let done =
-  Number(
-    b.functions_restored
-  ) || 0;
-
-
-  $("#baseProgress").style.width =
-  100 * done / total + "%";
-
-
-  $("#baseRooms").innerHTML =
-  (b.rooms || []).map(
-    r=>`
-
-<div
-class="card"
-style="margin:7px 0"
->
-
-<div
-class="status ${
-norm(r.status).includes("oper")
-? "ok"
-: "warn"
-}"
->
-${esc(r.status || "")}
+<div class="status">
+${esc(r.status||"")}
 </div>
 
-<b>
-${esc(r.name)}
-</b>
+<b>${esc(r.name)}</b>
 
-<div
-style="
-color:#969188;
-font-size:.75rem
-"
->
-${esc(r.owner || "")}
+<div style="color:#969188;font-size:.75rem">
+${esc(r.owner||"")}
 </div>
 
-<div
-style="
-margin-top:5px;
-color:#c4bdb3;
-font-size:.82rem
-"
->
-${esc(r.desc || "")}
-</div>
+<p>
+${esc(r.desc||r.description||"")}
+</p>
 
-</div>
+</div>`
+).join("");
 
-`
-  ).join("");
-
-
-  $("#kBase").textContent =
-  done + "/" + total;
-
+$("#kBase").textContent=
+done+"/"+total
 }
-
 
 function renderBestiary(){
+$("#bestiary").innerHTML=
+(DATA.bestiary||[]).map(m=>
+`<article class="card monster">
 
-  $("#bestiary").innerHTML =
-  DATA.bestiary.map(
-    m=>`
-
-<article class="card">
-
-<img
-class="map"
-style="aspect-ratio:16/9"
-src="${image(m.image)}"
->
+<img src="${image(m.image)}">
 
 <div class="status">
-${esc(m.status || "")}
+${esc(m.status||"")}
 </div>
 
-<h3>
-${esc(m.name)}
-</h3>
+<h3>${esc(m.name)}</h3>
 
 <span class="chip">
-${esc(m.type || "")}
+${esc(m.type||"")}
 </span>
 
 <span class="chip">
-CA ${esc(m.ac || "—")}
+CA ${esc(m.ac||"—")}
 </span>
 
 <span class="chip">
-PG ${esc(m.hp || "—")}
+PG ${esc(m.hp||"—")}
 </span>
 
 <p>
-${esc(
-  m.desc ||
-  m.description ||
-  ""
-)}
+${esc(m.desc||m.description||"")}
 </p>
 
-</article>
+${m.traits?.length
+?`<details>
+<summary>Rasgos</summary>
+<div class="body">
+${list(m.traits)}
+</div>
+</details>`
+:""}
 
-`
-  ).join("");
+${m.actions?.length
+?`<details>
+<summary>Acciones</summary>
+<div class="body">
+${list(m.actions)}
+</div>
+</details>`
+:""}
 
+</article>`
+).join("")
 }
-
 
 function renderLore(){
-
-  $("#loreList").innerHTML =
-  DATA.lore.map(
-    x=>`
-
-<details>
+$("#lore").innerHTML=
+(DATA.lore||[]).map(x=>
+`<details>
 
 <summary>
-${esc(x.category || "")}
-—
-${esc(x.title)}
+${esc(x.category||"")} — ${esc(x.title)}
 </summary>
 
-<div class="body">
-${esc(
-  x.body_public ||
-  x.body ||
-  x.text_public ||
-  ""
-)}
+<div class="body long">
+${esc(x.body||x.body_public||x.text_public||"")}
 </div>
 
-</details>
-
-`
-  ).join("");
-
+</details>`
+).join("")
 }
-
 
 function renderMysteries(){
-
-  $("#mysteries").innerHTML =
-  DATA.mysteries.map(
-    m=>`
-
-<article class="card">
+$("#mysteries").innerHTML=
+(DATA.mysteries||[]).map(m=>
+`<article class="card">
 
 <div class="status">
-${esc(m.status || "")}
+${esc(m.status||"")}
 </div>
 
-<h3>
-${esc(m.title)}
-</h3>
+<h3>${esc(m.title)}</h3>
 
 <div class="progress">
-
-<i
-style="width:${Number(m.progress)||0}%"
-></i>
-
+<i style="width:${Number(m.progress)||0}%"></i>
 </div>
 
 <p>
-${esc(m.known || "")}
+${esc(m.known||"")}
 </p>
 
+${m.suspicion
+?`<p>
+<b>Hipótesis:</b>
+${esc(m.suspicion)}
+</p>`
+:""}
+
+${m.evidence?.length
+?`<details>
+<summary>Evidencias</summary>
+<div class="body">
+${list(m.evidence)}
+</div>
+</details>`
+:""}
 
 ${m.questions?.length
-? `
-<b>
-Preguntas abiertas
-</b>
-
+?`<details>
+<summary>Preguntas abiertas</summary>
+<div class="body">
 ${list(m.questions)}
-`
-: ""
+</div>
+</details>`
+:""}
+
+</article>`
+).join("")
 }
-
-</article>
-
-`
-  ).join("");
-
-}
-
 
 function renderItems(){
-
-  $("#items").innerHTML =
-  DATA.items.map(
-    i=>`
-
-<article
+$("#items").innerHTML=
+(DATA.items||[]).map(i=>
+`<article
 class="card tipTarget"
-${tipAttr(
-  i,
-  "Objeto",
-  ""
-)}
->
+${tipAttr(i,"Objeto")}>
 
 <div class="status">
-${esc(i.status || "")}
+${esc(i.status||"")}
 </div>
 
-<h3>
-${esc(i.name)}
-</h3>
+<h3>${esc(i.name)}</h3>
 
 <span class="chip">
-${esc(i.type || "")}
+${esc(i.type||"")}
 </span>
 
 <p>
-${esc(
-  i.description ||
-  i.mechanics ||
-  ""
-)}
+${esc(i.description||i.mechanics||"")}
 </p>
 
-<small
-style="color:#918b83"
->
-${esc(
-  i.source ||
-  i.source_book ||
-  ""
-)}
+<small>
+${esc(i.links||i.source||"")}
 </small>
 
-</article>
-
-`
-  ).join("");
-
+</article>`
+).join("")
 }
 
-
 function renderRules(){
-
-  $("#rules").innerHTML =
-  DATA.rules.map(
-    r=>`
-
-<details>
+$("#rules").innerHTML=
+(DATA.rules||[]).map(r=>
+`<details>
 
 <summary>
-${esc(
-  r.title ||
-  r.name
-)}
+${esc(r.title||r.name)}
 </summary>
 
 <div class="body">
 
-<div class="rolls">
-
-<span class="roll">
-${esc(
-  r.status ||
-  r.rule_type ||
-  ""
-)}
+<span class="pill">
+${esc(r.status||r.rule_type||"")}
 </span>
 
-<span class="roll">
-${esc(
-  r.source ||
-  r.source_book ||
-  ""
-)}
+<span class="pill">
+${esc(r.source||r.source_book||"")}
 </span>
-
-</div>
 
 <p>
-${esc(
-  r.body ||
-  r.notes ||
-  r.summary ||
-  ""
-)}
+${esc(r.body||r.notes||r.summary||"")}
 </p>
 
+${r.application
+?`<p>
+<b>Aplicación:</b>
+${esc(r.application)}
+</p>`
+:""}
+
 </div>
-
-</details>
-
-`
-  ).join("");
-
+</details>`
+).join("")
 }
 
-
 function renderCheckpoint(){
+let c=DATA.checkpoint||DEMO_DATA.checkpoint;
 
-  let c =
-  DATA.checkpoint ||
-  FALLBACK.checkpoint;
-
-
-  $("#checkpointBox").innerHTML = `
-
-<div
-class="panel"
-style="padding:16px"
->
+$("#checkpoint").innerHTML=
+`<div class="panel" style="padding:16px">
 
 <div class="eyebrow">
-${esc(
-  c.title ||
-  "Checkpoint"
-)}
+${esc(c.title||"Checkpoint")}
 </div>
 
 <h3>
-${esc(
-  c.location ||
-  c.location_id ||
-  ""
-)}
+${esc(c.location||c.location_id||"")}
 </h3>
-
 
 <div class="two">
 
 <div>
 
-<b>
-Presentes
-</b>
+<b>Presentes</b>
+${list(arr(c.present||c.present_entity_ids))}
 
-${list(
-  arr(
-    c.present ||
-    c.present_entity_ids
-  )
-)}
-
-<b>
-Estado
-</b>
-
-${list(
-  arr(
-    c.state ||
-    c.base_state
-  )
-)}
+<b>Estado</b>
+${list(arr(c.state||c.base_state))}
 
 </div>
-
 
 <div>
 
-<b>
-Pendiente de decisión
-</b>
-
-${list(
-  arr(
-    c.pending ||
-    c.pending_decisions
-  )
-)}
+<b>Pendiente</b>
+${list(arr(c.pending||c.pending_decisions))}
 
 </div>
 
 </div>
-
 
 <div class="quote">
-
-${esc(
-  c.last_line ||
-  c.last_spoken_line ||
-  ""
-)}
-
+${esc(c.last_line||c.last_spoken_line||"")}
 </div>
 
-</div>
-
-`;
-
+</div>`
 }
 
-
 function renderChanges(){
-
-  $("#changes").innerHTML =
-  [...DATA.changelog]
-  .reverse()
-  .map(
-    c=>`
-
-<div
-class="card"
-style="margin-bottom:7px"
->
+$("#changes").innerHTML=
+[...(DATA.changelog||[])]
+.reverse()
+.map(c=>
+`<div class="card" style="margin-bottom:7px">
 
 <b>
-${esc(c.version || "")}
+${esc(c.version||"")}
 </b>
 
 ·
 
-<span
-style="color:#8f8990"
->
-${esc(
-  c.date ||
-  c.timestamp ||
-  ""
-)}
+<span style="color:#8f8990">
+${esc(c.date||c.timestamp||"")}
 </span>
 
 <div>
-${esc(
-  c.change ||
-  c.summary ||
-  ""
-)}
+${esc(c.change||c.summary||"")}
 </div>
 
-</div>
-
-`
-  ).join("");
-
+</div>`
+).join("")
 }
-
 
 function renderAll(){
+renderCharacters();
+renderHistory();
+renderNpcs();
+renderBase();
+renderBestiary();
+renderLore();
+renderMysteries();
+renderItems();
+renderRules();
+renderCheckpoint();
+renderChanges();
 
-  renderCharacters();
+let k=
+DATA.characters.find(x=>x.character_id==="PC_KAZYM")
+||
+DATA.characters[0];
 
-  renderHistory();
-
-  renderNpcs();
-
-  renderBase();
-
-  renderBestiary();
-
-  renderLore();
-
-  renderMysteries();
-
-  renderItems();
-
-  renderRules();
-
-  renderCheckpoint();
-
-  renderChanges();
-
-
-  let k =
-  DATA.characters.find(
-    x=>x.id === "PC_KAZYM"
-  )
-  ||
-  DATA.characters[0];
-
-
-  if(k){
-
-    $("#kLvl").textContent =
-    k.level ||
-    "—";
-
-
-    $("#kXp").textContent =
-    k.xp ||
-    "—";
-
-  }
-
-
-  $("#kAllies").textContent =
-  Math.max(
-    0,
-    DATA.characters.length - 1
-  );
-
+if(k){
+$("#kLvl").textContent=k.level||"—";
+$("#kXp").textContent=k.xp||"—"
 }
 
+$("#kAllies").textContent=
+Math.max(
+0,
+DATA.characters.filter(
+x=>
+x.character_id!=="PC_KAZYM"
+&&
+x.kind!=="Activo de base"
+).length
+)
+}
 
 async function refresh(){
+try{
 
-  try{
+$("#refresh").disabled=true;
 
-    $("#refresh").disabled =
-    true;
+DATA=await load();
 
+renderAll();
 
-    DATA =
-    await load();
+setMode(
+sheetId()
+?"Sheet vivo · "+new Date().toLocaleTimeString()
+:"Datos locales",
+sheetId()
+?"live"
+:""
+)
 
+}catch(e){
 
-    renderAll();
+console.error(e);
 
-
-    mode(
-      sheetId()
-      ? (
-          "Sheet vivo · " +
-          new Date()
-          .toLocaleTimeString()
-        )
-      : "Datos locales",
-      sheetId()
-      ? "live"
-      : ""
-    );
-
-  }
-
-  catch(e){
-
-    console.error(e);
-
-
-    if(!DATA){
-
-      DATA =
-      FALLBACK;
-
-
-      renderAll();
-
-    }
-
-
-    mode(
-      "Error de conexión",
-      "err"
-    );
-
-  }
-
-  finally{
-
-    $("#refresh").disabled =
-    false;
-
-  }
-
+if(!DATA){
+DATA=DEMO_DATA;
+renderAll()
 }
 
+setMode(
+"Error de conexión",
+"err"
+)
 
-$("#cfg").onclick = ()=>{
+}finally{
 
-  let x =
-  prompt(
+$("#refresh").disabled=false
 
-    "Pega el ID o URL del Google Sheet público de la campaña.\nNo pongas secretos del DM en ese Sheet.",
+}
+}
 
-    sheetId()
+$("#cfg").onclick=()=>{
 
-  );
-
-
-  if(x === null)
-    return;
-
-
-  x =
-  x.trim()
-  .replace(
-    /^.*\/spreadsheets\/d\//,
-    ""
-  )
-  .replace(
-    /\/.*$/,
-    ""
-  );
-
-
-  x
-  ? localStorage.setItem(
-      "kazym_sheet_id",
-      x
-    )
-  : localStorage.removeItem(
-      "kazym_sheet_id"
-    );
-
-
-  refresh();
-
-};
-
-
-$("#refresh").onclick =
-refresh;
-
-
-$("#search").oninput =
-renderCharacters;
-
-
-$("#close").onclick = ()=>{
-
-  $("#modal")
-  .classList
-  .remove("open");
-
-
-  document.body.style.overflow =
-  "";
-
-};
-
-
-$("#modal").onclick = e=>{
-
-  if(
-    e.target.id === "modal"
-  )
-    $("#close").click();
-
-};
-
-
-document.addEventListener(
-  "keydown",
-  e=>{
-
-    if(
-      e.key === "Escape"
-    )
-      $("#close").click();
-
-  }
+let x=prompt(
+"Pega el ID o URL del Google Sheet público de la campaña. No pongas secretos del DM en ese Sheet.",
+sheetId()
 );
 
+if(x===null)return;
+
+x=x
+.trim()
+.replace(/^.*\/spreadsheets\/d\//,"")
+.replace(/\/.*$/,"");
+
+x
+?localStorage.setItem("kazym_sheet_id",x)
+:localStorage.removeItem("kazym_sheet_id");
+
+refresh()
+};
+
+$("#refresh").onclick=
+refresh;
+
+$("#search").oninput=
+renderCharacters;
+
+$("#close").onclick=()=>{
+
+$("#modal")
+.classList
+.remove("open");
+
+document.body.style.overflow=""
+
+};
+
+$("#modal").onclick=e=>{
+
+if(e.target.id==="modal")
+$("#close").click()
+
+};
+
+document.addEventListener(
+"keydown",
+e=>{
+
+if(e.key==="Escape")
+$("#close").click()
+
+}
+);
 
 refresh();
 
+TIMER=setInterval(
+()=>{
 
-TIMER =
-setInterval(
-  ()=>{
+if(sheetId())
+refresh()
 
-    if(sheetId())
-      refresh();
-
-  },
-  60000
+},
+CFG.refresh
 );
 
 </script>
-
 </body>
 </html>
