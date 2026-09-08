@@ -4,530 +4,4248 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="dark">
-<title>Kazym Campaign Codex · v2.0</title>
+<title>Kazym Campaign Codex · v2.3</title>
+
 <style>
-:root{--bg:#0b0d12;--panel:#171a22;--panel2:#20242f;--line:#393e4d;--ink:#eee6d8;--muted:#aaa297;--gold:#b89a67;--good:#98c393;--bad:#d48b91;--paper:#1d1813}
-*{box-sizing:border-box} html{scroll-behavior:smooth}
-body{margin:0;background:radial-gradient(circle at 20% -10%,#2b2138 0,transparent 32%),linear-gradient(#0a0c11,#11141b);color:var(--ink);font-family:Georgia,"Times New Roman",serif}
+:root{
+  --bg:#0b0d12;
+  --panel:#171a22;
+  --line:#393e4d;
+  --ink:#eee6d8;
+  --muted:#aaa297;
+  --gold:#b89a67;
+  --paper:#1d1813
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 20% -10%,#2b2138 0,transparent 32%),
+    linear-gradient(#0a0c11,#11141b);
+  color:var(--ink);
+  font-family:Georgia,"Times New Roman",serif
+}
+
 button,input{font:inherit}
-.top{position:sticky;top:0;z-index:50;background:#0d0f16ee;border-bottom:1px solid #303440;backdrop-filter:blur(10px)}
-nav{max-width:1440px;margin:auto;padding:10px 18px;display:flex;align-items:center;gap:7px;overflow-x:auto}
-.brand{font-weight:900;letter-spacing:.12em;text-transform:uppercase;margin-right:auto;white-space:nowrap}
-nav a,.btn,.badge{border:1px solid #3c4150;background:#171a23;color:#dcd3c7;border-radius:8px;padding:7px 9px;text-decoration:none;font-size:.73rem;white-space:nowrap}
-.btn{cursor:pointer} .btn:hover,nav a:hover{background:#252936}
-.badge.live{border-color:#4e6b50;color:#a8d4a1} .badge.err{border-color:#75484d;color:#eba1a7}
-.hero,main{max-width:1440px;margin:auto;padding-left:18px;padding-right:18px}
-.hero{padding-top:48px;padding-bottom:22px;display:grid;grid-template-columns:1.45fr .65fr;gap:20px}
-.eyebrow{color:var(--gold);text-transform:uppercase;letter-spacing:.17em;font-size:.7rem}
-.hero h1{font-size:clamp(2.6rem,7vw,5.7rem);line-height:.9;margin:.15em 0}
-.hero p{color:#c7c0b5;line-height:1.62;max-width:880px}
-.panel,.card,details{background:linear-gradient(180deg,#1b1f2afa,#141720fa);border:1px solid #343947;border-radius:12px}
-.kpis{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:15px}
-.kpi{background:#10131a;border:1px solid #343947;border-radius:8px;padding:11px} .kpi b{display:block;font-size:1.55rem} .kpi span{color:#989188;font-size:.7rem}
-section{padding:31px 0} .head{display:flex;gap:14px;align-items:end;margin-bottom:15px} .head h2{margin:0;font-size:2rem} .head p{margin:0;color:var(--muted);max-width:760px}
-.search{margin-left:auto;background:#11141c;color:#eee;border:1px solid #353a48;border-radius:8px;padding:9px 11px;min-width:220px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:13px}
-.avatars{grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:16px}
-.avatar{border:0;background:none;color:inherit;text-align:center;cursor:pointer;padding:0}
-.portrait{aspect-ratio:1;border:1px solid #404553;border-radius:13px;overflow:hidden;background:radial-gradient(circle,#292b3a,#0d1016 70%)}
-.portrait img{width:100%;height:100%;object-fit:contain;transition:.2s} .avatar:hover img{transform:scale(1.04)}
-.avatar b{display:block;margin-top:7px} .avatar small{color:#969087}
-.status{font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:#bbb1a5}
-.chip,.pill{display:inline-block;border:1px solid #404654;background:#222631;border-radius:999px;padding:4px 7px;font-size:.68rem;color:#c5bdb2;margin:2px}
-details{margin-bottom:8px;overflow:hidden} summary{cursor:pointer;padding:14px 16px;font-weight:800;list-style:none} summary:before{content:"+";color:var(--gold);margin-right:9px} details[open] summary:before{content:"–"}
-.body{padding:0 16px 16px;color:#cbc3b8;line-height:1.62} .long{white-space:pre-line} .quote{border-left:3px solid var(--gold);background:#11151d;padding:10px 13px;margin:10px 0;font-style:italic}
-.list{margin:.3rem 0;padding-left:1.15rem} .list li{margin:.25rem 0}
-.two{display:grid;grid-template-columns:1.1fr .9fr;gap:15px} .map{width:100%;max-height:520px;border:1px solid #353b47;border-radius:12px;background:#08090d;object-fit:contain}
-.progress{height:9px;border:1px solid #393f4b;border-radius:999px;background:#11141b;overflow:hidden} .progress i{display:block;height:100%;background:linear-gradient(90deg,#6e5c83,#b08f72)}
-.card{padding:14px} .monster img,.cardImg{width:100%;aspect-ratio:16/9;object-fit:contain;background:#090a0e;border-radius:9px;margin-bottom:8px}
-.empty{padding:20px;border:1px dashed #424756;border-radius:10px;color:#918b83;text-align:center}
-.modal{position:fixed;inset:0;z-index:100;display:none;background:#050609ea;padding:16px;overflow:auto} .modal.open{display:block}
-.shell{max-width:1600px;margin:auto;background:#0e1118;border:1px solid #3d4351;border-radius:14px;overflow:hidden}
-.bar{position:sticky;top:0;z-index:8;background:#171b24;border-bottom:1px solid #343947;padding:10px 12px;display:flex;align-items:center} .bar h2{margin:0 auto 0 0;font-size:1.15rem}
-.char{display:grid;grid-template-columns:minmax(1000px,1.55fr) minmax(340px,.45fr);gap:14px;padding:14px}
-.sheet{position:relative;aspect-ratio:1672/941;min-width:1000px;background:#090a0e;border-radius:10px;overflow:hidden}
-.sheet>.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:fill}
-.pic{position:absolute;left:78.7%;top:10.6%;width:10.7%;height:18.7%;display:grid;place-items:center;overflow:hidden;z-index:3} .pic img{max-width:100%;max-height:100%;object-fit:contain}
-.f,.score,.mod,.combat,.skill,.save,.box,.pb{position:absolute;z-index:4;color:var(--paper)}
-.f{font-weight:700;font-size:13px;line-height:1;white-space:nowrap;overflow:hidden;text-overflow:clip}
-.f-name{left:16%;top:16.55%;width:16.7%;height:2.4%} .f-race{left:16%;top:20.15%;width:16.7%;height:2.4%} .f-class{left:16%;top:23.85%;width:16.7%;height:2.4%}
-.f-sub{left:41.15%;top:16.55%;width:14.6%;height:2.4%} .f-bg{left:41.15%;top:20.15%;width:14.6%;height:2.4%} .f-level{left:37.55%;top:23.85%;width:4.15%;height:2.4%;text-align:center}
-.f-xp{left:49.55%;top:23.85%;width:6.15%;height:2.4%;text-align:center} .f-align{left:64.55%;top:16.55%;width:10.25%;height:2.4%} .f-pb{left:69.95%;top:23.75%;width:2.85%;height:2.4%;text-align:center}
-.score,.mod,.combat,.pb{font-weight:900;text-align:center} .score{left:3.15%;width:2.7%;font-size:19px} .mod{left:11.55%;width:2.45%;font-size:16px}
-.a1{top:34.55%} .a2{top:42.15%} .a3{top:49.75%} .a4{top:57.35%} .a5{top:64.95%} .a6{top:72.55%} .pb{left:10.85%;top:74.15%;width:2.9%;font-size:17px}
-.save{left:23.1%;width:4.4%;font-weight:800;text-align:center;font-size:10px} .sv1{top:34.55%} .sv2{top:37.65%} .sv3{top:40.75%} .sv4{top:43.85%} .sv5{top:46.95%} .sv6{top:50.05%}
-.combat{top:37.1%;font-size:20px} .ac{left:32.05%;width:3.15%} .ini{left:39.75%;width:3.15%} .spd{left:47.2%;width:3.45%} .hpm{left:55.7%;width:5.2%} .hpc{left:62.2%;width:5.2%} .hd{left:71.15%;width:4.15%}
-.skill{font-weight:800;font-size:9px;text-align:right;width:3%} .sl{left:43.75%} .sr{left:58.05%} .sk1{top:49.42%} .sk2{top:51.72%} .sk3{top:54.02%} .sk4{top:56.32%} .sk5{top:58.62%} .sk6{top:60.92%} .sk7{top:63.22%} .sk8{top:65.52%} .sk9{top:67.82%}
-.box{font-size:9px;line-height:1.12;overflow:hidden;padding:2px 4px} .box ul{margin:0;padding-left:12px} .box li{margin:0 0 2px}
-.raceBox{left:78.65%;top:32.55%;width:10.7%;height:10.5%} .classBox{left:78.65%;top:47%;width:10.7%;height:9.6%} .otherBox{left:78.65%;top:59.95%;width:10.7%;height:9.2%}
-.langBox{left:62.25%;top:48.35%;width:14.6%;height:19.1%} .attacks{left:15.75%;top:78.3%;width:24.1%;height:16.4%} .equip{left:41%;top:75.25%;width:11.8%;height:19.8%} .inv{left:53.55%;top:75.25%;width:13.9%;height:19.8%} .notes{left:74.15%;top:86.4%;width:15.05%;height:9%}
-.atkrow{display:grid;grid-template-columns:31% 17% 20% 16% 16%;align-items:center;height:20%;overflow:hidden} .atkrow span{overflow:hidden;white-space:nowrap;padding:0 2px}
-.side{display:flex;flex-direction:column;gap:9px} .side .card{padding:15px}
-.mechanics{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:8px} .mini{background:#11141b;border:1px solid #353b47;border-radius:8px;padding:10px;color:#c9c1b5} .mini b{display:block;color:#e8ded0;margin-bottom:5px}
-.tipTarget{cursor:help} .tipDot{border-bottom:1px dotted #8e7656}
-#tip{display:none;position:fixed;z-index:9999;pointer-events:none;width:min(430px,calc(100vw - 24px));max-height:min(520px,calc(100vh - 24px));overflow:auto;background:#141821f8;border:1px solid #5a5066;border-radius:11px;padding:13px 14px;box-shadow:0 20px 60px #0008}
-#tip.show{display:block} #tip .k{color:var(--gold);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase} #tip h4{margin:3px 0 7px} #tip p{margin:0;color:#d0c7bb;font-size:.82rem;line-height:1.45;white-space:pre-line}
-#tip dl{display:grid;grid-template-columns:auto 1fr;gap:4px 9px;margin:9px 0 0;padding-top:8px;border-top:1px solid #373c47;font-size:.73rem} #tip dt{color:#9f978c;font-weight:700} #tip dd{margin:0;color:#ddd5c8}
-footer{text-align:center;color:#8d877f;border-top:1px solid #2e333e;padding:25px 18px;font-size:.74rem}
-@media(max-width:1100px){.hero,.two{grid-template-columns:1fr} .char{display:block;overflow-x:auto} .side{margin-top:14px} .head{align-items:start;flex-direction:column} .search{margin-left:0}}
-@media(max-width:650px){.grid{grid-template-columns:1fr} .avatars{grid-template-columns:repeat(2,1fr)}}
+
+.top{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:#0d0f16ee;
+  border-bottom:1px solid #303440;
+  backdrop-filter:blur(10px)
+}
+
+nav{
+  max-width:1440px;
+  margin:auto;
+  padding:10px 18px;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  overflow-x:auto
+}
+
+.brand{
+  font-weight:900;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  margin-right:auto;
+  white-space:nowrap
+}
+
+nav a,.btn,.badge{
+  border:1px solid #3c4150;
+  background:#171a23;
+  color:#dcd3c7;
+  border-radius:8px;
+  padding:7px 9px;
+  text-decoration:none;
+  font-size:.73rem;
+  white-space:nowrap
+}
+
+.btn{cursor:pointer}
+.btn:hover,nav a:hover{background:#252936}
+
+.badge.live{
+  border-color:#4e6b50;
+  color:#a8d4a1
+}
+
+.badge.err{
+  border-color:#75484d;
+  color:#eba1a7
+}
+
+.hero,main{
+  max-width:1440px;
+  margin:auto;
+  padding-left:18px;
+  padding-right:18px
+}
+
+.hero{
+  padding-top:48px;
+  padding-bottom:22px;
+  display:grid;
+  grid-template-columns:1.45fr .65fr;
+  gap:20px
+}
+
+.eyebrow{
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:.17em;
+  font-size:.7rem
+}
+
+.hero h1{
+  font-size:clamp(2.6rem,7vw,5.7rem);
+  line-height:.9;
+  margin:.15em 0
+}
+
+.hero p{
+  color:#c7c0b5;
+  line-height:1.62;
+  max-width:880px
+}
+
+.panel,.card,details{
+  background:linear-gradient(180deg,#1b1f2afa,#141720fa);
+  border:1px solid #343947;
+  border-radius:12px
+}
+
+.kpis{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+  padding:15px
+}
+
+.kpi{
+  background:#10131a;
+  border:1px solid #343947;
+  border-radius:8px;
+  padding:11px
+}
+
+.kpi b{
+  display:block;
+  font-size:1.55rem
+}
+
+.kpi span{
+  color:#989188;
+  font-size:.7rem
+}
+
+section{padding:31px 0}
+
+.head{
+  display:flex;
+  gap:14px;
+  align-items:end;
+  margin-bottom:15px
+}
+
+.head h2{
+  margin:0;
+  font-size:2rem
+}
+
+.head p{
+  margin:0;
+  color:var(--muted);
+  max-width:760px
+}
+
+.search{
+  margin-left:auto;
+  background:#11141c;
+  color:#eee;
+  border:1px solid #353a48;
+  border-radius:8px;
+  padding:9px 11px;
+  min-width:220px
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:13px
+}
+
+.avatars{
+  grid-template-columns:repeat(auto-fill,minmax(145px,1fr));
+  gap:16px
+}
+
+.avatar{
+  border:0;
+  background:none;
+  color:inherit;
+  text-align:center;
+  cursor:pointer;
+  padding:0
+}
+
+.portrait{
+  aspect-ratio:1;
+  border:1px solid #404553;
+  border-radius:13px;
+  overflow:hidden;
+  background:radial-gradient(circle,#292b3a,#0d1016 70%)
+}
+
+.portrait img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  transition:.2s
+}
+
+.avatar:hover img{transform:scale(1.04)}
+
+.avatar b{
+  display:block;
+  margin-top:7px
+}
+
+.avatar small{color:#969087}
+
+.status{
+  font-size:.65rem;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:#bbb1a5
+}
+
+.chip,.pill{
+  display:inline-block;
+  border:1px solid #404654;
+  background:#222631;
+  border-radius:999px;
+  padding:4px 7px;
+  font-size:.68rem;
+  color:#c5bdb2;
+  margin:2px
+}
+
+details{
+  margin-bottom:8px;
+  overflow:hidden
+}
+
+summary{
+  cursor:pointer;
+  padding:14px 16px;
+  font-weight:800;
+  list-style:none
+}
+
+summary:before{
+  content:"+";
+  color:var(--gold);
+  margin-right:9px
+}
+
+details[open] summary:before{content:"–"}
+
+.body{
+  padding:0 16px 16px;
+  color:#cbc3b8;
+  line-height:1.62
+}
+
+.long{white-space:pre-line}
+
+.quote{
+  border-left:3px solid var(--gold);
+  background:#11151d;
+  padding:10px 13px;
+  margin:10px 0;
+  font-style:italic
+}
+
+.list{
+  margin:.3rem 0;
+  padding-left:1.15rem
+}
+
+.list li{margin:.25rem 0}
+
+.two{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:15px
+}
+
+.map{
+  width:100%;
+  max-height:520px;
+  border:1px solid #353b47;
+  border-radius:12px;
+  background:#08090d;
+  object-fit:contain
+}
+
+.progress{
+  height:9px;
+  border:1px solid #393f4b;
+  border-radius:999px;
+  background:#11141b;
+  overflow:hidden
+}
+
+.progress i{
+  display:block;
+  height:100%;
+  background:linear-gradient(90deg,#6e5c83,#b08f72)
+}
+
+.card{padding:14px}
+
+.monster img,.cardImg{
+  width:100%;
+  aspect-ratio:16/9;
+  object-fit:contain;
+  background:#090a0e;
+  border-radius:9px;
+  margin-bottom:8px
+}
+
+.drive-broken{
+  display:none!important
+}
+
+.empty{
+  padding:20px;
+  border:1px dashed #424756;
+  border-radius:10px;
+  color:#918b83;
+  text-align:center
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  display:none;
+  background:#050609ea;
+  padding:16px;
+  overflow:auto
+}
+
+.modal.open{display:block}
+
+.shell{
+  max-width:1600px;
+  margin:auto;
+  background:#0e1118;
+  border:1px solid #3d4351;
+  border-radius:14px;
+  overflow:hidden
+}
+
+.bar{
+  position:sticky;
+  top:0;
+  z-index:8;
+  background:#171b24;
+  border-bottom:1px solid #343947;
+  padding:10px 12px;
+  display:flex;
+  align-items:center
+}
+
+.bar h2{
+  margin:0 auto 0 0;
+  font-size:1.15rem
+}
+
+.char{
+  display:grid;
+  grid-template-columns:minmax(1000px,1.55fr) minmax(340px,.45fr);
+  gap:14px;
+  padding:14px
+}
+
+.sheet{
+  position:relative;
+  aspect-ratio:1672/941;
+  min-width:1000px;
+  background:#090a0e;
+  border-radius:10px;
+  overflow:hidden
+}
+
+.sheet>.bg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:fill
+}
+
+.pic{
+  position:absolute;
+  left:78.7%;
+  top:10.6%;
+  width:10.7%;
+  height:18.7%;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  z-index:3
+}
+
+.pic img{
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain
+}
+
+.f,.score,.mod,.combat,.skill,.save,.box,.pb{
+  position:absolute;
+  z-index:4;
+  color:var(--paper)
+}
+
+.f{
+  font-weight:700;
+  font-size:13px;
+  line-height:1;
+  white-space:nowrap;
+  overflow:hidden
+}
+
+.f-name{left:16%;top:16.55%;width:16.7%;height:2.4%}
+.f-race{left:16%;top:20.15%;width:16.7%;height:2.4%}
+.f-class{left:16%;top:23.85%;width:16.7%;height:2.4%}
+
+.f-sub{left:41.15%;top:16.55%;width:14.6%;height:2.4%}
+.f-bg{left:41.15%;top:20.15%;width:14.6%;height:2.4%}
+.f-level{left:37.55%;top:23.85%;width:4.15%;height:2.4%;text-align:center}
+.f-xp{left:49.55%;top:23.85%;width:6.15%;height:2.4%;text-align:center}
+.f-align{left:64.55%;top:16.55%;width:10.25%;height:2.4%}
+.f-pb{left:69.95%;top:23.75%;width:2.85%;height:2.4%;text-align:center}
+
+.score,.mod,.combat,.pb{
+  font-weight:900;
+  text-align:center
+}
+
+.score{
+  left:3.15%;
+  width:2.7%;
+  font-size:19px
+}
+
+.mod{
+  left:11.55%;
+  width:2.45%;
+  font-size:16px
+}
+
+.a1{top:34.55%}
+.a2{top:42.15%}
+.a3{top:49.75%}
+.a4{top:57.35%}
+.a5{top:64.95%}
+.a6{top:72.55%}
+
+.pb{
+  left:10.85%;
+  top:74.15%;
+  width:2.9%;
+  font-size:17px
+}
+
+.save{
+  left:23.1%;
+  width:4.4%;
+  font-weight:800;
+  text-align:center;
+  font-size:10px
+}
+
+.sv1{top:34.55%}
+.sv2{top:37.65%}
+.sv3{top:40.75%}
+.sv4{top:43.85%}
+.sv5{top:46.95%}
+.sv6{top:50.05%}
+
+.combat{
+  top:37.1%;
+  font-size:20px
+}
+
+.ac{left:32.05%;width:3.15%}
+.ini{left:39.75%;width:3.15%}
+.spd{left:47.2%;width:3.45%}
+.hpm{left:55.7%;width:5.2%}
+.hpc{left:62.2%;width:5.2%}
+.hd{left:71.15%;width:4.15%}
+
+.skill{
+  font-weight:800;
+  font-size:9px;
+  text-align:right;
+  width:3%
+}
+
+.sl{left:43.75%}
+.sr{left:58.05%}
+
+.sk1{top:49.42%}
+.sk2{top:51.72%}
+.sk3{top:54.02%}
+.sk4{top:56.32%}
+.sk5{top:58.62%}
+.sk6{top:60.92%}
+.sk7{top:63.22%}
+.sk8{top:65.52%}
+.sk9{top:67.82%}
+
+.box{
+  font-size:9px;
+  line-height:1.12;
+  overflow:hidden;
+  padding:2px 4px
+}
+
+.box ul{
+  margin:0;
+  padding-left:12px
+}
+
+.box li{
+  margin:0 0 2px
+}
+
+.raceBox{left:78.65%;top:32.55%;width:10.7%;height:10.5%}
+.classBox{left:78.65%;top:47%;width:10.7%;height:9.6%}
+.otherBox{left:78.65%;top:59.95%;width:10.7%;height:9.2%}
+
+.langBox{left:62.25%;top:48.35%;width:14.6%;height:19.1%}
+.attacks{left:15.75%;top:78.3%;width:24.1%;height:16.4%}
+.equip{left:41%;top:75.25%;width:11.8%;height:19.8%}
+.inv{left:53.55%;top:75.25%;width:13.9%;height:19.8%}
+.notes{left:74.15%;top:86.4%;width:15.05%;height:9%}
+
+.atkrow{
+  display:grid;
+  grid-template-columns:31% 17% 20% 16% 16%;
+  align-items:center;
+  height:20%;
+  overflow:hidden
+}
+
+.atkrow span{
+  overflow:hidden;
+  white-space:nowrap;
+  padding:0 2px
+}
+
+.side{
+  display:flex;
+  flex-direction:column;
+  gap:9px
+}
+
+.side .card{padding:15px}
+
+.mechanics{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:8px
+}
+
+.mini{
+  background:#11141b;
+  border:1px solid #353b47;
+  border-radius:8px;
+  padding:10px;
+  color:#c9c1b5
+}
+
+.mini b{
+  display:block;
+  color:#e8ded0;
+  margin-bottom:5px
+}
+
+.tipTarget{cursor:help}
+.tipDot{border-bottom:1px dotted #8e7656}
+
+#tip{
+  display:none;
+  position:fixed;
+  z-index:9999;
+  pointer-events:none;
+  width:min(430px,calc(100vw - 24px));
+  max-height:min(520px,calc(100vh - 24px));
+  overflow:auto;
+  background:#141821f8;
+  border:1px solid #5a5066;
+  border-radius:11px;
+  padding:13px 14px;
+  box-shadow:0 20px 60px #0008
+}
+
+#tip.show{display:block}
+
+#tip .k{
+  color:var(--gold);
+  font-size:.64rem;
+  letter-spacing:.12em;
+  text-transform:uppercase
+}
+
+#tip h4{margin:3px 0 7px}
+
+#tip p{
+  margin:0;
+  color:#d0c7bb;
+  font-size:.82rem;
+  line-height:1.45;
+  white-space:pre-line
+}
+
+#tip dl{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:4px 9px;
+  margin:9px 0 0;
+  padding-top:8px;
+  border-top:1px solid #373c47;
+  font-size:.73rem
+}
+
+#tip dt{
+  color:#9f978c;
+  font-weight:700
+}
+
+#tip dd{
+  margin:0;
+  color:#ddd5c8
+}
+
+footer{
+  text-align:center;
+  color:#8d877f;
+  border-top:1px solid #2e333e;
+  padding:25px 18px;
+  font-size:.74rem
+}
+
+@media(max-width:1100px){
+  .hero,.two{grid-template-columns:1fr}
+  .char{display:block;overflow-x:auto}
+  .side{margin-top:14px}
+  .head{align-items:start;flex-direction:column}
+  .search{margin-left:0}
+}
+
+@media(max-width:650px){
+  .grid{grid-template-columns:1fr}
+  .avatars{grid-template-columns:repeat(2,1fr)}
+}
 </style>
 </head>
+
 <body>
-<header class="top"><nav id="nav"><div class="brand" id="brand">Campaign Codex</div><button class="btn" id="cfg">Sheet</button><button class="btn" id="refresh">Actualizar</button><span class="badge live">v2.0 · Sheet-driven</span><span class="badge" id="mode">Cargando…</span></nav></header>
-<div class="hero">
-  <div><div class="eyebrow" id="eyebrow"></div><h1 id="heroTitle">Campaign Codex</h1><p id="heroSubtitle"></p></div>
-  <div class="panel kpis"><div class="kpi"><b id="kLvl">—</b><span>Nivel principal</span></div><div class="kpi"><b id="kXp">—</b><span>PX</span></div><div class="kpi"><b id="kAllies">—</b><span>Personajes</span></div><div class="kpi"><b id="kBase">—</b><span>Funciones base</span></div></div>
+
+<header class="top">
+<nav id="nav">
+
+<div class="brand" id="brand">
+Campaign Codex
 </div>
+
+<button class="btn" id="refresh">
+Actualizar
+</button>
+
+<span class="badge live">
+v2.3 · Drive robusto
+</span>
+
+<span class="badge" id="mode">
+Cargando…
+</span>
+
+</nav>
+</header>
+
+<div class="hero">
+
+<div>
+<div class="eyebrow" id="eyebrow"></div>
+<h1 id="heroTitle">Campaign Codex</h1>
+<p id="heroSubtitle"></p>
+</div>
+
+<div class="panel kpis">
+
+<div class="kpi">
+<b id="kLvl">—</b>
+<span>Nivel principal</span>
+</div>
+
+<div class="kpi">
+<b id="kXp">—</b>
+<span>PX</span>
+</div>
+
+<div class="kpi">
+<b id="kAllies">—</b>
+<span>Personajes</span>
+</div>
+
+<div class="kpi">
+<b id="kBase">—</b>
+<span>Funciones base</span>
+</div>
+
+</div>
+</div>
+
 <main id="main"></main>
-<div class="modal" id="modal"><div class="shell"><div class="bar"><h2 id="modalTitle"></h2><button class="btn" id="close">Cerrar ×</button></div><div class="char"><div class="sheet" id="sheet"></div><aside class="side" id="side"></aside></div></div></div>
+
+<div class="modal" id="modal">
+
+<div class="shell">
+
+<div class="bar">
+<h2 id="modalTitle"></h2>
+<button class="btn" id="close">
+Cerrar ×
+</button>
+</div>
+
+<div class="char">
+
+<div class="sheet" id="sheet"></div>
+
+<aside class="side" id="side"></aside>
+
+</div>
+</div>
+</div>
+
 <div id="tip"></div>
-<footer id="footer">Motor visual conectado a Google Sheets y Google Drive.</footer>
+
+<footer>
+v2.3 · Google Sheets = contenido · Google Drive = imágenes · HTML = motor visual
+</footer>
 
 <script>
-const DEFAULT_SHEET_ID="1WsuHIOT0wQRd1jZcIzaBBMJCeZhwPQ0rPpQ96-aFBwg";
-const TAB_NAMES=[
-"config","sections","assets","characters","character_stats","character_saves","character_skills",
-"character_proficiencies","character_traits","character_attacks","character_spells","character_spell_slots",
-"character_equipment","relationships","history","history_rolls","npcs","bestiary","enemy_traits","base_overview",
-"base_rooms","base_projects","base_protocols","faction_members","lore","mysteries","items","rules","checkpoint","changelog"
-];
-let DB={},DATA={},ASSETS=new Map(),CONFIG={},SECTION_CONFIG=[],TIMER=null;
 
-const $=s=>document.querySelector(s);
-const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
-const norm=s=>String(s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim();
-const truth=v=>["true","1","yes","si","sí","on"].includes(norm(v));
-const arr=v=>Array.isArray(v)?v:String(v||"").split(/\r?\n|;;|\s*\|\s*/).map(x=>x.trim()).filter(Boolean);
-const val=v=>v===undefined||v===null||v===""?"—":v;
-const number=v=>{let n=Number(String(v??"").replace(",", "."));return Number.isFinite(n)?n:null};
-const modifier=v=>{let n=number(v);if(n===null)return"—";let m=Math.floor((n-10)/2);return(m>=0?"+":"")+m};
-const sheetId=()=>new URLSearchParams(location.search).get("sheet")||localStorage.getItem("kazym_sheet_id")||DEFAULT_SHEET_ID;
-const drive=id=>id?`https://drive.google.com/thumbnail?id=${encodeURIComponent(id)}&sz=w2000`:"";
+const DEFAULT_SHEET_ID =
+"1WsuHIOT0wQRd1jZcIzaBBMJCeZhwPQ0rPpQ96-aFBwg";
+
+const TAB_NAMES = [
+"config",
+"sections",
+"assets",
+
+"characters",
+"character_stats",
+"character_saves",
+"character_skills",
+"character_proficiencies",
+"character_traits",
+"character_attacks",
+"character_spells",
+"character_spell_slots",
+"character_equipment",
+"relationships",
+
+"history",
+"history_rolls",
+
+"npcs",
+
+"bestiary",
+"enemy_traits",
+
+"base_overview",
+"base_rooms",
+"base_projects",
+"base_protocols",
+"faction_members",
+
+"lore",
+"mysteries",
+"items",
+"rules",
+"checkpoint",
+"changelog"
+];
+
+let DB = {};
+let DATA = {};
+let ASSETS = new Map();
+let CONFIG = {};
+let SECTION_CONFIG = [];
+let TIMER = null;
+
+const $ = selector =>
+document.querySelector(selector);
+
+const esc = value =>
+String(value ?? "").replace(
+/[&<>"']/g,
+char => ({
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#39;"
+}[char])
+);
+
+const norm = value =>
+String(value || "")
+.toLowerCase()
+.normalize("NFD")
+.replace(/[\u0300-\u036f]/g,"")
+.trim();
+
+const truth = value =>
+["true","1","yes","si","sí","on"]
+.includes(norm(value));
+
+const arr = value =>
+Array.isArray(value)
+? value
+: String(value || "")
+.split(/\r?\n|;;|\s*\|\s*/)
+.map(x => x.trim())
+.filter(Boolean);
+
+const number = value => {
+
+const parsed =
+Number(
+String(value ?? "")
+.replace(",",".")
+);
+
+return Number.isFinite(parsed)
+? parsed
+: null;
+
+};
+
+const val = value =>
+value === undefined ||
+value === null ||
+value === ""
+? "—"
+: value;
+
+const modifier = value => {
+
+const score =
+number(value);
+
+if(score === null)
+return "—";
+
+const m =
+Math.floor(
+(score - 10) / 2
+);
+
+return (
+m >= 0
+? "+"
+: ""
+) + m;
+
+};
+
+function driveId(value){
+
+const text =
+String(value || "")
+.trim();
+
+if(!text)
+return "";
+
+if(
+/^[A-Za-z0-9_-]{20,}$/
+.test(text)
+)
+return text;
+
+let match =
+text.match(
+/\/d\/([A-Za-z0-9_-]{20,})/
+);
+
+if(match)
+return match[1];
+
+match =
+text.match(
+/[?&]id=([A-Za-z0-9_-]{20,})/
+);
+
+if(match)
+return match[1];
+
+return "";
+
+}
+
+function driveCandidates(value){
+
+const original =
+String(value || "")
+.trim();
+
+if(!original)
+return [];
+
+const id =
+driveId(original);
+
+if(!id){
+
+return /^https?:/i.test(original)
+? [original]
+: [];
+
+}
+
+return [
+`https://drive.google.com/thumbnail?id=${encodeURIComponent(id)}&sz=w2000`,
+`https://lh3.googleusercontent.com/d/${encodeURIComponent(id)}=w2000`,
+`https://drive.google.com/uc?export=view&id=${encodeURIComponent(id)}`
+];
+
+}
+
+function imageRef(value){
+
+const candidates =
+driveCandidates(value);
+
+return {
+src:candidates[0] || "",
+fallbacks:candidates.slice(1)
+};
+
+}
+
+function imgHtml(
+value,
+className="",
+alt=""
+){
+
+const ref =
+imageRef(value);
+
+if(!ref.src)
+return "";
+
+return `
+<img
+class="${esc(className)}"
+src="${esc(ref.src)}"
+alt="${esc(alt)}"
+data-drive-fallbacks='${esc(JSON.stringify(ref.fallbacks))}'
+data-drive-index="0"
+>
+`;
+
+}
+
+document.addEventListener(
+"error",
+event => {
+
+const img =
+event.target;
+
+if(
+!(img instanceof HTMLImageElement)
+)
+return;
+
+if(
+!img.dataset.driveFallbacks
+)
+return;
+
+let fallbacks = [];
+
+try{
+
+fallbacks =
+JSON.parse(
+img.dataset.driveFallbacks
+);
+
+}
+catch(error){
+
+fallbacks = [];
+
+}
+
+const index =
+Number(
+img.dataset.driveIndex || 0
+);
+
+if(
+index < fallbacks.length
+){
+
+img.dataset.driveIndex =
+String(index + 1);
+
+img.src =
+fallbacks[index];
+
+return;
+
+}
+
+img.classList.add(
+"drive-broken"
+);
+
+},
+true
+);
 
 function parseCSV(text){
-  let rows=[],row=[],cell="",quoted=false;
-  for(let i=0;i<text.length;i++){
-    let ch=text[i],next=text[i+1];
-    if(ch=='"'&&quoted&&next=='"'){cell+='"';i++;continue}
-    if(ch=='"'){quoted=!quoted;continue}
-    if(ch==","&&!quoted){row.push(cell);cell="";continue}
-    if((ch=="\n"||ch=="\r")&&!quoted){
-      if(ch=="\r"&&next=="\n")i++;
-      row.push(cell); if(row.some(x=>x.trim()!==""))rows.push(row); row=[];cell="";continue
-    }
-    cell+=ch
-  }
-  row.push(cell); if(row.some(x=>x.trim()!==""))rows.push(row);
-  return rows
+
+const rows = [];
+
+let row = [];
+let cell = "";
+let quoted = false;
+
+for(
+let i = 0;
+i < text.length;
+i++
+){
+
+const char =
+text[i];
+
+const next =
+text[i + 1];
+
+if(
+char === '"' &&
+quoted &&
+next === '"'
+){
+
+cell += '"';
+i++;
+continue;
+
+}
+
+if(char === '"'){
+
+quoted = !quoted;
+continue;
+
+}
+
+if(
+char === "," &&
+!quoted
+){
+
+row.push(cell);
+cell = "";
+continue;
+
+}
+
+if(
+(char === "\n" || char === "\r") &&
+!quoted
+){
+
+if(
+char === "\r" &&
+next === "\n"
+)
+i++;
+
+row.push(cell);
+
+if(
+row.some(
+value =>
+value.trim() !== ""
+)
+)
+rows.push(row);
+
+row = [];
+cell = "";
+continue;
+
+}
+
+cell += char;
+
+}
+
+row.push(cell);
+
+if(
+row.some(
+value =>
+value.trim() !== ""
+)
+)
+rows.push(row);
+
+return rows;
+
 }
 
 function rowsToObjects(rows){
-  if(!rows.length)return[];
-  let headerIndex=0,best=-1;
-  for(let i=0;i<Math.min(5,rows.length);i++){
-    let nonEmpty=rows[i].filter(x=>String(x).trim()!=="").length;
-    if(nonEmpty>best){best=nonEmpty;headerIndex=i}
-  }
-  let headers=rows[headerIndex].map(x=>String(x).trim());
-  return rows.slice(headerIndex+1).filter(r=>r.some(x=>String(x).trim()!=="")).map(r=>{
-    let o={}; headers.forEach((h,i)=>{if(h)o[h]=r[i]??""}); return o
-  })
+
+if(!rows.length)
+return [];
+
+let headerIndex = 0;
+let best = -1;
+
+for(
+let i = 0;
+i < Math.min(5,rows.length);
+i++
+){
+
+const count =
+rows[i]
+.filter(
+value =>
+String(value).trim() !== ""
+)
+.length;
+
+if(count > best){
+
+best = count;
+headerIndex = i;
+
+}
+
+}
+
+const headers =
+rows[headerIndex]
+.map(
+value =>
+String(value).trim()
+);
+
+return rows
+.slice(headerIndex + 1)
+.filter(
+row =>
+row.some(
+value =>
+String(value).trim() !== ""
+)
+)
+.map(row => {
+
+const object = {};
+
+headers.forEach(
+(header,index) => {
+
+if(header)
+object[header] =
+row[index] ?? "";
+
+}
+);
+
+return object;
+
+});
+
 }
 
 async function loadTab(name){
-  const id=sheetId();
-  const url=`https://docs.google.com/spreadsheets/d/${id}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(name)}&_=${Date.now()}`;
-  const r=await fetch(url,{cache:"no-store"});
-  if(!r.ok)throw Error(`${name}: HTTP ${r.status}`);
-  const text=await r.text();
-  if(/<!doctype|<html/i.test(text))throw Error(`${name}: el Sheet no es accesible públicamente`);
-  return rowsToObjects(parseCSV(text)).filter(x=>!["dm","secret","secreto","private","privado"].includes(norm(x.visibility||x.scope||"both")))
+
+const url =
+`https://docs.google.com/spreadsheets/d/${DEFAULT_SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(name)}&_=${Date.now()}`;
+
+const response =
+await fetch(
+url,
+{
+cache:"no-store"
+}
+);
+
+if(!response.ok)
+throw new Error(
+`${name}: HTTP ${response.status}`
+);
+
+const text =
+await response.text();
+
+if(
+/<!doctype|<html/i
+.test(text)
+)
+throw new Error(
+`${name}: el Sheet no es accesible públicamente`
+);
+
+return rowsToObjects(
+parseCSV(text)
+)
+.filter(
+row =>
+![
+"dm",
+"secret",
+"secreto",
+"private",
+"privado"
+]
+.includes(
+norm(
+row.visibility ||
+row.scope ||
+"both"
+)
+)
+);
+
 }
 
 async function loadDB(){
-  setMode("Cargando…");
-  const out={};
-  await Promise.all(TAB_NAMES.map(async name=>{
-    try{out[name]=await loadTab(name)}catch(e){console.warn(e);out[name]=[]}
-  }));
-  if(!out.characters.length&&!out.history.length&&!out.assets.length)throw Error("No se pudieron leer datos del Google Sheet");
-  return out
+
+setMode(
+"Cargando…"
+);
+
+const result = {};
+
+await Promise.all(
+TAB_NAMES.map(
+async name => {
+
+try{
+
+result[name] =
+await loadTab(name);
+
+}
+catch(error){
+
+console.warn(
+"Pestaña no disponible:",
+name,
+error
+);
+
+result[name] = [];
+
+}
+
+}
+)
+);
+
+if(
+!result.characters.length &&
+!result.history.length &&
+!result.assets.length
+)
+throw new Error(
+"No se pudieron leer datos del Google Sheet"
+);
+
+return result;
+
 }
 
 function group(rows,key){
-  const m=new Map(); (rows||[]).forEach(r=>{let k=r[key]||"";if(!m.has(k))m.set(k,[]);m.get(k).push(r)}); return m
+
+const map =
+new Map();
+
+(rows || [])
+.forEach(row => {
+
+const id =
+row[key] || "";
+
+if(!map.has(id))
+map.set(id,[]);
+
+map.get(id).push(row);
+
+});
+
+return map;
+
 }
+
 function first(rows,key){
-  const m=new Map(); (rows||[]).forEach(r=>{let k=r[key]||"";if(k&&!m.has(k))m.set(k,r)}); return m
+
+const map =
+new Map();
+
+(rows || [])
+.forEach(row => {
+
+const id =
+row[key] || "";
+
+if(
+id &&
+!map.has(id)
+)
+map.set(id,row);
+
+});
+
+return map;
+
 }
+
 function configObject(rows){
-  const o={};(rows||[]).forEach(r=>{if(r.key)o[r.key]=r.value});return o
+
+const result = {};
+
+(rows || [])
+.forEach(row => {
+
+if(row.key)
+result[row.key] =
+row.value;
+
+});
+
+return result;
+
 }
-function assetURL(assetId){
-  const a=ASSETS.get(String(assetId||"").trim()); if(!a)return"";
-  let id=String(a.drive_file_id||"").trim(); if(!id)return"";
-  return /^https?:/i.test(id)?id:drive(id)
+
+function byOrder(a,b){
+
+return (
+number(a.sort_order) ?? 999
+) - (
+number(b.sort_order) ?? 999
+);
+
 }
-function byOrder(a,b){return (number(a.sort_order)??999)-(number(b.sort_order)??999)}
-function displayName(x){return typeof x==="string"?x:(x?.name||x?.item||x?.title||"")}
-function list(a){return`<ul class="list">${(a||[]).map(x=>`<li>${esc(displayName(x))}</li>`).join("")}</ul>`}
+
+function asset(assetId){
+
+return ASSETS.get(
+String(assetId || "").trim()
+) || null;
+
+}
+
+function assetImage(assetId){
+
+const record =
+asset(assetId);
+
+if(!record)
+return "";
+
+return (
+record.drive_file_id ||
+record.url ||
+record.image_url ||
+""
+);
+
+}
+
+function displayName(item){
+
+return typeof item === "string"
+? item
+: (
+item?.name ||
+item?.item ||
+item?.skill ||
+item?.title ||
+""
+);
+
+}
+
+function list(items){
+
+return `
+<ul class="list">
+${(items || [])
+.map(
+item =>
+`<li>${esc(displayName(item))}</li>`
+)
+.join("")}
+</ul>
+`;
+
+}
 
 function buildData(db){
-  CONFIG=configObject(db.config);
-  ASSETS=new Map((db.assets||[]).filter(a=>a.asset_id).map(a=>[a.asset_id,a]));
 
-  const stats=first(db.character_stats,"character_id");
-  const saves=group(db.character_saves,"character_id");
-  const skills=group(db.character_skills,"character_id");
-  const profs=group(db.character_proficiencies,"character_id");
-  const traits=group(db.character_traits,"character_id");
-  const attacks=group(db.character_attacks,"character_id");
-  const spells=group(db.character_spells,"character_id");
-  const slots=group(db.character_spell_slots,"character_id");
-  const equip=group(db.character_equipment,"character_id");
-  const rels=group(db.relationships,"subject_id");
+CONFIG =
+configObject(
+db.config
+);
 
-  const characters=(db.characters||[]).sort(byOrder).map(c=>{
-    const cid=c.character_id;
-    return {
-      ...c,
-      portrait:assetURL(c.portrait_asset_id),
-      stats:stats.get(cid)||{},
-      saves:saves.get(cid)||[],
-      skills:(skills.get(cid)||[]).sort(byOrder),
-      proficiencies:(profs.get(cid)||[]).sort(byOrder),
-      traits:(traits.get(cid)||[]).sort(byOrder),
-      attacks:(attacks.get(cid)||[]).sort(byOrder),
-      spells:(spells.get(cid)||[]).sort(byOrder),
-      spell_slots:slots.get(cid)||[],
-      equipment:(equip.get(cid)||[]).sort(byOrder),
-      relationships:(rels.get(cid)||[]).sort(byOrder)
-    }
-  });
+ASSETS =
+new Map(
+(db.assets || [])
+.filter(
+row =>
+row.asset_id
+)
+.map(
+row => [
+row.asset_id,
+row
+]
+)
+);
 
-  const history=(db.history||[]).sort(byOrder).map(h=>({...h,image:assetURL(h.image_asset_id)}));
-  const bestiary=(db.bestiary||[]).sort(byOrder).map(b=>({...b,image:assetURL(b.image_asset_id)}));
-  const npcs=(db.npcs||[]).sort(byOrder).map(n=>({...n,image:assetURL(n.portrait_asset_id)}));
-  const items=(db.items||[]).sort(byOrder).map(i=>({...i,image:assetURL(i.image_asset_id)}));
-  const base=(db.base_overview||[])[0]||{};
-  base.image=assetURL(base.map_asset_id||CONFIG.base_map_asset_id);
-  base.rooms=(db.base_rooms||[]).sort(byOrder);
-  base.projects=(db.base_projects||[]).sort(byOrder);
-  base.protocols=(db.base_protocols||[]).sort(byOrder);
-  base.members=(db.faction_members||[]).sort(byOrder);
+const stats =
+first(
+db.character_stats,
+"character_id"
+);
 
-  const checkpoint={};
-  (db.checkpoint||[]).sort(byOrder).forEach(r=>{if(r.key)checkpoint[r.key]=r.value});
+const saves =
+group(
+db.character_saves,
+"character_id"
+);
 
-  SECTION_CONFIG=(db.sections||[]).sort(byOrder);
+const skills =
+group(
+db.character_skills,
+"character_id"
+);
 
-  return {
-    characters,history,bestiary,npcs,items,base,checkpoint,
-    lore:(db.lore||[]).sort(byOrder),
-    mysteries:(db.mysteries||[]).sort(byOrder),
-    rules:(db.rules||[]).sort(byOrder),
-    changelog:(db.changelog||[]),
-    history_rolls:db.history_rolls||[],
-    enemy_traits:group(db.enemy_traits,"enemy_id")
-  }
+const proficiencies =
+group(
+db.character_proficiencies,
+"character_id"
+);
+
+const traits =
+group(
+db.character_traits,
+"character_id"
+);
+
+const attacks =
+group(
+db.character_attacks,
+"character_id"
+);
+
+const spells =
+group(
+db.character_spells,
+"character_id"
+);
+
+const spellSlots =
+group(
+db.character_spell_slots,
+"character_id"
+);
+
+const equipment =
+group(
+db.character_equipment,
+"character_id"
+);
+
+const relationships =
+group(
+db.relationships,
+"subject_id"
+);
+
+const characters =
+(db.characters || [])
+.sort(byOrder)
+.map(character => {
+
+const id =
+character.character_id;
+
+return {
+...character,
+
+portrait:
+assetImage(
+character.portrait_asset_id
+),
+
+stats:
+stats.get(id) || {},
+
+saves:
+saves.get(id) || [],
+
+skills:
+(skills.get(id) || [])
+.sort(byOrder),
+
+proficiencies:
+(proficiencies.get(id) || [])
+.sort(byOrder),
+
+traits:
+(traits.get(id) || [])
+.sort(byOrder),
+
+attacks:
+(attacks.get(id) || [])
+.sort(byOrder),
+
+spells:
+(spells.get(id) || [])
+.sort(byOrder),
+
+spell_slots:
+spellSlots.get(id) || [],
+
+equipment:
+(equipment.get(id) || [])
+.sort(byOrder),
+
+relationships:
+(relationships.get(id) || [])
+.sort(byOrder)
+};
+
+});
+
+const history =
+(db.history || [])
+.sort(byOrder)
+.map(chapter => ({
+...chapter,
+
+image:
+assetImage(
+chapter.image_asset_id
+)
+}));
+
+const bestiary =
+(db.bestiary || [])
+.sort(byOrder)
+.map(entry => ({
+...entry,
+
+image:
+assetImage(
+entry.image_asset_id
+)
+}));
+
+const npcs =
+(db.npcs || [])
+.sort(byOrder)
+.map(npc => ({
+...npc,
+
+image:
+assetImage(
+npc.portrait_asset_id ||
+npc.image_asset_id
+)
+}));
+
+const items =
+(db.items || [])
+.sort(byOrder)
+.map(item => ({
+...item,
+
+image:
+assetImage(
+item.image_asset_id
+)
+}));
+
+const base =
+{
+...(
+(db.base_overview || [])[0] ||
+{}
+)
+};
+
+base.image =
+assetImage(
+base.map_asset_id ||
+CONFIG.base_map_asset_id
+);
+
+base.rooms =
+(db.base_rooms || [])
+.sort(byOrder);
+
+base.projects =
+(db.base_projects || [])
+.sort(byOrder);
+
+base.protocols =
+(db.base_protocols || [])
+.sort(byOrder);
+
+base.members =
+(db.faction_members || [])
+.sort(byOrder);
+
+let checkpoint = {};
+
+if(
+(db.checkpoint || [])
+.some(row => row.key)
+){
+
+(db.checkpoint || [])
+.forEach(row => {
+
+if(row.key)
+checkpoint[row.key] =
+row.value;
+
+});
+
+}
+else{
+
+checkpoint =
+(db.checkpoint || [])[0] || {};
+
 }
 
-function setMode(text,cls=""){let e=$("#mode");e.textContent=text;e.className="badge "+cls}
-function cfg(k,d=""){return CONFIG[k]!==undefined&&CONFIG[k]!==""?CONFIG[k]:d}
+SECTION_CONFIG =
+(db.sections || [])
+.sort(byOrder);
 
-function createSection(id,title,subtitle){
-  const s=document.createElement("section");s.id=id;
-  s.innerHTML=`<div class="head"><div><h2>${esc(title)}</h2><p>${esc(subtitle||"")}</p></div></div><div class="sectionBody"></div>`;
-  return s
+return {
+characters,
+history,
+bestiary,
+npcs,
+items,
+base,
+checkpoint,
+
+lore:
+(db.lore || [])
+.sort(byOrder),
+
+mysteries:
+(db.mysteries || [])
+.sort(byOrder),
+
+rules:
+(db.rules || [])
+.sort(byOrder),
+
+changelog:
+db.changelog || [],
+
+history_rolls:
+db.history_rolls || [],
+
+enemy_traits:
+group(
+db.enemy_traits,
+"enemy_id"
+)
+};
+
 }
-function sectionMeta(id,title,subtitle){
-  let r=SECTION_CONFIG.find(x=>x.section_id===id);
-  if(!r)return{title,subtitle,visible:true,sort_order:999};
-  return{title:r.title||title,subtitle:r.subtitle||subtitle,visible:r.visible===""?true:truth(r.visible),sort_order:number(r.sort_order)??999}
+
+function cfg(
+key,
+fallback=""
+){
+
+return (
+CONFIG[key] !== undefined &&
+CONFIG[key] !== ""
+)
+? CONFIG[key]
+: fallback;
+
+}
+
+function setMode(
+text,
+className=""
+){
+
+const element =
+$("#mode");
+
+element.textContent =
+text;
+
+element.className =
+"badge " + className;
+
+}
+
+function createSection(
+id,
+title,
+subtitle
+){
+
+const section =
+document.createElement(
+"section"
+);
+
+section.id = id;
+
+section.innerHTML = `
+<div class="head">
+<div>
+<h2>${esc(title)}</h2>
+<p>${esc(subtitle || "")}</p>
+</div>
+</div>
+
+<div class="sectionBody"></div>
+`;
+
+return section;
+
+}
+
+function sectionMeta(
+id,
+title,
+subtitle,
+order
+){
+
+const row =
+SECTION_CONFIG.find(
+entry =>
+entry.section_id === id
+);
+
+if(!row)
+return {
+title,
+subtitle,
+visible:true,
+sort_order:order
+};
+
+return {
+title:
+row.title || title,
+
+subtitle:
+row.subtitle || subtitle,
+
+visible:
+row.visible === ""
+? true
+: truth(row.visible),
+
+sort_order:
+number(row.sort_order) ?? order
+};
+
+}
+
+function body(id){
+
+return document.querySelector(
+`#${id} .sectionBody`
+);
+
 }
 
 function renderShell(){
-  $("#brand").textContent=cfg("campaign_name","Campaign Codex");
-  $("#eyebrow").textContent=cfg("ruleset","");
-  $("#heroTitle").textContent=cfg("site_title",cfg("campaign_name","Campaign Codex"));
-  $("#heroSubtitle").textContent=cfg("site_subtitle","");
-  document.title=cfg("site_title","Campaign Codex")+" · v2.0";
 
-  const defs=[
-    ["characters","Personajes","Fichas del grupo y residentes"],
-    ["history","Historia","Crónica completa"],
-    ["npcs","PNJ","Contactos y figuras conocidas"],
-    ["base","Base y facción","Instalaciones, proyectos y protocolos"],
-    ["bestiary","Bestiario","Criaturas y enemigos conocidos"],
-    ["lore","Lore","Culturas, lugares, religiones y organizaciones"],
-    ["mysteries","Misterios","Pistas, hipótesis y preguntas abiertas"],
-    ["items","Objetos","Documentos, llaves y pistas"],
-    ["rules","Reglas","Reglas oficiales, opcionales y adaptaciones"],
-    ["checkpoint","Checkpoint","Estado canónico para continuar"],
-    ["changelog","Changelog","Historial de cambios"]
-  ];
-  const main=$("#main");main.innerHTML="";
-  const nav=$("#nav");nav.querySelectorAll("a").forEach(x=>x.remove());
+$("#brand").textContent =
+cfg(
+"campaign_name",
+"Campaign Codex"
+);
 
-  defs.map(d=>{let m=sectionMeta(...d);return{id:d[0],...m}})
-      .filter(x=>x.visible).sort((a,b)=>a.sort_order-b.sort_order).forEach(m=>{
-        const s=createSection(m.id,m.title,m.subtitle);main.appendChild(s);
-        const a=document.createElement("a");a.href="#"+m.id;a.textContent=m.title;nav.insertBefore(a,$("#cfg"))
-      })
+$("#eyebrow").textContent =
+cfg(
+"ruleset",
+"D&D 5e 2014"
+);
+
+$("#heroTitle").textContent =
+cfg(
+"site_title",
+cfg(
+"campaign_name",
+"Kazym Garnithor"
+)
+);
+
+$("#heroSubtitle").textContent =
+cfg(
+"site_subtitle",
+"Campaign Bible viva"
+);
+
+document.title =
+cfg(
+"site_title",
+"Kazym Campaign Codex"
+) +
+" · v2.3";
+
+const definitions = [
+["characters","Personajes","Fichas del grupo y residentes",1],
+["history","Historia","Crónica completa",2],
+["npcs","PNJ","Contactos y figuras conocidas",3],
+["base","Base y facción","Instalaciones, proyectos y protocolos",4],
+["bestiary","Bestiario","Criaturas y enemigos conocidos",5],
+["lore","Lore","Culturas, lugares, religiones y organizaciones",6],
+["mysteries","Misterios","Pistas, hipótesis y preguntas abiertas",7],
+["items","Objetos","Documentos, llaves y pistas",8],
+["rules","Reglas","Reglas oficiales, opcionales y adaptaciones",9],
+["checkpoint","Checkpoint","Estado canónico para continuar",10],
+["changelog","Changelog","Historial de cambios",11]
+];
+
+const main =
+$("#main");
+
+main.innerHTML = "";
+
+const nav =
+$("#nav");
+
+nav.querySelectorAll("a")
+.forEach(
+link =>
+link.remove()
+);
+
+definitions
+.map(definition => ({
+id:definition[0],
+...sectionMeta(...definition)
+}))
+.filter(
+section =>
+section.visible
+)
+.sort(
+(a,b) =>
+a.sort_order -
+b.sort_order
+)
+.forEach(section => {
+
+main.appendChild(
+createSection(
+section.id,
+section.title,
+section.subtitle
+)
+);
+
+const link =
+document.createElement(
+"a"
+);
+
+link.href =
+"#" + section.id;
+
+link.textContent =
+section.title;
+
+nav.insertBefore(
+link,
+$("#refresh")
+);
+
+});
+
 }
 
-function body(id){return document.querySelector(`#${id} .sectionBody`)}
-
 function renderCharacters(){
-  const root=body("characters");if(!root)return;
-  root.innerHTML=`<div style="display:flex;justify-content:flex-end;margin-bottom:12px"><input id="characterSearch" class="search" placeholder="Buscar personaje…"></div><div class="grid avatars" id="charactersGrid"></div>`;
-  const draw=()=>{
-    const q=norm($("#characterSearch").value);
-    const grid=$("#charactersGrid");grid.innerHTML="";
-    DATA.characters.filter(c=>norm([c.name,c.role,c.race,c.class,c.subclass].join(" ")).includes(q)).forEach(c=>{
-      const b=document.createElement("button");b.className="avatar";
-      b.innerHTML=`<div class="portrait">${c.portrait?`<img src="${esc(c.portrait)}" alt="${esc(c.name)}">`:""}</div><b>${esc(c.name)}</b><small>${esc(c.role||"")}</small>`;
-      b.onclick=()=>openChar(c);grid.appendChild(b)
-    });
-    if(!grid.children.length)grid.innerHTML=`<div class="empty">Sin personajes.</div>`
-  };
-  $("#characterSearch").oninput=draw;draw()
+
+const root =
+body("characters");
+
+if(!root)
+return;
+
+root.innerHTML = `
+<div style="display:flex;justify-content:flex-end;margin-bottom:12px">
+<input
+id="characterSearch"
+class="search"
+placeholder="Buscar personaje…"
+>
+</div>
+
+<div
+class="grid avatars"
+id="charactersGrid"
+></div>
+`;
+
+const draw = () => {
+
+const query =
+norm(
+$("#characterSearch").value
+);
+
+const grid =
+$("#charactersGrid");
+
+grid.innerHTML = "";
+
+DATA.characters
+.filter(character =>
+norm([
+character.name,
+character.role,
+character.race,
+character.class,
+character.subclass
+].join(" "))
+.includes(query)
+)
+.forEach(character => {
+
+const button =
+document.createElement(
+"button"
+);
+
+button.className =
+"avatar";
+
+button.innerHTML = `
+<div class="portrait">
+${imgHtml(
+character.portrait,
+"",
+character.name
+)}
+</div>
+
+<b>
+${esc(character.name)}
+</b>
+
+<small>
+${esc(character.role || "")}
+</small>
+`;
+
+button.onclick =
+() =>
+openChar(character);
+
+grid.appendChild(button);
+
+});
+
+if(!grid.children.length)
+grid.innerHTML =
+`<div class="empty">Sin personajes.</div>`;
+
+};
+
+$("#characterSearch").oninput =
+draw;
+
+draw();
+
 }
 
 function renderHistory(){
-  const root=body("history");if(!root)return;
-  if(!DATA.history.length){root.innerHTML=`<div class="empty">Sin capítulos.</div>`;return}
-  const rolls=group(DATA.history_rolls,"chapter_id");
-  root.innerHTML=DATA.history.map(h=>`<details>
-    <summary>${String(h.sort_order||"").padStart(2,"0")} — ${esc(h.title)}</summary>
-    <div class="body">
-      ${h.image?`<img class="map" src="${esc(h.image)}" alt="">`:""}
-      ${h.summary?`<p><b>${esc(h.summary)}</b></p>`:""}
-      <p class="long">${esc(h.full_text||"")}</p>
-      ${(rolls.get(h.chapter_id)||[]).length?`<h4>Tiradas registradas</h4>${list((rolls.get(h.chapter_id)||[]).map(r=>`${r.label||r.type}: ${r.total||r.result||""}${r.consequence?" — "+r.consequence:""}`))}`:""}
-    </div></details>`).join("")
+
+const root =
+body("history");
+
+if(!root)
+return;
+
+if(!DATA.history.length){
+
+root.innerHTML =
+`<div class="empty">Sin capítulos.</div>`;
+
+return;
+
+}
+
+const rolls =
+group(
+DATA.history_rolls,
+"chapter_id"
+);
+
+root.innerHTML =
+DATA.history
+.map(chapter => {
+
+const chapterRolls =
+rolls.get(
+chapter.chapter_id
+) || [];
+
+return `
+<details>
+
+<summary>
+${String(
+chapter.sort_order ||
+chapter.order ||
+""
+).padStart(2,"0")}
+—
+${esc(chapter.title || "")}
+</summary>
+
+<div class="body">
+
+${chapter.image
+? imgHtml(
+chapter.image,
+"map",
+chapter.title
+)
+: ""
+}
+
+${chapter.summary
+? `
+<p>
+<b>${esc(chapter.summary)}</b>
+</p>
+`
+: ""
+}
+
+<p class="long">
+${esc(
+chapter.full_text ||
+chapter.detailed_text ||
+chapter.body ||
+""
+)}
+</p>
+
+${chapterRolls.length
+? `
+<h4>Tiradas registradas</h4>
+
+${list(
+chapterRolls.map(roll =>
+`${roll.label || roll.type || "Tirada"}: ${roll.total || roll.result || ""}${roll.consequence ? " — " + roll.consequence : ""}`
+)
+)}
+`
+: ""
+}
+
+</div>
+</details>
+`;
+
+})
+.join("");
+
 }
 
 function renderNPCs(){
-  const root=body("npcs");if(!root)return;
-  root.innerHTML=`<div class="grid">${DATA.npcs.map(n=>`<article class="card">
-    ${n.image?`<img class="cardImg" src="${esc(n.image)}" alt="">`:""}
-    <div class="status">${esc(n.status||"")}</div><h3>${esc(n.name||"")}</h3><span class="chip">${esc(n.role||"")}</span>
-    <p class="long">${esc(n.known||"")}</p>
-    ${n.appearance?`<details><summary>Apariencia</summary><div class="body">${esc(n.appearance)}</div></details>`:""}
-    ${n.relationship?`<details><summary>Relación</summary><div class="body">${esc(n.relationship)}</div></details>`:""}
-  </article>`).join("")}</div>`;
-  if(!DATA.npcs.length)root.innerHTML=`<div class="empty">Sin PNJ.</div>`
+
+const root =
+body("npcs");
+
+if(!root)
+return;
+
+if(!DATA.npcs.length){
+
+root.innerHTML =
+`<div class="empty">Sin PNJ.</div>`;
+
+return;
+
+}
+
+root.innerHTML = `
+<div class="grid">
+
+${DATA.npcs
+.map(npc => `
+<article class="card">
+
+${npc.image
+? imgHtml(
+npc.image,
+"cardImg",
+npc.name
+)
+: ""
+}
+
+<div class="status">
+${esc(npc.status || "")}
+</div>
+
+<h3>
+${esc(npc.name || "")}
+</h3>
+
+<span class="chip">
+${esc(npc.role || "")}
+</span>
+
+<p class="long">
+${esc(
+npc.known ||
+npc.known_info ||
+npc.description ||
+""
+)}
+</p>
+
+${npc.appearance
+? `
+<details>
+<summary>Apariencia</summary>
+<div class="body">
+${esc(npc.appearance)}
+</div>
+</details>
+`
+: ""
+}
+
+${npc.relationship
+? `
+<details>
+<summary>Relación</summary>
+<div class="body">
+${esc(npc.relationship)}
+</div>
+</details>
+`
+: ""
+}
+
+</article>
+`)
+.join("")}
+
+</div>
+`;
+
 }
 
 function renderBase(){
-  const root=body("base");if(!root)return;const b=DATA.base||{};
-  const done=number(b.functions_restored)||0,total=number(b.functions_total)||0;
-  root.innerHTML=`<div class="two">
-    <div>${b.image?`<img class="map" src="${esc(b.image)}" alt="">`:""}</div>
-    <div class="panel" style="padding:15px"><div class="eyebrow">${esc(b.status||"")}</div><h3>${esc(b.name||"Base")}</h3><p>${esc(b.purpose||"")}</p>
-      <div class="progress"><i style="width:${total?100*done/total:0}%"></i></div>
-      <p><b>${done}/${total}</b> funciones · ${esc(b.integrity||"")}</p>
-      <details open><summary>Salas</summary><div class="body">${list((b.rooms||[]).map(r=>`${r.name} — ${r.status}${r.description?" · "+r.description:""}`))}</div></details>
-      <details><summary>Proyectos</summary><div class="body">${list((b.projects||[]).map(r=>`${r.name} — ${r.status||""}`))}</div></details>
-      <details><summary>Protocolos</summary><div class="body">${list((b.protocols||[]).map(r=>r.text))}</div></details>
-      <details><summary>Miembros</summary><div class="body">${list((b.members||[]).map(r=>r.role_summary||r.entity_name))}</div></details>
-    </div></div>`
+
+const root =
+body("base");
+
+if(!root)
+return;
+
+const base =
+DATA.base || {};
+
+const done =
+number(
+base.functions_restored
+) || 0;
+
+const total =
+number(
+base.functions_total
+) || 0;
+
+root.innerHTML = `
+<div class="two">
+
+<div>
+
+${base.image
+? imgHtml(
+base.image,
+"map",
+base.name || "Base"
+)
+: ""
+}
+
+</div>
+
+<div
+class="panel"
+style="padding:15px"
+>
+
+<div class="eyebrow">
+${esc(base.status || "")}
+</div>
+
+<h3>
+${esc(base.name || "Base")}
+</h3>
+
+<p>
+${esc(base.purpose || "")}
+</p>
+
+<div class="progress">
+<i style="width:${total ? 100 * done / total : 0}%"></i>
+</div>
+
+<p>
+<b>${done}/${total}</b>
+funciones
+${base.integrity ? " · " + esc(base.integrity) : ""}
+</p>
+
+<details open>
+<summary>Salas</summary>
+<div class="body">
+
+${list(
+(base.rooms || [])
+.map(room =>
+`${room.name || ""} — ${room.status || ""}${room.description ? " · " + room.description : ""}`
+)
+)}
+
+</div>
+</details>
+
+<details>
+<summary>Proyectos</summary>
+<div class="body">
+
+${list(
+(base.projects || [])
+.map(project =>
+`${project.name || ""} — ${project.status || ""}`
+)
+)}
+
+</div>
+</details>
+
+<details>
+<summary>Protocolos</summary>
+<div class="body">
+
+${list(
+(base.protocols || [])
+.map(protocol =>
+protocol.text ||
+protocol.description ||
+protocol.name ||
+""
+)
+)}
+
+</div>
+</details>
+
+<details>
+<summary>Miembros</summary>
+<div class="body">
+
+${list(
+(base.members || [])
+.map(member =>
+member.role_summary ||
+member.entity_name ||
+member.name ||
+""
+)
+)}
+
+</div>
+</details>
+
+</div>
+</div>
+`;
+
 }
 
 function renderBestiary(){
-  const root=body("bestiary");if(!root)return;
-  root.innerHTML=`<div class="grid">${DATA.bestiary.map(m=>{
-    let traits=(DATA.enemy_traits.get(m.enemy_id)||[]).sort(byOrder);
-    return`<article class="card monster">${m.image?`<img src="${esc(m.image)}" alt="">`:""}
-      <div class="status">${esc(m.status||"")}</div><h3>${esc(m.name||"")}</h3>
-      <span class="chip">${esc(m.type||"")}</span><span class="chip">CA ${esc(m.ac||"—")}</span><span class="chip">PG ${esc(m.hp||"—")}</span>
-      <p>${esc(m.description||"")}</p>
-      ${traits.length?`<details><summary>Rasgos y acciones</summary><div class="body">${list(traits.map(t=>`${t.name||""}${t.description?": "+t.description:""}`))}</div></details>`:""}
-    </article>`}).join("")}</div>`;
-  if(!DATA.bestiary.length)root.innerHTML=`<div class="empty">Sin entradas.</div>`
+
+const root =
+body("bestiary");
+
+if(!root)
+return;
+
+if(!DATA.bestiary.length){
+
+root.innerHTML =
+`<div class="empty">Sin entradas.</div>`;
+
+return;
+
+}
+
+root.innerHTML = `
+<div class="grid">
+
+${DATA.bestiary
+.map(entry => {
+
+const traits =
+(
+DATA.enemy_traits
+.get(
+entry.enemy_id
+) || []
+)
+.sort(byOrder);
+
+return `
+<article class="card monster">
+
+${entry.image
+? imgHtml(
+entry.image,
+"",
+entry.name
+)
+: ""
+}
+
+<div class="status">
+${esc(entry.status || "")}
+</div>
+
+<h3>
+${esc(entry.name || "")}
+</h3>
+
+<span class="chip">
+${esc(entry.type || "")}
+</span>
+
+<span class="chip">
+CA ${esc(entry.ac || "—")}
+</span>
+
+<span class="chip">
+PG ${esc(entry.hp || "—")}
+</span>
+
+<p>
+${esc(
+entry.description ||
+entry.desc ||
+""
+)}
+</p>
+
+${traits.length
+? `
+<details>
+<summary>Rasgos y acciones</summary>
+<div class="body">
+
+${list(
+traits.map(trait =>
+`${trait.name || ""}${trait.description ? ": " + trait.description : ""}`
+)
+)}
+
+</div>
+</details>
+`
+: ""
+}
+
+</article>
+`;
+
+})
+.join("")}
+
+</div>
+`;
+
 }
 
 function renderLore(){
-  const root=body("lore");if(!root)return;
-  root.innerHTML=DATA.lore.map(x=>`<details><summary>${esc(x.category||"")} — ${esc(x.title||"")}</summary><div class="body long">${esc(x.body_public||"")}</div></details>`).join("")||`<div class="empty">Sin entradas.</div>`
+
+const root =
+body("lore");
+
+if(!root)
+return;
+
+root.innerHTML =
+DATA.lore.length
+? DATA.lore
+.map(entry => `
+<details>
+
+<summary>
+${esc(entry.category || "")}
+—
+${esc(entry.title || "")}
+</summary>
+
+<div class="body long">
+${esc(
+entry.body_public ||
+entry.body ||
+entry.text_public ||
+""
+)}
+</div>
+
+</details>
+`)
+.join("")
+: `<div class="empty">Sin entradas.</div>`;
+
 }
 
 function renderMysteries(){
-  const root=body("mysteries");if(!root)return;
-  root.innerHTML=`<div class="grid">${DATA.mysteries.map(m=>`<article class="card">
-    <div class="status">${esc(m.status||"")}</div><h3>${esc(m.title||"")}</h3>
-    <div class="progress"><i style="width:${number(m.progress_pct)||0}%"></i></div>
-    <p>${esc(m.known||"")}</p>${m.suspicion?`<p><b>Hipótesis:</b> ${esc(m.suspicion)}</p>`:""}
-    ${arr(m.evidence).length?`<details><summary>Evidencias</summary><div class="body">${list(arr(m.evidence))}</div></details>`:""}
-    ${arr(m.questions).length?`<details><summary>Preguntas</summary><div class="body">${list(arr(m.questions))}</div></details>`:""}
-  </article>`).join("")}</div>`
+
+const root =
+body("mysteries");
+
+if(!root)
+return;
+
+root.innerHTML = `
+<div class="grid">
+
+${DATA.mysteries
+.map(mystery => `
+<article class="card">
+
+<div class="status">
+${esc(mystery.status || "")}
+</div>
+
+<h3>
+${esc(mystery.title || "")}
+</h3>
+
+<div class="progress">
+<i style="width:${number(mystery.progress_pct || mystery.progress) || 0}%"></i>
+</div>
+
+<p>
+${esc(mystery.known || "")}
+</p>
+
+${mystery.suspicion
+? `
+<p>
+<b>Hipótesis:</b>
+${esc(mystery.suspicion)}
+</p>
+`
+: ""
+}
+
+${arr(mystery.evidence).length
+? `
+<details>
+<summary>Evidencias</summary>
+<div class="body">
+${list(arr(mystery.evidence))}
+</div>
+</details>
+`
+: ""
+}
+
+${arr(
+mystery.questions ||
+mystery.open_questions
+).length
+? `
+<details>
+<summary>Preguntas</summary>
+<div class="body">
+${list(
+arr(
+mystery.questions ||
+mystery.open_questions
+)
+)}
+</div>
+</details>
+`
+: ""
+}
+
+</article>
+`)
+.join("")}
+
+</div>
+`;
+
+}
+
+function tipData(
+object,
+kind,
+owner=""
+){
+
+object =
+object || {};
+
+const title =
+object.name ||
+object.item ||
+object.skill ||
+object.title ||
+"";
+
+const description =
+object.technical_details ||
+object.description ||
+object.notes ||
+object.public_summary ||
+title;
+
+const rows = [];
+
+[
+["Bonificador",object.bonus || object.attack_bonus],
+["Daño",object.damage],
+["Tipo",object.damage_type || object.type],
+["Acción",object.action_type],
+["Alcance",object.range],
+["Duración",object.duration],
+["Concentración",object.concentration],
+["Usos",object.uses],
+["Recarga",object.recharge],
+["Estado",object.status],
+["Fuente",object.source || object.source_book]
+]
+.forEach(pair => {
+
+if(pair[1])
+rows.push(pair);
+
+});
+
+if(owner)
+rows.push([
+"Personaje",
+owner
+]);
+
+return {
+kind,
+title,
+desc:description,
+rows
+};
+
+}
+
+function tipAttr(
+object,
+kind,
+owner=""
+){
+
+return (
+`data-tip='` +
+esc(
+JSON.stringify(
+tipData(
+object,
+kind,
+owner
+)
+)
+) +
+`' tabindex="0"`
+);
+
+}
+
+function techList(
+items,
+kind,
+owner=""
+){
+
+return `
+<ul class="list">
+
+${(items || [])
+.map(item => `
+<li
+class="tipTarget tipDot"
+${tipAttr(
+item,
+kind,
+owner
+)}
+>
+${esc(displayName(item))}
+</li>
+`)
+.join("")}
+
+</ul>
+`;
+
 }
 
 function renderItems(){
-  const root=body("items");if(!root)return;
-  root.innerHTML=`<div class="grid">${DATA.items.map(i=>`<article class="card tipTarget" ${tipAttr(i,"Objeto")}>
-    ${i.image?`<img class="cardImg" src="${esc(i.image)}" alt="">`:""}
-    <div class="status">${esc(i.status||"")}</div><h3>${esc(i.name||"")}</h3><span class="chip">${esc(i.type||"")}</span>
-    <p>${esc(i.description||"")}</p><small>${esc(i.related_ids||"")}</small>
-  </article>`).join("")}</div>`
+
+const root =
+body("items");
+
+if(!root)
+return;
+
+root.innerHTML = `
+<div class="grid">
+
+${DATA.items
+.map(item => `
+<article
+class="card tipTarget"
+${tipAttr(
+item,
+"Objeto"
+)}
+>
+
+${item.image
+? imgHtml(
+item.image,
+"cardImg",
+item.name
+)
+: ""
+}
+
+<div class="status">
+${esc(item.status || "")}
+</div>
+
+<h3>
+${esc(item.name || "")}
+</h3>
+
+<span class="chip">
+${esc(item.type || "")}
+</span>
+
+<p>
+${esc(item.description || "")}
+</p>
+
+</article>
+`)
+.join("")}
+
+</div>
+`;
+
 }
 
 function renderRules(){
-  const root=body("rules");if(!root)return;
-  root.innerHTML=DATA.rules.map(r=>`<details><summary>${esc(r.title||"")}</summary><div class="body">
-    <span class="pill">${esc(r.status||"")}</span><span class="pill">${esc(r.source_book||"")}</span>
-    <p>${esc(r.notes||"")}</p>${r.application?`<p><b>Aplicación:</b> ${esc(r.application)}</p>`:""}
-  </div></details>`).join("")||`<div class="empty">Sin reglas.</div>`
+
+const root =
+body("rules");
+
+if(!root)
+return;
+
+root.innerHTML =
+DATA.rules.length
+? DATA.rules
+.map(rule => `
+<details>
+
+<summary>
+${esc(rule.title || "")}
+</summary>
+
+<div class="body">
+
+<span class="pill">
+${esc(rule.status || "")}
+</span>
+
+<span class="pill">
+${esc(
+rule.source_book ||
+rule.source ||
+""
+)}
+</span>
+
+<p>
+${esc(
+rule.notes ||
+rule.body ||
+""
+)}
+</p>
+
+${rule.application
+? `
+<p>
+<b>Aplicación:</b>
+${esc(rule.application)}
+</p>
+`
+: ""
+}
+
+</div>
+</details>
+`)
+.join("")
+: `<div class="empty">Sin reglas.</div>`;
+
 }
 
 function renderCheckpoint(){
-  const root=body("checkpoint");if(!root)return;const c=DATA.checkpoint||{};
-  root.innerHTML=`<div class="panel" style="padding:16px"><div class="eyebrow">${esc(c.title||"Checkpoint")}</div><h3>${esc(c.location||"")}</h3>
-    <div class="two"><div><b>Presentes</b>${list(arr(c.present))}<b>Estado</b>${list(arr(c.state))}<b>Kazym</b>${list(arr(c.kazym))}</div>
-    <div><b>En otros lugares</b>${list(arr(c.elsewhere))}<b>Pendiente</b>${list(arr(c.pending))}</div></div>
-    ${c.last_line?`<div class="quote">${esc(c.last_line)}</div>`:""}
-  </div>`
+
+const root =
+body("checkpoint");
+
+if(!root)
+return;
+
+const checkpoint =
+DATA.checkpoint || {};
+
+root.innerHTML = `
+<div
+class="panel"
+style="padding:16px"
+>
+
+<div class="eyebrow">
+${esc(
+checkpoint.title ||
+"Checkpoint"
+)}
+</div>
+
+<h3>
+${esc(
+checkpoint.location ||
+checkpoint.location_id ||
+""
+)}
+</h3>
+
+<div class="two">
+
+<div>
+
+<b>Presentes</b>
+
+${list(
+arr(
+checkpoint.present ||
+checkpoint.present_entity_ids
+)
+)}
+
+<b>Estado</b>
+
+${list(
+arr(
+checkpoint.state ||
+checkpoint.base_state
+)
+)}
+
+<b>Kazym</b>
+
+${list(
+arr(
+checkpoint.kazym
+)
+)}
+
+</div>
+
+<div>
+
+<b>En otros lugares</b>
+
+${list(
+arr(
+checkpoint.elsewhere
+)
+)}
+
+<b>Pendiente</b>
+
+${list(
+arr(
+checkpoint.pending ||
+checkpoint.pending_decisions
+)
+)}
+
+</div>
+
+</div>
+
+${checkpoint.last_line ||
+checkpoint.last_spoken_line
+? `
+<div class="quote">
+${esc(
+checkpoint.last_line ||
+checkpoint.last_spoken_line
+)}
+</div>
+`
+: ""
+}
+
+</div>
+`;
+
 }
 
 function renderChanges(){
-  const root=body("changelog");if(!root)return;
-  root.innerHTML=[...(DATA.changelog||[])].reverse().map(c=>`<div class="card" style="margin-bottom:7px"><b>${esc(c.version||"")}</b> · <span style="color:#8f8990">${esc(c.date||"")}</span><div>${esc(c.change||"")}</div></div>`).join("")
+
+const root =
+body("changelog");
+
+if(!root)
+return;
+
+root.innerHTML =
+[
+...(DATA.changelog || [])
+]
+.reverse()
+.map(entry => `
+<div
+class="card"
+style="margin-bottom:7px"
+>
+
+<b>
+${esc(entry.version || "")}
+</b>
+
+·
+
+<span style="color:#8f8990">
+${esc(entry.date || entry.timestamp || "")}
+</span>
+
+<div>
+${esc(entry.change || entry.summary || "")}
+</div>
+
+</div>
+`)
+.join("");
+
 }
 
 function renderAll(){
-  renderShell();renderCharacters();renderHistory();renderNPCs();renderBase();renderBestiary();renderLore();renderMysteries();renderItems();renderRules();renderCheckpoint();renderChanges();
-  const pc=DATA.characters.find(c=>c.character_id===cfg("default_character_id","PC_KAZYM"))||DATA.characters[0];
-  if(pc){$("#kLvl").textContent=pc.level||"—";$("#kXp").textContent=pc.xp||"—"}
-  $("#kAllies").textContent=DATA.characters.length||"—";
-  $("#kBase").textContent=(DATA.base.functions_restored||"—")+"/"+(DATA.base.functions_total||"—")
+
+renderShell();
+renderCharacters();
+renderHistory();
+renderNPCs();
+renderBase();
+renderBestiary();
+renderLore();
+renderMysteries();
+renderItems();
+renderRules();
+renderCheckpoint();
+renderChanges();
+
+const mainCharacter =
+DATA.characters.find(
+character =>
+character.character_id ===
+cfg(
+"default_character_id",
+"PC_KAZYM"
+)
+) ||
+DATA.characters[0];
+
+if(mainCharacter){
+
+$("#kLvl").textContent =
+mainCharacter.level || "—";
+
+$("#kXp").textContent =
+mainCharacter.xp || "—";
+
 }
 
-function traitGroups(c){
-  const out={species:[],class:[],other:[]};
-  (c.traits||[]).forEach(t=>{let cat=norm(t.category);if(cat==="species"||cat==="race")out.species.push(t);else if(cat==="class")out.class.push(t);else out.other.push(t)});
-  return out
-}
-function skillsArray(c){return c.skills||[]}
-function saveMap(c){return Object.fromEntries((c.saves||[]).map(x=>[String(x.ability||"").toUpperCase(),x.bonus]))}
-function profList(c,cat){return(c.proficiencies||[]).filter(x=>norm(x.category)===cat).map(x=>x.name)}
+$("#kAllies").textContent =
+DATA.characters.length || "—";
 
-const SKPOS={
-"acrobacias":["sl",1],"atletismo":["sl",2],"arcanos":["sl",4],"engano":["sl",5],"historia":["sl",6],"interpretacion":["sl",7],
-"intimidacion":["sl",8],"investigacion":["sl",9],"medicina":["sr",1],"naturaleza":["sr",2],"percepcion":["sr",3],"perspicacia":["sr",4],
-"juego de manos":["sr",5],"sigilo":["sr",6],"supervivencia":["sr",7],"trato con animales":["sr",8]
+$("#kBase").textContent =
+`${DATA.base.functions_restored || "—"}/${DATA.base.functions_total || "—"}`;
+
+}
+
+function traitGroups(character){
+
+const result = {
+species:[],
+class:[],
+other:[]
 };
-function skillOverlay(c){return skillsArray(c).map(x=>{let p=SKPOS[norm(x.skill||x.name)];return p?`<span class="skill ${p[0]} sk${p[1]}">${esc(x.bonus||"")}</span>`:""}).join("")}
-function saveOverlay(c){let S=saveMap(c),A=["FUE","DES","CON","INT","SAB","CAR"];return A.map((k,i)=>S[k]?`<span class="save sv${i+1}">${esc(S[k])}</span>`:"").join("")}
 
-function tipData(o,kind,owner=""){
-  o=o||{};let title=o.name||o.item||o.skill||o.title||"";
-  let desc=o.technical_details||o.description||o.notes||o.public_summary||title;
-  let rows=[];[["Bonificador",o.bonus||o.attack_bonus],["Daño",o.damage],["Tipo",o.damage_type||o.type],["Acción",o.action_type],["Alcance",o.range],["Duración",o.duration],["Concentración",o.concentration],["Usos",o.uses],["Recarga",o.recharge],["Estado",o.status],["Fuente",o.source||o.source_book]].forEach(x=>{if(x[1])rows.push(x)});if(owner)rows.push(["Personaje",owner]);
-  return{kind,title,desc,rows}
-}
-function tipAttr(o,k,owner=""){return`data-tip='${esc(JSON.stringify(tipData(o,k,owner)))}' tabindex="0"`}
-function techList(a,k,owner=""){return`<ul class="list">${(a||[]).map(x=>`<li class="tipTarget tipDot" ${tipAttr(x,k,owner)}>${esc(displayName(x))}</li>`).join("")}</ul>`}
+(character.traits || [])
+.forEach(trait => {
 
-function attackDisplay(a){
-  const name=a.name||"";
-  if(a.attack_bonus||a.damage)return{name,bonus:a.attack_bonus||"",damage:a.damage||"",type:a.damage_type||"",props:a.range||""};
-  let m=name.match(/^(.*?)\s([+-]\d+)\s+[—-]\s+(.+)$/);return{name:m?m[1]:name,bonus:m?m[2]:"",damage:m?m[3]:"",type:"",props:""}
-}
-function attackRows(c){return(c.attacks||[]).slice(0,4).map(a=>{let p=attackDisplay(a);return`<div class="atkrow tipTarget" ${tipAttr(a,"Ataque",c.name)}><span class="fitText">${esc(p.name)}</span><span class="fitText">${esc(p.bonus)}</span><span class="fitText">${esc(p.damage)}</span><span class="fitText">${esc(p.type)}</span><span class="fitText">${esc(p.props)}</span></div>`}).join("")}
+const category =
+norm(
+trait.category ||
+trait.trait_type
+);
 
-function openChar(c){
-  $("#modalTitle").textContent=c.name||"";
-  const s=c.stats||{},tg=traitGroups(c),langs=profList(c,"language"),profs=profList(c,"proficiency"),eq=c.equipment||[],S=saveMap(c);
-  const template=assetURL(cfg("sheet_template_asset_id",""));
-  $("#sheet").innerHTML=`
-    ${template?`<img class="bg" src="${esc(template)}">`:""}
-    <div class="pic">${c.portrait?`<img src="${esc(c.portrait)}">`:""}</div>
-    <span class="f f-name fitText" data-max="13" data-min="7">${esc(c.name||"")}</span>
-    <span class="f f-race fitText" data-max="13" data-min="7">${esc(c.race||"")}</span>
-    <span class="f f-class fitText" data-max="13" data-min="7">${esc(c.class||"")}</span>
-    <span class="f f-sub fitText" data-max="13" data-min="7">${esc(c.subclass||"")}</span>
-    <span class="f f-bg fitText" data-max="13" data-min="6">${esc(c.background||"")}</span>
-    <span class="f f-level">${esc(c.level||"")}</span><span class="f f-xp">${esc(c.xp||"")}</span>
-    <span class="f f-align fitText" data-max="13" data-min="7">${esc(c.alignment||"")}</span><span class="f f-pb">${s.proficiency_bonus?`+${esc(s.proficiency_bonus)}`:""}</span>
-    ${["str","dex","con","int","wis","cha"].map((k,i)=>`<span class="score a${i+1}">${esc(val(s[k]))}</span><span class="mod a${i+1}">${esc(modifier(s[k]))}</span>`).join("")}
-    <span class="pb">${s.proficiency_bonus?`+${esc(s.proficiency_bonus)}`:""}</span>
-    ${saveOverlay(c)}
-    <span class="combat ac">${esc(val(s.ac))}</span><span class="combat ini">${number(s.initiative)!==null&&number(s.initiative)>=0?"+":""}${esc(val(s.initiative))}</span>
-    <span class="combat spd">${esc(val(s.speed_ft))}</span><span class="combat hpm">${esc(val(s.hp_max))}</span><span class="combat hpc">${esc(val(s.hp_current))}</span><span class="combat hd fitText" data-max="20" data-min="9">${esc(val(s.hit_dice))}</span>
-    ${skillOverlay(c)}
-    <div class="box raceBox fitBox" data-max="9" data-min="5">${techList(tg.species,"Rasgo de especie",c.name)}</div>
-    <div class="box classBox fitBox" data-max="9" data-min="5">${techList(tg.class,"Rasgo de clase",c.name)}</div>
-    <div class="box otherBox fitBox" data-max="9" data-min="5">${techList(tg.other,"Dote / otro rasgo",c.name)}</div>
-    <div class="box langBox fitBox" data-max="9" data-min="5"><b>Idiomas</b><br>${esc(langs.join(", ")||"—")}<br><br><b>Competencias</b><br>${esc(profs.join("; ")||"—")}</div>
-    <div class="box attacks fitBox" data-max="9" data-min="5">${attackRows(c)}</div>
-    <div class="box equip fitBox" data-max="9" data-min="5">${techList(eq.slice(0,6),"Objeto",c.name)}</div>
-    <div class="box inv fitBox" data-max="9" data-min="5">${techList(eq.slice(6),"Objeto",c.name)}</div>
-    <div class="box notes fitBox" data-max="9" data-min="5">${esc(c.current_state||c.short_description||"")}</div>`;
+if(
+category === "species" ||
+category === "race"
+)
+result.species.push(trait);
 
-  $("#side").innerHTML=`<div class="card"><div class="status">${esc(c.kind||"")} · ${esc(c.role||"")}</div><h3>${esc(c.name||"")}</h3>
-    <p class="long">${esc(c.short_description||"")}</p><span class="pill">${esc(c.race||"—")}</span><span class="pill">${esc([c.class,c.subclass].filter(Boolean).join(" — ")||"—")}</span><span class="pill">Nivel ${esc(c.level||"—")}</span></div>
-    <details open><summary>Historia conocida</summary><div class="body long">${esc(c.public_history||"—")}</div></details>
-    ${c.personality?`<details><summary>Personalidad</summary><div class="body long">${esc(c.personality)}</div></details>`:""}
-    <details open><summary>Mecánicas</summary><div class="body"><div class="mechanics">
-      <div class="mini"><b>Atributos</b>FUE ${val(s.str)} (${modifier(s.str)}) · DES ${val(s.dex)} (${modifier(s.dex)}) · CON ${val(s.con)} (${modifier(s.con)}) · INT ${val(s.int)} (${modifier(s.int)}) · SAB ${val(s.wis)} (${modifier(s.wis)}) · CAR ${val(s.cha)} (${modifier(s.cha)})</div>
-      <div class="mini"><b>Combate</b>CA ${val(s.ac)} · iniciativa ${val(s.initiative)} · velocidad ${val(s.speed_ft)} · PG ${val(s.hp_current)}/${val(s.hp_max)} · dados ${val(s.hit_dice)}</div>
-      <div class="mini"><b>Salvaciones</b>${Object.entries(S).map(([k,v])=>`${k} ${v}`).join(" · ")||"—"}</div>
-      <div class="mini"><b>Habilidades</b>${(c.skills||[]).map(x=>`${x.skill} ${x.bonus||""}`).join(" · ")||"—"}</div>
-    </div></div></details>
-    <details open><summary>Rasgos de especie</summary><div class="body">${techList(tg.species,"Rasgo de especie",c.name)}</div></details>
-    <details open><summary>Rasgos de clase</summary><div class="body">${techList(tg.class,"Rasgo de clase",c.name)}</div></details>
-    ${tg.other.length?`<details><summary>Dotes y otros rasgos</summary><div class="body">${techList(tg.other,"Rasgo",c.name)}</div></details>`:""}
-    <details><summary>Habilidades</summary><div class="body">${techList(c.skills,"Habilidad",c.name)}</div></details>
-    <details><summary>Idiomas y competencias</summary><div class="body"><h4>Idiomas</h4>${list(langs)}<h4>Competencias</h4>${list(profs)}</div></details>
-    ${c.spells.length?`<details><summary>Conjuros</summary><div class="body">${techList(c.spells,"Conjuro",c.name)}${c.spell_slots.length?`<h4>Espacios</h4>${list(c.spell_slots.map(x=>`Nivel ${x.spell_level}: ${x.slots_current}/${x.slots_max}`))}`:""}</div></details>`:""}
-    <details><summary>Ataques</summary><div class="body">${techList(c.attacks,"Ataque",c.name)}</div></details>
-    <details><summary>Equipo e inventario</summary><div class="body">${techList(c.equipment,"Objeto",c.name)}</div></details>
-    ${c.relationships.length?`<details><summary>Relaciones</summary><div class="body">${list(c.relationships.map(x=>`${x.object_name}${x.public_summary?": "+x.public_summary:""}`))}</div></details>`:""}
-    <details><summary>Estado actual</summary><div class="body long">${esc(c.current_state||"—")}</div></details>`;
+else if(
+category === "class"
+)
+result.class.push(trait);
 
-  $("#modal").classList.add("open");document.body.style.overflow="hidden";
-  requestAnimationFrame(()=>requestAnimationFrame(fitSheetText))
+else
+result.other.push(trait);
+
+});
+
+return result;
+
 }
 
-function fitOne(el){
-  let max=number(el.dataset.max)||parseFloat(getComputedStyle(el).fontSize)||12,min=number(el.dataset.min)||5;
-  el.style.fontSize=max+"px";el.style.lineHeight="1.1";
-  let size=max;
-  const overflow=()=>el.scrollWidth>el.clientWidth+1||el.scrollHeight>el.clientHeight+1;
-  while(size>min&&overflow()){size-=.35;el.style.fontSize=size+"px";if(el.classList.contains("fitBox"))el.style.lineHeight=Math.max(.95,1.12-(max-size)*.015)}
-}
-function fitSheetText(){document.querySelectorAll("#sheet .fitText,#sheet .fitBox").forEach(fitOne)}
+function saveMap(character){
 
-function showTip(t,e){
-  let x=$("#tip"),r=(t.rows||[]).map(v=>`<dt>${esc(v[0])}</dt><dd>${esc(v[1])}</dd>`).join("");
-  x.innerHTML=`<div class="k">${esc(t.kind)}</div><h4>${esc(t.title)}</h4><p>${esc(t.desc||"")}</p>${r?`<dl>${r}</dl>`:""}`;x.classList.add("show");posTip(e)
+return Object.fromEntries(
+(character.saves || [])
+.map(save => [
+String(
+save.ability ||
+save.save ||
+save.name ||
+""
+).toUpperCase(),
+save.bonus ||
+save.value ||
+""
+])
+);
+
 }
-function posTip(e){let x=$("#tip");if(!x.classList.contains("show"))return;let px=e.clientX+15,py=e.clientY+15,r=x.getBoundingClientRect();if(px+r.width>innerWidth-10)px=e.clientX-r.width-15;if(py+r.height>innerHeight-10)py=innerHeight-r.height-10;x.style.left=Math.max(10,px)+"px";x.style.top=Math.max(10,py)+"px"}
-document.addEventListener("mouseover",e=>{let x=e.target.closest?.("[data-tip]");if(x)try{showTip(JSON.parse(x.dataset.tip),e)}catch(_){}});
-document.addEventListener("mousemove",posTip);document.addEventListener("mouseout",e=>{if(e.target.closest?.("[data-tip]"))$("#tip").classList.remove("show")});
-document.addEventListener("focusin",e=>{let x=e.target.closest?.("[data-tip]");if(x)try{let r=x.getBoundingClientRect();showTip(JSON.parse(x.dataset.tip),{clientX:r.right,clientY:r.top})}catch(_){}});
-document.addEventListener("focusout",()=>$("#tip").classList.remove("show"));
+
+function profList(
+character,
+category
+){
+
+return (
+character.proficiencies || []
+)
+.filter(entry =>
+norm(entry.category) === category
+)
+.map(entry =>
+entry.name ||
+entry.proficiency ||
+""
+);
+
+}
+
+const SKILL_POSITIONS = {
+
+"acrobacias":["sl",1],
+"atletismo":["sl",2],
+"arcanos":["sl",4],
+"engano":["sl",5],
+"historia":["sl",6],
+"interpretacion":["sl",7],
+"intimidacion":["sl",8],
+"investigacion":["sl",9],
+
+"medicina":["sr",1],
+"naturaleza":["sr",2],
+"percepcion":["sr",3],
+"perspicacia":["sr",4],
+"juego de manos":["sr",5],
+"sigilo":["sr",6],
+"supervivencia":["sr",7],
+"trato con animales":["sr",8]
+
+};
+
+function skillOverlay(character){
+
+return (
+character.skills || []
+)
+.map(skill => {
+
+const name =
+skill.skill ||
+skill.name ||
+"";
+
+const position =
+SKILL_POSITIONS[
+norm(name)
+];
+
+if(!position)
+return "";
+
+return `
+<span
+class="skill ${position[0]} sk${position[1]}"
+>
+${esc(
+skill.bonus ||
+skill.value ||
+""
+)}
+</span>
+`;
+
+})
+.join("");
+
+}
+
+function saveOverlay(character){
+
+const saves =
+saveMap(character);
+
+const abilities = [
+"FUE",
+"DES",
+"CON",
+"INT",
+"SAB",
+"CAR"
+];
+
+return abilities
+.map(
+(ability,index) =>
+saves[ability]
+? `
+<span
+class="save sv${index + 1}"
+>
+${esc(saves[ability])}
+</span>
+`
+: ""
+)
+.join("");
+
+}
+
+function attackDisplay(attack){
+
+const name =
+attack.name ||
+attack.attack ||
+"";
+
+if(
+attack.attack_bonus ||
+attack.damage
+)
+return {
+name,
+bonus:
+attack.attack_bonus ||
+attack.bonus ||
+"",
+damage:
+attack.damage ||
+"",
+type:
+attack.damage_type ||
+"",
+props:
+attack.range ||
+attack.properties ||
+""
+};
+
+const match =
+name.match(
+/^(.*?)\s([+-]\d+)\s+[—-]\s+(.+)$/
+);
+
+return {
+name:
+match
+? match[1]
+: name,
+
+bonus:
+match
+? match[2]
+: "",
+
+damage:
+match
+? match[3]
+: "",
+
+type:"",
+props:""
+};
+
+}
+
+function attackRows(character){
+
+return (
+character.attacks || []
+)
+.slice(0,4)
+.map(attack => {
+
+const display =
+attackDisplay(attack);
+
+return `
+<div
+class="atkrow tipTarget"
+${tipAttr(
+attack,
+"Ataque",
+character.name
+)}
+>
+
+<span class="fitText">
+${esc(display.name)}
+</span>
+
+<span class="fitText">
+${esc(display.bonus)}
+</span>
+
+<span class="fitText">
+${esc(display.damage)}
+</span>
+
+<span class="fitText">
+${esc(display.type)}
+</span>
+
+<span class="fitText">
+${esc(display.props)}
+</span>
+
+</div>
+`;
+
+})
+.join("");
+
+}
+
+function openChar(character){
+
+$("#modalTitle").textContent =
+character.name || "";
+
+const stats =
+character.stats || {};
+
+const groups =
+traitGroups(character);
+
+const languages =
+profList(
+character,
+"language"
+);
+
+const proficiencies =
+profList(
+character,
+"proficiency"
+);
+
+const equipment =
+character.equipment || [];
+
+const saves =
+saveMap(character);
+
+const template =
+assetImage(
+cfg(
+"sheet_template_asset_id",
+"AST_SHEET"
+)
+);
+
+const speed =
+stats.speed_ft ||
+stats.speed ||
+"";
+
+const pb =
+stats.proficiency_bonus ||
+stats.pb ||
+"";
+
+$("#sheet").innerHTML = `
+
+${template
+? imgHtml(
+template,
+"bg",
+"Plantilla de hoja de personaje"
+)
+: ""
+}
+
+<div class="pic">
+${character.portrait
+? imgHtml(
+character.portrait,
+"",
+character.name
+)
+: ""
+}
+</div>
+
+<span
+class="f f-name fitText"
+data-max="13"
+data-min="7"
+>
+${esc(character.name || "")}
+</span>
+
+<span
+class="f f-race fitText"
+data-max="13"
+data-min="7"
+>
+${esc(character.race || "")}
+</span>
+
+<span
+class="f f-class fitText"
+data-max="13"
+data-min="7"
+>
+${esc(character.class || "")}
+</span>
+
+<span
+class="f f-sub fitText"
+data-max="13"
+data-min="7"
+>
+${esc(character.subclass || "")}
+</span>
+
+<span
+class="f f-bg fitText"
+data-max="13"
+data-min="6"
+>
+${esc(character.background || "")}
+</span>
+
+<span class="f f-level">
+${esc(character.level || "")}
+</span>
+
+<span class="f f-xp">
+${esc(character.xp || "")}
+</span>
+
+<span
+class="f f-align fitText"
+data-max="13"
+data-min="7"
+>
+${esc(character.alignment || "")}
+</span>
+
+<span class="f f-pb">
+${pb ? "+" + esc(pb) : ""}
+</span>
+
+${[
+"str",
+"dex",
+"con",
+"int",
+"wis",
+"cha"
+]
+.map(
+(ability,index) => `
+<span
+class="score a${index + 1}"
+>
+${esc(val(stats[ability]))}
+</span>
+
+<span
+class="mod a${index + 1}"
+>
+${esc(
+modifier(
+stats[ability]
+)
+)}
+</span>
+`
+)
+.join("")}
+
+<span class="pb">
+${pb ? "+" + esc(pb) : ""}
+</span>
+
+${saveOverlay(character)}
+
+<span class="combat ac">
+${esc(val(stats.ac))}
+</span>
+
+<span class="combat ini">
+${number(stats.initiative) !== null &&
+number(stats.initiative) >= 0
+? "+"
+: ""
+}
+${esc(val(stats.initiative))}
+</span>
+
+<span class="combat spd">
+${esc(val(speed))}
+</span>
+
+<span class="combat hpm">
+${esc(val(stats.hp_max))}
+</span>
+
+<span class="combat hpc">
+${esc(val(stats.hp_current))}
+</span>
+
+<span
+class="combat hd fitText"
+data-max="20"
+data-min="9"
+>
+${esc(val(stats.hit_dice))}
+</span>
+
+${skillOverlay(character)}
+
+<div
+class="box raceBox fitBox"
+data-max="9"
+data-min="5"
+>
+${techList(
+groups.species,
+"Rasgo de especie",
+character.name
+)}
+</div>
+
+<div
+class="box classBox fitBox"
+data-max="9"
+data-min="5"
+>
+${techList(
+groups.class,
+"Rasgo de clase",
+character.name
+)}
+</div>
+
+<div
+class="box otherBox fitBox"
+data-max="9"
+data-min="5"
+>
+${techList(
+groups.other,
+"Dote / otro rasgo",
+character.name
+)}
+</div>
+
+<div
+class="box langBox fitBox"
+data-max="9"
+data-min="5"
+>
+
+<b>Idiomas</b><br>
+
+${esc(
+languages.join(", ") ||
+"—"
+)}
+
+<br><br>
+
+<b>Competencias</b><br>
+
+${esc(
+proficiencies.join("; ") ||
+"—"
+)}
+
+</div>
+
+<div
+class="box attacks fitBox"
+data-max="9"
+data-min="5"
+>
+${attackRows(character)}
+</div>
+
+<div
+class="box equip fitBox"
+data-max="9"
+data-min="5"
+>
+${techList(
+equipment.slice(0,6),
+"Objeto",
+character.name
+)}
+</div>
+
+<div
+class="box inv fitBox"
+data-max="9"
+data-min="5"
+>
+${techList(
+equipment.slice(6),
+"Objeto",
+character.name
+)}
+</div>
+
+<div
+class="box notes fitBox"
+data-max="9"
+data-min="5"
+>
+${esc(
+character.current_state ||
+character.short_description ||
+character.status ||
+""
+)}
+</div>
+`;
+
+$("#side").innerHTML = `
+
+<div class="card">
+
+<div class="status">
+${esc(character.kind || "")}
+·
+${esc(character.role || "")}
+</div>
+
+<h3>
+${esc(character.name || "")}
+</h3>
+
+<p class="long">
+${esc(
+character.short_description ||
+character.description ||
+""
+)}
+</p>
+
+<span class="pill">
+${esc(character.race || "—")}
+</span>
+
+<span class="pill">
+${esc(
+[
+character.class,
+character.subclass
+]
+.filter(Boolean)
+.join(" — ") ||
+"—"
+)}
+</span>
+
+<span class="pill">
+Nivel ${esc(character.level || "—")}
+</span>
+
+</div>
+
+<details open>
+<summary>Historia conocida</summary>
+
+<div class="body long">
+${esc(
+character.public_history ||
+character.history ||
+"—"
+)}
+</div>
+</details>
+
+${character.appearance
+? `
+<details>
+<summary>Apariencia</summary>
+<div class="body long">
+${esc(character.appearance)}
+</div>
+</details>
+`
+: ""
+}
+
+${character.personality
+? `
+<details>
+<summary>Personalidad</summary>
+<div class="body long">
+${esc(character.personality)}
+</div>
+</details>
+`
+: ""
+}
+
+<details open>
+<summary>Mecánicas</summary>
+
+<div class="body">
+
+<div class="mechanics">
+
+<div class="mini">
+<b>Atributos</b>
+
+FUE ${val(stats.str)}
+(${modifier(stats.str)})
+·
+DES ${val(stats.dex)}
+(${modifier(stats.dex)})
+·
+CON ${val(stats.con)}
+(${modifier(stats.con)})
+·
+INT ${val(stats.int)}
+(${modifier(stats.int)})
+·
+SAB ${val(stats.wis)}
+(${modifier(stats.wis)})
+·
+CAR ${val(stats.cha)}
+(${modifier(stats.cha)})
+</div>
+
+<div class="mini">
+<b>Combate</b>
+
+CA ${val(stats.ac)}
+·
+iniciativa ${val(stats.initiative)}
+·
+velocidad ${val(speed)}
+·
+PG ${val(stats.hp_current)}/${val(stats.hp_max)}
+·
+dados ${val(stats.hit_dice)}
+</div>
+
+<div class="mini">
+<b>Salvaciones</b>
+
+${Object.entries(saves)
+.map(
+([ability,bonus]) =>
+`${ability} ${bonus}`
+)
+.join(" · ") ||
+"—"
+}
+</div>
+
+<div class="mini">
+<b>Habilidades</b>
+
+${(character.skills || [])
+.map(skill =>
+`${skill.skill || skill.name} ${skill.bonus || skill.value || ""}`
+)
+.join(" · ") ||
+"—"
+}
+</div>
+
+</div>
+</div>
+</details>
+
+<details open>
+<summary>Rasgos de especie</summary>
+
+<div class="body">
+${techList(
+groups.species,
+"Rasgo de especie",
+character.name
+)}
+</div>
+</details>
+
+<details open>
+<summary>Rasgos de clase</summary>
+
+<div class="body">
+${techList(
+groups.class,
+"Rasgo de clase",
+character.name
+)}
+</div>
+</details>
+
+${groups.other.length
+? `
+<details>
+<summary>Dotes y otros rasgos</summary>
+
+<div class="body">
+${techList(
+groups.other,
+"Rasgo",
+character.name
+)}
+</div>
+</details>
+`
+: ""
+}
+
+<details>
+<summary>Habilidades</summary>
+
+<div class="body">
+${techList(
+character.skills,
+"Habilidad",
+character.name
+)}
+</div>
+</details>
+
+<details>
+<summary>Idiomas y competencias</summary>
+
+<div class="body">
+
+<h4>Idiomas</h4>
+${list(languages)}
+
+<h4>Competencias</h4>
+${list(proficiencies)}
+
+</div>
+</details>
+
+${character.spells.length
+? `
+<details>
+<summary>Conjuros</summary>
+
+<div class="body">
+
+${techList(
+character.spells,
+"Conjuro",
+character.name
+)}
+
+${character.spell_slots.length
+? `
+<h4>Espacios</h4>
+
+${list(
+character.spell_slots
+.map(slot =>
+`Nivel ${slot.spell_level}: ${slot.slots_current}/${slot.slots_max}`
+)
+)}
+`
+: ""
+}
+
+</div>
+</details>
+`
+: ""
+}
+
+<details>
+<summary>Ataques</summary>
+
+<div class="body">
+${techList(
+character.attacks,
+"Ataque",
+character.name
+)}
+</div>
+</details>
+
+<details>
+<summary>Equipo e inventario</summary>
+
+<div class="body">
+${techList(
+character.equipment,
+"Objeto",
+character.name
+)}
+</div>
+</details>
+
+${character.relationships.length
+? `
+<details>
+<summary>Relaciones</summary>
+
+<div class="body">
+${list(
+character.relationships
+.map(relationship =>
+`${relationship.object_name || relationship.object_id || ""}${relationship.public_summary ? ": " + relationship.public_summary : ""}`
+)
+)}
+</div>
+</details>
+`
+: ""
+}
+
+<details>
+<summary>Estado actual</summary>
+
+<div class="body long">
+${esc(
+character.current_state ||
+character.status ||
+"—"
+)}
+</div>
+</details>
+`;
+
+$("#modal")
+.classList
+.add("open");
+
+document.body.style.overflow =
+"hidden";
+
+requestAnimationFrame(
+() =>
+requestAnimationFrame(
+fitSheetText
+)
+);
+
+}
+
+function fitOne(element){
+
+const max =
+number(element.dataset.max) ||
+parseFloat(
+getComputedStyle(element)
+.fontSize
+) ||
+12;
+
+const min =
+number(element.dataset.min) ||
+5;
+
+element.style.fontSize =
+max + "px";
+
+element.style.lineHeight =
+"1.1";
+
+let size =
+max;
+
+const overflow = () =>
+element.scrollWidth >
+element.clientWidth + 1 ||
+element.scrollHeight >
+element.clientHeight + 1;
+
+while(
+size > min &&
+overflow()
+){
+
+size -= .35;
+
+element.style.fontSize =
+size + "px";
+
+if(
+element.classList.contains(
+"fitBox"
+)
+){
+
+element.style.lineHeight =
+String(
+Math.max(
+.95,
+1.12 -
+(max - size) * .015
+)
+);
+
+}
+
+}
+
+}
+
+function fitSheetText(){
+
+document.querySelectorAll(
+"#sheet .fitText,#sheet .fitBox"
+)
+.forEach(
+fitOne
+);
+
+}
+
+function showTip(
+data,
+event
+){
+
+const tip =
+$("#tip");
+
+const rows =
+(data.rows || [])
+.map(row => `
+<dt>${esc(row[0])}</dt>
+<dd>${esc(row[1])}</dd>
+`)
+.join("");
+
+tip.innerHTML = `
+<div class="k">
+${esc(data.kind)}
+</div>
+
+<h4>
+${esc(data.title)}
+</h4>
+
+<p>
+${esc(data.desc || "")}
+</p>
+
+${rows
+? `<dl>${rows}</dl>`
+: ""
+}
+`;
+
+tip.classList.add(
+"show"
+);
+
+positionTip(event);
+
+}
+
+function positionTip(event){
+
+const tip =
+$("#tip");
+
+if(
+!tip.classList.contains(
+"show"
+)
+)
+return;
+
+let x =
+event.clientX + 15;
+
+let y =
+event.clientY + 15;
+
+const box =
+tip.getBoundingClientRect();
+
+if(
+x + box.width >
+window.innerWidth - 10
+)
+x =
+event.clientX -
+box.width -
+15;
+
+if(
+y + box.height >
+window.innerHeight - 10
+)
+y =
+window.innerHeight -
+box.height -
+10;
+
+tip.style.left =
+Math.max(10,x) + "px";
+
+tip.style.top =
+Math.max(10,y) + "px";
+
+}
+
+document.addEventListener(
+"mouseover",
+event => {
+
+const target =
+event.target.closest?.(
+"[data-tip]"
+);
+
+if(!target)
+return;
+
+try{
+
+showTip(
+JSON.parse(
+target.dataset.tip
+),
+event
+);
+
+}
+catch(error){}
+
+}
+);
+
+document.addEventListener(
+"mousemove",
+positionTip
+);
+
+document.addEventListener(
+"mouseout",
+event => {
+
+if(
+event.target.closest?.(
+"[data-tip]"
+)
+)
+$("#tip")
+.classList
+.remove("show");
+
+}
+);
+
+document.addEventListener(
+"focusin",
+event => {
+
+const target =
+event.target.closest?.(
+"[data-tip]"
+);
+
+if(!target)
+return;
+
+try{
+
+const rect =
+target.getBoundingClientRect();
+
+showTip(
+JSON.parse(
+target.dataset.tip
+),
+{
+clientX:rect.right,
+clientY:rect.top
+}
+);
+
+}
+catch(error){}
+
+}
+);
+
+document.addEventListener(
+"focusout",
+() =>
+$("#tip")
+.classList
+.remove("show")
+);
 
 async function refresh(){
-  try{
-    $("#refresh").disabled=true;DB=await loadDB();DATA=buildData(DB);renderAll();
-    setMode("Sheet vivo · "+new Date().toLocaleTimeString(),"live");
-    clearInterval(TIMER);let seconds=Math.max(15,number(cfg("refresh_seconds",60))||60);TIMER=setInterval(refresh,seconds*1000)
-  }catch(e){
-    console.error(e);setMode("Error de Sheet","err");
-    $("#main").innerHTML=`<section><div class="panel" style="padding:20px"><h2>No se pudo leer la base de datos</h2><p>${esc(e.message)}</p><p>Revisa que el Google Sheet sea accesible para cualquier persona con el enlace y vuelve a pulsar Actualizar.</p></div></section>`
-  }finally{$("#refresh").disabled=false}
+
+try{
+
+$("#refresh").disabled =
+true;
+
+DB =
+await loadDB();
+
+DATA =
+buildData(DB);
+
+renderAll();
+
+setMode(
+"Sheet vivo · " +
+new Date()
+.toLocaleTimeString(),
+"live"
+);
+
+clearInterval(TIMER);
+
+const seconds =
+Math.max(
+15,
+number(
+cfg(
+"refresh_seconds",
+60
+)
+) || 60
+);
+
+TIMER =
+setInterval(
+refresh,
+seconds * 1000
+);
+
+}
+catch(error){
+
+console.error(error);
+
+setMode(
+"Error de Sheet",
+"err"
+);
+
+$("#main").innerHTML = `
+<section>
+
+<div
+class="panel"
+style="padding:20px"
+>
+
+<h2>
+No se pudo leer la base de datos
+</h2>
+
+<p>
+${esc(error.message)}
+</p>
+
+<p>
+Revisa que el Google Sheet sea accesible para cualquier persona con el enlace y pulsa Actualizar.
+</p>
+
+</div>
+</section>
+`;
+
+}
+finally{
+
+$("#refresh").disabled =
+false;
+
 }
 
-$("#cfg").onclick=()=>{let x=prompt("ID o URL del Google Sheet maestro:",sheetId());if(x===null)return;x=x.trim().replace(/^.*\/spreadsheets\/d\//,"").replace(/\/.*$/,"");if(x)localStorage.setItem("kazym_sheet_id",x);else localStorage.removeItem("kazym_sheet_id");refresh()};
-$("#refresh").onclick=refresh;
-$("#close").onclick=()=>{$("#modal").classList.remove("open");document.body.style.overflow=""};
-$("#modal").onclick=e=>{if(e.target.id==="modal")$("#close").click()};
-document.addEventListener("keydown",e=>{if(e.key==="Escape")$("#close").click()});
-window.addEventListener("resize",()=>{if($("#modal").classList.contains("open"))fitSheetText()});
+}
+
+$("#refresh").onclick =
+refresh;
+
+$("#close").onclick =
+() => {
+
+$("#modal")
+.classList
+.remove("open");
+
+document.body.style.overflow =
+"";
+
+};
+
+$("#modal").onclick =
+event => {
+
+if(
+event.target.id ===
+"modal"
+)
+$("#close").click();
+
+};
+
+document.addEventListener(
+"keydown",
+event => {
+
+if(
+event.key ===
+"Escape"
+)
+$("#close").click();
+
+}
+);
+
+window.addEventListener(
+"resize",
+() => {
+
+if(
+$("#modal")
+.classList
+.contains("open")
+)
+fitSheetText();
+
+}
+);
+
 refresh();
+
 </script>
+
 </body>
 </html>
