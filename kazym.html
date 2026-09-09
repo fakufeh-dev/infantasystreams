@@ -62,7 +62,7 @@ details{margin-bottom:8px;overflow:hidden}summary{cursor:pointer;padding:14px 16
 <div id="tip"></div><footer>v2.8.8 · RATE-LIMIT FIX único · src directo assets/<local_path></footer>
 <script>
 const SHEET_ID="1QSrD9vg2erPGGVyR92zSFETVOUmm8GhbKMYWRxGk2Jw"; // ÚNICA fuente: Kazym Campaign Codex MASTER
-const BUILD_ID="v2.8.9-20260909-1200";
+const BUILD_ID="v2.8.10-20260909-1215";
 console.info("Campaign Codex MASTER Sheet:", SHEET_ID);
 const TABS=["config","sections","assets","characters","character_stats","character_saves","character_skills","character_proficiencies","character_traits","character_attacks","character_spells","character_spell_slots","character_equipment","relationships","history","history_rolls","history_events","npcs","bestiary","enemy_traits","base_overview","base_rooms","base_projects","base_protocols","faction_members","base_details","lore","mysteries","items","rules","checkpoint","changelog"];
 
@@ -645,7 +645,7 @@ async function refresh(){
       const schemaFailures=Object.entries(TAB_STATUS).filter(([,v])=>v.schemaOk===false).length;
       addDiag("info","SHEET-OK","MASTER leído y esquemas validados",
         `${Object.keys(TAB_STATUS).length} pestañas consultadas · ${schemaFailures} fallos de esquema · ${ASSETS.size} assets resueltos · ${imageRefs} imágenes insertadas en el DOM.`,
-        `Sheet ID: ${SHEET_ID}\nHeaders: fila 1 · gviz headers=${MASTER_HEADER_ROWS}`,"sheet-ok");
+        `Sheet ID: ${SHEET_ID}\nCarga de datos: auto-header (headers=1 → retry headers=0)`,"sheet-ok");
     }
 
     clearInterval(TIMER);
