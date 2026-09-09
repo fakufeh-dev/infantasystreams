@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="dark">
-<title>Kazym Campaign Codex · v2.8.7 · AUTO-HEADER</title>
+<title>Kazym Campaign Codex · v2.8.8 · RATE-LIMIT FIX</title>
 <style>
 :root{--bg:#0b0d12;--panel:#171a22;--line:#393e4d;--ink:#eee6d8;--muted:#aaa297;--gold:#b89a67;--paper:#1d1813}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 20% -10%,#2b2138 0,transparent 32%),linear-gradient(#0a0c11,#11141b);color:var(--ink);font-family:Georgia,"Times New Roman",serif}button,input{font:inherit}
@@ -42,7 +42,7 @@ details{margin-bottom:8px;overflow:hidden}summary{cursor:pointer;padding:14px 16
 </style>
 </head>
 <body>
-<header class="top"><nav id="nav"><div class="brand" id="brand">Campaign Codex</div><button class="btn" id="refresh">Actualizar</button><button class="btn diag-btn" id="diagToggle" type="button">Diagnóstico 0</button><span class="badge live">v2.8.7 · AUTO-HEADER</span><span class="badge" id="mode">Cargando…</span></nav></header>
+<header class="top"><nav id="nav"><div class="brand" id="brand">Campaign Codex</div><button class="btn" id="refresh">Actualizar</button><button class="btn diag-btn" id="diagToggle" type="button">Diagnóstico 0</button><span class="badge live">v2.8.8 · RATE-LIMIT FIX</span><span class="badge" id="mode">Cargando…</span></nav></header>
 
 <div class="diag-wrap">
   <section class="diag-panel" id="diagPanel" hidden aria-live="polite">
@@ -59,10 +59,10 @@ details{margin-bottom:8px;overflow:hidden}summary{cursor:pointer;padding:14px 16
 <div class="hero"><div><div class="eyebrow" id="eyebrow"></div><h1 id="heroTitle">Campaign Codex</h1><p id="heroSubtitle"></p></div><div class="panel kpis"><div class="kpi"><b id="kLvl">—</b><span>Nivel principal</span></div><div class="kpi"><b id="kXp">—</b><span>PX</span></div><div class="kpi"><b id="kAllies">—</b><span>Personajes</span></div><div class="kpi"><b id="kBase">—</b><span>Funciones base</span></div></div></div>
 <main id="main"></main>
 <div class="modal" id="modal"><div class="shell"><div class="bar"><h2 id="modalTitle"></h2><button class="btn" id="close">Cerrar ×</button></div><div class="char"><div class="sheet" id="sheet"></div><aside class="side" id="side"></aside></div></div></div>
-<div id="tip"></div><footer>v2.8.7 · AUTO-HEADER único · src directo assets/<local_path></footer>
+<div id="tip"></div><footer>v2.8.8 · RATE-LIMIT FIX único · src directo assets/<local_path></footer>
 <script>
 const SHEET_ID="1QSrD9vg2erPGGVyR92zSFETVOUmm8GhbKMYWRxGk2Jw"; // ÚNICA fuente: Kazym Campaign Codex MASTER
-const BUILD_ID="v2.8.7-20260909-1135";
+const BUILD_ID="v2.8.9-20260909-1200";
 console.info("Campaign Codex MASTER Sheet:", SHEET_ID);
 const TABS=["config","sections","assets","characters","character_stats","character_saves","character_skills","character_proficiencies","character_traits","character_attacks","character_spells","character_spell_slots","character_equipment","relationships","history","history_rolls","history_events","npcs","bestiary","enemy_traits","base_overview","base_rooms","base_projects","base_protocols","faction_members","base_details","lore","mysteries","items","rules","checkpoint","changelog"];
 
@@ -347,7 +347,7 @@ async function tab(name){
 
 async function loadDB(){
   const out={};
-  await Promise.all(TABS.map(async n=>{
+  for(const n of TABS){
     try{
       out[n]=await tab(n);
     }catch(e){
@@ -363,7 +363,8 @@ async function loadDB(){
         `tab:${n}:${e?.diagCode||"TAB-LOAD"}`
       );
     }
-  }));
+    await new Promise(r=>setTimeout(r,180));
+  }
 
   if(!out.characters.length){
     addDiag("error","DATA-CHARACTERS-EMPTY","La pestaña characters está vacía o no pudo leerse",
@@ -393,33 +394,42 @@ async function loadDB(){
 }
 function group(rows,key){const m=new Map;(rows||[]).forEach(r=>{const k=r[key]||"";if(!m.has(k))m.set(k,[]);m.get(k).push(r)});return m}function first(rows,key){const m=new Map;(rows||[]).forEach(r=>{const k=r[key]||"";if(k&&!m.has(k))m.set(k,r)});return m}function order(a,b){return(num(a.sort_order)??999)-(num(b.sort_order)??999)}function cfg(k,d=""){return CONFIG[k]!==undefined&&CONFIG[k]!==""?CONFIG[k]:d}function list(a){return`<ul class="list">${(a||[]).map(x=>`<li>${esc(typeof x==="string"?x:(x.name||x.item||x.skill||x.title||""))}</li>`).join("")}</ul>`}
 /*
-  Método de imágenes replicado de las versiones que sí funcionaban.
+  v2.8.9 — IMÁGENES DIRECTAS DESDE GOOGLE DRIVE
 
-  CONTRATO:
-  - assets.local_path guarda SOLO la ruta/nombre relativo del archivo.
-  - assetValue() antepone "assets/" una sola vez.
-  - img() usa ese string directamente como src.
-  - Google Drive NO participa en el render del navegador.
-  - drive_file_id puede seguir existiendo en el Sheet como referencia,
-    pero nunca se usa para construir <img src>.
+  Fuente única:
+  assets.drive_file_id
+
+  El MASTER guarda URLs como:
+  https://lh3.googleusercontent.com/d/<FILE_ID>
+
+  local_path se conserva solo como referencia documental; el navegador
+  NO busca una carpeta assets/ en GitHub Pages.
 */
-function encodePath(path){
-  return String(path||"")
-    .split("/")
-    .map(part=>encodeURIComponent(part))
-    .join("/");
+function driveId(v){
+  const s=String(v||"").trim();
+  if(!s)return "";
+  if(/^[A-Za-z0-9_-]{20,}$/.test(s))return s;
+  let m=s.match(/\/d\/([A-Za-z0-9_-]{20,})/);
+  if(m)return m[1];
+  m=s.match(/[?&]id=([A-Za-z0-9_-]{20,})/);
+  return m?m[1]:"";
 }
 
-function assetSrc(v){
+function drivePrimary(v){
   const raw=String(v||"").trim();
   if(!raw)return "";
+  if(/^https?:\/\//i.test(raw))return raw;
+  const id=driveId(raw);
+  return id?`https://lh3.googleusercontent.com/d/${encodeURIComponent(id)}`:"";
+}
 
-  // Evita assets/assets/... si algún dato antiguo ya trae el prefijo.
-  const clean=raw
-    .replace(/^\.?\//,"")
-    .replace(/^assets\//i,"");
-
-  return `assets/${encodePath(clean)}`;
+function driveFallbacks(v){
+  const id=driveId(v);
+  if(!id)return [];
+  return [
+    `https://drive.google.com/thumbnail?id=${encodeURIComponent(id)}&sz=w2000`,
+    `https://drive.google.com/uc?export=view&id=${encodeURIComponent(id)}`
+  ];
 }
 
 function imageUrl(v){
@@ -433,7 +443,8 @@ function img(v,cls="",alt=""){
     return inlineAssetErrorHTML(src);
   }
   if(!src)return "";
-  return `<img class="${esc(cls)}" src="${esc(src)}" alt="${esc(alt)}" data-asset-alt="${esc(alt)}" loading="lazy" decoding="async">`;
+  const id=driveId(src);
+  return `<img class="${esc(cls)}" src="${esc(src)}" alt="${esc(alt)}" data-asset-alt="${esc(alt)}" data-drive-id="${esc(id)}" data-drive-attempt="0" loading="lazy" decoding="async" referrerpolicy="no-referrer">`;
 }
 
 function queueImages(root=document){
@@ -442,28 +453,44 @@ function queueImages(root=document){
     image.dataset.imageFallbackBound="1";
 
     image.addEventListener("error",()=>{
+      const id=image.dataset.driveId||driveId(image.getAttribute("src")||"");
+      const attempt=Number(image.dataset.driveAttempt||0);
+      const fallbacks=driveFallbacks(id);
+
+      if(id && attempt < fallbacks.length){
+        const next=fallbacks[attempt];
+        image.dataset.driveAttempt=String(attempt+1);
+        addDiag(
+          "warn",
+          "IMG-DRIVE-RETRY",
+          `Reintentando imagen desde Google Drive`,
+          `Falló el endpoint anterior. Se probará otra URL pública de Drive.`,
+          `Archivo: ${image.alt||"Imagen"}\nDrive ID: ${id}\nSiguiente: ${next}`,
+          `drive-retry:${id}:${attempt}`
+        );
+        image.src=next;
+        return;
+      }
+
       const raw=image.getAttribute("src")||"";
       const alt=image.getAttribute("data-asset-alt")||image.alt||"Imagen";
-      const absolute=image.src||raw;
-
       addDiag(
         "error",
-        "IMG-LOAD",
-        `No se pudo cargar "${alt}"`,
-        `El navegador intentó cargar: ${raw}\nComprueba que el archivo exista exactamente en esa ruta y respete mayúsculas/minúsculas.`,
-        `URL resuelta: ${absolute}`,
-        `img:${absolute}`
+        "IMG-DRIVE-FAIL",
+        `No se pudo cargar "${alt}" desde Google Drive`,
+        `Se agotaron los endpoints públicos de Drive para este archivo. Revisa que el archivo siga compartido como \"Cualquiera con el enlace / lector\".`,
+        `Drive ID: ${id||"no detectado"}\nÚltima URL: ${raw}`,
+        `drive-fail:${id||raw}`
       );
 
-      const parent=image.parentElement;
       const box=document.createElement("div");
       box.className="image-error-inline";
-      box.innerHTML=`<b>IMG-LOAD</b>
-        <span>No se pudo cargar la imagen</span>
-        <span class="path">${esc(raw)}</span>
-        <span class="hint">Revisa carpeta assets/, nombre y mayúsculas/minúsculas.</span>`;
+      box.innerHTML=`<b>IMG-DRIVE-FAIL</b>
+        <span>No se pudo cargar desde Google Drive</span>
+        <span class="path">${esc(id||raw)}</span>
+        <span class="hint">Revisa permisos públicos del archivo en Drive.</span>`;
       image.replaceWith(box);
-    },{once:true});
+    });
   });
 }
 
@@ -476,7 +503,7 @@ function assetValue(assetId,opts={}){
     if(required){
       addDiag(
         "error","ASSET-ID-EMPTY","Falta el asset_id requerido",
-        "El registro que intenta mostrar una imagen no contiene portrait_asset_id, image_asset_id o map_asset_id.",
+        "El registro no contiene portrait_asset_id, image_asset_id o map_asset_id.",
         context,`asset-empty:${context}`
       );
       return inlineAssetError("ASSET-ID-EMPTY","Falta asset_id",context||"Registro sin referencia de imagen");
@@ -494,26 +521,26 @@ function assetValue(assetId,opts={}){
     return inlineAssetError("ASSET-ID-NOT-FOUND",`No existe ${key}`,context);
   }
 
-  const local=String(a.local_path||"").trim();
-  if(!local){
+  const drive=String(a.drive_file_id||a.image_url||a.url||"").trim();
+  if(!drive){
     addDiag(
-      "error","ASSET-PATH-EMPTY",`${key} no tiene local_path`,
-      "El método actual necesita un nombre/ruta relativa para construir assets/<local_path>.",
-      context||`asset_id: ${key}`,`asset-path-empty:${key}`
+      "error","ASSET-DRIVE-EMPTY",`${key} no tiene drive_file_id`,
+      "Este sitio carga las imágenes directamente desde Google Drive; drive_file_id es obligatorio.",
+      context||`asset_id: ${key}`,`asset-drive-empty:${key}`
     );
-    return inlineAssetError("ASSET-PATH-EMPTY",`${key} sin local_path`,context);
+    return inlineAssetError("ASSET-DRIVE-EMPTY",`${key} sin URL de Drive`,context);
   }
 
-  if(/^https?:\/\//i.test(local)){
+  const src=drivePrimary(drive);
+  if(!src){
     addDiag(
-      "error","ASSET-PATH-URL",`${key} contiene una URL en local_path`,
-      "local_path debe ser un nombre o ruta relativa (ej. kazym.png), no una URL.",
-      `local_path: ${local}`,`asset-path-url:${key}`
+      "error","ASSET-DRIVE-INVALID",`${key} tiene un drive_file_id inválido`,
+      "Debe ser una URL pública de Google Drive o un ID válido.",
+      `drive_file_id: ${drive}`,`asset-drive-invalid:${key}`
     );
-    return inlineAssetError("ASSET-PATH-URL","local_path debe ser relativo",local);
+    return inlineAssetError("ASSET-DRIVE-INVALID",`${key} URL inválida`,drive);
   }
 
-  const src=assetSrc(local);
   return src;
 }
 
@@ -534,14 +561,15 @@ function build(db){
     seenAssetIds.add(id);
   });
   ASSETS=new Map(assetRows.map(x=>[String(x.asset_id||"").trim(),x]));
+  const DRIVE_ASSET_COUNT=[...ASSETS.values()].filter(a=>String(a.drive_file_id||"").trim()).length;
 
   if(ASSETS.size){
     addDiag(
       "info",
       "ASSETS-OK",
       `Pestaña assets interpretada correctamente`,
-      `${ASSETS.size} asset_id disponibles. Ejemplo: ${[...ASSETS.keys()].slice(0,5).join(", ")}`,
-      `Headers: ${(TAB_STATUS.assets?.headers||[]).join(", ")}`,
+      `${ASSETS.size} asset_id disponibles. Imágenes configuradas para Google Drive directo. Ejemplo: ${[...ASSETS.keys()].slice(0,5).join(", ")}`,
+      `Drive URLs: ${DRIVE_ASSET_COUNT}/${ASSETS.size} · Headers: ${(TAB_STATUS.assets?.headers||[]).join(", ")}`,
       "assets-ok"
     );
 
