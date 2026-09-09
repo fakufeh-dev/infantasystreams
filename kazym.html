@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="dark">
-<title>Kazym Campaign Codex · v2.8.13 · CIRCULAR IMAGE LENS</title>
+<title>Kazym Campaign Codex · v2.8.14 · CURSOR MAGNIFIER</title>
 <style>
 :root{--bg:#0b0d12;--panel:#171a22;--line:#393e4d;--ink:#eee6d8;--muted:#aaa297;--gold:#b89a67;--paper:#1d1813}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 20% -10%,#2b2138 0,transparent 32%),linear-gradient(#0a0c11,#11141b);color:var(--ink);font-family:Georgia,"Times New Roman",serif}button,input{font:inherit}
@@ -173,50 +173,28 @@ section.is-lazy .sectionBody{min-height:140px}
   position:fixed;
   left:0;top:0;
   z-index:9998;
-  width:238px;height:238px;
+  width:190px;height:190px;
   display:none;
   pointer-events:none;
   border-radius:50%;
   overflow:hidden;
-  background:
-    radial-gradient(circle at 50% 45%,#202633 0,#10141d 68%,#080a0f 100%);
-  border:2px solid #8e7656;
-  box-shadow:0 16px 42px #0009, inset 0 0 0 4px #0d1017cc;
-  transform:translate(18px,-50%);
+  border:2px solid #9b835f;
+  box-shadow:
+    0 10px 30px #0008,
+    inset 0 0 0 3px #0d1017cc,
+    inset 0 0 22px #0005;
+  background-color:#11151d;
+  background-repeat:no-repeat;
+  transform:translate(-50%,-50%);
 }
 #imagePreview.show{display:block}
-#imagePreview .previewShell{
-  position:relative;
-  width:100%;height:100%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-#imagePreview img{
-  width:92%;height:92%;
-  max-width:none;max-height:none;
-  object-fit:contain;
-  object-position:center center;
-  background:transparent;
-  border:0;
-  border-radius:0;
-  box-shadow:none;
-}
-#imagePreview .previewCaption{
-  position:absolute;
-  left:50%;bottom:10px;
-  transform:translateX(-50%);
-  max-width:82%;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-  color:#eee6d8;
-  background:#0a0d13d9;
-  border:1px solid #5a5045;
-  border-radius:999px;
-  padding:4px 8px;
-  font-size:.69rem;
-}
+#imagePreview .previewShell,
+#imagePreview img,
+#imagePreview .previewCaption{display:none!important}
+
+/* En imágenes ampliables, el círculo sustituye visualmente al cursor */
+img[data-zoom-bound="1"]{cursor:zoom-in}
+body.imageLensActive img[data-zoom-bound="1"]{cursor:none}
 
 /* Tomás: conservar proporción vertical real, nunca llenar el ancho */
 .portrait img.fullBodyPortrait,
@@ -235,7 +213,7 @@ section.is-lazy .sectionBody{min-height:140px}
 </style>
 </head>
 <body>
-<header class="top"><nav id="nav"><div class="brand" id="brand">Campaign Codex</div><button class="btn" id="refresh">Actualizar</button><button class="btn diag-btn" id="diagToggle" type="button">Diagnóstico 0</button><span class="badge live">v2.8.13 · CIRCULAR IMAGE LENS</span><span class="badge" id="mode">Cargando…</span></nav></header>
+<header class="top"><nav id="nav"><div class="brand" id="brand">Campaign Codex</div><button class="btn" id="refresh">Actualizar</button><button class="btn diag-btn" id="diagToggle" type="button">Diagnóstico 0</button><span class="badge live">v2.8.14 · CURSOR MAGNIFIER</span><span class="badge" id="mode">Cargando…</span></nav></header>
 
 <div class="diag-wrap">
   <section class="diag-panel" id="diagPanel" hidden aria-live="polite">
@@ -259,10 +237,10 @@ section.is-lazy .sectionBody{min-height:140px}
     <div class="previewCaption" id="imagePreviewCaption"></div>
   </div>
 </div>
-<footer>v2.8.13 · Drive directo + lazy + lupa circular</footer>
+<footer>v2.8.14 · Drive directo + lazy + lupa bajo cursor</footer>
 <script>
 const SHEET_ID="1QSrD9vg2erPGGVyR92zSFETVOUmm8GhbKMYWRxGk2Jw"; // ÚNICA fuente: Kazym Campaign Codex MASTER
-const BUILD_ID="v2.8.13-20260909-1405";
+const BUILD_ID="v2.8.14-20260909-1415";
 console.info("Campaign Codex MASTER Sheet:", SHEET_ID);
 const TABS=["config","sections","assets","characters","character_stats","character_saves","character_skills","character_proficiencies","character_traits","character_attacks","character_spells","character_spell_slots","character_equipment","relationships","history","history_rolls","history_events","npcs","bestiary","enemy_traits","base_overview","base_rooms","base_projects","base_protocols","faction_members","base_details","lore","mysteries","items","rules","checkpoint","changelog"];
 
@@ -701,57 +679,67 @@ function queueImages(root=document){
 const queueImagesCore=queueImages;
 function bindImageZoom(root=document){
   const preview=document.getElementById("imagePreview");
-  const pimg=document.getElementById("imagePreviewImg");
-  const pcap=document.getElementById("imagePreviewCaption");
-  if(!preview||!pimg||!pcap)return;
+  if(!preview)return;
 
-  const placePreview=e=>{
-    const size=238;
-    const gap=22;
-    let x=e.clientX+gap;
-    let y=e.clientY-size/2;
+  const LENS_SIZE=190;
+  const ZOOM=2.6;
 
-    if(x+size>window.innerWidth-12){
-      x=e.clientX-size-gap;
+  const hideLens=()=>{
+    preview.classList.remove("show");
+    preview.setAttribute("aria-hidden","true");
+    preview.style.backgroundImage="";
+    document.body.classList.remove("imageLensActive");
+  };
+
+  const updateLens=(image,e)=>{
+    const src=image.currentSrc||image.src;
+    if(!src)return;
+
+    const rect=image.getBoundingClientRect();
+    if(!rect.width||!rect.height)return;
+
+    const x=e.clientX-rect.left;
+    const y=e.clientY-rect.top;
+
+    // Si el puntero sale del rectángulo real, ocultar.
+    if(x<0||y<0||x>rect.width||y>rect.height){
+      hideLens();
+      return;
     }
-    if(y<12)y=12;
-    if(y+size>window.innerHeight-12){
-      y=window.innerHeight-size-12;
-    }
 
-    preview.style.left=`${x}px`;
-    preview.style.top=`${y}px`;
-    preview.style.transform="none";
+    preview.style.left=`${e.clientX}px`;
+    preview.style.top=`${e.clientY}px`;
+
+    // La lupa reproduce la misma imagen y amplía exactamente la zona bajo el cursor.
+    preview.style.backgroundImage=`url("${src.replace(/"/g,'\\"')}")`;
+    preview.style.backgroundSize=`${rect.width*ZOOM}px ${rect.height*ZOOM}px`;
+
+    const bgX=-(x*ZOOM)+(LENS_SIZE/2);
+    const bgY=-(y*ZOOM)+(LENS_SIZE/2);
+    preview.style.backgroundPosition=`${bgX}px ${bgY}px`;
+
+    preview.classList.add("show");
+    preview.setAttribute("aria-hidden","false");
+    document.body.classList.add("imageLensActive");
   };
 
   root.querySelectorAll("img").forEach(image=>{
-    // La plantilla no necesita zoom.
+    // Nunca aplicar a la plantilla de la ficha.
     if(image.classList.contains("bg"))return;
 
-    // En Historia las imágenes ya se muestran grandes.
+    // En Historia las imágenes ya son suficientemente grandes.
     if(image.closest("#history"))return;
 
     if(image.dataset.zoomBound==="1")return;
     image.dataset.zoomBound="1";
+    image.setAttribute("data-zoom-bound","1");
 
-    image.addEventListener("mouseenter",e=>{
-      if(!image.currentSrc&&!image.src)return;
-      pimg.src=image.currentSrc||image.src;
-      pimg.alt=image.alt||"";
-      pcap.textContent=image.alt||"Imagen";
-      placePreview(e);
-      preview.classList.add("show");
-      preview.setAttribute("aria-hidden","false");
-    });
-
-    image.addEventListener("mousemove",placePreview);
-
-    image.addEventListener("mouseleave",()=>{
-      preview.classList.remove("show");
-      preview.setAttribute("aria-hidden","true");
-      pimg.removeAttribute("src");
-    });
+    image.addEventListener("mouseenter",e=>updateLens(image,e));
+    image.addEventListener("mousemove",e=>updateLens(image,e));
+    image.addEventListener("mouseleave",hideLens);
   });
+
+  window.addEventListener("blur",hideLens,{once:false});
 }
 queueImages=function(root=document){
   queueImagesCore(root);
@@ -859,7 +847,7 @@ function build(db){
   }
 const st=first(db.character_stats,"character_id"),sv=group(db.character_saves,"character_id"),sk=group(db.character_skills,"character_id"),pf=group(db.character_proficiencies,"character_id"),tr=group(db.character_traits,"character_id"),at=group(db.character_attacks,"character_id"),sp=group(db.character_spells,"character_id"),ss=group(db.character_spell_slots,"character_id"),eq=group(db.character_equipment,"character_id"),rel=group(db.relationships,"subject_id");const characters=(db.characters||[]).sort(order).map(c=>({...c,portrait:assetValue(c.portrait_asset_id,{required:true,context:`Personaje: ${c.character_id||c.name||"sin ID"}`}),stats:st.get(c.character_id)||{},saves:sv.get(c.character_id)||[],skills:(sk.get(c.character_id)||[]).sort(order),proficiencies:(pf.get(c.character_id)||[]).sort(order),traits:(tr.get(c.character_id)||[]).sort(order),attacks:(at.get(c.character_id)||[]).sort(order),spells:(sp.get(c.character_id)||[]).sort(order),spell_slots:ss.get(c.character_id)||[],equipment:(eq.get(c.character_id)||[]).sort(order),relationships:(rel.get(c.character_id)||[]).sort(order)}));const history=(db.history||[]).sort(order).map(h=>({...h,image:assetValue(h.image_asset_id)}));const npcs=(db.npcs||[]).sort(order).map(n=>({...n,image:assetValue(n.portrait_asset_id||n.image_asset_id)}));const bestiary=(db.bestiary||[]).sort(order).map(b=>({...b,image:assetValue(b.image_asset_id)}));const items=(db.items||[]).sort(order).map(i=>({...i,image:assetValue(i.image_asset_id)}));const base={...((db.base_overview||[])[0]||{})};base.image=assetValue(base.map_asset_id||CONFIG.base_map_asset_id,{required:true,context:`Base: ${base.base_id||base.name||"principal"}`});base.rooms=(db.base_rooms||[]).sort(order);base.projects=(db.base_projects||[]).sort(order);base.protocols=(db.base_protocols||[]).sort(order);base.members=(db.faction_members||[]).sort(order);let checkpoint={};if((db.checkpoint||[]).some(r=>r.key))(db.checkpoint||[]).forEach(r=>{if(r.key)checkpoint[r.key]=r.value});else checkpoint=(db.checkpoint||[])[0]||{};return{characters,history,npcs,bestiary,items,base,checkpoint,lore:(db.lore||[]).sort(order),mysteries:(db.mysteries||[]).sort(order),rules:(db.rules||[]).sort(order),changelog:db.changelog||[],history_rolls:db.history_rolls||[],enemy_traits:group(db.enemy_traits,"enemy_id")}}
 function sectionMeta(id,title,subtitle,n){const r=SECTIONS.find(x=>x.section_id===id);return r?{title:r.title||title,subtitle:r.subtitle||subtitle,visible:r.visible===""?true:truth(r.visible),sort_order:num(r.sort_order)??n}:{title,subtitle,visible:true,sort_order:n}}
-function renderShell(){$("#brand").textContent=cfg("campaign_name","Campaign Codex");$("#eyebrow").textContent=cfg("ruleset","D&D 5e 2014");$("#heroTitle").textContent=cfg("site_title",cfg("campaign_name","Kazym Garnithor"));$("#heroSubtitle").textContent=cfg("site_subtitle","Campaign Bible viva");document.title=cfg("site_title","Kazym Campaign Codex")+" · v2.8.13";const defs=[["characters","Personajes","Fichas del grupo y residentes",1],["history","Historia","Crónica completa",2],["npcs","PNJ","Contactos y figuras conocidas",3],["base","Base y facción","Instalaciones, proyectos y protocolos",4],["bestiary","Bestiario","Criaturas y enemigos conocidos",5],["lore","Lore","Culturas, lugares, religiones y organizaciones",6],["mysteries","Misterios","Pistas, hipótesis y preguntas abiertas",7],["items","Objetos","Documentos, llaves y pistas",8],["rules","Reglas","Reglas oficiales, opcionales y adaptaciones",9],["checkpoint","Checkpoint","Estado canónico para continuar",10],["changelog","Changelog","Historial de cambios",11]];const main=$("#main"),nav=$("#nav");main.innerHTML="";nav.querySelectorAll("a").forEach(a=>a.remove());defs.map(d=>({id:d[0],...sectionMeta(...d)})).filter(x=>x.visible).sort((a,b)=>a.sort_order-b.sort_order).forEach(s=>{const sec=document.createElement("section");sec.id=s.id;sec.innerHTML=`<div class="head"><div><h2>${esc(s.title)}</h2><p>${esc(s.subtitle||"")}</p></div></div><div class="sectionBody"></div>`;main.appendChild(sec);const a=document.createElement("a");a.href="#"+s.id;a.textContent=s.title;nav.insertBefore(a,$("#refresh"))})}
+function renderShell(){$("#brand").textContent=cfg("campaign_name","Campaign Codex");$("#eyebrow").textContent=cfg("ruleset","D&D 5e 2014");$("#heroTitle").textContent=cfg("site_title",cfg("campaign_name","Kazym Garnithor"));$("#heroSubtitle").textContent=cfg("site_subtitle","Campaign Bible viva");document.title=cfg("site_title","Kazym Campaign Codex")+" · v2.8.14";const defs=[["characters","Personajes","Fichas del grupo y residentes",1],["history","Historia","Crónica completa",2],["npcs","PNJ","Contactos y figuras conocidas",3],["base","Base y facción","Instalaciones, proyectos y protocolos",4],["bestiary","Bestiario","Criaturas y enemigos conocidos",5],["lore","Lore","Culturas, lugares, religiones y organizaciones",6],["mysteries","Misterios","Pistas, hipótesis y preguntas abiertas",7],["items","Objetos","Documentos, llaves y pistas",8],["rules","Reglas","Reglas oficiales, opcionales y adaptaciones",9],["checkpoint","Checkpoint","Estado canónico para continuar",10],["changelog","Changelog","Historial de cambios",11]];const main=$("#main"),nav=$("#nav");main.innerHTML="";nav.querySelectorAll("a").forEach(a=>a.remove());defs.map(d=>({id:d[0],...sectionMeta(...d)})).filter(x=>x.visible).sort((a,b)=>a.sort_order-b.sort_order).forEach(s=>{const sec=document.createElement("section");sec.id=s.id;sec.innerHTML=`<div class="head"><div><h2>${esc(s.title)}</h2><p>${esc(s.subtitle||"")}</p></div></div><div class="sectionBody"></div>`;main.appendChild(sec);const a=document.createElement("a");a.href="#"+s.id;a.textContent=s.title;nav.insertBefore(a,$("#refresh"))})}
 const body=id=>document.querySelector(`#${id} .sectionBody`);
 
 function sectionPlaceholder(id){
