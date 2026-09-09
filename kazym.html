@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="dark">
-<title>Kazym Campaign Codex · v2.8.8 · RATE-LIMIT FIX</title>
+<title>Kazym Campaign Codex · v2.8.12 · SHEET CALIBRATION</title>
 <style>
 :root{--bg:#0b0d12;--panel:#171a22;--line:#393e4d;--ink:#eee6d8;--muted:#aaa297;--gold:#b89a67;--paper:#1d1813}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 20% -10%,#2b2138 0,transparent 32%),linear-gradient(#0a0c11,#11141b);color:var(--ink);font-family:Georgia,"Times New Roman",serif}button,input{font:inherit}
@@ -61,10 +61,143 @@ section.is-lazy .sectionBody{min-height:140px}
   50%{opacity:1;transform:translateY(-2px)}
 }
 
+
+/* v2.8.12 — calibración fina de hoja y previews */
+
+/* Campos superiores: usar exactamente el interior de las cajas */
+.f{
+  display:flex;align-items:center;
+  padding:0 .28%;
+  line-height:1!important;
+  overflow:hidden;
+}
+.f-name{left:15.90%;top:15.95%;width:16.65%;height:3.15%}
+.f-race{left:15.90%;top:19.82%;width:16.65%;height:3.15%}
+.f-class{left:15.90%;top:23.58%;width:16.65%;height:3.15%}
+.f-sub{left:41.05%;top:15.95%;width:14.80%;height:3.15%}
+.f-bg{left:41.05%;top:19.82%;width:14.80%;height:3.15%}
+.f-level{left:37.45%;top:23.58%;width:4.35%;height:3.15%;justify-content:center;padding:0}
+.f-xp{left:49.45%;top:23.58%;width:6.35%;height:3.15%;justify-content:center;padding:0}
+.f-align{left:64.45%;top:15.95%;width:10.45%;height:3.15%}
+.f-pb{left:69.85%;top:23.25%;width:2.95%;height:4.0%;justify-content:center;padding:0}
+
+/* Atributos: centrar valores respecto a los octógonos/círculos reales */
+.score,.mod,.pb,.combat{
+  display:flex;align-items:center;justify-content:center;
+  line-height:1!important;
+}
+.score,.mod,.pb{transform:translateY(-50%)}
+.score{left:2.45%;width:3.05%;height:3.0%;font-size:19px}
+.mod{left:11.58%;width:2.20%;height:2.8%;font-size:16px}
+.a1{top:36.61%}.a2{top:42.99%}.a3{top:49.95%}
+.a4{top:56.32%}.a5{top:62.59%}.a6{top:68.78%}
+.pb{left:10.65%;top:75.61%;width:2.55%;height:3.2%;font-size:17px}
+
+/* Salvaciones: círculo marcado + bonificador junto al nombre */
+.save,.saveMark{position:absolute;z-index:5;transform:translateY(-50%)}
+.save{left:24.30%;width:2.70%;font-size:10px;font-weight:800;text-align:left;line-height:1}
+.saveMark{
+  left:17.20%;
+  width:.48%;aspect-ratio:1;height:auto;
+  background:#1d1813;border-radius:50%;
+  transform:translate(-50%,-50%);
+}
+.sv1{top:35.60%}.sv2{top:38.15%}.sv3{top:40.70%}
+.sv4{top:43.25%}.sv5{top:45.80%}.sv6{top:48.35%}
+
+/* Habilidades: marcas sobre los círculos impresos y bonus más próximos */
+.skill,.skillMark{position:absolute;z-index:5;transform:translateY(-50%)}
+.skill{
+  width:2.55%;font-size:9px;font-weight:800;text-align:left;line-height:1
+}
+.skill.sl{left:42.25%}
+.skill.sr{left:59.05%}
+.skillMark{
+  width:.46%;aspect-ratio:1;height:auto;
+  background:#1d1813;border-radius:50%;
+  transform:translate(-50%,-50%);
+}
+.skillMark.slm{left:30.92%}
+.skillMark.srm{left:47.67%}
+.skillMark.expert{
+  box-shadow:0 0 0 1px #1d1813, inset 0 0 0 1px #e5dac5;
+}
+.sk1{top:50.80%}.sk2{top:52.92%}.sk3{top:55.05%}
+.sk4{top:57.23%}.sk5{top:59.36%}.sk6{top:61.58%}
+.sk7{top:63.71%}.sk8{top:65.89%}.sk9{top:68.01%}
+
+/* Idiomas y herramientas */
+.langBox{
+  left:62.45%;top:48.35%;width:14.15%;height:19.95%;
+  padding:.35% .42%;
+  font-size:7.6px;
+  line-height:1.15;
+  overflow:hidden;
+}
+.langBox b{font-size:1em}
+.langGroup{margin-bottom:5px}
+.langGroup:last-child{margin-bottom:0}
+
+/* Ataques: seis columnas reales de la plantilla */
+.attacks{left:15.72%;top:78.40%;width:24.12%;height:14.25%;padding:0}
+.atkrow{
+  display:grid;
+  grid-template-columns:15.7% 19.7% 12.5% 13.7% 14.2% 24.2%;
+  align-items:stretch;
+  height:20%;
+  overflow:hidden;
+}
+.atkrow span{
+  min-width:0;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+  white-space:normal!important;
+  overflow-wrap:anywhere;
+  word-break:normal;
+  text-align:center;
+  padding:1px 3px;
+  line-height:1.03!important;
+  font-size:7.6px;
+}
+.atkrow span:first-child{text-align:left;justify-content:flex-start;padding-left:4px}
+
+/* Retratos siempre completos, incluyendo Tomás */
+.portrait img,.npcPortrait img,.pic img{
+  object-fit:contain!important;
+  object-position:center bottom!important;
+}
+.avatar:hover img{transform:none!important}
+
+/* Preview ampliado al hacer hover */
+#imagePreview{
+  position:fixed;inset:0;z-index:9998;
+  display:none;align-items:center;justify-content:center;
+  pointer-events:none;
+  background:#05070bd9;
+  backdrop-filter:blur(4px);
+  padding:4vh 4vw;
+}
+#imagePreview.show{display:flex}
+#imagePreview .previewShell{
+  max-width:88vw;max-height:88vh;
+  display:flex;flex-direction:column;align-items:center;gap:8px
+}
+#imagePreview img{
+  max-width:84vw;max-height:80vh;width:auto;height:auto;
+  object-fit:contain;
+  background:#0a0d13;
+  border:1px solid #4b5261;border-radius:12px;
+  box-shadow:0 28px 90px #000b;
+}
+#imagePreview .previewCaption{
+  color:#ddd4c7;background:#11151dcc;border:1px solid #3d4351;
+  border-radius:999px;padding:6px 11px;font-size:.78rem
+}
+
 </style>
 </head>
 <body>
-<header class="top"><nav id="nav"><div class="brand" id="brand">Campaign Codex</div><button class="btn" id="refresh">Actualizar</button><button class="btn diag-btn" id="diagToggle" type="button">Diagnóstico 0</button><span class="badge live">v2.8.8 · RATE-LIMIT FIX</span><span class="badge" id="mode">Cargando…</span></nav></header>
+<header class="top"><nav id="nav"><div class="brand" id="brand">Campaign Codex</div><button class="btn" id="refresh">Actualizar</button><button class="btn diag-btn" id="diagToggle" type="button">Diagnóstico 0</button><span class="badge live">v2.8.12 · SHEET CALIBRATION</span><span class="badge" id="mode">Cargando…</span></nav></header>
 
 <div class="diag-wrap">
   <section class="diag-panel" id="diagPanel" hidden aria-live="polite">
@@ -81,10 +214,17 @@ section.is-lazy .sectionBody{min-height:140px}
 <div class="hero"><div><div class="eyebrow" id="eyebrow"></div><h1 id="heroTitle">Campaign Codex</h1><p id="heroSubtitle"></p></div><div class="panel kpis"><div class="kpi"><b id="kLvl">—</b><span>Nivel principal</span></div><div class="kpi"><b id="kXp">—</b><span>PX</span></div><div class="kpi"><b id="kAllies">—</b><span>Personajes</span></div><div class="kpi"><b id="kBase">—</b><span>Funciones base</span></div></div></div>
 <main id="main"></main>
 <div class="modal" id="modal"><div class="shell"><div class="bar"><h2 id="modalTitle"></h2><button class="btn" id="close">Cerrar ×</button></div><div class="char"><div class="sheet" id="sheet"></div><aside class="side" id="side"></aside></div></div></div>
-<div id="tip"></div><footer>v2.8.11 · Drive directo + secciones lazy</footer>
+<div id="tip"></div>
+<div id="imagePreview" aria-hidden="true">
+  <div class="previewShell">
+    <img id="imagePreviewImg" alt="">
+    <div class="previewCaption" id="imagePreviewCaption"></div>
+  </div>
+</div>
+<footer>v2.8.12 · Drive directo + lazy + ficha calibrada</footer>
 <script>
 const SHEET_ID="1QSrD9vg2erPGGVyR92zSFETVOUmm8GhbKMYWRxGk2Jw"; // ÚNICA fuente: Kazym Campaign Codex MASTER
-const BUILD_ID="v2.8.11-20260909-1235";
+const BUILD_ID="v2.8.12-20260909-1305";
 console.info("Campaign Codex MASTER Sheet:", SHEET_ID);
 const TABS=["config","sections","assets","characters","character_stats","character_saves","character_skills","character_proficiencies","character_traits","character_attacks","character_spells","character_spell_slots","character_equipment","relationships","history","history_rolls","history_events","npcs","bestiary","enemy_traits","base_overview","base_rooms","base_projects","base_protocols","faction_members","base_details","lore","mysteries","items","rules","checkpoint","changelog"];
 
@@ -520,6 +660,38 @@ function queueImages(root=document){
   });
 }
 
+const queueImagesCore=queueImages;
+function bindImageZoom(root=document){
+  const preview=document.getElementById("imagePreview");
+  const pimg=document.getElementById("imagePreviewImg");
+  const pcap=document.getElementById("imagePreviewCaption");
+  if(!preview||!pimg||!pcap)return;
+
+  root.querySelectorAll("img").forEach(image=>{
+    if(image.classList.contains("bg"))return;
+    if(image.dataset.zoomBound==="1")return;
+    image.dataset.zoomBound="1";
+
+    image.addEventListener("mouseenter",()=>{
+      if(!image.currentSrc&&!image.src)return;
+      pimg.src=image.currentSrc||image.src;
+      pimg.alt=image.alt||"";
+      pcap.textContent=image.alt||"Imagen";
+      preview.classList.add("show");
+      preview.setAttribute("aria-hidden","false");
+    });
+    image.addEventListener("mouseleave",()=>{
+      preview.classList.remove("show");
+      preview.setAttribute("aria-hidden","true");
+      pimg.removeAttribute("src");
+    });
+  });
+}
+queueImages=function(root=document){
+  queueImagesCore(root);
+  bindImageZoom(root);
+};
+
 function assetValue(assetId,opts={}){
   const key=String(assetId||"").trim();
   const context=String(opts.context||"");
@@ -621,7 +793,7 @@ function build(db){
   }
 const st=first(db.character_stats,"character_id"),sv=group(db.character_saves,"character_id"),sk=group(db.character_skills,"character_id"),pf=group(db.character_proficiencies,"character_id"),tr=group(db.character_traits,"character_id"),at=group(db.character_attacks,"character_id"),sp=group(db.character_spells,"character_id"),ss=group(db.character_spell_slots,"character_id"),eq=group(db.character_equipment,"character_id"),rel=group(db.relationships,"subject_id");const characters=(db.characters||[]).sort(order).map(c=>({...c,portrait:assetValue(c.portrait_asset_id,{required:true,context:`Personaje: ${c.character_id||c.name||"sin ID"}`}),stats:st.get(c.character_id)||{},saves:sv.get(c.character_id)||[],skills:(sk.get(c.character_id)||[]).sort(order),proficiencies:(pf.get(c.character_id)||[]).sort(order),traits:(tr.get(c.character_id)||[]).sort(order),attacks:(at.get(c.character_id)||[]).sort(order),spells:(sp.get(c.character_id)||[]).sort(order),spell_slots:ss.get(c.character_id)||[],equipment:(eq.get(c.character_id)||[]).sort(order),relationships:(rel.get(c.character_id)||[]).sort(order)}));const history=(db.history||[]).sort(order).map(h=>({...h,image:assetValue(h.image_asset_id)}));const npcs=(db.npcs||[]).sort(order).map(n=>({...n,image:assetValue(n.portrait_asset_id||n.image_asset_id)}));const bestiary=(db.bestiary||[]).sort(order).map(b=>({...b,image:assetValue(b.image_asset_id)}));const items=(db.items||[]).sort(order).map(i=>({...i,image:assetValue(i.image_asset_id)}));const base={...((db.base_overview||[])[0]||{})};base.image=assetValue(base.map_asset_id||CONFIG.base_map_asset_id,{required:true,context:`Base: ${base.base_id||base.name||"principal"}`});base.rooms=(db.base_rooms||[]).sort(order);base.projects=(db.base_projects||[]).sort(order);base.protocols=(db.base_protocols||[]).sort(order);base.members=(db.faction_members||[]).sort(order);let checkpoint={};if((db.checkpoint||[]).some(r=>r.key))(db.checkpoint||[]).forEach(r=>{if(r.key)checkpoint[r.key]=r.value});else checkpoint=(db.checkpoint||[])[0]||{};return{characters,history,npcs,bestiary,items,base,checkpoint,lore:(db.lore||[]).sort(order),mysteries:(db.mysteries||[]).sort(order),rules:(db.rules||[]).sort(order),changelog:db.changelog||[],history_rolls:db.history_rolls||[],enemy_traits:group(db.enemy_traits,"enemy_id")}}
 function sectionMeta(id,title,subtitle,n){const r=SECTIONS.find(x=>x.section_id===id);return r?{title:r.title||title,subtitle:r.subtitle||subtitle,visible:r.visible===""?true:truth(r.visible),sort_order:num(r.sort_order)??n}:{title,subtitle,visible:true,sort_order:n}}
-function renderShell(){$("#brand").textContent=cfg("campaign_name","Campaign Codex");$("#eyebrow").textContent=cfg("ruleset","D&D 5e 2014");$("#heroTitle").textContent=cfg("site_title",cfg("campaign_name","Kazym Garnithor"));$("#heroSubtitle").textContent=cfg("site_subtitle","Campaign Bible viva");document.title=cfg("site_title","Kazym Campaign Codex")+" · v2.8.7";const defs=[["characters","Personajes","Fichas del grupo y residentes",1],["history","Historia","Crónica completa",2],["npcs","PNJ","Contactos y figuras conocidas",3],["base","Base y facción","Instalaciones, proyectos y protocolos",4],["bestiary","Bestiario","Criaturas y enemigos conocidos",5],["lore","Lore","Culturas, lugares, religiones y organizaciones",6],["mysteries","Misterios","Pistas, hipótesis y preguntas abiertas",7],["items","Objetos","Documentos, llaves y pistas",8],["rules","Reglas","Reglas oficiales, opcionales y adaptaciones",9],["checkpoint","Checkpoint","Estado canónico para continuar",10],["changelog","Changelog","Historial de cambios",11]];const main=$("#main"),nav=$("#nav");main.innerHTML="";nav.querySelectorAll("a").forEach(a=>a.remove());defs.map(d=>({id:d[0],...sectionMeta(...d)})).filter(x=>x.visible).sort((a,b)=>a.sort_order-b.sort_order).forEach(s=>{const sec=document.createElement("section");sec.id=s.id;sec.innerHTML=`<div class="head"><div><h2>${esc(s.title)}</h2><p>${esc(s.subtitle||"")}</p></div></div><div class="sectionBody"></div>`;main.appendChild(sec);const a=document.createElement("a");a.href="#"+s.id;a.textContent=s.title;nav.insertBefore(a,$("#refresh"))})}
+function renderShell(){$("#brand").textContent=cfg("campaign_name","Campaign Codex");$("#eyebrow").textContent=cfg("ruleset","D&D 5e 2014");$("#heroTitle").textContent=cfg("site_title",cfg("campaign_name","Kazym Garnithor"));$("#heroSubtitle").textContent=cfg("site_subtitle","Campaign Bible viva");document.title=cfg("site_title","Kazym Campaign Codex")+" · v2.8.12";const defs=[["characters","Personajes","Fichas del grupo y residentes",1],["history","Historia","Crónica completa",2],["npcs","PNJ","Contactos y figuras conocidas",3],["base","Base y facción","Instalaciones, proyectos y protocolos",4],["bestiary","Bestiario","Criaturas y enemigos conocidos",5],["lore","Lore","Culturas, lugares, religiones y organizaciones",6],["mysteries","Misterios","Pistas, hipótesis y preguntas abiertas",7],["items","Objetos","Documentos, llaves y pistas",8],["rules","Reglas","Reglas oficiales, opcionales y adaptaciones",9],["checkpoint","Checkpoint","Estado canónico para continuar",10],["changelog","Changelog","Historial de cambios",11]];const main=$("#main"),nav=$("#nav");main.innerHTML="";nav.querySelectorAll("a").forEach(a=>a.remove());defs.map(d=>({id:d[0],...sectionMeta(...d)})).filter(x=>x.visible).sort((a,b)=>a.sort_order-b.sort_order).forEach(s=>{const sec=document.createElement("section");sec.id=s.id;sec.innerHTML=`<div class="head"><div><h2>${esc(s.title)}</h2><p>${esc(s.subtitle||"")}</p></div></div><div class="sectionBody"></div>`;main.appendChild(sec);const a=document.createElement("a");a.href="#"+s.id;a.textContent=s.title;nav.insertBefore(a,$("#refresh"))})}
 const body=id=>document.querySelector(`#${id} .sectionBody`);
 
 function sectionPlaceholder(id){
@@ -779,10 +951,123 @@ function renderAll(){
   $("#kAllies").textContent=DATA.characters.length||"—";
   $("#kBase").textContent=`${DATA.base.functions_restored||"—"}/${DATA.base.functions_total||"—"}`;
 }
-function traitGroups(c){const o={species:[],class:[],other:[]};(c.traits||[]).forEach(t=>{const k=norm(t.category||t.trait_type);if(k==="species"||k==="race")o.species.push(t);else if(k==="class")o.class.push(t);else o.other.push(t)});return o}function saveMap(c){return Object.fromEntries((c.saves||[]).map(s=>[String(s.ability||s.save||s.name||"").toUpperCase(),s.bonus||s.value||""]))}function profList(c,k){return(c.proficiencies||[]).filter(x=>norm(x.category)===k).map(x=>x.name||x.proficiency||"")}
-const SK={"acrobacias":["sl",1],"atletismo":["sl",2],"arcanos":["sl",4],"engano":["sl",5],"historia":["sl",6],"interpretacion":["sl",7],"intimidacion":["sl",8],"investigacion":["sl",9],"medicina":["sr",1],"naturaleza":["sr",2],"percepcion":["sr",3],"perspicacia":["sr",4],"juego de manos":["sr",5],"sigilo":["sr",6],"supervivencia":["sr",7],"trato con animales":["sr",8]};function skillOverlay(c){return(c.skills||[]).map(s=>{const p=SK[norm(s.skill||s.name||"")];return p?`<span class="skill ${p[0]} sk${p[1]}">${esc(s.bonus||s.value||"")}</span>`:""}).join("")}function saveOverlay(c){const s=saveMap(c),a=["FUE","DES","CON","INT","SAB","CAR"];return a.map((k,i)=>s[k]?`<span class="save sv${i+1}">${esc(s[k])}</span>`:"").join("")}
-function attackDisplay(a){const name=a.name||a.attack||"";if(a.attack_bonus||a.damage)return{name,bonus:a.attack_bonus||a.bonus||"",damage:a.damage||"",type:a.damage_type||"",props:a.range||a.properties||""};const m=name.match(/^(.*?)\s([+-]\d+)\s+[—-]\s+(.+)$/);return{name:m?m[1]:name,bonus:m?m[2]:"",damage:m?m[3]:"",type:"",props:""}}function attackRows(c){return(c.attacks||[]).slice(0,4).map(a=>{const d=attackDisplay(a);return`<div class="atkrow tipTarget" ${tipAttr(a,"Ataque",c.name)}><span class="fitText">${esc(d.name)}</span><span class="fitText">${esc(d.bonus)}</span><span class="fitText">${esc(d.damage)}</span><span class="fitText">${esc(d.type)}</span><span class="fitText">${esc(d.props)}</span></div>`}).join("")}
-function openChar(c){$("#modalTitle").textContent=c.name||"";const s=c.stats||{},g=traitGroups(c),langs=profList(c,"language"),profs=profList(c,"proficiency"),eq=c.equipment||[],saves=saveMap(c),template=assetValue(cfg("sheet_template_asset_id","AST_SHEET")),speed=s.speed_ft||s.speed||"",pb=s.proficiency_bonus||s.pb||"";$("#sheet").innerHTML=`${template?img(template,"bg","Plantilla de hoja de personaje"):""}<div class="pic">${c.portrait?img(c.portrait,"",c.name):""}</div><span class="f f-name fitText" data-max="13" data-min="7">${esc(c.name||"")}</span><span class="f f-race fitText" data-max="13" data-min="7">${esc(c.race||"")}</span><span class="f f-class fitText" data-max="13" data-min="7">${esc(c.class||"")}</span><span class="f f-sub fitText" data-max="13" data-min="7">${esc(c.subclass||"")}</span><span class="f f-bg fitText" data-max="13" data-min="6">${esc(c.background||"")}</span><span class="f f-level">${esc(c.level||"")}</span><span class="f f-xp">${esc(c.xp||"")}</span><span class="f f-align fitText" data-max="13" data-min="7">${esc(c.alignment||"")}</span><span class="f f-pb">${pb?"+"+esc(pb):""}</span>${["str","dex","con","int","wis","cha"].map((a,i)=>`<span class="score a${i+1}">${esc(val(s[a]))}</span><span class="mod a${i+1}">${esc(mod(s[a]))}</span>`).join("")}<span class="pb">${pb?"+"+esc(pb):""}</span>${saveOverlay(c)}<span class="combat ac">${esc(val(s.ac))}</span><span class="combat ini">${num(s.initiative)!==null&&num(s.initiative)>=0?"+":""}${esc(val(s.initiative))}</span><span class="combat spd">${esc(val(speed))}</span><span class="combat hpm">${esc(val(s.hp_max))}</span><span class="combat hpc">${esc(val(s.hp_current))}</span><span class="combat hd fitText" data-max="20" data-min="9">${esc(val(s.hit_dice))}</span>${skillOverlay(c)}<div class="box raceBox fitBox" data-max="9" data-min="5">${techList(g.species,"Rasgo de especie",c.name)}</div><div class="box classBox fitBox" data-max="9" data-min="5">${techList(g.class,"Rasgo de clase",c.name)}</div><div class="box otherBox fitBox" data-max="9" data-min="5">${techList(g.other,"Dote / otro rasgo",c.name)}</div><div class="box langBox fitBox" data-max="9" data-min="5"><b>Idiomas</b><br>${esc(langs.join(", ")||"—")}<br><br><b>Competencias</b><br>${esc(profs.join("; ")||"—")}</div><div class="box attacks fitBox" data-max="9" data-min="5">${attackRows(c)}</div><div class="box equip fitBox" data-max="9" data-min="5">${techList(eq.slice(0,6),"Objeto",c.name)}</div><div class="box inv fitBox" data-max="9" data-min="5">${techList(eq.slice(6),"Objeto",c.name)}</div><div class="box notes fitBox" data-max="9" data-min="5">${esc(c.current_state||c.short_description||c.status||"")}</div>`;$("#side").innerHTML=`<div class="card"><div class="status">${esc(c.kind||"")} · ${esc(c.role||"")}</div><h3>${esc(c.name||"")}</h3><p class="long">${esc(c.short_description||c.description||"")}</p><span class="pill">${esc(c.race||"—")}</span><span class="pill">${esc([c.class,c.subclass].filter(Boolean).join(" — ")||"—")}</span><span class="pill">Nivel ${esc(c.level||"—")}</span></div><details open><summary>Historia conocida</summary><div class="body long">${esc(c.public_history||c.history||"—")}</div></details>${c.appearance?`<details><summary>Apariencia</summary><div class="body long">${esc(c.appearance)}</div></details>`:""}${c.personality?`<details><summary>Personalidad</summary><div class="body long">${esc(c.personality)}</div></details>`:""}<details open><summary>Mecánicas</summary><div class="body"><div class="mechanics"><div class="mini"><b>Atributos</b>FUE ${val(s.str)} (${mod(s.str)}) · DES ${val(s.dex)} (${mod(s.dex)}) · CON ${val(s.con)} (${mod(s.con)}) · INT ${val(s.int)} (${mod(s.int)}) · SAB ${val(s.wis)} (${mod(s.wis)}) · CAR ${val(s.cha)} (${mod(s.cha)})</div><div class="mini"><b>Combate</b>CA ${val(s.ac)} · iniciativa ${val(s.initiative)} · velocidad ${val(speed)} · PG ${val(s.hp_current)}/${val(s.hp_max)} · dados ${val(s.hit_dice)}</div><div class="mini"><b>Salvaciones</b>${Object.entries(saves).map(([a,b])=>`${a} ${b}`).join(" · ")||"—"}</div><div class="mini"><b>Habilidades</b>${(c.skills||[]).map(x=>`${x.skill||x.name} ${x.bonus||x.value||""}`).join(" · ")||"—"}</div></div></div></details><details open><summary>Rasgos de especie</summary><div class="body">${techList(g.species,"Rasgo de especie",c.name)}</div></details><details open><summary>Rasgos de clase</summary><div class="body">${techList(g.class,"Rasgo de clase",c.name)}</div></details>${g.other.length?`<details><summary>Dotes y otros rasgos</summary><div class="body">${techList(g.other,"Rasgo",c.name)}</div></details>`:""}<details><summary>Habilidades</summary><div class="body">${techList(c.skills,"Habilidad",c.name)}</div></details><details><summary>Idiomas y competencias</summary><div class="body"><h4>Idiomas</h4>${list(langs)}<h4>Competencias</h4>${list(profs)}</div></details>${c.spells.length?`<details><summary>Conjuros</summary><div class="body">${techList(c.spells,"Conjuro",c.name)}${c.spell_slots.length?`<h4>Espacios</h4>${list(c.spell_slots.map(x=>`Nivel ${x.spell_level}: ${x.slots_current}/${x.slots_max}`))}`:""}</div></details>`:""}<details><summary>Ataques</summary><div class="body">${techList(c.attacks,"Ataque",c.name)}</div></details><details><summary>Equipo e inventario</summary><div class="body">${techList(c.equipment,"Objeto",c.name)}</div></details>${c.relationships.length?`<details><summary>Relaciones</summary><div class="body">${list(c.relationships.map(r=>`${r.object_name||r.object_id||""}${r.public_summary?": "+r.public_summary:""}`))}</div></details>`:""}<details><summary>Estado actual</summary><div class="body long">${esc(c.current_state||c.status||"—")}</div></details>`;$("#modal").classList.add("open");document.body.style.overflow="hidden";queueImages($("#sheet"));requestAnimationFrame(()=>requestAnimationFrame(fitSheetText))}
+function traitGroups(c){const o={species:[],class:[],other:[]};(c.traits||[]).forEach(t=>{const k=norm(t.category||t.trait_type);if(k==="species"||k==="race")o.species.push(t);else if(k==="class")o.class.push(t);else o.other.push(t)});return o}function saveMap(c){
+  return Object.fromEntries((c.saves||[]).map(s=>[
+    String(s.ability||s.save||s.name||"").toUpperCase(),
+    s.bonus||s.value||""
+  ]));
+}
+function profList(c,k){
+  return(c.proficiencies||[]).filter(x=>norm(x.category)===k).map(x=>x.name||x.proficiency||"");
+}
+
+const SK={
+  "acrobacias":["sl",1,"dex"],
+  "atletismo":["sl",2,"str"],
+  "conocimiento de animales":["sl",3,"wis"],
+  "arcanos":["sl",4,"int"],
+  "engano":["sl",5,"cha"],
+  "historia":["sl",6,"int"],
+  "interpretacion":["sl",7,"cha"],
+  "intimidacion":["sl",8,"cha"],
+  "investigacion":["sl",9,"int"],
+  "medicina":["sr",1,"wis"],
+  "naturaleza":["sr",2,"int"],
+  "percepcion":["sr",3,"wis"],
+  "perspicacia":["sr",4,"wis"],
+  "juego de manos":["sr",5,"dex"],
+  "sigilo":["sr",6,"dex"],
+  "supervivencia":["sr",7,"wis"],
+  "trato con animales":["sr",8,"wis"]
+};
+
+function abilityModFromStats(c,ability){
+  const n=num(c?.stats?.[ability]);
+  return n===null?null:Math.floor((n-10)/2);
+}
+
+function skillProficiencyState(s,c,ability){
+  const explicit=norm(s.proficiency_level||s.proficiency||"");
+  if(["expertise","expert","pericia","double"].includes(explicit))return "expert";
+  if(explicit && !["none","no","false","0","untrained"].includes(explicit))return "proficient";
+
+  const bonus=num(s.bonus||s.value);
+  const base=abilityModFromStats(c,ability);
+  const pb=num(c?.stats?.proficiency_bonus||c?.stats?.pb);
+
+  if(bonus===null||base===null||pb===null||pb<=0)return "";
+  const delta=bonus-base;
+  if(delta>=pb*2)return "expert";
+  if(delta>=pb)return "proficient";
+  return "";
+}
+
+function skillOverlay(c){
+  return(c.skills||[]).map(s=>{
+    const p=SK[norm(s.skill||s.name||"")];
+    if(!p)return "";
+    const state=skillProficiencyState(s,c,p[2]);
+    const mark=state
+      ? `<span class="skillMark ${p[0]==="sl"?"slm":"srm"} sk${p[1]} ${state==="expert"?"expert":""}" aria-hidden="true"></span>`
+      : "";
+    return `${mark}<span class="skill ${p[0]} sk${p[1]}">${esc(s.bonus||s.value||"")}</span>`;
+  }).join("");
+}
+
+function saveOverlay(c){
+  const rows=c.saves||[];
+  const lookup=new Map(rows.map(s=>[
+    String(s.ability||s.save||s.name||"").toUpperCase(),
+    s
+  ]));
+  const abilities=["FUE","DES","CON","INT","SAB","CAR"];
+  return abilities.map((k,i)=>{
+    const s=lookup.get(k);
+    if(!s)return "";
+    return `<span class="saveMark sv${i+1}" aria-hidden="true"></span><span class="save sv${i+1}">${esc(s.bonus||s.value||"")}</span>`;
+  }).join("");
+}
+
+function attackDisplay(a){
+  const raw=a.name||a.attack||"";
+  if(a.attack_bonus||a.damage||a.damage_type||a.range||a.properties){
+    return{
+      name:raw,
+      bonus:a.attack_bonus||a.bonus||"",
+      damage:a.damage||"",
+      type:a.damage_type||"",
+      range:a.range||"",
+      props:a.properties||a.notes||""
+    };
+  }
+
+  const m=raw.match(/^(.*?)\s([+-]\d+)\s+[—-]\s+(.+)$/);
+  if(!m)return{name:raw,bonus:"",damage:"",type:"",range:"",props:""};
+
+  let damage=m[3].trim(),type="";
+  const dm=damage.match(/^([0-9dD+\-]+)\s*(.*)$/);
+  if(dm){
+    damage=dm[1];
+    type=dm[2]||"";
+  }
+  return{name:m[1].trim(),bonus:m[2],damage,type,range:"",props:""};
+}
+
+function attackRows(c){
+  return(c.attacks||[]).slice(0,5).map(a=>{
+    const d=attackDisplay(a);
+    return `<div class="atkrow tipTarget" ${tipAttr(a,"Ataque",c.name)}>
+      <span class="fitText" data-max="8" data-min="5">${esc(d.name)}</span>
+      <span class="fitText" data-max="8" data-min="5">${esc(d.bonus)}</span>
+      <span class="fitText" data-max="8" data-min="5">${esc(d.damage)}</span>
+      <span class="fitText" data-max="8" data-min="5">${esc(d.type)}</span>
+      <span class="fitText" data-max="8" data-min="5">${esc(d.range)}</span>
+      <span class="fitText" data-max="8" data-min="5">${esc(d.props)}</span>
+    </div>`;
+  }).join("");
+}
+
+function openChar(c){$("#modalTitle").textContent=c.name||"";const s=c.stats||{},g=traitGroups(c),langs=profList(c,"language"),profs=profList(c,"proficiency"),eq=c.equipment||[],saves=saveMap(c),template=assetValue(cfg("sheet_template_asset_id","AST_SHEET")),speed=s.speed_ft||s.speed||"",pb=s.proficiency_bonus||s.pb||"";$("#sheet").innerHTML=`${template?img(template,"bg","Plantilla de hoja de personaje"):""}<div class="pic">${c.portrait?img(c.portrait,"",c.name):""}</div><span class="f f-name fitText" data-max="13" data-min="7">${esc(c.name||"")}</span><span class="f f-race fitText" data-max="13" data-min="7">${esc(c.race||"")}</span><span class="f f-class fitText" data-max="13" data-min="7">${esc(c.class||"")}</span><span class="f f-sub fitText" data-max="13" data-min="7">${esc(c.subclass||"")}</span><span class="f f-bg fitText" data-max="13" data-min="6">${esc(c.background||"")}</span><span class="f f-level">${esc(c.level||"")}</span><span class="f f-xp">${esc(c.xp||"")}</span><span class="f f-align fitText" data-max="13" data-min="7">${esc(c.alignment||"")}</span><span class="f f-pb">${pb?"+"+esc(pb):""}</span>${["str","dex","con","int","wis","cha"].map((a,i)=>`<span class="score a${i+1}">${esc(val(s[a]))}</span><span class="mod a${i+1}">${esc(mod(s[a]))}</span>`).join("")}<span class="pb">${pb?"+"+esc(pb):""}</span>${saveOverlay(c)}<span class="combat ac">${esc(val(s.ac))}</span><span class="combat ini">${num(s.initiative)!==null&&num(s.initiative)>=0?"+":""}${esc(val(s.initiative))}</span><span class="combat spd">${esc(val(speed))}</span><span class="combat hpm">${esc(val(s.hp_max))}</span><span class="combat hpc">${esc(val(s.hp_current))}</span><span class="combat hd fitText" data-max="20" data-min="9">${esc(val(s.hit_dice))}</span>${skillOverlay(c)}<div class="box raceBox fitBox" data-max="9" data-min="5">${techList(g.species,"Rasgo de especie",c.name)}</div><div class="box classBox fitBox" data-max="9" data-min="5">${techList(g.class,"Rasgo de clase",c.name)}</div><div class="box otherBox fitBox" data-max="9" data-min="5">${techList(g.other,"Dote / otro rasgo",c.name)}</div><div class="box langBox fitBox" data-max="8" data-min="5"><div class="langGroup"><b>Idiomas</b><br>${esc(langs.join(", ")||"—")}</div><div class="langGroup"><b>Herramientas y competencias</b><br>${esc(profs.join(" · ")||"—")}</div></div><div class="box attacks fitBox" data-max="9" data-min="5">${attackRows(c)}</div><div class="box equip fitBox" data-max="9" data-min="5">${techList(eq.slice(0,6),"Objeto",c.name)}</div><div class="box inv fitBox" data-max="9" data-min="5">${techList(eq.slice(6),"Objeto",c.name)}</div><div class="box notes fitBox" data-max="9" data-min="5">${esc(c.current_state||c.short_description||c.status||"")}</div>`;$("#side").innerHTML=`<div class="card"><div class="status">${esc(c.kind||"")} · ${esc(c.role||"")}</div><h3>${esc(c.name||"")}</h3><p class="long">${esc(c.short_description||c.description||"")}</p><span class="pill">${esc(c.race||"—")}</span><span class="pill">${esc([c.class,c.subclass].filter(Boolean).join(" — ")||"—")}</span><span class="pill">Nivel ${esc(c.level||"—")}</span></div><details open><summary>Historia conocida</summary><div class="body long">${esc(c.public_history||c.history||"—")}</div></details>${c.appearance?`<details><summary>Apariencia</summary><div class="body long">${esc(c.appearance)}</div></details>`:""}${c.personality?`<details><summary>Personalidad</summary><div class="body long">${esc(c.personality)}</div></details>`:""}<details open><summary>Mecánicas</summary><div class="body"><div class="mechanics"><div class="mini"><b>Atributos</b>FUE ${val(s.str)} (${mod(s.str)}) · DES ${val(s.dex)} (${mod(s.dex)}) · CON ${val(s.con)} (${mod(s.con)}) · INT ${val(s.int)} (${mod(s.int)}) · SAB ${val(s.wis)} (${mod(s.wis)}) · CAR ${val(s.cha)} (${mod(s.cha)})</div><div class="mini"><b>Combate</b>CA ${val(s.ac)} · iniciativa ${val(s.initiative)} · velocidad ${val(speed)} · PG ${val(s.hp_current)}/${val(s.hp_max)} · dados ${val(s.hit_dice)}</div><div class="mini"><b>Salvaciones</b>${Object.entries(saves).map(([a,b])=>`${a} ${b}`).join(" · ")||"—"}</div><div class="mini"><b>Habilidades</b>${(c.skills||[]).map(x=>`${x.skill||x.name} ${x.bonus||x.value||""}`).join(" · ")||"—"}</div></div></div></details><details open><summary>Rasgos de especie</summary><div class="body">${techList(g.species,"Rasgo de especie",c.name)}</div></details><details open><summary>Rasgos de clase</summary><div class="body">${techList(g.class,"Rasgo de clase",c.name)}</div></details>${g.other.length?`<details><summary>Dotes y otros rasgos</summary><div class="body">${techList(g.other,"Rasgo",c.name)}</div></details>`:""}<details><summary>Habilidades</summary><div class="body">${techList(c.skills,"Habilidad",c.name)}</div></details><details><summary>Idiomas y competencias</summary><div class="body"><h4>Idiomas</h4>${list(langs)}<h4>Competencias</h4>${list(profs)}</div></details>${c.spells.length?`<details><summary>Conjuros</summary><div class="body">${techList(c.spells,"Conjuro",c.name)}${c.spell_slots.length?`<h4>Espacios</h4>${list(c.spell_slots.map(x=>`Nivel ${x.spell_level}: ${x.slots_current}/${x.slots_max}`))}`:""}</div></details>`:""}<details><summary>Ataques</summary><div class="body">${techList(c.attacks,"Ataque",c.name)}</div></details><details><summary>Equipo e inventario</summary><div class="body">${techList(c.equipment,"Objeto",c.name)}</div></details>${c.relationships.length?`<details><summary>Relaciones</summary><div class="body">${list(c.relationships.map(r=>`${r.object_name||r.object_id||""}${r.public_summary?": "+r.public_summary:""}`))}</div></details>`:""}<details><summary>Estado actual</summary><div class="body long">${esc(c.current_state||c.status||"—")}</div></details>`;$("#modal").classList.add("open");document.body.style.overflow="hidden";queueImages($("#sheet"));requestAnimationFrame(()=>requestAnimationFrame(fitSheetText))}
 function fitOne(el){const max=num(el.dataset.max)||parseFloat(getComputedStyle(el).fontSize)||12,min=num(el.dataset.min)||5;el.style.fontSize=max+"px";el.style.lineHeight="1.1";let size=max;const overflow=()=>el.scrollWidth>el.clientWidth+1||el.scrollHeight>el.clientHeight+1;while(size>min&&overflow()){size-=.35;el.style.fontSize=size+"px";if(el.classList.contains("fitBox"))el.style.lineHeight=String(Math.max(.95,1.12-(max-size)*.015))}}function fitSheetText(){document.querySelectorAll("#sheet .fitText,#sheet .fitBox").forEach(fitOne)}
 function showTip(data,e){const tip=$("#tip"),rows=(data.rows||[]).map(r=>`<dt>${esc(r[0])}</dt><dd>${esc(r[1])}</dd>`).join("");tip.innerHTML=`<div class="k">${esc(data.kind)}</div><h4>${esc(data.title)}</h4><p>${esc(data.desc||"")}</p>${rows?`<dl>${rows}</dl>`:""}`;tip.classList.add("show");positionTip(e)}function positionTip(e){const tip=$("#tip");if(!tip.classList.contains("show"))return;let x=e.clientX+15,y=e.clientY+15,b=tip.getBoundingClientRect();if(x+b.width>innerWidth-10)x=e.clientX-b.width-15;if(y+b.height>innerHeight-10)y=innerHeight-b.height-10;tip.style.left=Math.max(10,x)+"px";tip.style.top=Math.max(10,y)+"px"}
 document.addEventListener("mouseover",e=>{const t=e.target.closest?.("[data-tip]");if(t)try{showTip(JSON.parse(t.dataset.tip),e)}catch{}});document.addEventListener("mousemove",positionTip);document.addEventListener("mouseout",e=>{if(e.target.closest?.("[data-tip]"))$("#tip").classList.remove("show")});document.addEventListener("focusin",e=>{const t=e.target.closest?.("[data-tip]");if(t)try{const r=t.getBoundingClientRect();showTip(JSON.parse(t.dataset.tip),{clientX:r.right,clientY:r.top})}catch{}});document.addEventListener("focusout",()=>$("#tip").classList.remove("show"));
