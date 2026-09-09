@@ -39,6 +39,28 @@ details{margin-bottom:8px;overflow:hidden}summary{cursor:pointer;padding:14px 16
 .image-error-inline .path{color:#c9b8bb;word-break:break-all;max-width:100%}
 .image-error-inline .hint{color:#8f8588;font-family:Georgia,"Times New Roman",serif;font-size:.67rem}
 
+
+/* Lazy sections v2.8.11 */
+section.is-lazy .sectionBody{min-height:140px}
+.lazySectionCard{
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  min-height:140px;padding:18px;border:1px dashed #3b414e;border-radius:14px;
+  background:linear-gradient(180deg,#121620 0%,#0e121a 100%);
+  color:#bbb3a8;text-align:center
+}
+.lazySectionCard .dot{
+  width:10px;height:10px;border-radius:999px;background:#7b6d55;
+  box-shadow:18px 0 0 #7b6d55,-18px 0 0 #7b6d55;
+  animation:lazyPulse 1.2s infinite ease-in-out
+}
+.lazySectionCard strong{display:block;font-size:.95rem;color:#f1eadf;margin-bottom:4px}
+.lazySectionCard small{display:block;font-size:.78rem;color:#8f8990;line-height:1.45;max-width:56ch}
+.sectionReadyNote{margin-top:10px;font-size:.72rem;color:#8f8990}
+@keyframes lazyPulse{
+  0%,100%{opacity:.35;transform:translateY(0)}
+  50%{opacity:1;transform:translateY(-2px)}
+}
+
 </style>
 </head>
 <body>
@@ -59,10 +81,10 @@ details{margin-bottom:8px;overflow:hidden}summary{cursor:pointer;padding:14px 16
 <div class="hero"><div><div class="eyebrow" id="eyebrow"></div><h1 id="heroTitle">Campaign Codex</h1><p id="heroSubtitle"></p></div><div class="panel kpis"><div class="kpi"><b id="kLvl">—</b><span>Nivel principal</span></div><div class="kpi"><b id="kXp">—</b><span>PX</span></div><div class="kpi"><b id="kAllies">—</b><span>Personajes</span></div><div class="kpi"><b id="kBase">—</b><span>Funciones base</span></div></div></div>
 <main id="main"></main>
 <div class="modal" id="modal"><div class="shell"><div class="bar"><h2 id="modalTitle"></h2><button class="btn" id="close">Cerrar ×</button></div><div class="char"><div class="sheet" id="sheet"></div><aside class="side" id="side"></aside></div></div></div>
-<div id="tip"></div><footer>v2.8.8 · RATE-LIMIT FIX único · src directo assets/<local_path></footer>
+<div id="tip"></div><footer>v2.8.11 · Drive directo + secciones lazy</footer>
 <script>
 const SHEET_ID="1QSrD9vg2erPGGVyR92zSFETVOUmm8GhbKMYWRxGk2Jw"; // ÚNICA fuente: Kazym Campaign Codex MASTER
-const BUILD_ID="v2.8.10-20260909-1215";
+const BUILD_ID="v2.8.11-20260909-1235";
 console.info("Campaign Codex MASTER Sheet:", SHEET_ID);
 const TABS=["config","sections","assets","characters","character_stats","character_saves","character_skills","character_proficiencies","character_traits","character_attacks","character_spells","character_spell_slots","character_equipment","relationships","history","history_rolls","history_events","npcs","bestiary","enemy_traits","base_overview","base_rooms","base_projects","base_protocols","faction_members","base_details","lore","mysteries","items","rules","checkpoint","changelog"];
 
@@ -103,7 +125,11 @@ const EXPECTED_SCHEMA={
 
 const ESSENTIAL_TABS=new Set(["config","assets","characters","history"]);
 
+
 let DB={},DATA={},ASSETS=new Map(),CONFIG={},SECTIONS=[],TIMER=null;
+let SECTION_OBSERVER=null;
+const EAGER_SECTIONS=new Set(["characters"]);
+
 
 let DIAGNOSTICS=[],DIAG_KEYS=new Set(),TAB_STATUS={};
 
@@ -597,6 +623,137 @@ const st=first(db.character_stats,"character_id"),sv=group(db.character_saves,"c
 function sectionMeta(id,title,subtitle,n){const r=SECTIONS.find(x=>x.section_id===id);return r?{title:r.title||title,subtitle:r.subtitle||subtitle,visible:r.visible===""?true:truth(r.visible),sort_order:num(r.sort_order)??n}:{title,subtitle,visible:true,sort_order:n}}
 function renderShell(){$("#brand").textContent=cfg("campaign_name","Campaign Codex");$("#eyebrow").textContent=cfg("ruleset","D&D 5e 2014");$("#heroTitle").textContent=cfg("site_title",cfg("campaign_name","Kazym Garnithor"));$("#heroSubtitle").textContent=cfg("site_subtitle","Campaign Bible viva");document.title=cfg("site_title","Kazym Campaign Codex")+" · v2.8.7";const defs=[["characters","Personajes","Fichas del grupo y residentes",1],["history","Historia","Crónica completa",2],["npcs","PNJ","Contactos y figuras conocidas",3],["base","Base y facción","Instalaciones, proyectos y protocolos",4],["bestiary","Bestiario","Criaturas y enemigos conocidos",5],["lore","Lore","Culturas, lugares, religiones y organizaciones",6],["mysteries","Misterios","Pistas, hipótesis y preguntas abiertas",7],["items","Objetos","Documentos, llaves y pistas",8],["rules","Reglas","Reglas oficiales, opcionales y adaptaciones",9],["checkpoint","Checkpoint","Estado canónico para continuar",10],["changelog","Changelog","Historial de cambios",11]];const main=$("#main"),nav=$("#nav");main.innerHTML="";nav.querySelectorAll("a").forEach(a=>a.remove());defs.map(d=>({id:d[0],...sectionMeta(...d)})).filter(x=>x.visible).sort((a,b)=>a.sort_order-b.sort_order).forEach(s=>{const sec=document.createElement("section");sec.id=s.id;sec.innerHTML=`<div class="head"><div><h2>${esc(s.title)}</h2><p>${esc(s.subtitle||"")}</p></div></div><div class="sectionBody"></div>`;main.appendChild(sec);const a=document.createElement("a");a.href="#"+s.id;a.textContent=s.title;nav.insertBefore(a,$("#refresh"))})}
 const body=id=>document.querySelector(`#${id} .sectionBody`);
+
+function sectionPlaceholder(id){
+  const titles={
+    history:"Historia",
+    npcs:"PNJ",
+    base:"Base y facción",
+    bestiary:"Bestiario",
+    lore:"Lore",
+    mysteries:"Misterios",
+    items:"Objetos",
+    rules:"Reglas",
+    checkpoint:"Checkpoint",
+    changelog:"Changelog"
+  };
+  return `<div class="lazySectionCard">
+    <div>
+      <div class="dot" aria-hidden="true"></div>
+      <div class="sectionReadyNote"><strong>${esc(titles[id]||id)}</strong><small>Esta sección se cargará cuando entres en ella para acelerar el inicio de la página.</small></div>
+    </div>
+  </div>`;
+}
+
+function sectionRenderers(){
+  return {
+    characters: renderCharacters,
+    history: renderHistory,
+    npcs: renderNPCs,
+    base: renderBase,
+    bestiary: renderBestiary,
+    lore: renderLore,
+    mysteries: renderMysteries,
+    items: renderItems,
+    rules: renderRules,
+    checkpoint: renderCheckpoint,
+    changelog: renderChanges
+  };
+}
+
+function renderSectionNow(id){
+  const root=body(id);
+  const section=document.getElementById(id);
+  if(!root||!section)return;
+  if(root.dataset.rendered==="1"||root.dataset.rendering==="1")return;
+
+  const renderer=sectionRenderers()[id];
+  if(typeof renderer!=="function")return;
+
+  root.dataset.rendering="1";
+  try{
+    renderer();
+    root.dataset.rendered="1";
+    section.classList.remove("is-lazy");
+  }catch(e){
+    addDiag(
+      "error",
+      "SECTION-RENDER",
+      `No se pudo renderizar la sección "${id}"`,
+      String(e?.message||e),
+      `Sección: ${id}`,
+      `section:${id}`
+    );
+    throw e;
+  }finally{
+    root.dataset.rendering="0";
+  }
+}
+
+function initLazySections(){
+  if(SECTION_OBSERVER)SECTION_OBSERVER.disconnect();
+
+  const renderers=sectionRenderers();
+
+  Object.keys(renderers).forEach(id=>{
+    const root=body(id);
+    const section=document.getElementById(id);
+    if(!root||!section)return;
+    root.dataset.rendered="0";
+    root.dataset.rendering="0";
+
+    if(EAGER_SECTIONS.has(id)){
+      root.innerHTML="";
+      section.classList.remove("is-lazy");
+    }else{
+      root.innerHTML=sectionPlaceholder(id);
+      section.classList.add("is-lazy");
+    }
+  });
+
+  SECTION_OBSERVER=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(!entry.isIntersecting)return;
+      const id=entry.target.id;
+      renderSectionNow(id);
+      SECTION_OBSERVER.unobserve(entry.target);
+    });
+  },{rootMargin:"280px 0px 280px 0px",threshold:0.01});
+
+  Object.keys(renderers).forEach(id=>{
+    const section=document.getElementById(id);
+    if(!section)return;
+    if(EAGER_SECTIONS.has(id)){
+      renderSectionNow(id);
+    }else{
+      SECTION_OBSERVER.observe(section);
+    }
+  });
+
+  const hashId=(location.hash||"").replace(/^#/,"");
+  if(hashId&&renderers[hashId]){
+    renderSectionNow(hashId);
+    document.getElementById(hashId)?.scrollIntoView({block:"start"});
+  }
+}
+
+function wireLazyNavigation(){
+  const nav=document.getElementById("nav");
+  if(!nav||nav.dataset.lazyBound==="1")return;
+  nav.dataset.lazyBound="1";
+  nav.addEventListener("click",e=>{
+    const a=e.target.closest('a[href^="#"]');
+    if(!a)return;
+    const id=(a.getAttribute("href")||"").replace(/^#/,"");
+    if(!id)return;
+    renderSectionNow(id);
+  });
+
+  window.addEventListener("hashchange",()=>{
+    const id=(location.hash||"").replace(/^#/,"");
+    if(id)renderSectionNow(id);
+  });
+}
 function renderCharacters(){const root=body("characters");if(!root)return;root.innerHTML=`<div style="display:flex;justify-content:flex-end;margin-bottom:12px"><input id="characterSearch" class="search" placeholder="Buscar personaje…"></div><div class="grid avatars" id="charactersGrid"></div>`;const draw=()=>{const q=norm($("#characterSearch").value),g=$("#charactersGrid");g.innerHTML="";DATA.characters.filter(c=>norm([c.name,c.role,c.race,c.class,c.subclass].join(" ")).includes(q)).forEach(c=>{const b=document.createElement("button");b.className="avatar";b.innerHTML=`<div class="portrait">${img(c.portrait,"",c.name)}</div><b>${esc(c.name)}</b><small>${esc(c.role||"")}</small>`;b.onclick=()=>openChar(c);g.appendChild(b)});if(!g.children.length)g.innerHTML=`<div class="empty">Sin personajes.</div>`;queueImages(g)};$("#characterSearch").oninput=draw;draw()}
 function renderHistory(){const root=body("history");if(!root)return;if(!DATA.history.length){root.innerHTML=`<div class="empty">Sin capítulos.</div>`;return}const rolls=group(DATA.history_rolls,"chapter_id");root.innerHTML=DATA.history.map(h=>`<details><summary>${String(h.sort_order||h.order||"").padStart(2,"0")} — ${esc(h.title||"")}</summary><div class="body">${h.image?img(h.image,"map",h.title):""}${h.summary?`<p><b>${esc(h.summary)}</b></p>`:""}<p class="long">${esc(h.full_text||h.detailed_text||h.body||"")}</p>${(rolls.get(h.chapter_id)||[]).length?`<h4>Tiradas registradas</h4>${list((rolls.get(h.chapter_id)||[]).map(r=>`${r.label||r.type||"Tirada"}: ${r.total||r.result||""}${r.consequence?" — "+r.consequence:""}`))}`:""}</div></details>`).join("");queueImages(root)}
 function renderNPCs(){const root=body("npcs");if(!root)return;if(!DATA.npcs.length){root.innerHTML=`<div class="empty">Sin PNJ.</div>`;return}root.innerHTML=`<div class="grid">${DATA.npcs.map(n=>`<article class="card"><div class="npcPortrait">${n.image?img(n.image,"",n.name):`<div class="npcPlaceholder">Retrato pendiente</div>`}</div><div class="status">${esc(n.status||"")}</div><h3>${esc(n.name||"")}</h3><span class="chip">${esc(n.role||"")}</span><p class="long">${esc(n.known||n.known_info||n.description||"")}</p>${n.appearance?`<details><summary>Apariencia</summary><div class="body">${esc(n.appearance)}</div></details>`:""}${n.relationship?`<details><summary>Relación</summary><div class="body">${esc(n.relationship)}</div></details>`:""}</article>`).join("")}</div>`;queueImages(root)}
@@ -609,7 +766,19 @@ function renderItems(){const root=body("items");if(!root)return;root.innerHTML=`
 function renderRules(){const root=body("rules");if(!root)return;root.innerHTML=DATA.rules.length?DATA.rules.map(r=>`<details><summary>${esc(r.title||"")}</summary><div class="body"><span class="pill">${esc(r.status||"")}</span><span class="pill">${esc(r.source_book||r.source||"")}</span><p>${esc(r.notes||r.body||"")}</p>${r.application?`<p><b>Aplicación:</b> ${esc(r.application)}</p>`:""}</div></details>`).join(""):`<div class="empty">Sin reglas.</div>`}
 function renderCheckpoint(){const root=body("checkpoint");if(!root)return;const c=DATA.checkpoint||{};root.innerHTML=`<div class="panel" style="padding:16px"><div class="eyebrow">${esc(c.title||"Checkpoint")}</div><h3>${esc(c.location||c.location_id||"")}</h3><div class="two"><div><b>Presentes</b>${list(arr(c.present||c.present_entity_ids))}<b>Estado</b>${list(arr(c.state||c.base_state))}<b>Kazym</b>${list(arr(c.kazym))}</div><div><b>En otros lugares</b>${list(arr(c.elsewhere))}<b>Pendiente</b>${list(arr(c.pending||c.pending_decisions))}</div></div>${c.last_line||c.last_spoken_line?`<div class="quote">${esc(c.last_line||c.last_spoken_line)}</div>`:""}</div>`}
 function renderChanges(){const root=body("changelog");if(!root)return;root.innerHTML=[...(DATA.changelog||[])].reverse().map(e=>`<div class="card" style="margin-bottom:7px"><b>${esc(e.version||"")}</b> · <span style="color:#8f8990">${esc(e.date||e.timestamp||"")}</span><div>${esc(e.change||e.summary||"")}</div></div>`).join("")}
-function renderAll(){renderShell();renderCharacters();renderHistory();renderNPCs();renderBase();renderBestiary();renderLore();renderMysteries();renderItems();renderRules();renderCheckpoint();renderChanges();const c=DATA.characters.find(x=>x.character_id===cfg("default_character_id","PC_KAZYM"))||DATA.characters[0];if(c){$("#kLvl").textContent=c.level||"—";$("#kXp").textContent=c.xp||"—"}$("#kAllies").textContent=DATA.characters.length||"—";$("#kBase").textContent=`${DATA.base.functions_restored||"—"}/${DATA.base.functions_total||"—"}`}
+function renderAll(){
+  renderShell();
+  wireLazyNavigation();
+  initLazySections();
+
+  const c=DATA.characters.find(x=>x.character_id===cfg("default_character_id","PC_KAZYM"))||DATA.characters[0];
+  if(c){
+    $("#kLvl").textContent=c.level||"—";
+    $("#kXp").textContent=c.xp||"—";
+  }
+  $("#kAllies").textContent=DATA.characters.length||"—";
+  $("#kBase").textContent=`${DATA.base.functions_restored||"—"}/${DATA.base.functions_total||"—"}`;
+}
 function traitGroups(c){const o={species:[],class:[],other:[]};(c.traits||[]).forEach(t=>{const k=norm(t.category||t.trait_type);if(k==="species"||k==="race")o.species.push(t);else if(k==="class")o.class.push(t);else o.other.push(t)});return o}function saveMap(c){return Object.fromEntries((c.saves||[]).map(s=>[String(s.ability||s.save||s.name||"").toUpperCase(),s.bonus||s.value||""]))}function profList(c,k){return(c.proficiencies||[]).filter(x=>norm(x.category)===k).map(x=>x.name||x.proficiency||"")}
 const SK={"acrobacias":["sl",1],"atletismo":["sl",2],"arcanos":["sl",4],"engano":["sl",5],"historia":["sl",6],"interpretacion":["sl",7],"intimidacion":["sl",8],"investigacion":["sl",9],"medicina":["sr",1],"naturaleza":["sr",2],"percepcion":["sr",3],"perspicacia":["sr",4],"juego de manos":["sr",5],"sigilo":["sr",6],"supervivencia":["sr",7],"trato con animales":["sr",8]};function skillOverlay(c){return(c.skills||[]).map(s=>{const p=SK[norm(s.skill||s.name||"")];return p?`<span class="skill ${p[0]} sk${p[1]}">${esc(s.bonus||s.value||"")}</span>`:""}).join("")}function saveOverlay(c){const s=saveMap(c),a=["FUE","DES","CON","INT","SAB","CAR"];return a.map((k,i)=>s[k]?`<span class="save sv${i+1}">${esc(s[k])}</span>`:"").join("")}
 function attackDisplay(a){const name=a.name||a.attack||"";if(a.attack_bonus||a.damage)return{name,bonus:a.attack_bonus||a.bonus||"",damage:a.damage||"",type:a.damage_type||"",props:a.range||a.properties||""};const m=name.match(/^(.*?)\s([+-]\d+)\s+[—-]\s+(.+)$/);return{name:m?m[1]:name,bonus:m?m[2]:"",damage:m?m[3]:"",type:"",props:""}}function attackRows(c){return(c.attacks||[]).slice(0,4).map(a=>{const d=attackDisplay(a);return`<div class="atkrow tipTarget" ${tipAttr(a,"Ataque",c.name)}><span class="fitText">${esc(d.name)}</span><span class="fitText">${esc(d.bonus)}</span><span class="fitText">${esc(d.damage)}</span><span class="fitText">${esc(d.type)}</span><span class="fitText">${esc(d.props)}</span></div>`}).join("")}
