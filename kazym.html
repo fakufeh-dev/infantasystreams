@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="dark">
-<title>Kazym Campaign Codex · v2.8.25 · HISTORY TIMELINE</title>
+<title>Kazym Campaign Codex · v2.8.26 · HORIZONTAL TIMELINE</title>
 <style>
 :root{--bg:#0b0d12;--panel:#171a22;--line:#393e4d;--ink:#eee6d8;--muted:#aaa297;--gold:#b89a67;--paper:#1d1813}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 20% -10%,#2b2138 0,transparent 32%),linear-gradient(#0a0c11,#11141b);color:var(--ink);font-family:Georgia,"Times New Roman",serif}button,input{font:inherit}
@@ -981,10 +981,340 @@ body.imageLensActive img[data-zoom-bound="1"]{cursor:none}
   }
 }
 
+
+/* v2.8.26 — Timeline horizontal + carruseles sin barra visible */
+
+/* Ningún carrusel muestra barra horizontal: la navegación visual queda en botones */
+.contentCarouselTrack,
+.questCarouselTrack,
+.historyTimelineTrack{
+  scrollbar-width:none!important;
+  -ms-overflow-style:none!important;
+}
+.contentCarouselTrack::-webkit-scrollbar,
+.questCarouselTrack::-webkit-scrollbar,
+.historyTimelineTrack::-webkit-scrollbar{
+  width:0!important;
+  height:0!important;
+  display:none!important;
+}
+
+/* Historia horizontal */
+.historyTimelineHorizontal{
+  position:relative;
+  min-width:0;
+}
+
+.historyTimelineNav{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  margin:0 0 12px;
+}
+
+.historyTimelineNavBtn{
+  appearance:none;
+  border:1px solid rgba(214,188,126,.28);
+  background:rgba(11,14,20,.94);
+  color:var(--gold);
+  border-radius:999px;
+  width:38px;
+  height:38px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  font:inherit;
+  font-size:1.08rem;
+  transition:border-color .16s ease,background .16s ease,opacity .16s ease;
+}
+
+.historyTimelineNavBtn:hover:not(:disabled){
+  border-color:rgba(214,188,126,.62);
+  background:#181c26;
+}
+
+.historyTimelineNavBtn:disabled{
+  opacity:.35;
+  cursor:default;
+}
+
+.historyTimelineViewport{
+  position:relative;
+  min-width:0;
+  overflow:hidden;
+  padding:7px 0 16px;
+}
+
+/* Línea continua detrás de los hitos */
+.historyTimelineViewport::before{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:68px;
+  height:2px;
+  background:linear-gradient(
+    90deg,
+    rgba(214,188,126,.12),
+    rgba(214,188,126,.6) 8%,
+    rgba(126,110,159,.62) 92%,
+    rgba(126,110,159,.12)
+  );
+  z-index:0;
+}
+
+.historyTimelineTrack{
+  position:relative;
+  z-index:1;
+  display:flex;
+  flex-wrap:nowrap;
+  gap:18px;
+  overflow-x:auto;
+  overflow-y:hidden;
+  scroll-behavior:smooth;
+  scroll-snap-type:x mandatory;
+  padding:0 3px 8px;
+  min-width:0;
+}
+
+.historyTimelineStep{
+  flex:0 0 220px;
+  min-width:220px;
+  scroll-snap-align:start;
+}
+
+.historyTimelineSelect{
+  width:100%;
+  appearance:none;
+  border:0;
+  background:transparent;
+  color:inherit;
+  padding:0;
+  margin:0;
+  text-align:center;
+  cursor:pointer;
+  font:inherit;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  min-width:0;
+}
+
+.historyTimelineIcon{
+  width:106px;
+  height:106px;
+  border-radius:50%;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:3px solid #414756;
+  background:radial-gradient(circle,#2a2d3c,#0a0d13 72%);
+  box-shadow:
+    0 0 0 5px #0e1118,
+    0 9px 22px rgba(0,0,0,.3);
+  position:relative;
+  z-index:2;
+  transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease;
+}
+
+.historyTimelineIcon img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:#090a0e!important;
+}
+
+.historyTimelineSelect:hover .historyTimelineIcon{
+  transform:translateY(-2px);
+  border-color:#6c647a;
+}
+
+.historyTimelineSelect.isActive .historyTimelineIcon{
+  border-color:#c2a7dd;
+  box-shadow:
+    0 0 0 5px #0e1118,
+    0 0 0 7px rgba(194,167,221,.2),
+    0 10px 24px rgba(0,0,0,.32);
+}
+
+.historyTimelineDot{
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:#d0b67b;
+  border:3px solid #0e1118;
+  margin:7px 0 7px;
+  box-shadow:0 0 0 2px rgba(208,182,123,.28);
+  position:relative;
+  z-index:3;
+}
+
+.historyTimelineSelect.isActive .historyTimelineDot{
+  background:#b39acc;
+  box-shadow:0 0 0 2px rgba(179,154,204,.34);
+}
+
+.historyTimelineLabel{
+  width:100%;
+  border:1px solid #343947;
+  border-radius:12px;
+  background:linear-gradient(180deg,#1a1e28,#13161e);
+  padding:10px 11px;
+  min-height:74px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  transition:border-color .16s ease,background .16s ease;
+}
+
+.historyTimelineSelect.isActive .historyTimelineLabel{
+  border-color:rgba(179,154,204,.52);
+  background:linear-gradient(180deg,#20212d,#151721);
+}
+
+.historyTimelineChapter{
+  color:var(--gold);
+  font-size:.62rem;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  font-weight:800;
+  margin-bottom:4px;
+}
+
+.historyTimelineName{
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  overflow:hidden;
+  color:#f0ebe4;
+  font-size:.9rem;
+  line-height:1.18;
+  font-weight:900;
+}
+
+.historyStoryPanel{
+  display:none;
+  margin-top:10px;
+  border:1px solid #3a404d;
+  border-radius:14px;
+  background:linear-gradient(180deg,#171b24,#10131a);
+  padding:18px;
+  color:#cbc3b8;
+  line-height:1.62;
+}
+
+.historyStoryPanel.open{
+  display:block;
+}
+
+.historyStoryTop{
+  display:grid;
+  grid-template-columns:66px minmax(0,1fr) auto;
+  gap:13px;
+  align-items:center;
+  margin-bottom:14px;
+}
+
+.historyStoryMiniIcon{
+  width:66px;
+  height:66px;
+  border-radius:12px;
+  overflow:hidden;
+  border:1px solid #404654;
+  background:#090b10;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.historyStoryMiniIcon img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  margin:0!important;
+  background:#090a0e!important;
+}
+
+.historyStoryHeading{
+  min-width:0;
+}
+
+.historyStoryHeading .eyebrow{
+  margin-bottom:3px;
+}
+
+.historyStoryHeading h3{
+  margin:0;
+  font-size:1.22rem;
+}
+
+.historyStoryClose{
+  appearance:none;
+  border:1px solid #3d4350;
+  background:#11151c;
+  color:#bdb6ac;
+  width:34px;
+  height:34px;
+  border-radius:999px;
+  cursor:pointer;
+  font-size:1rem;
+}
+
+.historyStoryClose:hover{
+  color:#fff;
+  border-color:#666f82;
+}
+
+.historyStorySummary{
+  color:#eee5d8;
+  font-weight:800;
+}
+
+.historyStoryPanel h4{
+  margin:16px 0 5px;
+}
+
+@media (max-width:700px){
+  .historyTimelineStep{
+    flex-basis:172px;
+    min-width:172px;
+  }
+
+  .historyTimelineIcon{
+    width:88px;
+    height:88px;
+  }
+
+  .historyTimelineViewport::before{
+    top:59px;
+  }
+
+  .historyTimelineLabel{
+    min-height:68px;
+    padding:9px;
+  }
+
+  .historyStoryTop{
+    grid-template-columns:52px minmax(0,1fr) auto;
+    gap:10px;
+  }
+
+  .historyStoryMiniIcon{
+    width:52px;
+    height:52px;
+  }
+}
+
 </style>
 </head>
 <body>
-<header class="top"><nav id="nav"><div class="brand" id="brand">Campaign Codex</div><button class="btn" id="refresh">Actualizar</button><button class="btn diag-btn" id="diagToggle" type="button">Diagnóstico 0</button><span class="badge live">v2.8.25 · HISTORY TIMELINE</span><span class="badge" id="mode">Cargando…</span></nav></header>
+<header class="top"><nav id="nav"><div class="brand" id="brand">Campaign Codex</div><button class="btn" id="refresh">Actualizar</button><button class="btn diag-btn" id="diagToggle" type="button">Diagnóstico 0</button><span class="badge live">v2.8.26 · HORIZONTAL TIMELINE</span><span class="badge" id="mode">Cargando…</span></nav></header>
 
 <div class="diag-wrap">
   <section class="diag-panel" id="diagPanel" hidden aria-live="polite">
@@ -1008,10 +1338,10 @@ body.imageLensActive img[data-zoom-bound="1"]{cursor:none}
     <div class="previewCaption" id="imagePreviewCaption"></div>
   </div>
 </div>
-<footer>v2.8.25 · Historia en línea de tiempo + acordeón global</footer>
+<footer>v2.8.26 · Historia horizontal + carruseles solo con botones</footer>
 <script>
 const SHEET_ID="1QSrD9vg2erPGGVyR92zSFETVOUmm8GhbKMYWRxGk2Jw"; // ÚNICA fuente: Kazym Campaign Codex MASTER
-const BUILD_ID="v2.8.25-20260910-1140";
+const BUILD_ID="v2.8.26-20260910-1210";
 console.info("Campaign Codex MASTER Sheet:", SHEET_ID);
 const TABS=["config","sections","assets","characters","character_stats","character_saves","character_skills","character_proficiencies","character_traits","character_attacks","character_spells","character_spell_slots","character_equipment","relationships","history","history_rolls","history_events","npcs","bestiary","enemy_traits","base_overview","base_rooms","base_projects","base_protocols","faction_members","base_details","lore","mysteries","items","rules","checkpoint","changelog"];
 
@@ -1732,7 +2062,7 @@ function renderShell(){
   $("#eyebrow").textContent=cfg("ruleset","D&D 5e 2014");
   $("#heroTitle").textContent=cfg("site_title",cfg("campaign_name","Kazym Garnithor"));
   $("#heroSubtitle").textContent=cfg("site_subtitle","Campaign Bible viva");
-  document.title=cfg("site_title","Kazym Campaign Codex")+" · v2.8.25";
+  document.title=cfg("site_title","Kazym Campaign Codex")+" · v2.8.26";
 
   const defs=[
     ["characters","Personajes","Fichas del grupo y residentes",1],
@@ -1901,6 +2231,111 @@ function wireLazyNavigation(){
   });
 }
 function renderCharacters(){const root=body("characters");if(!root)return;root.innerHTML=`<div style="display:flex;justify-content:flex-end;margin-bottom:12px"><input id="characterSearch" class="search" placeholder="Buscar personaje…"></div><div class="grid avatars" id="charactersGrid"></div>`;const draw=()=>{const q=norm($("#characterSearch").value),g=$("#charactersGrid");g.innerHTML="";DATA.characters.filter(c=>norm([c.name,c.role,c.race,c.class,c.subclass].join(" ")).includes(q)).forEach(c=>{const b=document.createElement("button");b.className="avatar";const isTomas=(c.character_id==="ALLY_TOMAS"||norm(c.name)==="tomas");const portraitCls=isTomas?"fullBodyPortrait":"";const portraitBoxCls=isTomas?"portrait tomasPortrait":"portrait";b.innerHTML=`<div class="${portraitBoxCls}">${img(c.portrait,portraitCls,c.name)}</div><b>${esc(c.name)}</b><small>${esc(c.role||"")}</small>`;b.onclick=()=>openChar(c);g.appendChild(b)});if(!g.children.length)g.innerHTML=`<div class="empty">Sin personajes.</div>`;queueImages(g)};$("#characterSearch").oninput=draw;draw()}
+function bindHistoryTimeline(root=document){
+  const wrap=root.querySelector(".historyTimelineHorizontal");
+  if(!wrap)return;
+
+  const track=wrap.querySelector(".historyTimelineTrack");
+  const prev=wrap.querySelector(".historyTimelineNavBtn[data-dir='prev']");
+  const next=wrap.querySelector(".historyTimelineNavBtn[data-dir='next']");
+  const panel=wrap.querySelector(".historyStoryPanel");
+  const buttons=[...wrap.querySelectorAll(".historyTimelineSelect")];
+
+  if(!track||!prev||!next||!panel)return;
+
+  const histories=DATA.history||[];
+  const rolls=group(DATA.history_rolls,"chapter_id");
+
+  const updateNav=()=>{
+    const max=Math.max(0,track.scrollWidth-track.clientWidth);
+    prev.disabled=track.scrollLeft<=4;
+    next.disabled=max<=4||track.scrollLeft>=max-4;
+  };
+
+  const step=dir=>{
+    const first=track.querySelector(".historyTimelineStep");
+    const width=first?first.getBoundingClientRect().width:220;
+    const gap=parseFloat(getComputedStyle(track).gap)||18;
+    const visible=Math.max(1,Math.floor(track.clientWidth/(width+gap)));
+    track.scrollBy({
+      left:(width+gap)*visible*dir,
+      behavior:"smooth"
+    });
+  };
+
+  const closePanel=()=>{
+    panel.classList.remove("open");
+    panel.innerHTML="";
+    buttons.forEach(btn=>{
+      btn.classList.remove("isActive");
+      btn.setAttribute("aria-expanded","false");
+    });
+  };
+
+  const openHistory=(index,button)=>{
+    const h=histories[index];
+    if(!h)return;
+
+    if(button.classList.contains("isActive")){
+      closePanel();
+      return;
+    }
+
+    buttons.forEach(btn=>{
+      btn.classList.remove("isActive");
+      btn.setAttribute("aria-expanded","false");
+    });
+
+    button.classList.add("isActive");
+    button.setAttribute("aria-expanded","true");
+
+    const chapterNo=String(h.sort_order||h.order||"").padStart(2,"0");
+    const story=h.full_text||h.detailed_text||h.body||"";
+    const chapterRolls=rolls.get(h.chapter_id)||[];
+
+    panel.innerHTML=`
+      <div class="historyStoryTop">
+        <div class="historyStoryMiniIcon">
+          ${h.image?img(h.image,"",h.title||`Capítulo ${chapterNo}`):`<div class="historyTimelineIconFallback">Sin imagen</div>`}
+        </div>
+        <div class="historyStoryHeading">
+          <div class="eyebrow">Capítulo ${esc(chapterNo)}</div>
+          <h3>${esc(h.title||"")}</h3>
+        </div>
+        <button class="historyStoryClose" type="button" aria-label="Cerrar historia">×</button>
+      </div>
+      ${h.summary?`<p class="historyStorySummary">${esc(h.summary)}</p>`:""}
+      ${story?`<p class="long">${esc(story)}</p>`:""}
+      ${chapterRolls.length
+        ? `<h4>Tiradas registradas</h4>${list(chapterRolls.map(r=>`${r.label||r.type||"Tirada"}: ${r.total||r.result||""}${r.consequence?" — "+r.consequence:""}`))}`
+        : ""}
+    `;
+
+    panel.classList.add("open");
+
+    const closer=panel.querySelector(".historyStoryClose");
+    if(closer)closer.addEventListener("click",closePanel);
+
+    queueImages(panel);
+  };
+
+  if(wrap.dataset.timelineBound!=="1"){
+    wrap.dataset.timelineBound="1";
+
+    prev.addEventListener("click",()=>step(-1));
+    next.addEventListener("click",()=>step(1));
+    track.addEventListener("scroll",updateNav,{passive:true});
+    window.addEventListener("resize",updateNav);
+
+    buttons.forEach((button,index)=>{
+      button.addEventListener("click",()=>openHistory(index,button));
+    });
+  }
+
+  requestAnimationFrame(updateNav);
+  setTimeout(updateNav,120);
+}
+
 function renderHistory(){
   const root=body("history");
   if(!root)return;
@@ -1910,43 +2345,48 @@ function renderHistory(){
     return;
   }
 
-  const rolls=group(DATA.history_rolls,"chapter_id");
-
   root.innerHTML=`
-    <div class="historyTimeline">
-      ${DATA.history.map(h=>{
-        const chapterNo=String(h.sort_order||h.order||"").padStart(2,"0");
-        const story=h.full_text||h.detailed_text||h.body||"";
-        const teaser=h.summary||story||"";
+    <div class="historyTimelineHorizontal">
+      <div class="historyTimelineNav" aria-label="Navegación de la línea de tiempo">
+        <button class="historyTimelineNavBtn" type="button" data-dir="prev" aria-label="Capítulos anteriores">‹</button>
+        <button class="historyTimelineNavBtn" type="button" data-dir="next" aria-label="Capítulos siguientes">›</button>
+      </div>
 
-        return `<details class="historyTimelineItem">
-          <summary>
-            <div class="historyTimelineIconWrap">
-              ${h.image
-                ? img(h.image,"",h.title||`Capítulo ${chapterNo}`)
-                : `<div class="historyTimelineIconFallback">Sin<br>imagen</div>`}
-            </div>
+      <div class="historyTimelineViewport">
+        <div class="historyTimelineTrack">
+          ${DATA.history.map(h=>{
+            const chapterNo=String(h.sort_order||h.order||"").padStart(2,"0");
 
-            <div class="historyTimelineHeader">
-              <span class="historyTimelineNumber">Capítulo ${esc(chapterNo)}</span>
-              <span class="historyTimelineTitle">${esc(h.title||"")}</span>
-              ${teaser?`<span class="historyTimelineTeaser">${esc(teaser)}</span>`:""}
-              <span class="historyTimelineChevron" aria-hidden="true">▾</span>
-            </div>
-          </summary>
+            return `<div class="historyTimelineStep">
+              <button
+                class="historyTimelineSelect"
+                type="button"
+                aria-expanded="false"
+                aria-label="Abrir capítulo ${esc(chapterNo)}: ${esc(h.title||"")}">
+                <div class="historyTimelineIcon">
+                  ${h.image
+                    ? img(h.image,"",h.title||`Capítulo ${chapterNo}`)
+                    : `<div class="historyTimelineIconFallback">Sin<br>imagen</div>`}
+                </div>
 
-          <div class="historyTimelineBody">
-            ${h.summary?`<p class="historySummary">${esc(h.summary)}</p>`:""}
-            ${story?`<p class="long">${esc(story)}</p>`:""}
-            ${(rolls.get(h.chapter_id)||[]).length
-              ? `<h4>Tiradas registradas</h4>${list((rolls.get(h.chapter_id)||[]).map(r=>`${r.label||r.type||"Tirada"}: ${r.total||r.result||""}${r.consequence?" — "+r.consequence:""}`))}`
-              : ""}
-          </div>
-        </details>`;
-      }).join("")}
-    </div>`;
+                <div class="historyTimelineDot" aria-hidden="true"></div>
+
+                <div class="historyTimelineLabel">
+                  <span class="historyTimelineChapter">Capítulo ${esc(chapterNo)}</span>
+                  <span class="historyTimelineName">${esc(h.title||"")}</span>
+                </div>
+              </button>
+            </div>`;
+          }).join("")}
+        </div>
+      </div>
+
+      <div class="historyStoryPanel" aria-live="polite"></div>
+    </div>
+  `;
 
   queueImages(root);
+  bindHistoryTimeline(root);
 }
 
 function bindCompactDescriptions(root=document){
