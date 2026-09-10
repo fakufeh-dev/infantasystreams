@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="dark">
-<title>Kazym Campaign Codex · v2.8.28 · HISTORY TOP CROP</title>
+<title>Kazym Campaign Codex · v2.8.29 · SECONDARY META</title>
 <style>
 :root{--bg:#0b0d12;--panel:#171a22;--line:#393e4d;--ink:#eee6d8;--muted:#aaa297;--gold:#b89a67;--paper:#1d1813}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 20% -10%,#2b2138 0,transparent 32%),linear-gradient(#0a0c11,#11141b);color:var(--ink);font-family:Georgia,"Times New Roman",serif}button,input{font:inherit}
@@ -1467,10 +1467,118 @@ body.imageLensActive img[data-zoom-bound="1"]{cursor:none}
   }
 }
 
+
+/* v2.8.29 — secciones técnicas secundarias */
+#checkpoint,
+#changelog{
+  padding-top:16px;
+  padding-bottom:10px;
+  opacity:.88;
+}
+
+#checkpoint .head,
+#changelog .head{
+  margin-bottom:7px;
+  opacity:.7;
+}
+
+#checkpoint .head h2,
+#changelog .head h2{
+  font-size:1.15rem;
+  font-weight:800;
+  letter-spacing:.01em;
+}
+
+#checkpoint .head p,
+#changelog .head p{
+  font-size:.7rem;
+  max-width:620px;
+}
+
+#checkpoint .sectionBody,
+#changelog .sectionBody{
+  font-size:.79rem;
+}
+
+#checkpoint .metaSectionDetails,
+#changelog .metaSectionDetails{
+  border-color:#2d323d;
+  background:linear-gradient(180deg,#141820,#10131a);
+  margin-bottom:0;
+}
+
+#checkpoint .metaSectionDetails > summary,
+#changelog .metaSectionDetails > summary{
+  padding:10px 13px;
+  font-size:.76rem;
+  color:#aaa399;
+  font-weight:800;
+}
+
+#checkpoint .metaSectionDetails[open] > summary,
+#changelog .metaSectionDetails[open] > summary{
+  color:#d0c7bc;
+}
+
+#checkpoint .metaSectionBody,
+#changelog .metaSectionBody{
+  padding:0 13px 13px;
+  color:#aaa49b;
+}
+
+#checkpoint .metaSectionBody h3{
+  font-size:1rem;
+  margin:.25rem 0 .6rem;
+  color:#d9d2c8;
+}
+
+#checkpoint .metaSectionBody .two{
+  gap:10px;
+}
+
+#checkpoint .metaSectionBody b{
+  font-size:.72rem;
+  color:#c9c1b7;
+}
+
+#checkpoint .metaSectionBody .list{
+  font-size:.76rem;
+}
+
+#checkpoint .metaSectionBody .quote{
+  font-size:.76rem;
+  opacity:.86;
+}
+
+#changelog .metaChange{
+  padding:8px 10px;
+  margin-bottom:5px;
+  border:1px solid #2e3440;
+  border-radius:8px;
+  background:#10131a;
+  font-size:.74rem;
+  color:#aaa49b;
+}
+
+#changelog .metaChange b{
+  color:#c9c0b5;
+}
+
+nav a[href="#checkpoint"],
+nav a[href="#changelog"]{
+  opacity:.52;
+  font-size:.78rem;
+}
+
+nav a[href="#checkpoint"]:hover,
+nav a[href="#changelog"]:hover{
+  opacity:.82;
+}
+
 </style>
 </head>
 <body>
-<header class="top"><nav id="nav"><div class="brand" id="brand">Campaign Codex</div><button class="btn" id="refresh">Actualizar</button><button class="btn diag-btn" id="diagToggle" type="button">Diagnóstico 0</button><span class="badge live">v2.8.28 · HISTORY TOP CROP</span><span class="badge" id="mode">Cargando…</span></nav></header>
+<header class="top"><nav id="nav"><div class="brand" id="brand">Campaign Codex</div><button class="btn" id="refresh">Actualizar</button><button class="btn diag-btn" id="diagToggle" type="button">Diagnóstico 0</button><span class="badge live">v2.8.29 · SECONDARY META</span><span class="badge" id="mode">Cargando…</span></nav></header>
 
 <div class="diag-wrap">
   <section class="diag-panel" id="diagPanel" hidden aria-live="polite">
@@ -1494,10 +1602,10 @@ body.imageLensActive img[data-zoom-bound="1"]{cursor:none}
     <div class="previewCaption" id="imagePreviewCaption"></div>
   </div>
 </div>
-<footer>v2.8.28 · Historia 50/50 con recorte priorizando zona superior</footer>
+<footer>v2.8.29 · Capítulos 07/08 corregidos + secciones técnicas secundarias</footer>
 <script>
 const SHEET_ID="1QSrD9vg2erPGGVyR92zSFETVOUmm8GhbKMYWRxGk2Jw"; // ÚNICA fuente: Kazym Campaign Codex MASTER
-const BUILD_ID="v2.8.28-20260910-1115";
+const BUILD_ID="v2.8.29-20260910-1215";
 console.info("Campaign Codex MASTER Sheet:", SHEET_ID);
 const TABS=["config","sections","assets","characters","character_stats","character_saves","character_skills","character_proficiencies","character_traits","character_attacks","character_spells","character_spell_slots","character_equipment","relationships","history","history_rolls","history_events","npcs","bestiary","enemy_traits","base_overview","base_rooms","base_projects","base_protocols","faction_members","base_details","lore","mysteries","items","rules","checkpoint","changelog"];
 
@@ -2218,7 +2326,7 @@ function renderShell(){
   $("#eyebrow").textContent=cfg("ruleset","D&D 5e 2014");
   $("#heroTitle").textContent=cfg("site_title",cfg("campaign_name","Kazym Garnithor"));
   $("#heroSubtitle").textContent=cfg("site_subtitle","Campaign Bible viva");
-  document.title=cfg("site_title","Kazym Campaign Codex")+" · v2.8.28";
+  document.title=cfg("site_title","Kazym Campaign Codex")+" · v2.8.29";
 
   const defs=[
     ["characters","Personajes","Fichas del grupo y residentes",1],
@@ -2878,8 +2986,66 @@ function renderItems(){
   bindContentCarousels(root);
 }
 function renderRules(){const root=body("rules");if(!root)return;root.innerHTML=DATA.rules.length?DATA.rules.map(r=>`<details><summary>${esc(r.title||"")}</summary><div class="body"><span class="pill">${esc(r.status||"")}</span><span class="pill">${esc(r.source_book||r.source||"")}</span><p>${esc(r.notes||r.body||"")}</p>${r.application?`<p><b>Aplicación:</b> ${esc(r.application)}</p>`:""}</div></details>`).join(""):`<div class="empty">Sin reglas.</div>`}
-function renderCheckpoint(){const root=body("checkpoint");if(!root)return;const c=DATA.checkpoint||{};root.innerHTML=`<div class="panel" style="padding:16px"><div class="eyebrow">${esc(c.title||"Checkpoint")}</div><h3>${esc(c.location||c.location_id||"")}</h3><div class="two"><div><b>Presentes</b>${list(arr(c.present||c.present_entity_ids))}<b>Estado</b>${list(arr(c.state||c.base_state))}<b>Kazym</b>${list(arr(c.kazym))}</div><div><b>En otros lugares</b>${list(arr(c.elsewhere))}<b>Pendiente</b>${list(arr(c.pending||c.pending_decisions))}</div></div>${c.last_line||c.last_spoken_line?`<div class="quote">${esc(c.last_line||c.last_spoken_line)}</div>`:""}</div>`}
-function renderChanges(){const root=body("changelog");if(!root)return;root.innerHTML=[...(DATA.changelog||[])].reverse().map(e=>`<div class="card" style="margin-bottom:7px"><b>${esc(e.version||"")}</b> · <span style="color:#8f8990">${esc(e.date||e.timestamp||"")}</span><div>${esc(e.change||e.summary||"")}</div></div>`).join("")}
+function renderCheckpoint(){
+  const root=body("checkpoint");
+  if(!root)return;
+
+  const c=DATA.checkpoint||{};
+
+  root.innerHTML=`
+    <details class="metaSectionDetails">
+      <summary>Ver estado canónico de continuidad</summary>
+      <div class="metaSectionBody">
+        <div class="eyebrow">${esc(c.title||"Checkpoint")}</div>
+        <h3>${esc(c.location||c.location_id||"")}</h3>
+
+        <div class="two">
+          <div>
+            <b>Presentes</b>
+            ${list(arr(c.present||c.present_entity_ids))}
+            <b>Estado</b>
+            ${list(arr(c.state||c.base_state))}
+            <b>Kazym</b>
+            ${list(arr(c.kazym))}
+          </div>
+
+          <div>
+            <b>En otros lugares</b>
+            ${list(arr(c.elsewhere))}
+            <b>Pendiente</b>
+            ${list(arr(c.pending||c.pending_decisions))}
+          </div>
+        </div>
+
+        ${c.last_line||c.last_spoken_line
+          ? `<div class="quote">${esc(c.last_line||c.last_spoken_line)}</div>`
+          : ""}
+      </div>
+    </details>`;
+}
+
+function renderChanges(){
+  const root=body("changelog");
+  if(!root)return;
+
+  const entries=[...(DATA.changelog||[])].reverse();
+
+  root.innerHTML=`
+    <details class="metaSectionDetails">
+      <summary>Ver historial técnico de cambios${entries.length?` · ${entries.length}`:""}</summary>
+      <div class="metaSectionBody">
+        ${entries.length
+          ? entries.map(e=>`
+              <div class="metaChange">
+                <b>${esc(e.version||"")}</b>
+                · <span>${esc(e.date||e.timestamp||"")}</span>
+                <div>${esc(e.change||e.summary||"")}</div>
+              </div>`).join("")
+          : `<div class="empty">Sin cambios registrados.</div>`}
+      </div>
+    </details>`;
+}
+
 function renderAll(){
   renderShell();installGlobalDetailsAccordion();
   wireLazyNavigation();
