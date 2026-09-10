@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="dark">
-<title>Kazym Campaign Codex · v2.8.26 · HORIZONTAL TIMELINE</title>
+<title>Kazym Campaign Codex · v2.8.27 · SPLIT HISTORY</title>
 <style>
 :root{--bg:#0b0d12;--panel:#171a22;--line:#393e4d;--ink:#eee6d8;--muted:#aaa297;--gold:#b89a67;--paper:#1d1813}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 20% -10%,#2b2138 0,transparent 32%),linear-gradient(#0a0c11,#11141b);color:var(--ink);font-family:Georgia,"Times New Roman",serif}button,input{font:inherit}
@@ -1311,10 +1311,166 @@ body.imageLensActive img[data-zoom-bound="1"]{cursor:none}
   }
 }
 
+
+/* v2.8.27 — Historia desplegada 50/50 con altura uniforme */
+.historyStoryPanel{
+  display:none;
+  margin-top:12px;
+  border:1px solid #3a404d;
+  border-radius:14px;
+  background:linear-gradient(180deg,#171b24,#10131a);
+  overflow:hidden;
+  padding:0!important;
+  height:390px;
+  min-height:390px;
+  max-height:390px;
+  color:#cbc3b8;
+}
+
+.historyStoryPanel.open{
+  display:block;
+}
+
+.historyStorySplit{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  height:100%;
+  min-height:0;
+}
+
+.historyStoryImage{
+  min-width:0;
+  min-height:0;
+  height:100%;
+  overflow:hidden;
+  background:#090a0e;
+  border-right:1px solid #343947;
+}
+
+.historyStoryImage img{
+  display:block;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center center!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:#090a0e!important;
+}
+
+.historyStoryImageFallback{
+  width:100%;
+  height:100%;
+  display:grid;
+  place-items:center;
+  color:#777f91;
+  font-size:.75rem;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  text-align:center;
+  padding:16px;
+}
+
+.historyStoryText{
+  position:relative;
+  min-width:0;
+  min-height:0;
+  height:100%;
+  padding:18px 18px 20px;
+  overflow-y:auto;
+  overflow-x:hidden;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(214,188,126,.32) transparent;
+  box-sizing:border-box;
+}
+
+.historyStoryText::-webkit-scrollbar{
+  width:8px;
+}
+
+.historyStoryText::-webkit-scrollbar-thumb{
+  background:rgba(214,188,126,.32);
+  border-radius:999px;
+}
+
+.historyStoryHeader{
+  position:relative;
+  padding-right:42px;
+  margin-bottom:12px;
+}
+
+.historyStoryHeader .eyebrow{
+  margin-bottom:4px;
+}
+
+.historyStoryHeader h3{
+  margin:0;
+  font-size:1.28rem;
+  line-height:1.16;
+}
+
+.historyStoryClose{
+  position:absolute;
+  top:0;
+  right:0;
+  appearance:none;
+  border:1px solid #3d4350;
+  background:#11151c;
+  color:#bdb6ac;
+  width:34px;
+  height:34px;
+  border-radius:999px;
+  cursor:pointer;
+  font-size:1rem;
+}
+
+.historyStoryClose:hover{
+  color:#fff;
+  border-color:#666f82;
+}
+
+.historyStorySummary{
+  color:#eee5d8;
+  font-weight:800;
+  margin:0 0 12px;
+}
+
+.historyStoryText > p:last-child{
+  margin-bottom:0;
+}
+
+.historyStoryText h4{
+  margin:16px 0 5px;
+}
+
+/* En pantallas estrechas apilamos, pero conservamos altura visual controlada */
+@media (max-width:760px){
+  .historyStoryPanel{
+    height:540px;
+    min-height:540px;
+    max-height:540px;
+  }
+
+  .historyStorySplit{
+    grid-template-columns:1fr;
+    grid-template-rows:220px minmax(0,1fr);
+  }
+
+  .historyStoryImage{
+    border-right:0;
+    border-bottom:1px solid #343947;
+  }
+
+  .historyStoryText{
+    padding:14px 15px 16px;
+  }
+}
+
 </style>
 </head>
 <body>
-<header class="top"><nav id="nav"><div class="brand" id="brand">Campaign Codex</div><button class="btn" id="refresh">Actualizar</button><button class="btn diag-btn" id="diagToggle" type="button">Diagnóstico 0</button><span class="badge live">v2.8.26 · HORIZONTAL TIMELINE</span><span class="badge" id="mode">Cargando…</span></nav></header>
+<header class="top"><nav id="nav"><div class="brand" id="brand">Campaign Codex</div><button class="btn" id="refresh">Actualizar</button><button class="btn diag-btn" id="diagToggle" type="button">Diagnóstico 0</button><span class="badge live">v2.8.27 · SPLIT HISTORY</span><span class="badge" id="mode">Cargando…</span></nav></header>
 
 <div class="diag-wrap">
   <section class="diag-panel" id="diagPanel" hidden aria-live="polite">
@@ -1338,10 +1494,10 @@ body.imageLensActive img[data-zoom-bound="1"]{cursor:none}
     <div class="previewCaption" id="imagePreviewCaption"></div>
   </div>
 </div>
-<footer>v2.8.26 · Historia horizontal + carruseles solo con botones</footer>
+<footer>v2.8.27 · Historia horizontal + panel 50/50 de altura uniforme</footer>
 <script>
 const SHEET_ID="1QSrD9vg2erPGGVyR92zSFETVOUmm8GhbKMYWRxGk2Jw"; // ÚNICA fuente: Kazym Campaign Codex MASTER
-const BUILD_ID="v2.8.26-20260910-1210";
+const BUILD_ID="v2.8.27-20260910-1055";
 console.info("Campaign Codex MASTER Sheet:", SHEET_ID);
 const TABS=["config","sections","assets","characters","character_stats","character_saves","character_skills","character_proficiencies","character_traits","character_attacks","character_spells","character_spell_slots","character_equipment","relationships","history","history_rolls","history_events","npcs","bestiary","enemy_traits","base_overview","base_rooms","base_projects","base_protocols","faction_members","base_details","lore","mysteries","items","rules","checkpoint","changelog"];
 
@@ -2062,7 +2218,7 @@ function renderShell(){
   $("#eyebrow").textContent=cfg("ruleset","D&D 5e 2014");
   $("#heroTitle").textContent=cfg("site_title",cfg("campaign_name","Kazym Garnithor"));
   $("#heroSubtitle").textContent=cfg("site_subtitle","Campaign Bible viva");
-  document.title=cfg("site_title","Kazym Campaign Codex")+" · v2.8.26";
+  document.title=cfg("site_title","Kazym Campaign Codex")+" · v2.8.27";
 
   const defs=[
     ["characters","Personajes","Fichas del grupo y residentes",1],
@@ -2294,21 +2450,28 @@ function bindHistoryTimeline(root=document){
     const chapterRolls=rolls.get(h.chapter_id)||[];
 
     panel.innerHTML=`
-      <div class="historyStoryTop">
-        <div class="historyStoryMiniIcon">
-          ${h.image?img(h.image,"",h.title||`Capítulo ${chapterNo}`):`<div class="historyTimelineIconFallback">Sin imagen</div>`}
+      <div class="historyStorySplit">
+        <div class="historyStoryImage">
+          ${h.image
+            ? img(h.image,"",h.title||`Capítulo ${chapterNo}`)
+            : `<div class="historyStoryImageFallback">Sin imagen</div>`}
         </div>
-        <div class="historyStoryHeading">
-          <div class="eyebrow">Capítulo ${esc(chapterNo)}</div>
-          <h3>${esc(h.title||"")}</h3>
+
+        <div class="historyStoryText">
+          <div class="historyStoryHeader">
+            <div class="eyebrow">Capítulo ${esc(chapterNo)}</div>
+            <h3>${esc(h.title||"")}</h3>
+            <button class="historyStoryClose" type="button" aria-label="Cerrar historia">×</button>
+          </div>
+
+          ${h.summary?`<p class="historyStorySummary">${esc(h.summary)}</p>`:""}
+          ${story?`<p class="long">${esc(story)}</p>`:""}
+
+          ${chapterRolls.length
+            ? `<h4>Tiradas registradas</h4>${list(chapterRolls.map(r=>`${r.label||r.type||"Tirada"}: ${r.total||r.result||""}${r.consequence?" — "+r.consequence:""}`))}`
+            : ""}
         </div>
-        <button class="historyStoryClose" type="button" aria-label="Cerrar historia">×</button>
       </div>
-      ${h.summary?`<p class="historyStorySummary">${esc(h.summary)}</p>`:""}
-      ${story?`<p class="long">${esc(story)}</p>`:""}
-      ${chapterRolls.length
-        ? `<h4>Tiradas registradas</h4>${list(chapterRolls.map(r=>`${r.label||r.type||"Tirada"}: ${r.total||r.result||""}${r.consequence?" — "+r.consequence:""}`))}`
-        : ""}
     `;
 
     panel.classList.add("open");
