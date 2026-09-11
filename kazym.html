@@ -4,323 +4,5321 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="dark">
-<title>Kazym Campaign Codex · v2.9.3 · MAPA COORDENADAS + ZOOM</title>
+<title>Kazym Campaign Codex · v2.9.4 · BASE + MAPA UNIFICADOS + ARCHIVO INFERIOR</title>
 <style>
 :root{--bg:#0b0d12;--panel:#171a22;--line:#393e4d;--ink:#eee6d8;--muted:#aaa297;--gold:#b89a67;--paper:#1d1813}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 20% -10%,#2b2138 0,transparent 32%),linear-gradient(#0a0c11,#11141b);color:var(--ink);font-family:Georgia,"Times New Roman",serif}button,input{font:inherit}
-.top{position:sticky;top:0;z-index:50;background:#0d0f16ee;border-bottom:1px solid #303440;backdrop-filter:blur(10px)}nav{max-width:1440px;margin:auto;padding:10px 18px;display:flex;align-items:center;gap:7px;overflow-x:auto}.brand{font-weight:900;letter-spacing:.12em;text-transform:uppercase;margin-right:auto;white-space:nowrap}nav a,.btn,.badge{border:1px solid #3c4150;background:#171a23;color:#dcd3c7;border-radius:8px;padding:7px 9px;text-decoration:none;font-size:.73rem;white-space:nowrap}.btn{cursor:pointer}.btn:hover,nav a:hover{background:#252936}.badge.live{border-color:#4e6b50;color:#a8d4a1}.badge.err{border-color:#75484d;color:#eba1a7}
-.hero,main{max-width:1440px;margin:auto;padding-left:18px;padding-right:18px}.hero{padding-top:48px;padding-bottom:22px;display:grid;grid-template-columns:1.45fr .65fr;gap:20px}.eyebrow{color:var(--gold);text-transform:uppercase;letter-spacing:.17em;font-size:.7rem}.hero h1{font-size:clamp(2.6rem,7vw,5.7rem);line-height:.9;margin:.15em 0}.hero p{color:#c7c0b5;line-height:1.62;max-width:880px}.panel,.card,details{background:linear-gradient(180deg,#1b1f2afa,#141720fa);border:1px solid #343947;border-radius:12px}.kpis{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:15px}.kpi{background:#10131a;border:1px solid #343947;border-radius:8px;padding:11px}.kpi b{display:block;font-size:1.55rem}.kpi span{color:#989188;font-size:.7rem}
-section{padding:31px 0}.head{display:flex;gap:14px;align-items:end;margin-bottom:15px}.head h2{margin:0;font-size:2rem}.head p{margin:0;color:var(--muted);max-width:760px}.search{margin-left:auto;background:#11141c;color:#eee;border:1px solid #353a48;border-radius:8px;padding:9px 11px;min-width:220px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:13px}.avatars{grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:16px}.avatar{border:0;background:none;color:inherit;text-align:center;cursor:pointer;padding:0}.portrait,.npcPortrait{aspect-ratio:1;border:1px solid #404553;border-radius:13px;overflow:hidden;background:radial-gradient(circle,#292b3a,#0d1016 70%);display:grid;place-items:center}.portrait img,.npcPortrait img{width:100%;height:100%;object-fit:contain}.avatar:hover img{transform:scale(1.04)}.avatar b{display:block;margin-top:7px}.avatar small{color:#969087}.npcPortrait{margin-bottom:10px;aspect-ratio:4/3}.npcPlaceholder{font-size:.72rem;color:#777;letter-spacing:.08em;text-transform:uppercase}.status{font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:#bbb1a5}.chip,.pill{display:inline-block;border:1px solid #404654;background:#222631;border-radius:999px;padding:4px 7px;font-size:.68rem;color:#c5bdb2;margin:2px}
-details{margin-bottom:8px;overflow:hidden}summary{cursor:pointer;padding:14px 16px;font-weight:800;list-style:none}summary:before{content:"+";color:var(--gold);margin-right:9px}details[open] summary:before{content:"–"}.body{padding:0 16px 16px;color:#cbc3b8;line-height:1.62}.long{white-space:pre-line}.quote{border-left:3px solid var(--gold);background:#11151d;padding:10px 13px;margin:10px 0;font-style:italic}.list{margin:.3rem 0;padding-left:1.15rem}.list li{margin:.25rem 0}.two{display:grid;grid-template-columns:1.1fr .9fr;gap:15px}.map{width:100%;max-height:520px;border:1px solid #353b47;border-radius:12px;background:#08090d;object-fit:contain}.progress{height:9px;border:1px solid #393f4b;border-radius:999px;background:#11141b;overflow:hidden}.progress i{display:block;height:100%;background:linear-gradient(90deg,#6e5c83,#b08f72)}.card{padding:14px}.monster img,.cardImg{width:100%;aspect-ratio:16/9;object-fit:contain;background:#090a0e;border-radius:9px;margin-bottom:8px}.empty{padding:20px;border:1px dashed #424756;border-radius:10px;color:#918b83;text-align:center}
-.externalImg{width:100%;height:100%;object-fit:contain}.image-fallback{min-height:90px;display:grid;place-items:center;border:1px dashed #4a4450;border-radius:8px;color:#837b82;background:#0d0f15;font-size:.72rem;text-align:center;padding:8px}
-.modal{position:fixed;inset:0;z-index:100;display:none;background:#050609ea;padding:16px;overflow:auto}.modal.open{display:block}.shell{max-width:1600px;margin:auto;background:#0e1118;border:1px solid #3d4351;border-radius:14px;overflow:hidden}.bar{position:sticky;top:0;z-index:8;background:#171b24;border-bottom:1px solid #343947;padding:10px 12px;display:flex;align-items:center}.bar h2{margin:0 auto 0 0;font-size:1.15rem}.char{display:grid;grid-template-columns:minmax(1000px,1.55fr) minmax(340px,.45fr);gap:14px;padding:14px}.sheet{position:relative;aspect-ratio:1672/941;min-width:1000px;background:#090a0e;border-radius:10px;overflow:hidden}.sheet>.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:fill}.pic{position:absolute;left:78.7%;top:10.6%;width:10.7%;height:18.7%;display:grid;place-items:center;overflow:hidden;z-index:3}.pic img{max-width:100%;max-height:100%;object-fit:contain;border:0}.f,.score,.mod,.combat,.skill,.save,.box,.pb{position:absolute;z-index:4;color:var(--paper)}.f{font-weight:700;font-size:13px;line-height:1;white-space:nowrap;overflow:hidden}.f-name{left:16%;top:16.55%;width:16.7%;height:2.4%}.f-race{left:16%;top:20.15%;width:16.7%;height:2.4%}.f-class{left:16%;top:23.85%;width:16.7%;height:2.4%}.f-sub{left:41.15%;top:16.55%;width:14.6%;height:2.4%}.f-bg{left:41.15%;top:20.15%;width:14.6%;height:2.4%}.f-level{left:37.55%;top:23.85%;width:4.15%;height:2.4%;text-align:center}.f-xp{left:49.55%;top:23.85%;width:6.15%;height:2.4%;text-align:center}.f-align{left:64.55%;top:16.55%;width:10.25%;height:2.4%}.f-pb{left:69.95%;top:23.75%;width:2.85%;height:2.4%;text-align:center}.score,.mod,.combat,.pb{font-weight:900;text-align:center}.score{left:3.15%;width:2.7%;font-size:19px}.mod{left:11.55%;width:2.45%;font-size:16px}.a1{top:34.55%}.a2{top:42.15%}.a3{top:49.75%}.a4{top:57.35%}.a5{top:64.95%}.a6{top:72.55%}.pb{left:10.85%;top:74.15%;width:2.9%;font-size:17px}.save{left:23.1%;width:4.4%;font-weight:800;text-align:center;font-size:10px}.sv1{top:34.55%}.sv2{top:37.65%}.sv3{top:40.75%}.sv4{top:43.85%}.sv5{top:46.95%}.sv6{top:50.05%}.combat{top:37.1%;font-size:20px}.ac{left:32.05%;width:3.15%}.ini{left:39.75%;width:3.15%}.spd{left:47.2%;width:3.45%}.hpm{left:55.7%;width:5.2%}.hpc{left:62.2%;width:5.2%}.hd{left:71.15%;width:4.15%}.skill{font-weight:800;font-size:9px;text-align:right;width:3%}.sl{left:43.75%}.sr{left:58.05%}.sk1{top:49.42%}.sk2{top:51.72%}.sk3{top:54.02%}.sk4{top:56.32%}.sk5{top:58.62%}.sk6{top:60.92%}.sk7{top:63.22%}.sk8{top:65.52%}.sk9{top:67.82%}.box{font-size:9px;line-height:1.12;overflow:hidden;padding:2px 4px}.box ul{margin:0;padding-left:12px}.box li{margin:0 0 2px}.raceBox{left:78.65%;top:32.55%;width:10.7%;height:10.5%}.classBox{left:78.65%;top:47%;width:10.7%;height:9.6%}.otherBox{left:78.65%;top:59.95%;width:10.7%;height:9.2%}.langBox{left:62.25%;top:48.35%;width:14.6%;height:19.1%}.attacks{left:15.75%;top:78.3%;width:24.1%;height:16.4%}.equip{left:41%;top:75.25%;width:11.8%;height:19.8%}.inv{left:53.55%;top:75.25%;width:13.9%;height:19.8%}.notes{left:74.15%;top:86.4%;width:15.05%;height:9%}.atkrow{display:grid;grid-template-columns:31% 17% 20% 16% 16%;align-items:center;height:20%;overflow:hidden}.atkrow span{overflow:hidden;white-space:nowrap;padding:0 2px}.side{display:flex;flex-direction:column;gap:9px}.side .card{padding:15px}.mechanics{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:8px}.mini{background:#11141b;border:1px solid #353b47;border-radius:8px;padding:10px;color:#c9c1b5}.mini b{display:block;color:#e8ded0;margin-bottom:5px}.tipTarget{cursor:help}.tipDot{border-bottom:1px dotted #8e7656}#tip{display:none;position:fixed;z-index:9999;pointer-events:none;width:min(430px,calc(100vw - 24px));max-height:min(520px,calc(100vh - 24px));overflow:auto;background:#141821f8;border:1px solid #5a5066;border-radius:11px;padding:13px 14px;box-shadow:0 20px 60px #0008}#tip.show{display:block}#tip .k{color:var(--gold);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase}#tip h4{margin:3px 0 7px}#tip p{margin:0;color:#d0c7bb;font-size:.82rem;line-height:1.45;white-space:pre-line}#tip dl{display:grid;grid-template-columns:auto 1fr;gap:4px 9px;margin:9px 0 0;padding-top:8px;border-top:1px solid #373c47;font-size:.73rem}#tip dt{color:#9f978c;font-weight:700}#tip dd{margin:0;color:#ddd5c8}footer{text-align:center;color:#8d877f;border-top:1px solid #2e333e;padding:25px 18px;font-size:.74rem}
+.top{position:sticky;top:0;z-index:50;background:#0d0f16ee;border-bottom:1px solid #303440;backdrop-filter:blur(10px)}
+nav{max-width:1440px;margin:auto;padding:10px 18px;display:flex;align-items:center;gap:7px;overflow-x:auto}
+.brand{font-weight:900;letter-spacing:.12em;text-transform:uppercase;margin-right:auto;white-space:nowrap}
+nav a,.btn,.badge{border:1px solid #3c4150;background:#171a23;color:#dcd3c7;border-radius:8px;padding:7px 9px;text-decoration:none;font-size:.73rem;white-space:nowrap}
+.btn{cursor:pointer}
+.btn:hover,nav a:hover{background:#252936}
+.badge.live{border-color:#4e6b50;color:#a8d4a1}
+.badge.err{border-color:#75484d;color:#eba1a7}
 
-/* v2.9.2 — capacidad, suministros y mapa de reconocimiento */
+.hero,main{max-width:1440px;margin:auto;padding-left:18px;padding-right:18px}
+.hero{padding-top:48px;padding-bottom:22px;display:grid;grid-template-columns:1.45fr .65fr;gap:20px}
+.eyebrow{color:var(--gold);text-transform:uppercase;letter-spacing:.17em;font-size:.7rem}
+.hero h1{font-size:clamp(2.6rem,7vw,5.7rem);line-height:.9;margin:.15em 0}
+.hero p{color:#c7c0b5;line-height:1.62;max-width:880px}
+.panel,.card,details{background:linear-gradient(180deg,#1b1f2afa,#141720fa);border:1px solid #343947;border-radius:12px}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:15px}
+.kpi{background:#10131a;border:1px solid #343947;border-radius:8px;padding:11px}
+.kpi b{display:block;font-size:1.55rem}
+.kpi span{color:#989188;font-size:.7rem}
+
+section{padding:31px 0}
+.head{display:flex;gap:14px;align-items:end;margin-bottom:15px}
+.head h2{margin:0;font-size:2rem}
+.head p{margin:0;color:var(--muted);max-width:760px}
+.search{margin-left:auto;background:#11141c;color:#eee;border:1px solid #353a48;border-radius:8px;padding:9px 11px;min-width:220px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:13px}
+.avatars{grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:16px}
+.avatar{border:0;background:none;color:inherit;text-align:center;cursor:pointer;padding:0}
+.portrait,.npcPortrait{aspect-ratio:1;border:1px solid #404553;border-radius:13px;overflow:hidden;background:radial-gradient(circle,#292b3a,#0d1016 70%);display:grid;place-items:center}
+.portrait img,.npcPortrait img{width:100%;height:100%;object-fit:contain}
+.avatar:hover img{transform:scale(1.04)}
+.avatar b{display:block;margin-top:7px}
+.avatar small{color:#969087}
+.npcPortrait{margin-bottom:10px;aspect-ratio:4/3}
+.npcPlaceholder{font-size:.72rem;color:#777;letter-spacing:.08em;text-transform:uppercase}
+.status{font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:#bbb1a5}
+.chip,.pill{display:inline-block;border:1px solid #404654;background:#222631;border-radius:999px;padding:4px 7px;font-size:.68rem;color:#c5bdb2;margin:2px}
+
+details{margin-bottom:8px;overflow:hidden}
+summary{cursor:pointer;padding:14px 16px;font-weight:800;list-style:none}
+summary:before{content:"+";color:var(--gold);margin-right:9px}
+details[open] summary:before{content:"–"}
+.body{padding:0 16px 16px;color:#cbc3b8;line-height:1.62}
+.long{white-space:pre-line}
+.quote{border-left:3px solid var(--gold);background:#11151d;padding:10px 13px;margin:10px 0;font-style:italic}
+.list{margin:.3rem 0;padding-left:1.15rem}
+.list li{margin:.25rem 0}
+.two{display:grid;grid-template-columns:1.1fr .9fr;gap:15px}
+.map{width:100%;max-height:520px;border:1px solid #353b47;border-radius:12px;background:#08090d;object-fit:contain}
+.progress{height:9px;border:1px solid #393f4b;border-radius:999px;background:#11141b;overflow:hidden}
+.progress i{display:block;height:100%;background:linear-gradient(90deg,#6e5c83,#b08f72)}
+.card{padding:14px}
+.monster img,.cardImg{width:100%;aspect-ratio:16/9;object-fit:contain;background:#090a0e;border-radius:9px;margin-bottom:8px}
+.empty{padding:20px;border:1px dashed #424756;border-radius:10px;color:#918b83;text-align:center}
+.externalImg{width:100%;height:100%;object-fit:contain}
+.image-fallback{min-height:90px;display:grid;place-items:center;border:1px dashed #4a4450;border-radius:8px;color:#837b82;background:#0d0f15;font-size:.72rem;text-align:center;padding:8px}
+
+.modal{position:fixed;inset:0;z-index:100;display:none;background:#050609ea;padding:16px;overflow:auto}
+.modal.open{display:block}
+.shell{max-width:1600px;margin:auto;background:#0e1118;border:1px solid #3d4351;border-radius:14px;overflow:hidden}
+.bar{position:sticky;top:0;z-index:8;background:#171b24;border-bottom:1px solid #343947;padding:10px 12px;display:flex;align-items:center}
+.bar h2{margin:0 auto 0 0;font-size:1.15rem}
+.char{display:grid;grid-template-columns:minmax(1000px,1.55fr) minmax(340px,.45fr);gap:14px;padding:14px}
+.sheet{position:relative;aspect-ratio:1672/941;min-width:1000px;background:#090a0e;border-radius:10px;overflow:hidden}
+.sheet>.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:fill}
+.pic{position:absolute;left:78.7%;top:10.6%;width:10.7%;height:18.7%;display:grid;place-items:center;overflow:hidden;z-index:3}
+.pic img{max-width:100%;max-height:100%;object-fit:contain;border:0}
+.f,.score,.mod,.combat,.skill,.save,.box,.pb{position:absolute;z-index:4;color:var(--paper)}
+.f{font-weight:700;font-size:13px;line-height:1;white-space:nowrap;overflow:hidden}
+.f-name{left:16%;top:16.55%;width:16.7%;height:2.4%}
+.f-race{left:16%;top:20.15%;width:16.7%;height:2.4%}
+.f-class{left:16%;top:23.85%;width:16.7%;height:2.4%}
+.f-sub{left:41.15%;top:16.55%;width:14.6%;height:2.4%}
+.f-bg{left:41.15%;top:20.15%;width:14.6%;height:2.4%}
+.f-level{left:37.55%;top:23.85%;width:4.15%;height:2.4%;text-align:center}
+.f-xp{left:49.55%;top:23.85%;width:6.15%;height:2.4%;text-align:center}
+.f-align{left:64.55%;top:16.55%;width:10.25%;height:2.4%}
+.f-pb{left:69.95%;top:23.75%;width:2.85%;height:2.4%;text-align:center}
+.score,.mod,.combat,.pb{font-weight:900;text-align:center}
+.score{left:3.15%;width:2.7%;font-size:19px}
+.mod{left:11.55%;width:2.45%;font-size:16px}
+.a1{top:34.55%}.a2{top:42.15%}.a3{top:49.75%}.a4{top:57.35%}.a5{top:64.95%}.a6{top:72.55%}
+.pb{left:10.85%;top:74.15%;width:2.9%;font-size:17px}
+.save{left:23.1%;width:4.4%;font-weight:800;text-align:center;font-size:10px}
+.sv1{top:34.55%}.sv2{top:37.65%}.sv3{top:40.75%}.sv4{top:43.85%}.sv5{top:46.95%}.sv6{top:50.05%}
+.combat{top:37.1%;font-size:20px}
+.ac{left:32.05%;width:3.15%}
+.ini{left:39.75%;width:3.15%}
+.spd{left:47.2%;width:3.45%}
+.hpm{left:55.7%;width:5.2%}
+.hpc{left:62.2%;width:5.2%}
+.hd{left:71.15%;width:4.15%}
+.skill{font-weight:800;font-size:9px;text-align:right;width:3%}
+.sl{left:43.75%}
+.sr{left:58.05%}
+.sk1{top:49.42%}.sk2{top:51.72%}.sk3{top:54.02%}.sk4{top:56.32%}.sk5{top:58.62%}.sk6{top:60.92%}.sk7{top:63.22%}.sk8{top:65.52%}.sk9{top:67.82%}
+.box{font-size:9px;line-height:1.12;overflow:hidden;padding:2px 4px}
+.box ul{margin:0;padding-left:12px}
+.box li{margin:0 0 2px}
+.raceBox{left:78.65%;top:32.55%;width:10.7%;height:10.5%}
+.classBox{left:78.65%;top:47%;width:10.7%;height:9.6%}
+.otherBox{left:78.65%;top:59.95%;width:10.7%;height:9.2%}
+.langBox{left:62.25%;top:48.35%;width:14.6%;height:19.1%}
+.attacks{left:15.75%;top:78.3%;width:24.1%;height:16.4%}
+.equip{left:41%;top:75.25%;width:11.8%;height:19.8%}
+.inv{left:53.55%;top:75.25%;width:13.9%;height:19.8%}
+.notes{left:74.15%;top:86.4%;width:15.05%;height:9%}
+.atkrow{display:grid;grid-template-columns:31% 17% 20% 16% 16%;align-items:center;height:20%;overflow:hidden}
+.atkrow span{overflow:hidden;white-space:nowrap;padding:0 2px}
+.side{display:flex;flex-direction:column;gap:9px}
+.side .card{padding:15px}
+.mechanics{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:8px}
+.mini{background:#11141b;border:1px solid #353b47;border-radius:8px;padding:10px;color:#c9c1b5}
+.mini b{display:block;color:#e8ded0;margin-bottom:5px}
+.tipTarget{cursor:help}
+.tipDot{border-bottom:1px dotted #8e7656}
+
+#tip{display:none;position:fixed;z-index:9999;pointer-events:none;width:min(430px,calc(100vw - 24px));max-height:min(520px,calc(100vh - 24px));overflow:auto;background:#141821f8;border:1px solid #5a5066;border-radius:11px;padding:13px 14px;box-shadow:0 20px 60px #0008}
+#tip.show{display:block}
+#tip .k{color:var(--gold);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase}
+#tip h4{margin:3px 0 7px}
+#tip p{margin:0;color:#d0c7bb;font-size:.82rem;line-height:1.45;white-space:pre-line}
+#tip dl{display:grid;grid-template-columns:auto 1fr;gap:4px 9px;margin:9px 0 0;padding-top:8px;border-top:1px solid #373c47;font-size:.73rem}
+#tip dt{color:#9f978c;font-weight:700}
+#tip dd{margin:0;color:#ddd5c8}
+
+footer{text-align:center;color:#8d877f;border-top:1px solid #2e333e;padding:25px 18px;font-size:.74rem}
+
+/* Capacidad y suministros */
 .baseOps{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,.78fr);gap:14px;margin:14px 0}
 .baseCapacityCard,.baseSupplyCard{background:linear-gradient(180deg,#171b24,#11141b);border:1px solid #343947;border-radius:12px;padding:14px}
-.baseCapacityTop{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:10px}.baseCapacityTop h3,.baseSupplyCard h3{margin:.1rem 0}.baseCapacityNumber{font-size:1.7rem;font-weight:900;white-space:nowrap}.baseCapacityNumber small{font-size:.68rem;color:#9f978c;font-weight:500;display:block;text-align:right}.baseCapacityNote{font-size:.72rem;color:#918b83;line-height:1.4;margin:8px 0 0}
-.baseOccupants{display:flex;flex-wrap:wrap;gap:8px}.baseOccupant{width:58px;text-align:center}.baseOccupantIcon{width:42px;height:42px;border-radius:999px;overflow:hidden;border:1px solid #4a5060;background:#0b0e14;margin:0 auto 4px;display:grid;place-items:center}.baseOccupantIcon img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center top!important}.baseOccupant span{display:block;font-size:.58rem;line-height:1.15;color:#c9c1b5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.basePersonFallback{width:100%;height:100%;position:relative;background:radial-gradient(circle at 50% 33%,#81766b 0 17%,transparent 18%),radial-gradient(ellipse at 50% 88%,#625d61 0 36%,transparent 37%)}
-.baseResidentsSecondary{margin-top:12px;padding-top:10px;border-top:1px solid #303541}.baseResidentsSecondary b{display:block;font-size:.67rem;color:#9e968c;margin-bottom:7px;text-transform:uppercase;letter-spacing:.08em}
-.supplyGrid{display:grid;gap:8px;margin-top:10px}.supplyRow{display:grid;grid-template-columns:minmax(110px,1fr) auto;gap:8px;align-items:center;border:1px solid #333945;background:#0e1118;border-radius:9px;padding:9px 10px}.supplyRow .supplyName{font-weight:800;font-size:.8rem}.supplyRow .supplyMeta{font-size:.62rem;color:#8f8990;margin-top:2px}.supplyValue{font-weight:900;font-size:.88rem;white-space:nowrap}.supplyValue small{display:block;color:#8f8990;font-size:.56rem;font-weight:500;text-align:right}.supplyBar{grid-column:1/-1;height:5px;border-radius:999px;background:#252a34;overflow:hidden}.supplyBar i{display:block;height:100%;width:0}.supplyRow.short{border-color:#6f3941;background:#1b1014}.supplyRow.short .supplyValue{color:#f39aa2}.supplyRow.short .supplyBar i{background:#b84f5c}.supplyRow.exact{border-color:#7b6a37;background:#1c190f}.supplyRow.exact .supplyValue{color:#e5c870}.supplyRow.exact .supplyBar i{background:#c4a84d}.supplyRow.surplus{border-color:#3f6748;background:#101912}.supplyRow.surplus .supplyValue{color:#94d19e}.supplyRow.surplus .supplyBar i{background:#5da76a}.supplyRow.neutral .supplyValue{color:#c1b9ae}.supplyRow.neutral .supplyBar i{background:#59606e}
+.baseCapacityTop{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:10px}
+.baseCapacityTop h3,.baseSupplyCard h3{margin:.1rem 0}
+.baseCapacityNumber{font-size:1.7rem;font-weight:900;white-space:nowrap}
+.baseCapacityNumber small{font-size:.68rem;color:#9f978c;font-weight:500;display:block;text-align:right}
+.baseCapacityNote{font-size:.72rem;color:#918b83;line-height:1.4;margin:8px 0 0}
+.baseOccupants{display:flex;flex-wrap:wrap;gap:8px}
+.baseOccupant{width:58px;text-align:center}
+.baseOccupantIcon{width:42px;height:42px;border-radius:999px;overflow:hidden;border:1px solid #4a5060;background:#0b0e14;margin:0 auto 4px;display:grid;place-items:center}
+.baseOccupantIcon img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center top!important}
+.baseOccupant span{display:block;font-size:.58rem;line-height:1.15;color:#c9c1b5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.basePersonFallback{width:100%;height:100%;position:relative;background:radial-gradient(circle at 50% 33%,#81766b 0 17%,transparent 18%),radial-gradient(ellipse at 50% 88%,#625d61 0 36%,transparent 37%)}
+.baseResidentsSecondary{margin-top:12px;padding-top:10px;border-top:1px solid #303541}
+.baseResidentsSecondary b{display:block;font-size:.67rem;color:#9e968c;margin-bottom:7px;text-transform:uppercase;letter-spacing:.08em}
 
-@media(max-width:1100px){.hero,.two{grid-template-columns:1fr}.char{display:block;overflow-x:auto}.side{margin-top:14px}.head{align-items:start;flex-direction:column}.search{margin-left:0}}
-@media(max-width:650px){.grid{grid-template-columns:1fr}.avatars{grid-template-columns:repeat(2,1fr)}}
-
-/* Diagnóstico */
-.diag-btn{position:relative}.diag-btn.has-warn{border-color:#8a7440;color:#e9cf83}.diag-btn.has-error{border-color:#8b474d;color:#ffadb4;background:#2a151a}
-.diag-wrap{max-width:1440px;margin:0 auto;padding:0 18px}.diag-panel{margin:12px 0 4px;border:1px solid #4b4350;border-radius:12px;background:#11141cee;box-shadow:0 14px 40px #0007;overflow:hidden}.diag-panel[hidden]{display:none}.diag-head{display:flex;align-items:center;gap:10px;padding:11px 13px;border-bottom:1px solid #343947;background:#171a23}.diag-head strong{margin-right:auto}.diag-summary{font-size:.75rem;color:#aaa297}.diag-list{max-height:360px;overflow:auto;padding:9px}.diag-item{padding:10px 11px;margin-bottom:7px;border-radius:8px;border:1px solid #3b414e;background:#0d1017}.diag-item.error{border-color:#75484d;background:#1d1014}.diag-item.warn{border-color:#75643e;background:#1b180f}.diag-item.info{border-color:#405b6f;background:#101820}.diag-code{display:inline-block;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.68rem;padding:2px 5px;border-radius:4px;background:#0006;margin-right:7px;color:#d9d2c7}.diag-title{font-weight:800;font-size:.82rem}.diag-detail{margin-top:5px;color:#bbb3a8;font-size:.76rem;line-height:1.45;white-space:pre-wrap;word-break:break-word}.diag-context{margin-top:4px;color:#8f8990;font-size:.69rem;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;word-break:break-all}
-.image-error-inline{width:100%;height:100%;min-height:90px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:9px;border:1px dashed #8b474d;border-radius:8px;background:#1b1014;color:#ffb6bc;text-align:center;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.65rem;line-height:1.3;overflow:hidden}.image-error-inline b{font-size:.72rem;color:#ffd1d5}.image-error-inline .path{color:#c9b8bb;word-break:break-all;max-width:100%}.image-error-inline .hint{color:#8f8588;font-family:Georgia,"Times New Roman",serif;font-size:.67rem}
+.supplyGrid{display:grid;gap:8px;margin-top:10px}
+.supplyRow{display:grid;grid-template-columns:minmax(110px,1fr) auto;gap:8px;align-items:center;border:1px solid #333945;background:#0e1118;border-radius:9px;padding:9px 10px}
+.supplyRow .supplyName{font-weight:800;font-size:.8rem}
+.supplyRow .supplyMeta{font-size:.62rem;color:#8f8990;margin-top:2px}
+.supplyValue{font-weight:900;font-size:.88rem;white-space:nowrap}
+.supplyValue small{display:block;color:#8f8990;font-size:.56rem;font-weight:500;text-align:right}
+.supplyBar{grid-column:1/-1;height:5px;border-radius:999px;background:#252a34;overflow:hidden}
+.supplyBar i{display:block;height:100%;width:0}
+.supplyRow.short{border-color:#6f3941;background:#1b1014}
+.supplyRow.short .supplyValue{color:#f39aa2}
+.supplyRow.short .supplyBar i{background:#b84f5c}
+.supplyRow.exact{border-color:#7b6a37;background:#1c190f}
+.supplyRow.exact .supplyValue{color:#e5c870}
+.supplyRow.exact .supplyBar i{background:#c4a84d}
+.supplyRow.surplus{border-color:#3f6748;background:#101912}
+.supplyRow.surplus .supplyValue{color:#94d19e}
+.supplyRow.surplus .supplyBar i{background:#5da76a}
+.supplyRow.neutral .supplyValue{color:#c1b9ae}
+.supplyRow.neutral .supplyBar i{background:#59606e}
 
 /* Lazy */
 section.is-lazy .sectionBody{min-height:140px}
 .lazySectionCard{display:flex;align-items:center;justify-content:center;gap:14px;min-height:140px;padding:18px;border:1px dashed #3b414e;border-radius:14px;background:linear-gradient(180deg,#121620 0%,#0e121a 100%);color:#bbb3a8;text-align:center}
 .lazySectionCard .dot{width:10px;height:10px;border-radius:999px;background:#7b6d55;box-shadow:18px 0 0 #7b6d55,-18px 0 0 #7b6d55;animation:lazyPulse 1.2s infinite ease-in-out}
-.lazySectionCard strong{display:block;font-size:.95rem;color:#f1eadf;margin-bottom:4px}.lazySectionCard small{display:block;font-size:.78rem;color:#8f8990;line-height:1.45;max-width:56ch}.sectionReadyNote{margin-top:10px;font-size:.72rem;color:#8f8990}
+.lazySectionCard strong{display:block;font-size:.95rem;color:#f1eadf;margin-bottom:4px}
+.lazySectionCard small{display:block;font-size:.78rem;color:#8f8990;line-height:1.45;max-width:56ch}
+.sectionReadyNote{margin-top:10px;font-size:.72rem;color:#8f8990}
 @keyframes lazyPulse{0%,100%{opacity:.35;transform:translateY(0)}50%{opacity:1;transform:translateY(-2px)}}
 
-/* Hoja de personaje */
+/* Ficha */
 .f{display:flex;align-items:center;padding:0 .28%;line-height:1!important;overflow:hidden}
-.f-name{left:15.90%;top:15.95%;width:16.65%;height:3.15%}.f-race{left:15.90%;top:19.82%;width:16.65%;height:3.15%}.f-class{left:15.90%;top:23.58%;width:16.65%;height:3.15%}.f-sub{left:41.05%;top:15.95%;width:14.80%;height:3.15%}.f-bg{left:41.05%;top:19.82%;width:14.80%;height:3.15%}.f-level{left:37.45%;top:23.58%;width:4.35%;height:3.15%;justify-content:center;padding:0}.f-xp{left:49.45%;top:23.58%;width:6.35%;height:3.15%;justify-content:center;padding:0}.f-align{left:64.45%;top:15.95%;width:10.45%;height:3.15%}.f-pb{left:69.85%;top:23.25%;width:2.95%;height:4%;justify-content:center;padding:0}
-.score,.mod,.pb,.combat{display:flex;align-items:center;justify-content:center;line-height:1!important}.score,.mod,.pb{transform:translateY(-50%)}.score{left:2.45%;width:3.05%;height:3%;font-size:19px}.mod{left:11.58%;width:2.2%;height:2.8%;font-size:16px}.a1{top:36.61%}.a2{top:42.99%}.a3{top:49.95%}.a4{top:56.32%}.a5{top:62.59%}.a6{top:68.78%}.pb{left:10.65%;top:75.61%;width:2.55%;height:3.2%;font-size:17px}
-.save,.saveMark{position:absolute;z-index:5;transform:translateY(-50%)}.save{left:24.30%;width:2.70%;font-size:10px;font-weight:800;text-align:left;line-height:1}.saveMark{left:17.20%;width:.48%;aspect-ratio:1;height:auto;background:#1d1813;border-radius:50%;transform:translate(-50%,-50%)}.sv1{top:35.60%}.sv2{top:38.15%}.sv3{top:40.70%}.sv4{top:43.25%}.sv5{top:45.80%}.sv6{top:48.35%}
-.skill,.skillMark{position:absolute;z-index:5;transform:translateY(-50%)}.skill{width:2.55%;font-size:9px;font-weight:800;text-align:left;line-height:1}.skill.sl{left:42.25%}.skill.sr{left:59.05%}.skillMark{width:.46%;aspect-ratio:1;height:auto;background:#1d1813;border-radius:50%;transform:translate(-50%,-50%)}.skillMark.slm{left:30.92%}.skillMark.srm{left:47.67%}.skillMark.expert{box-shadow:0 0 0 1px #1d1813,inset 0 0 0 1px #e5dac5}.sk1{top:50.80%}.sk2{top:52.92%}.sk3{top:55.05%}.sk4{top:57.23%}.sk5{top:59.36%}.sk6{top:61.58%}.sk7{top:63.71%}.sk8{top:65.89%}.sk9{top:68.01%}
-.langBox{left:62.45%;top:48.35%;width:14.15%;height:19.95%;padding:.35% .42%;font-size:7.6px;line-height:1.15;overflow:hidden}.langBox b{font-size:1em}.langGroup{margin-bottom:5px}.langGroup:last-child{margin-bottom:0}
-.attacks{left:15.72%;top:78.40%;width:24.12%;height:14.25%;padding:0}.atkrow{display:grid;grid-template-columns:15.7% 19.7% 12.5% 13.7% 14.2% 24.2%;align-items:stretch;height:20%;overflow:hidden}.atkrow span{min-width:0;height:100%;display:flex;align-items:center;justify-content:center;overflow:hidden;white-space:normal!important;overflow-wrap:anywhere;text-align:center;padding:1px 3px;line-height:1.03!important;font-size:7.6px}.atkrow span:first-child{text-align:left;justify-content:flex-start;padding-left:4px}
-.portrait img,.npcPortrait img,.pic img{object-fit:contain!important;object-position:center bottom!important}.avatar:hover img{transform:none!important}
-.portrait img.fullBodyPortrait,.pic img.fullBodyPortrait{width:auto!important;height:96%!important;max-width:90%!important;max-height:96%!important;object-fit:contain!important;object-position:center bottom!important;display:block!important;margin:auto!important;transform:none!important}
+.f-name{left:15.90%;top:15.95%;width:16.65%;height:3.15%}
+.f-race{left:15.90%;top:19.82%;width:16.65%;height:3.15%}
+.f-class{left:15.90%;top:23.58%;width:16.65%;height:3.15%}
+.f-sub{left:41.05%;top:15.95%;width:14.80%;height:3.15%}
+.f-bg{left:41.05%;top:19.82%;width:14.80%;height:3.15%}
+.f-level{left:37.45%;top:23.58%;width:4.35%;height:3.15%;justify-content:center;padding:0}
+.f-xp{left:49.45%;top:23.58%;width:6.35%;height:3.15%;justify-content:center;padding:0}
+.f-align{left:64.45%;top:15.95%;width:10.45%;height:3.15%}
+.f-pb{left:69.85%;top:23.25%;width:2.95%;height:4%;justify-content:center;padding:0}
 
-/* Lupa */
+.score,.mod,.pb,.combat{display:flex;align-items:center;justify-content:center;line-height:1!important}
+.score,.mod,.pb{transform:translateY(-50%)}
+.score{left:2.45%;width:3.05%;height:3%;font-size:19px}
+.mod{left:11.58%;width:2.2%;height:2.8%;font-size:16px}
+.a1{top:36.61%}.a2{top:42.99%}.a3{top:49.95%}.a4{top:56.32%}.a5{top:62.59%}.a6{top:68.78%}
+.pb{left:10.65%;top:75.61%;width:2.55%;height:3.2%;font-size:17px}
+
+.save,.saveMark{position:absolute;z-index:5;transform:translateY(-50%)}
+.save{left:24.30%;width:2.70%;font-size:10px;font-weight:800;text-align:left;line-height:1}
+.saveMark{left:17.20%;width:.48%;aspect-ratio:1;height:auto;background:#1d1813;border-radius:50%;transform:translate(-50%,-50%)}
+.sv1{top:35.60%}.sv2{top:38.15%}.sv3{top:40.70%}.sv4{top:43.25%}.sv5{top:45.80%}.sv6{top:48.35%}
+
+.skill,.skillMark{position:absolute;z-index:5;transform:translateY(-50%)}
+.skill{width:2.55%;font-size:9px;font-weight:800;text-align:left;line-height:1}
+.skill.sl{left:42.25%}
+.skill.sr{left:59.05%}
+.skillMark{width:.46%;aspect-ratio:1;height:auto;background:#1d1813;border-radius:50%;transform:translate(-50%,-50%)}
+.skillMark.slm{left:30.92%}
+.skillMark.srm{left:47.67%}
+.skillMark.expert{box-shadow:0 0 0 1px #1d1813,inset 0 0 0 1px #e5dac5}
+.sk1{top:50.80%}.sk2{top:52.92%}.sk3{top:55.05%}.sk4{top:57.23%}.sk5{top:59.36%}.sk6{top:61.58%}.sk7{top:63.71%}.sk8{top:65.89%}.sk9{top:68.01%}
+
+.langBox{left:62.45%;top:48.35%;width:14.15%;height:19.95%;padding:.35% .42%;font-size:7.6px;line-height:1.15;overflow:hidden}
+.langBox b{font-size:1em}
+.langGroup{margin-bottom:5px}
+.langGroup:last-child{margin-bottom:0}
+
+.attacks{left:15.72%;top:78.40%;width:24.12%;height:14.25%;padding:0}
+.atkrow{display:grid;grid-template-columns:15.7% 19.7% 12.5% 13.7% 14.2% 24.2%;align-items:stretch;height:20%;overflow:hidden}
+.atkrow span{min-width:0;height:100%;display:flex;align-items:center;justify-content:center;overflow:hidden;white-space:normal!important;overflow-wrap:anywhere;text-align:center;padding:1px 3px;line-height:1.03!important;font-size:7.6px}
+.atkrow span:first-child{text-align:left;justify-content:flex-start;padding-left:4px}
+
+.portrait img,.npcPortrait img,.pic img{object-fit:contain!important;object-position:center bottom!important}
+.avatar:hover img{transform:none!important}
+
 #imagePreview{position:fixed;left:0;top:0;z-index:9998;width:190px;height:190px;display:none;pointer-events:none;border-radius:50%;overflow:hidden;border:2px solid #9b835f;box-shadow:0 10px 30px #0008,inset 0 0 0 3px #0d1017cc,inset 0 0 22px #0005;background-color:#11151d;background-repeat:no-repeat;transform:translate(-50%,-50%);image-rendering:pixelated}
-#imagePreview.show{display:block}#imagePreview .previewShell,#imagePreview img,#imagePreview .previewCaption{display:none!important}img[data-zoom-bound="1"]{cursor:zoom-in}body.imageLensActive img[data-zoom-bound="1"]{cursor:none}
-.portrait.tomasPortrait{position:relative!important;aspect-ratio:1!important;display:block!important;overflow:hidden!important}.portrait.tomasPortrait img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:contain!important;object-position:center bottom!important;margin:0!important;padding:0!important;transform:none!important}
+#imagePreview.show{display:block}
+img[data-zoom-bound="1"]{cursor:zoom-in}
+body.imageLensActive img[data-zoom-bound="1"]{cursor:none}
 
-/* Cards */
-.monsterPortrait{width:100%;height:260px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#090a0e;border-radius:10px;margin-bottom:12px;border:1px solid #252a35}.monsterPortrait>img{width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;object-position:center center!important;padding:6px!important;margin:0!important;border-radius:0!important;background:transparent!important;aspect-ratio:auto!important;image-rendering:pixelated}.monsterPortrait.portalFocus>img{transform:scale(1.12)}
-.itemCard{display:flex;flex-direction:column;gap:10px}.itemPortrait{width:100%;height:180px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#0a0d13;border:1px solid #2f3542;border-radius:12px;padding:10px}.itemPortrait>img{width:100%!important;height:100%!important;object-fit:contain!important;image-rendering:pixelated;background:transparent!important;margin:0!important}.itemMeta{display:flex;flex-wrap:wrap;gap:4px}.itemOrigin{font-size:.76rem;color:#b9b1a5;line-height:1.45}
-.loreCard{display:grid;grid-template-columns:116px 1fr;gap:14px;align-items:start;padding:14px}.loreIcon{width:116px;height:116px;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid #343947;border-radius:12px;background:radial-gradient(circle,#232735,#0b0e14 72%);padding:8px}.loreIcon img{width:100%!important;height:100%!important;object-fit:contain!important;image-rendering:pixelated}.loreText h3{margin:.1rem 0 .55rem}.loreText p{margin:0;color:#cbc3b8;line-height:1.55}
-.compactDescriptionText{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;line-clamp:1;overflow:hidden;line-height:1.45}.compactDescription.expanded .compactDescriptionText{display:block;-webkit-line-clamp:unset;line-clamp:unset;overflow:visible}.compactDescriptionToggle{display:none;border:0;background:transparent;padding:3px 0;color:var(--gold);font:inherit;font-size:.72rem;font-weight:800;cursor:pointer}.compactDescription.hasOverflow .compactDescriptionToggle{display:inline-flex}
+.portrait.tomasPortrait{position:relative!important;aspect-ratio:1!important;display:block!important;overflow:hidden!important}
+.portrait.tomasPortrait img{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:contain!important;object-position:center bottom!important;margin:0!important;padding:0!important;transform:none!important}
+
+.monsterPortrait{width:100%;height:260px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#090a0e;border-radius:10px;margin-bottom:12px;border:1px solid #252a35}
+.monsterPortrait>img{width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;object-position:center center!important;padding:6px!important;margin:0!important;border-radius:0!important;background:transparent!important;aspect-ratio:auto!important;image-rendering:pixelated}
+.monsterPortrait.portalFocus>img{transform:scale(1.12)}
+
+.itemCard{display:flex;flex-direction:column;gap:10px}
+.itemPortrait{width:100%;height:180px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#0a0d13;border:1px solid #2f3542;border-radius:12px;padding:10px}
+.itemPortrait>img{width:100%!important;height:100%!important;object-fit:contain!important;image-rendering:pixelated;background:transparent!important;margin:0!important}
+.itemMeta{display:flex;flex-wrap:wrap;gap:4px}
+.itemOrigin{font-size:.76rem;color:#b9b1a5;line-height:1.45}
+
+.loreCard{display:grid;grid-template-columns:116px 1fr;gap:14px;align-items:start;padding:14px}
+.loreIcon{width:116px;height:116px;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid #343947;border-radius:12px;background:radial-gradient(circle,#232735,#0b0e14 72%);padding:8px}
+.loreIcon img{width:100%!important;height:100%!important;object-fit:contain!important;image-rendering:pixelated}
+.loreText h3{margin:.1rem 0 .55rem}
+.loreText p{margin:0;color:#cbc3b8;line-height:1.55}
+
+.compactDescriptionText{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;line-clamp:1;overflow:hidden;line-height:1.45}
+.compactDescription.expanded .compactDescriptionText{display:block;-webkit-line-clamp:unset;line-clamp:unset;overflow:visible}
+.compactDescriptionToggle{display:none;border:0;background:transparent;padding:3px 0;color:var(--gold);font:inherit;font-size:.72rem;font-weight:800;cursor:pointer}
+.compactDescription.hasOverflow .compactDescriptionToggle{display:inline-flex}
 
 /* Carruseles */
-.contentCarousel,.questCarousel{position:relative}.contentCarouselControls,.questCarouselControls{display:flex;justify-content:flex-end;gap:8px;margin:0 0 10px}.contentCarouselBtn,.questCarouselBtn{appearance:none;border:1px solid rgba(214,188,126,.28);background:rgba(11,14,20,.94);color:var(--gold);border-radius:999px;width:36px;height:36px;cursor:pointer;font:inherit;font-size:1rem;display:none;align-items:center;justify-content:center}.contentCarousel.hasOverflow .contentCarouselBtn,.questCarousel.hasOverflow .questCarouselBtn{display:inline-flex}.contentCarouselTrack,.questCarouselTrack,.historyTimelineTrack{scrollbar-width:none!important;-ms-overflow-style:none!important}.contentCarouselTrack::-webkit-scrollbar,.questCarouselTrack::-webkit-scrollbar,.historyTimelineTrack::-webkit-scrollbar{display:none!important}.contentCarouselTrack,.questCarouselTrack{display:flex!important;flex-wrap:nowrap!important;gap:14px!important;overflow-x:auto;scroll-behavior:smooth;scroll-snap-type:x proximity;padding:2px 2px 10px}
-#bestiary .contentCarouselTrack>.card{flex:0 0 300px;width:300px;min-width:300px}.contentCarouselTrack>.itemCard{flex:0 0 280px;width:280px;min-width:280px}#lore .contentCarouselTrack>.loreCard{flex:0 0 390px;width:390px;min-width:390px}
-.questCard{flex:0 0 min(360px,calc(100vw - 64px));display:grid;grid-template-columns:92px 1fr;gap:14px;padding:14px}.questIcon{width:92px;height:92px;border-radius:12px;border:1px solid #343947;background:radial-gradient(circle,#232735,#0b0e14 72%);display:flex;align-items:center;justify-content:center;overflow:hidden;padding:8px}.questIcon img{width:100%!important;height:100%!important;object-fit:contain!important;image-rendering:pixelated}.questContent h3{margin:.1rem 0 .45rem}
+.contentCarousel,.questCarousel{position:relative}
+.contentCarouselControls,.questCarouselControls{display:flex;justify-content:flex-end;gap:8px;margin:0 0 10px}
+.contentCarouselBtn,.questCarouselBtn{appearance:none;border:1px solid rgba(214,188,126,.28);background:rgba(11,14,20,.94);color:var(--gold);border-radius:999px;width:36px;height:36px;cursor:pointer;font:inherit;font-size:1rem;display:none;align-items:center;justify-content:center}
+.contentCarousel.hasOverflow .contentCarouselBtn,.questCarousel.hasOverflow .questCarouselBtn{display:inline-flex}
+.contentCarouselTrack,.questCarouselTrack,.historyTimelineTrack{scrollbar-width:none!important;-ms-overflow-style:none!important}
+.contentCarouselTrack::-webkit-scrollbar,.questCarouselTrack::-webkit-scrollbar,.historyTimelineTrack::-webkit-scrollbar{display:none!important}
+.contentCarouselTrack,.questCarouselTrack{display:flex!important;flex-wrap:nowrap!important;gap:14px!important;overflow-x:auto;scroll-behavior:smooth;scroll-snap-type:x proximity;padding:2px 2px 10px}
+#bestiary .contentCarouselTrack>.card{flex:0 0 300px;width:300px;min-width:300px}
+.contentCarouselTrack>.itemCard{flex:0 0 280px;width:280px;min-width:280px}
+#lore .contentCarouselTrack>.loreCard{flex:0 0 390px;width:390px;min-width:390px}
+
+.questCard{flex:0 0 min(360px,calc(100vw - 64px));display:grid;grid-template-columns:92px 1fr;gap:14px;padding:14px}
+.questIcon{width:92px;height:92px;border-radius:12px;border:1px solid #343947;background:radial-gradient(circle,#232735,#0b0e14 72%);display:flex;align-items:center;justify-content:center;overflow:hidden;padding:8px}
+.questIcon img{width:100%!important;height:100%!important;object-fit:contain!important;image-rendering:pixelated}
+.questContent h3{margin:.1rem 0 .45rem}
 
 /* Historia */
-.historyTimelineHorizontal{position:relative}.historyTimelineNav{display:flex;justify-content:flex-end;gap:8px;margin:0 0 12px}.historyTimelineNavBtn{appearance:none;border:1px solid rgba(214,188,126,.28);background:#0b0e14;color:var(--gold);border-radius:999px;width:38px;height:38px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}.historyTimelineViewport{position:relative;overflow:hidden;padding:7px 0 16px}.historyTimelineViewport:before{content:"";position:absolute;left:0;right:0;top:68px;height:2px;background:linear-gradient(90deg,rgba(214,188,126,.12),rgba(214,188,126,.6),rgba(126,110,159,.62),rgba(126,110,159,.12))}
-.historyTimelineTrack{position:relative;z-index:1;display:flex;gap:18px;overflow-x:auto;scroll-behavior:smooth;scroll-snap-type:x mandatory;padding:0 3px 8px}.historyTimelineStep{flex:0 0 220px}.historyTimelineSelect{width:100%;border:0;background:transparent;color:inherit;padding:0;cursor:pointer;display:flex;flex-direction:column;align-items:center}.historyTimelineIcon{width:106px;height:106px;border-radius:50%;overflow:hidden;border:3px solid #414756;background:#0a0d13;box-shadow:0 0 0 5px #0e1118,0 9px 22px #0005;z-index:2}.historyTimelineIcon img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center top!important;margin:0!important}.historyTimelineDot{width:14px;height:14px;border-radius:50%;background:#d0b67b;border:3px solid #0e1118;margin:7px 0}.historyTimelineLabel{width:100%;border:1px solid #343947;border-radius:12px;background:#171b24;padding:10px 11px;min-height:74px;display:flex;flex-direction:column;justify-content:center}.historyTimelineChapter{color:var(--gold);font-size:.62rem;text-transform:uppercase;font-weight:800}.historyTimelineName{font-size:.9rem;line-height:1.18;font-weight:900}
-.historyStoryPanel{display:none;margin-top:12px;border:1px solid #3a404d;border-radius:14px;background:#10131a;overflow:hidden;padding:0!important;height:390px;min-height:390px;max-height:390px}.historyStoryPanel.open{display:block}.historyStorySplit{display:grid;grid-template-columns:1fr 1fr;height:100%}.historyStoryImage{height:100%;overflow:hidden;background:#090a0e;border-right:1px solid #343947}.historyStoryImage img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center top!important}.historyStoryText{position:relative;height:100%;padding:18px;overflow-y:auto}.historyStoryHeader{position:relative;padding-right:42px}.historyStoryHeader h3{margin:0}.historyStoryClose{position:absolute;top:0;right:0;border:1px solid #3d4350;background:#11151c;color:#bdb6ac;width:34px;height:34px;border-radius:50%;cursor:pointer}.historyStorySummary{color:#eee5d8;font-weight:800}
+.historyTimelineHorizontal{position:relative}
+.historyTimelineNav{display:flex;justify-content:flex-end;gap:8px;margin:0 0 12px}
+.historyTimelineNavBtn{appearance:none;border:1px solid rgba(214,188,126,.28);background:#0b0e14;color:var(--gold);border-radius:999px;width:38px;height:38px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+.historyTimelineViewport{position:relative;overflow:hidden;padding:7px 0 16px}
+.historyTimelineViewport:before{content:"";position:absolute;left:0;right:0;top:68px;height:2px;background:linear-gradient(90deg,rgba(214,188,126,.12),rgba(214,188,126,.6),rgba(126,110,159,.62),rgba(126,110,159,.12))}
+.historyTimelineTrack{position:relative;z-index:1;display:flex;gap:18px;overflow-x:auto;scroll-behavior:smooth;scroll-snap-type:x mandatory;padding:0 3px 8px}
+.historyTimelineStep{flex:0 0 220px}
+.historyTimelineSelect{width:100%;border:0;background:transparent;color:inherit;padding:0;cursor:pointer;display:flex;flex-direction:column;align-items:center}
+.historyTimelineIcon{width:106px;height:106px;border-radius:50%;overflow:hidden;border:3px solid #414756;background:#0a0d13;box-shadow:0 0 0 5px #0e1118,0 9px 22px #0005;z-index:2}
+.historyTimelineIcon img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center top!important;margin:0!important}
+.historyTimelineDot{width:14px;height:14px;border-radius:50%;background:#d0b67b;border:3px solid #0e1118;margin:7px 0}
+.historyTimelineLabel{width:100%;border:1px solid #343947;border-radius:12px;background:#171b24;padding:10px 11px;min-height:74px;display:flex;flex-direction:column;justify-content:center}
+.historyTimelineChapter{color:var(--gold);font-size:.62rem;text-transform:uppercase;font-weight:800}
+.historyTimelineName{font-size:.9rem;line-height:1.18;font-weight:900}
+
+.historyStoryPanel{display:none;margin-top:12px;border:1px solid #3a404d;border-radius:14px;background:#10131a;overflow:hidden;padding:0!important;height:390px;min-height:390px;max-height:390px}
+.historyStoryPanel.open{display:block}
+.historyStorySplit{display:grid;grid-template-columns:1fr 1fr;height:100%}
+.historyStoryImage{height:100%;overflow:hidden;background:#090a0e;border-right:1px solid #343947}
+.historyStoryImage img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center top!important}
+.historyStoryText{position:relative;height:100%;padding:18px;overflow-y:auto}
+.historyStoryHeader{position:relative;padding-right:42px}
+.historyStoryHeader h3{margin:0}
+.historyStoryClose{position:absolute;top:0;right:0;border:1px solid #3d4350;background:#11151c;color:#bdb6ac;width:34px;height:34px;border-radius:50%;cursor:pointer}
+.historyStorySummary{color:#eee5d8;font-weight:800}
 
 /* Campaign Bible */
-.campaignSupplement{margin-top:18px;padding-top:15px;border-top:1px solid #2f3541}.campaignSupplementKicker{display:block;color:var(--gold);font-size:.62rem;text-transform:uppercase;font-weight:900}.campaignSupplementHead h3{margin:0;font-size:1rem}.campaignSupplementHead p{color:#817b73;font-size:.7rem}.campaignSupplementRows{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.campaignBibleDetail{margin:0;border-color:#303642}.campaignBibleDetail>summary{padding:10px 12px;font-size:.75rem}.campaignBibleDetailBody{padding:0 12px 13px;color:#b9b2a8;font-size:.74rem;line-height:1.55}.campaignBibleDM{display:inline-block;margin-left:7px;padding:2px 5px;border:1px solid #9c525b80;border-radius:999px;color:#cda9ae;font-size:.52rem}
-.bibleSourceNote{display:flex;flex-wrap:wrap;gap:8px 12px;margin-bottom:12px;color:#928b82;font-size:.72rem}.bibleResume{border:1px solid #d6bc7e59;border-radius:14px;background:#17151b;padding:16px 18px;margin-bottom:15px}.bibleResumeText{color:#ddd4c8;line-height:1.58;font-size:.88rem;max-height:250px;overflow-y:auto}.bibleToolbar{display:grid;grid-template-columns:minmax(220px,1fr) auto;gap:10px;margin-bottom:10px}.bibleSearch{width:100%;background:#10131a;color:#eee;border:1px solid #343947;border-radius:9px;padding:10px 12px}.bibleCount{color:#888177;font-size:.72rem}.bibleMajorNav{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}.bibleMajorBtn{border:1px solid #343947;background:#151922;color:#aca59b;border-radius:999px;padding:6px 9px;font-size:.68rem;cursor:pointer}.bibleMajorBtn.active{color:#fff;border-color:#d6bc7e80;background:#27232a}.bibleSectionLabel{display:flex;gap:10px;margin:8px 0 9px}.bibleSectionNumber{color:var(--gold);font-size:.68rem;font-weight:900}.bibleEntry{margin-bottom:7px}.bibleEntry>summary{padding:11px 13px;font-size:.79rem}.bibleEntryBody{padding:0 14px 15px;color:#bdb6ac;line-height:1.58;font-size:.78rem}.bibleBadge{display:inline-block;margin-left:8px;padding:2px 6px;border:1px solid #9d545b80;border-radius:999px;color:#cda7ac;font-size:.56rem}
+.bibleSourceNote{display:flex;flex-wrap:wrap;gap:8px 12px;margin-bottom:12px;color:#928b82;font-size:.72rem}
+.bibleResume{border:1px solid #d6bc7e59;border-radius:14px;background:#17151b;padding:16px 18px;margin-bottom:15px}
+.bibleResumeText{color:#ddd4c8;line-height:1.58;font-size:.88rem;max-height:250px;overflow-y:auto}
+.bibleToolbar{display:grid;grid-template-columns:minmax(220px,1fr) auto;gap:10px;margin-bottom:10px}
+.bibleSearch{width:100%;background:#10131a;color:#eee;border:1px solid #343947;border-radius:9px;padding:10px 12px}
+.bibleCount{color:#888177;font-size:.72rem}
+.bibleMajorNav{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.bibleMajorBtn{border:1px solid #343947;background:#151922;color:#aca59b;border-radius:999px;padding:6px 9px;font-size:.68rem;cursor:pointer}
+.bibleMajorBtn.active{color:#fff;border-color:#d6bc7e80;background:#27232a}
+.bibleSectionLabel{display:flex;gap:10px;margin:8px 0 9px}
+.bibleSectionNumber{color:var(--gold);font-size:.68rem;font-weight:900}
+.bibleEntry{margin-bottom:7px}
+.bibleEntry>summary{padding:11px 13px;font-size:.79rem}
+.bibleEntryBody{padding:0 14px 15px;color:#bdb6ac;line-height:1.58;font-size:.78rem}
+.bibleBadge{display:inline-block;margin-left:8px;padding:2px 6px;border:1px solid #9d545b80;border-radius:999px;color:#cda7ac;font-size:.56rem}
 
-/* MAPA v2.9.3 */
+/* MAPA */
 .reconWrap{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:12px!important}
 .reconMapCard{border:1px solid #343947;border-radius:14px;background:#10131a;overflow:hidden;box-shadow:0 16px 50px #0005}
 .reconMapToolbar{display:flex;align-items:center;gap:7px;padding:9px 10px;border-bottom:1px solid #343947;background:#151923;position:relative;z-index:8}
 .reconMapToolbar .mapTool{width:34px;height:31px;padding:0;border:1px solid #444a59;border-radius:8px;background:#0d1118;color:#e8dfd2;cursor:pointer;font-weight:900}
-.reconMapToolbar .mapTool:hover{background:#242a35}.reconMapToolbar .zoomReadout{min-width:58px;text-align:center;font:700 .68rem ui-monospace,SFMono-Regular,Consolas,monospace;color:#bcb3a7}.reconMapToolbar .mapHint{margin-left:auto;color:#8f8990;font-size:.62rem}
-.reconMapViewport{position:relative;overflow:hidden;width:100%;aspect-ratio:1448/1086;background:#080b10;cursor:grab;touch-action:none;user-select:none;outline:none}.reconMapViewport.isPanning{cursor:grabbing}
-.reconMapStage{position:absolute;left:0;top:0;width:100%;height:100%;transform-origin:0 0;will-change:transform}.reconBaseImage{display:block;width:100%;height:100%;object-fit:cover;pointer-events:none;user-select:none}
-.reconMarkerLayer{position:absolute;inset:0;pointer-events:none}.reconMarkerButton{position:absolute;width:0;height:0;padding:0;border:0;background:none;z-index:5;pointer-events:auto;cursor:pointer;outline:none}.reconMarkerUI{position:absolute;left:0;top:0;transform:translate(-50%,-100%) scale(var(--marker-counter,1));transform-origin:50% 100%;filter:drop-shadow(0 2px 3px #000b)}.reconMarkerImage{display:block;height:auto;object-fit:contain;pointer-events:none}.reconMarkerUI.size-S .reconMarkerImage{width:22px}.reconMarkerUI.size-M .reconMarkerImage{width:28px}.reconMarkerUI.size-L .reconMarkerImage{width:34px}.reconMarkerFallback{width:18px;height:18px;border-radius:50%;border:2px solid #eee2c9;background:#6e5c83}
-.reconMarkerTooltip{position:absolute;left:50%;bottom:calc(100% + 6px);transform:translateX(-50%);width:max-content;max-width:240px;padding:6px 8px;border:1px solid #454b59;border-radius:7px;background:#0b0e14ee;color:#e7dfd4;font-size:.62rem;box-shadow:0 8px 28px #0009;opacity:0;visibility:hidden;pointer-events:none}.reconMarkerTooltip b{display:block}.reconMarkerTooltip span{display:block;color:#9f978d;max-width:220px;white-space:normal}.reconMarkerButton:hover .reconMarkerTooltip,.reconMarkerButton:focus-visible .reconMarkerTooltip{opacity:1;visibility:visible}
-.reconMapLegend{display:flex;gap:7px;flex-wrap:wrap;padding:9px 10px;border-top:1px solid #2c313c;background:#0d1017}.reconLegendItem{display:flex;align-items:center;gap:5px;color:#a79f94;font-size:.58rem}.reconLegendItem img{width:16px;height:22px;object-fit:contain}.reconMarkerDetail{margin-top:10px}.reconMarkerDetail:empty{display:none}.reconMapNote{margin-top:8px;color:#8f8990;font-size:.68rem;line-height:1.45}
-@media(max-width:900px){.baseOps{grid-template-columns:1fr}.campaignSupplementRows{grid-template-columns:1fr}}
-@media(max-width:760px){.historyStoryPanel{height:540px;min-height:540px;max-height:540px}.historyStorySplit{grid-template-columns:1fr;grid-template-rows:220px minmax(0,1fr)}.historyStoryImage{border-right:0;border-bottom:1px solid #343947}.reconMapToolbar .mapHint{display:none}.reconMarkerUI.size-S .reconMarkerImage{width:19px}.reconMarkerUI.size-M .reconMarkerImage{width:24px}.reconMarkerUI.size-L .reconMarkerImage{width:29px}}
+.reconMapToolbar .mapTool:hover{background:#242a35}
+.reconMapToolbar .zoomReadout{min-width:58px;text-align:center;font:700 .68rem ui-monospace,SFMono-Regular,Consolas,monospace;color:#bcb3a7}
+.reconMapToolbar .mapHint{margin-left:auto;color:#8f8990;font-size:.62rem}
+.reconMapViewport{position:relative;overflow:hidden;width:100%;aspect-ratio:1448/1086;background:#080b10;cursor:grab;touch-action:none;user-select:none;outline:none}
+.reconMapViewport.isPanning{cursor:grabbing}
+.reconMapStage{position:absolute;left:0;top:0;width:100%;height:100%;transform-origin:0 0;will-change:transform}
+.reconBaseImage{display:block;width:100%;height:100%;object-fit:cover;pointer-events:none;user-select:none}
+.reconMarkerLayer{position:absolute;inset:0;pointer-events:none}
+.reconMarkerButton{position:absolute;width:0;height:0;padding:0;border:0;background:none;z-index:5;pointer-events:auto;cursor:pointer;outline:none}
+.reconMarkerUI{position:absolute;left:0;top:0;transform:translate(-50%,-100%) scale(var(--marker-counter,1));transform-origin:50% 100%;filter:drop-shadow(0 2px 3px #000b)}
+.reconMarkerImage{display:block;height:auto;object-fit:contain;pointer-events:none}
+.reconMarkerUI.size-S .reconMarkerImage{width:22px}
+.reconMarkerUI.size-M .reconMarkerImage{width:28px}
+.reconMarkerUI.size-L .reconMarkerImage{width:34px}
+.reconMarkerFallback{width:18px;height:18px;border-radius:50%;border:2px solid #eee2c9;background:#6e5c83}
+.reconMarkerTooltip{position:absolute;left:50%;bottom:calc(100% + 6px);transform:translateX(-50%);width:max-content;max-width:240px;padding:6px 8px;border:1px solid #454b59;border-radius:7px;background:#0b0e14ee;color:#e7dfd4;font-size:.62rem;box-shadow:0 8px 28px #0009;opacity:0;visibility:hidden;pointer-events:none}
+.reconMarkerTooltip b{display:block}
+.reconMarkerTooltip span{display:block;color:#9f978d;max-width:220px;white-space:normal}
+.reconMarkerButton:hover .reconMarkerTooltip,.reconMarkerButton:focus-visible .reconMarkerTooltip{opacity:1;visibility:visible}
+.reconMapLegend{display:flex;gap:7px;flex-wrap:wrap;padding:9px 10px;border-top:1px solid #2c313c;background:#0d1017}
+.reconLegendItem{display:flex;align-items:center;gap:5px;color:#a79f94;font-size:.58rem}
+.reconLegendItem img{width:16px;height:22px;object-fit:contain}
+.reconMarkerDetail{margin-top:10px}
+.reconMarkerDetail:empty{display:none}
+.reconMapNote{margin-top:8px;color:#8f8990;font-size:.68rem;line-height:1.45}
+
+/* Base unificada */
+.baseUnified{display:grid;gap:9px}
+.baseUnifiedHero{display:grid;grid-template-columns:180px minmax(0,1fr);gap:16px;align-items:center;border:1px solid #3a404d;border-radius:14px;background:linear-gradient(135deg,#181b25,#10131a);padding:15px}
+.baseFactionBanner{height:150px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle,#282638,#0b0e14 72%);border:1px solid #343947;border-radius:12px;padding:10px;overflow:hidden}
+.baseFactionBanner img{width:100%!important;height:100%!important;object-fit:contain!important;image-rendering:pixelated}
+.baseUnifiedHeroText h3{font-size:1.45rem;margin:.2rem 0 .5rem}
+.baseUnifiedHeroText p{color:#bbb3a8;line-height:1.5}
+.baseUnifiedStats{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}
+.baseUnifiedSection{margin:0!important;border-radius:11px!important}
+.baseUnifiedSection>summary{background:#151922;padding:13px 15px}
+.baseUnifiedSection[open]>summary{border-bottom:1px solid #343947}
+.baseUnifiedBody{padding:14px 15px 16px;color:#c8c0b5;line-height:1.55}
+.baseUnifiedBody h4{margin:14px 0 7px;color:#e5dbcd}
+.baseDetailSub{margin-top:14px;padding-top:10px;border-top:1px solid #313744}
+
+@media(max-width:1100px){
+  .hero,.two{grid-template-columns:1fr}
+  .char{display:block;overflow-x:auto}
+  .side{margin-top:14px}
+  .head{align-items:start;flex-direction:column}
+  .search{margin-left:0}
+}
+@media(max-width:760px){
+  .baseUnifiedHero{grid-template-columns:1fr}
+  .baseFactionBanner{height:120px}
+  .historyStoryPanel{height:540px;min-height:540px;max-height:540px}
+  .historyStorySplit{grid-template-columns:1fr;grid-template-rows:220px minmax(0,1fr)}
+  .historyStoryImage{border-right:0;border-bottom:1px solid #343947}
+  .reconMapToolbar .mapHint{display:none}
+  .reconMarkerUI.size-S .reconMarkerImage{width:19px}
+  .reconMarkerUI.size-M .reconMarkerImage{width:24px}
+  .reconMarkerUI.size-L .reconMarkerImage{width:29px}
+}
+@media(max-width:650px){
+  .grid{grid-template-columns:1fr}
+  .avatars{grid-template-columns:repeat(2,1fr)}
+}
 </style>
+
 </head>
 <body>
-<header class="top"><nav id="nav"><div class="brand" id="brand">Campaign Codex</div><button class="btn" id="refresh">Actualizar</button><button class="btn diag-btn" id="diagToggle" type="button">Diagnóstico 0</button><span class="badge live">v2.9.3 · MAPA + ZOOM</span><span class="badge" id="mode">Cargando…</span></nav></header>
+<header class="top"><nav id="nav"><div class="brand" id="brand">Campaign Codex</div><button class="btn" id="refresh">Actualizar</button><button class="btn diag-btn" id="diagToggle" type="button">Diagnóstico 0</button><span class="badge live">v2.9.4 · BASE + MAPA UNIFICADOS</span><span class="badge" id="mode">Cargando…</span></nav></header>
 
 <div class="diag-wrap">
-<section class="diag-panel" id="diagPanel" hidden aria-live="polite">
-<div class="diag-head"><strong>Diagnóstico del Campaign Codex</strong><span class="diag-summary" id="diagSummary">Sin problemas detectados</span><button class="btn" id="diagCopy" type="button">Copiar informe</button><button class="btn" id="diagClose" type="button">Cerrar</button></div>
-<div class="diag-list" id="diagList"></div>
-</section>
+  <section class="diag-panel" id="diagPanel" hidden aria-live="polite">
+    <div class="diag-head">
+      <strong>Diagnóstico del Campaign Codex</strong>
+      <span class="diag-summary" id="diagSummary">Sin problemas detectados</span>
+      <button class="btn" id="diagCopy" type="button">Copiar informe</button>
+      <button class="btn" id="diagClose" type="button">Cerrar</button>
+    </div>
+    <div class="diag-list" id="diagList"></div>
+  </section>
 </div>
 
 <div class="hero">
-<div><div class="eyebrow" id="eyebrow"></div><h1 id="heroTitle">Campaign Codex</h1><p id="heroSubtitle"></p></div>
-<div class="panel kpis"><div class="kpi"><b id="kLvl">—</b><span>Nivel principal</span></div><div class="kpi"><b id="kXp">—</b><span>PX</span></div><div class="kpi"><b id="kAllies">—</b><span>Personajes</span></div><div class="kpi"><b id="kBase">—</b><span>Funciones base</span></div></div>
+  <div>
+    <div class="eyebrow" id="eyebrow"></div>
+    <h1 id="heroTitle">Campaign Codex</h1>
+    <p id="heroSubtitle"></p>
+  </div>
+  <div class="panel kpis">
+    <div class="kpi"><b id="kLvl">—</b><span>Nivel principal</span></div>
+    <div class="kpi"><b id="kXp">—</b><span>PX</span></div>
+    <div class="kpi"><b id="kAllies">—</b><span>Personajes</span></div>
+    <div class="kpi"><b id="kBase">—</b><span>Funciones base</span></div>
+  </div>
 </div>
 
 <main id="main"></main>
 
-<div class="modal" id="modal"><div class="shell"><div class="bar"><h2 id="modalTitle"></h2><button class="btn" id="close">Cerrar ×</button></div><div class="char"><div class="sheet" id="sheet"></div><aside class="side" id="side"></aside></div></div></div>
+<div class="modal" id="modal">
+  <div class="shell">
+    <div class="bar">
+      <h2 id="modalTitle"></h2>
+      <button class="btn" id="close">Cerrar ×</button>
+    </div>
+    <div class="char">
+      <div class="sheet" id="sheet"></div>
+      <aside class="side" id="side"></aside>
+    </div>
+  </div>
+</div>
+
 <div id="tip"></div>
-<div id="imagePreview" aria-hidden="true"></div>
-<footer>v2.9.3 · mapa regional por coordenadas + zoom/pan + assets Drive</footer>
+
+<div id="imagePreview" aria-hidden="true">
+  <div class="previewShell">
+    <img id="imagePreviewImg" alt="">
+    <div class="previewCaption" id="imagePreviewCaption"></div>
+  </div>
+</div>
+
+<footer>v2.9.4 · base/facción unificada + archivo extendido inferior + mapa con zoom</footer>
 
 <script>
 const SHEET_ID="1QSrD9vg2erPGGVyR92zSFETVOUmm8GhbKMYWRxGk2Jw";
-const BUILD_ID="v2.9.3-20260911-1753";
+const BUILD_ID="v2.9.4-20260911";
 
-const TABS=["config","sections","assets","characters","character_stats","character_saves","character_skills","character_proficiencies","character_traits","character_attacks","character_spells","character_spell_slots","character_equipment","relationships","history","history_rolls","history_events","npcs","bestiary","enemy_traits","base_overview","base_rooms","base_projects","base_protocols","faction_members","base_details","base_occupants","base_resources","recon_map","maps","map_markers","marker_types","lore","mysteries","items","rules","checkpoint","changelog","campaign_bible"];
+console.info("Campaign Codex MASTER Sheet:", SHEET_ID);
+
+const TABS=[
+  "config",
+  "sections",
+  "assets",
+  "characters",
+  "character_stats",
+  "character_saves",
+  "character_skills",
+  "character_proficiencies",
+  "character_traits",
+  "character_attacks",
+  "character_spells",
+  "character_spell_slots",
+  "character_equipment",
+  "relationships",
+  "history",
+  "history_rolls",
+  "history_events",
+  "npcs",
+  "bestiary",
+  "enemy_traits",
+  "base_overview",
+  "base_rooms",
+  "base_projects",
+  "base_protocols",
+  "faction_members",
+  "base_details",
+  "base_occupants",
+  "base_resources",
+  "recon_map",
+  "maps",
+  "map_markers",
+  "marker_types",
+  "lore",
+  "mysteries",
+  "items",
+  "rules",
+  "checkpoint",
+  "changelog",
+  "campaign_bible"
+];
 
 const EXPECTED_SCHEMA={
-config:["key","value"],sections:["section_id"],assets:["asset_id","local_path"],characters:["character_id","portrait_asset_id"],character_stats:["character_id"],character_saves:["character_id"],character_skills:["character_id"],character_proficiencies:["character_id"],character_traits:["character_id"],character_attacks:["character_id"],character_spells:["character_id"],character_spell_slots:["character_id"],character_equipment:["character_id"],relationships:["subject_id"],history:["chapter_id"],history_rolls:["chapter_id"],history_events:["chapter_id"],npcs:["npc_id"],bestiary:["enemy_id"],enemy_traits:["enemy_id"],base_overview:["base_id"],base_rooms:["base_id"],base_projects:["base_id"],base_protocols:["base_id"],faction_members:["base_id"],base_details:["base_id"],base_occupants:["occupant_id"],base_resources:["resource_id"],recon_map:["zone_id"],maps:["map_id","image_asset_id"],map_markers:["marker_id","map_id","x_percent","y_percent"],marker_types:["marker_type","default_asset_id"],lore:["lore_id"],mysteries:["mystery_id"],items:["item_id"],rules:["rule_id"],checkpoint:["key"],changelog:["version"],campaign_bible:["entry_id","major_section","title","body"]
+  config:["key","value"],
+  sections:["section_id"],
+  assets:["asset_id","local_path"],
+
+  characters:["character_id","portrait_asset_id"],
+  character_stats:["character_id"],
+  character_saves:["character_id"],
+  character_skills:["character_id"],
+  character_proficiencies:["character_id"],
+  character_traits:["character_id"],
+  character_attacks:["character_id"],
+  character_spells:["character_id"],
+  character_spell_slots:["character_id"],
+  character_equipment:["character_id"],
+
+  relationships:["subject_id"],
+
+  history:["chapter_id"],
+  history_rolls:["chapter_id"],
+  history_events:["chapter_id"],
+
+  npcs:["npc_id"],
+
+  bestiary:["enemy_id"],
+  enemy_traits:["enemy_id"],
+
+  base_overview:["base_id"],
+  base_rooms:["base_id"],
+  base_projects:["base_id"],
+  base_protocols:["base_id"],
+  faction_members:["base_id"],
+  base_details:["base_id"],
+  base_occupants:["occupant_id"],
+  base_resources:["resource_id"],
+
+  recon_map:["zone_id"],
+
+  maps:["map_id","image_asset_id"],
+  map_markers:["marker_id","map_id","x_percent","y_percent"],
+  marker_types:["marker_type","default_asset_id"],
+
+  lore:["lore_id"],
+  mysteries:["mystery_id"],
+  items:["item_id"],
+  rules:["rule_id"],
+  checkpoint:["key"],
+  changelog:["version"],
+
+  campaign_bible:[
+    "entry_id",
+    "major_section",
+    "title",
+    "body"
+  ]
 };
 
-let DB={},DATA={},ASSETS=new Map(),CONFIG={},SECTIONS=[],TIMER=null,SECTION_OBSERVER=null;
-const EAGER_SECTIONS=new Set(["characters"]);
-let DIAGNOSTICS=[],DIAG_KEYS=new Set(),TAB_STATUS={};
+const ESSENTIAL_TABS=new Set([
+  "config",
+  "assets",
+  "characters",
+  "history"
+]);
 
-const $=s=>document.querySelector(s);
-const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
-const norm=s=>String(s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim();
-const truth=v=>["true","1","yes","si","sí","on"].includes(norm(v));
-const arr=v=>Array.isArray(v)?v:String(v||"").split(/\r?\n|;;|\s*\|\s*/).map(x=>x.trim()).filter(Boolean);
-const num=v=>{const n=Number(String(v??"").replace(",","."));return Number.isFinite(n)?n:null};
-const val=v=>v===undefined||v===null||v===""?"—":v;
-const mod=v=>{const n=num(v);if(n===null)return"—";const m=Math.floor((n-10)/2);return(m>=0?"+":"")+m};
-const order=(a,b)=>(num(a.sort_order)??999)-(num(b.sort_order)??999);
-const cfg=(k,d="")=>CONFIG[k]!==undefined&&CONFIG[k]!==""?CONFIG[k]:d;
+let DB={};
+let DATA={};
+let ASSETS=new Map();
+let CONFIG={};
+let SECTIONS=[];
+let TIMER=null;
 
-function list(a){return`<ul class="list">${(a||[]).map(x=>`<li>${esc(typeof x==="string"?x:(x.name||x.item||x.skill||x.title||""))}</li>`).join("")}</ul>`}
-function group(rows,key){const m=new Map;(rows||[]).forEach(r=>{const k=r[key]||"";if(!m.has(k))m.set(k,[]);m.get(k).push(r)});return m}
-function first(rows,key){const m=new Map;(rows||[]).forEach(r=>{const k=r[key]||"";if(k&&!m.has(k))m.set(k,r)});return m}
-function configRows(rows){const o={};(rows||[]).forEach(r=>{if(r.key)o[r.key]=r.value});return o}
+let SECTION_OBSERVER=null;
 
-function resetDiagnostics(){DIAGNOSTICS=[];DIAG_KEYS=new Set();TAB_STATUS={};renderDiagnostics()}
-function addDiag(severity,code,title,detail="",context="",dedupe=""){
-const key=dedupe||[severity,code,title,detail,context].join("|");if(DIAG_KEYS.has(key))return;DIAG_KEYS.add(key);
-DIAGNOSTICS.push({severity,code,title,detail,context});
-renderDiagnostics()
+const EAGER_SECTIONS=new Set([
+  "characters"
+]);
+
+let DIAGNOSTICS=[];
+let DIAG_KEYS=new Set();
+let TAB_STATUS={};
+
+
+function resetDiagnostics(){
+  DIAGNOSTICS=[];
+  DIAG_KEYS=new Set();
+  TAB_STATUS={};
+  renderDiagnostics();
 }
+
+
+function addDiag(
+  severity,
+  code,
+  title,
+  detail="",
+  context="",
+  dedupe=""
+){
+  const key=
+    dedupe ||
+    [
+      severity,
+      code,
+      title,
+      detail,
+      context
+    ].join("|");
+
+  if(DIAG_KEYS.has(key))return;
+
+  DIAG_KEYS.add(key);
+
+  DIAGNOSTICS.push({
+    severity:String(severity||"warn"),
+    code:String(code||"GEN"),
+    title:String(title||"Problema"),
+    detail:String(detail||""),
+    context:String(context||""),
+    time:new Date().toLocaleTimeString()
+  });
+
+  console[
+    severity==="error"
+      ? "error"
+      : severity==="warn"
+        ? "warn"
+        : "info"
+  ](
+    `[${code}] ${title}`,
+    detail,
+    context
+  );
+
+  renderDiagnostics();
+}
+
+
 function renderDiagnostics(){
-const panel=$("#diagPanel"),listEl=$("#diagList"),sum=$("#diagSummary"),btn=$("#diagToggle");if(!panel||!listEl||!sum||!btn)return;
-const errors=DIAGNOSTICS.filter(x=>x.severity==="error").length,warns=DIAGNOSTICS.filter(x=>x.severity==="warn").length;
-btn.textContent=`Diagnóstico ${errors+warns}`;btn.classList.toggle("has-error",errors>0);btn.classList.toggle("has-warn",!errors&&warns>0);sum.textContent=errors+warns?`${errors} error(es) · ${warns} advertencia(s)`:"Sin problemas detectados";
-listEl.innerHTML=DIAGNOSTICS.length?DIAGNOSTICS.map(d=>`<div class="diag-item ${esc(d.severity)}"><span class="diag-code">${esc(d.code)}</span><span class="diag-title">${esc(d.title)}</span>${d.detail?`<div class="diag-detail">${esc(d.detail)}</div>`:""}${d.context?`<div class="diag-context">${esc(d.context)}</div>`:""}</div>`).join(""):`<div class="diag-item info">No se han detectado problemas.</div>`;
-if(errors)panel.hidden=false
+
+  const panel=
+    document.getElementById(
+      "diagPanel"
+    );
+
+  const list=
+    document.getElementById(
+      "diagList"
+    );
+
+  const sum=
+    document.getElementById(
+      "diagSummary"
+    );
+
+  const btn=
+    document.getElementById(
+      "diagToggle"
+    );
+
+  if(
+    !panel ||
+    !list ||
+    !sum ||
+    !btn
+  ){
+    return;
+  }
+
+  const errors=
+    DIAGNOSTICS.filter(
+      x=>x.severity==="error"
+    ).length;
+
+  const warns=
+    DIAGNOSTICS.filter(
+      x=>x.severity==="warn"
+    ).length;
+
+  const problems=
+    errors+warns;
+
+  btn.textContent=
+    `Diagnóstico ${problems}`;
+
+  btn.classList.toggle(
+    "has-error",
+    errors>0
+  );
+
+  btn.classList.toggle(
+    "has-warn",
+    errors===0 &&
+    warns>0
+  );
+
+  sum.textContent=
+    problems
+      ? `${errors} error(es) · ${warns} advertencia(s)`
+      : "Sin problemas detectados";
+
+  list.innerHTML=
+    DIAGNOSTICS.length
+      ?
+      DIAGNOSTICS.map(
+        d=>`
+          <div class="diag-item ${esc(d.severity)}">
+
+            <div>
+              <span class="diag-code">
+                ${esc(d.code)}
+              </span>
+
+              <span class="diag-title">
+                ${esc(d.title)}
+              </span>
+            </div>
+
+            ${
+              d.detail
+                ?
+                `<div class="diag-detail">
+                  ${esc(d.detail)}
+                </div>`
+                :
+                ""
+            }
+
+            ${
+              d.context
+                ?
+                `<div class="diag-context">
+                  ${esc(d.context)}
+                </div>`
+                :
+                ""
+            }
+
+          </div>
+        `
+      ).join("")
+      :
+      `
+        <div class="diag-item info">
+          <span class="diag-code">
+            OK
+          </span>
+
+          <span class="diag-title">
+            No se han detectado problemas.
+          </span>
+        </div>
+      `;
+
+  if(errors>0){
+    panel.hidden=false;
+  }
+
 }
+
+
+function diagnosticReport(){
+
+  const lines=[
+    "KAZYM CAMPAIGN CODEX — DIAGNÓSTICO",
+
+    `Fecha: ${
+      new Date().toLocaleString()
+    }`,
+
+    `URL: ${
+      location.href
+    }`,
+
+    `Sheet ID: ${
+      SHEET_ID
+    }`,
+
+    "",
+
+    ...DIAGNOSTICS.map(
+      d=>
+        `[${d.severity.toUpperCase()}] ${d.code} — ${d.title}
+${d.detail}${
+  d.context
+    ?
+    `\nContexto: ${d.context}`
+    :
+    ""
+}`
+    )
+  ];
+
+  return lines.join("\n\n");
+
+}
+
+
+function inlineAssetError(
+  code,
+  title,
+  detail
+){
+
+  return {
+    __assetError:true,
+    code:String(
+      code ||
+      "ASSET"
+    ),
+    title:String(
+      title ||
+      "Asset inválido"
+    ),
+    detail:String(
+      detail ||
+      ""
+    )
+  };
+
+}
+
+
+function inlineAssetErrorHTML(err){
+
+  return `
+    <div class="image-error-inline">
+
+      <b>
+        ${esc(
+          err.code ||
+          "ASSET"
+        )}
+      </b>
+
+      <span>
+        ${esc(
+          err.title ||
+          "Imagen no disponible"
+        )}
+      </span>
+
+      ${
+        err.detail
+          ?
+          `
+            <span class="path">
+              ${esc(err.detail)}
+            </span>
+          `
+          :
+          ""
+      }
+
+    </div>
+  `;
+
+}
+
+
+const $=
+  s=>
+    document.querySelector(s);
+
+
+const esc=
+  s=>
+    String(s??"")
+      .replace(
+        /[&<>"']/g,
+        m=>({
+          "&":"&amp;",
+          "<":"&lt;",
+          ">":"&gt;",
+          '"':"&quot;",
+          "'":"&#39;"
+        }[m])
+      );
+
+
+const norm=
+  s=>
+    String(s||"")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(
+        /[\u0300-\u036f]/g,
+        ""
+      )
+      .trim();
+
+
+const truth=
+  v=>
+    [
+      "true",
+      "1",
+      "yes",
+      "si",
+      "sí",
+      "on"
+    ].includes(
+      norm(v)
+    );
+
+
+const arr=
+  v=>
+    Array.isArray(v)
+      ?
+      v
+      :
+      String(v||"")
+        .split(
+          /\r?\n|;;|\s*\|\s*/
+        )
+        .map(
+          x=>x.trim()
+        )
+        .filter(Boolean);
+
+
+const num=
+  v=>{
+    const n=
+      Number(
+        String(v??"")
+          .replace(
+            ",",
+            "."
+          )
+      );
+
+    return Number.isFinite(n)
+      ? n
+      : null;
+  };
+
+
+const val=
+  v=>
+    v===undefined ||
+    v===null ||
+    v===""
+      ?
+      "—"
+      :
+      v;
+
+
+const mod=
+  v=>{
+
+    const n=
+      num(v);
+
+    if(n===null){
+      return "—";
+    }
+
+    const m=
+      Math.floor(
+        (n-10)/2
+      );
+
+    return (
+      m>=0
+        ?
+        "+"
+        :
+        ""
+    )+m;
+
+  };
+
 
 function parseCSV(t){
-const R=[];let r=[],c="",q=false;
-for(let i=0;i<t.length;i++){const x=t[i],n=t[i+1];if(x==='"'&&q&&n==='"'){c+='"';i++;continue}if(x==='"'){q=!q;continue}if(x===","&&!q){r.push(c);c="";continue}if((x==="\n"||x==="\r")&&!q){if(x==="\r"&&n==="\n")i++;r.push(c);if(r.some(v=>v.trim()))R.push(r);r=[];c="";continue}c+=x}
-r.push(c);if(r.some(v=>v.trim()))R.push(r);return R
+
+  const R=[];
+
+  let r=[];
+  let c="";
+  let q=false;
+
+  for(
+    let i=0;
+    i<t.length;
+    i++
+  ){
+
+    const x=t[i];
+    const n=t[i+1];
+
+    if(
+      x==='"' &&
+      q &&
+      n==='"'
+    ){
+      c+='"';
+      i++;
+      continue;
+    }
+
+    if(x==='"'){
+      q=!q;
+      continue;
+    }
+
+    if(
+      x==="," &&
+      !q
+    ){
+      r.push(c);
+      c="";
+      continue;
+    }
+
+    if(
+      (
+        x==="\n" ||
+        x==="\r"
+      )
+      &&
+      !q
+    ){
+
+      if(
+        x==="\r" &&
+        n==="\n"
+      ){
+        i++;
+      }
+
+      r.push(c);
+
+      if(
+        r.some(
+          v=>v.trim()
+        )
+      ){
+        R.push(r);
+      }
+
+      r=[];
+      c="";
+      continue;
+
+    }
+
+    c+=x;
+
+  }
+
+  r.push(c);
+
+  if(
+    r.some(
+      v=>v.trim()
+    )
+  ){
+    R.push(r);
+  }
+
+  return R;
+
 }
-function normalizeHeader(v){return String(v||"").trim().replace(/^\ufeff/,"")}
-function rowsToObjects(name,rows){
-if(!rows.length)return{ok:false,headers:[],rows:[]};
-const expected=EXPECTED_SCHEMA[name]||[];let headerIndex=-1;
-for(let i=0;i<Math.min(8,rows.length);i++){const cells=rows[i].map(normalizeHeader);if(expected.every(k=>cells.includes(k))){headerIndex=i;break}}
-if(headerIndex<0)return{ok:false,headers:(rows[0]||[]).map(normalizeHeader),rows:[]};
-const headers=rows[headerIndex].map(normalizeHeader);
-return{ok:true,headers,headerIndex,rows:rows.slice(headerIndex+1).filter(r=>r.some(x=>String(x||"").trim())).map(r=>Object.fromEntries(headers.map((k,i)=>[k,r[i]??""]).filter(([k])=>k)))}
+
+
+function normalizeHeader(v){
+
+  return String(v||"")
+    .trim()
+    .replace(
+      /^\ufeff/,
+      ""
+    );
+
 }
+
+
+function rowsToObjects(
+  name,
+  rows
+){
+
+  if(!rows.length){
+
+    return {
+      ok:false,
+      headers:[],
+      rows:[],
+      reason:"CSV vacío"
+    };
+
+  }
+
+  const expected=
+    EXPECTED_SCHEMA[name] ||
+    [];
+
+  const scanLimit=
+    Math.min(
+      8,
+      rows.length
+    );
+
+  let headerIndex=-1;
+
+
+  for(
+    let i=0;
+    i<scanLimit;
+    i++
+  ){
+
+    const cells=
+      rows[i].map(
+        normalizeHeader
+      );
+
+    if(
+      expected.length &&
+      expected.every(
+        k=>cells.includes(k)
+      )
+    ){
+
+      headerIndex=i;
+      break;
+
+    }
+
+  }
+
+
+  if(
+    headerIndex<0 &&
+    !expected.length
+  ){
+
+    headerIndex=0;
+
+  }
+
+
+  if(headerIndex<0){
+
+    return {
+
+      ok:false,
+
+      headers:
+        (rows[0]||[])
+          .map(
+            normalizeHeader
+          ),
+
+      rows:[],
+
+      reason:
+        `No se encontró una fila de encabezados con: ${
+          expected.join(", ")
+        }`
+
+    };
+
+  }
+
+
+  const headers=
+    rows[headerIndex]
+      .map(
+        normalizeHeader
+      );
+
+
+  const data=
+    rows
+      .slice(
+        headerIndex+1
+      )
+
+      .filter(
+        r=>
+          r.some(
+            x=>
+              String(x||"")
+                .trim()
+          )
+      )
+
+      .map(
+        r=>
+          Object.fromEntries(
+
+            headers
+              .map(
+                (k,i)=>[
+                  k,
+                  r[i]??""
+                ]
+              )
+
+              .filter(
+                ([k])=>k
+              )
+
+          )
+      );
+
+
+  return {
+    ok:true,
+    headers,
+    rows:data,
+    headerIndex
+  };
+
+}
+
+async function fetchTabCSV(name,headersMode){
+  const u=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(name)}&headers=${headersMode}&_=${Date.now()}`;
+  const res=await fetch(u,{cache:"no-store"});
+  if(!res.ok)throw new Error(`${name}: HTTP ${res.status}`);
+  const text=await res.text();
+  if(/<!doctype|<html/i.test(text))throw new Error(`${name}: Google devolvió HTML en vez de CSV`);
+  return text;
+}
+
 async function tab(name){
-for(const headersMode of[1,0]){
-const u=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(name)}&headers=${headersMode}&_=${Date.now()}`;
-try{
-const res=await fetch(u,{cache:"no-store"});if(!res.ok)continue;
-const parsed=rowsToObjects(name,parseCSV(await res.text()));
-if(parsed.ok){const rows=parsed.rows.filter(r=>!["dm","secret","secreto","private","privado"].includes(norm(r.visibility||r.scope||"both")));TAB_STATUS[name]={ok:true,headers:parsed.headers};return rows}
-}catch(e){}
+  for(const headersMode of [1,0]){
+    try{
+      const parsed=rowsToObjects(name,parseCSV(await fetchTabCSV(name,headersMode)));
+      if(parsed.ok){
+        TAB_STATUS[name]={
+          ok:true,
+          rows:parsed.rows.length,
+          headers:parsed.headers
+        };
+
+        return parsed.rows.filter(r=>
+          ![
+            "dm",
+            "secret",
+            "secreto",
+            "private",
+            "privado"
+          ].includes(
+            norm(r.visibility||r.scope||"both")
+          )
+        );
+      }
+    }catch(e){
+      console.warn(name,e);
+    }
+  }
+
+  TAB_STATUS[name]={ok:false};
+
+  addDiag(
+    "warn",
+    "TAB-LOAD",
+    `No cargó ${name}`,
+    "Revisa encabezados, permisos o nombre de pestaña.",
+    name,
+    `tab:${name}`
+  );
+
+  return [];
 }
-TAB_STATUS[name]={ok:false};addDiag("warn","TAB-LOAD",`No cargó ${name}`);return[]
-}
+
 async function loadDB(){
-const out={};
-for(const n of TABS){out[n]=await tab(n);await new Promise(r=>setTimeout(r,180))}
-if(!out.characters.length&&!out.assets.length)throw new Error("El MASTER no entregó datos útiles");
-return out
+  const out={};
+
+  for(const n of TABS){
+    out[n]=await tab(n);
+    await new Promise(r=>setTimeout(r,120));
+  }
+
+  if(
+    !out.characters.length &&
+    !out.assets.length
+  ){
+    throw new Error(
+      "El MASTER no entregó datos útiles"
+    );
+  }
+
+  return out;
 }
+
+function group(rows,key){
+  const m=new Map();
+
+  (rows||[]).forEach(r=>{
+    const k=r[key]||"";
+
+    if(!m.has(k)){
+      m.set(k,[]);
+    }
+
+    m.get(k).push(r);
+  });
+
+  return m;
+}
+
+function first(rows,key){
+  const m=new Map();
+
+  (rows||[]).forEach(r=>{
+    const k=r[key]||"";
+
+    if(
+      k &&
+      !m.has(k)
+    ){
+      m.set(k,r);
+    }
+  });
+
+  return m;
+}
+
+function order(a,b){
+  return(
+    num(a.sort_order)??999
+  )-(
+    num(b.sort_order)??999
+  );
+}
+
+function cfg(k,d=""){
+  return(
+    CONFIG[k]!==undefined &&
+    CONFIG[k]!==""
+  )
+    ?
+    CONFIG[k]
+    :
+    d;
+}
+
+function list(a){
+  return`
+    <ul class="list">
+      ${
+        (a||[])
+          .map(
+            x=>`
+              <li>
+                ${
+                  esc(
+                    typeof x==="string"
+                      ?
+                      x
+                      :
+                      (
+                        x.name ||
+                        x.item ||
+                        x.skill ||
+                        x.title ||
+                        ""
+                      )
+                  )
+                }
+              </li>
+            `
+          )
+          .join("")
+      }
+    </ul>
+  `;
+}
+
+function configRows(rows){
+  const o={};
+
+  (rows||[]).forEach(r=>{
+    if(r.key){
+      o[r.key]=r.value;
+    }
+  });
+
+  return o;
+}
+
 
 function driveId(v){
-const s=String(v||"").trim();if(/^[A-Za-z0-9_-]{20,}$/.test(s))return s;
-let m=s.match(/\/d\/([A-Za-z0-9_-]{20,})/);if(m)return m[1];m=s.match(/[?&]id=([A-Za-z0-9_-]{20,})/);return m?m[1]:""
+  const s=
+    String(v||"")
+      .trim();
+
+  if(
+    /^[A-Za-z0-9_-]{20,}$/.test(s)
+  ){
+    return s;
+  }
+
+  let m=
+    s.match(
+      /\/d\/([A-Za-z0-9_-]{20,})/
+    );
+
+  if(m){
+    return m[1];
+  }
+
+  m=
+    s.match(
+      /[?&]id=([A-Za-z0-9_-]{20,})/
+    );
+
+  return m
+    ?
+    m[1]
+    :
+    "";
 }
-function drivePrimary(v){const raw=String(v||"").trim(),id=driveId(raw);if(/^https?:\/\//i.test(raw))return raw;return id?`https://lh3.googleusercontent.com/d/${id}`:""}
-function img(v,cls="",alt=""){if(!v)return"";return`<img class="${esc(cls)}" src="${esc(v)}" alt="${esc(alt)}" loading="lazy" referrerpolicy="no-referrer">`}
-function assetValue(id){const a=ASSETS.get(String(id||"").trim());return a?drivePrimary(a.drive_file_id||a.image_url||a.url||""):""}
-function queueImages(root=document){root.querySelectorAll("img").forEach(i=>{if(i.dataset.bound)return;i.dataset.bound="1";i.onerror=()=>{i.style.opacity=".2"}})}
 
-const QUEST_ICON_ASSET_FALLBACKS={"madre de kazym":"AST_QUEST_MOTHER","plumas negras":"AST_QUEST_FEATHERS","hombre de la mascara de hueso":"AST_QUEST_BONEMASK","luna negra":"AST_QUEST_BLACKMOON","regreso y camino":"AST_QUEST_REGRESO_CAMINO"};
-function questIconForRecord(m){const id=m.image_asset_id||m.icon_asset_id||QUEST_ICON_ASSET_FALLBACKS[norm(m.title||"")];return assetValue(id)}
+function drivePrimary(v){
 
-const CAMPAIGN_BIBLE_DATA=[];
-const BIBLE_MAJOR_LABELS={"0":"Instrucciones","1":"Retomar","2":"Kazym","3":"Aliados","4":"Base","5":"Crónica","6":"Tiradas","7":"Bestiario","8":"NPC","9":"Lore","10":"Pistas","11":"Inventario","12":"Reglas","13":"Canon DM","14":"Retcons","15":"Checkpoint","16":"Cambios"};
-function bibleBodyHTML(text){return String(text||"").split("\n").map(x=>esc(x)).join("<br>")}
+  const raw=
+    String(v||"")
+      .trim();
+
+  const id=
+    driveId(raw);
+
+  if(
+    /^https?:\/\//i.test(raw)
+  ){
+    return raw;
+  }
+
+  return id
+    ?
+    `https://lh3.googleusercontent.com/d/${id}`
+    :
+    "";
+}
+
+function img(
+  v,
+  cls="",
+  alt=""
+){
+  if(!v){
+    return "";
+  }
+
+  if(
+    v &&
+    typeof v==="object" &&
+    v.__assetError
+  ){
+    return inlineAssetErrorHTML(v);
+  }
+
+  return`
+    <img
+      class="${esc(cls)}"
+      src="${esc(v)}"
+      alt="${esc(alt)}"
+      loading="lazy"
+      decoding="async"
+      referrerpolicy="no-referrer">
+  `;
+}
+
+function assetValue(id){
+
+  const key=
+    String(id||"")
+      .trim();
+
+  if(!key){
+    return "";
+  }
+
+  const a=
+    ASSETS.get(key);
+
+  if(!a){
+    return "";
+  }
+
+  return drivePrimary(
+    a.drive_file_id ||
+    a.image_url ||
+    a.url ||
+    ""
+  );
+}
+
+function queueImages(root=document){
+
+  root
+    .querySelectorAll("img")
+    .forEach(im=>{
+
+      if(im.dataset.bound){
+        return;
+      }
+
+      im.dataset.bound="1";
+
+      im.addEventListener(
+        "error",
+        ()=>{
+          im.style.opacity=".2";
+        }
+      );
+
+    });
+}
+
 
 function build(db){
-CONFIG=configRows(db.config);SECTIONS=(db.sections||[]).sort(order);ASSETS=new Map((db.assets||[]).filter(a=>a.asset_id).map(a=>[String(a.asset_id).trim(),a]));
-const st=first(db.character_stats,"character_id"),sv=group(db.character_saves,"character_id"),sk=group(db.character_skills,"character_id"),pf=group(db.character_proficiencies,"character_id"),tr=group(db.character_traits,"character_id"),at=group(db.character_attacks,"character_id"),sp=group(db.character_spells,"character_id"),ss=group(db.character_spell_slots,"character_id"),eq=group(db.character_equipment,"character_id"),rel=group(db.relationships,"subject_id");
-const characters=(db.characters||[]).sort(order).map(c=>({...c,portrait:assetValue(c.portrait_asset_id),stats:st.get(c.character_id)||{},saves:sv.get(c.character_id)||[],skills:sk.get(c.character_id)||[],proficiencies:pf.get(c.character_id)||[],traits:tr.get(c.character_id)||[],attacks:at.get(c.character_id)||[],spells:sp.get(c.character_id)||[],spell_slots:ss.get(c.character_id)||[],equipment:eq.get(c.character_id)||[],relationships:rel.get(c.character_id)||[]}));
-const history=(db.history||[]).sort(order).map(h=>({...h,image:assetValue(h.image_asset_id)}));
-const npcs=(db.npcs||[]).sort(order).map(n=>({...n,image:assetValue(n.portrait_asset_id||n.image_asset_id)}));
-const bestiary=(db.bestiary||[]).sort(order).map(b=>({...b,image:assetValue(b.image_asset_id)}));
-const items=(db.items||[]).sort(order).map(i=>({...i,image:assetValue(i.image_asset_id)}));
-const lore=(db.lore||[]).sort(order).map(l=>({...l,image:assetValue(l.image_asset_id)}));
-const base={...((db.base_overview||[])[0]||{})};base.image=assetValue(base.map_asset_id||CONFIG.base_map_asset_id);base.rooms=(db.base_rooms||[]).sort(order);base.projects=(db.base_projects||[]).sort(order);base.protocols=(db.base_protocols||[]).sort(order);base.members=(db.faction_members||[]).sort(order);base.occupants=(db.base_occupants||[]).sort(order).map(o=>({...o,portrait:assetValue(o.portrait_asset_id)}));base.resources=(db.base_resources||[]).sort(order);
-const maps=(db.maps||[]).sort(order).map(m=>({...m,image:assetValue(m.image_asset_id)}));const markerTypes=new Map((db.marker_types||[]).map(mt=>[String(mt.marker_type),mt]));const map_markers=(db.map_markers||[]).sort(order).map(m=>{const mt=markerTypes.get(String(m.marker_type))||{},aid=m.marker_asset_id||mt.default_asset_id||"";return{...m,image:assetValue(aid),marker_size:m.marker_size||mt.default_size||"S",type_label:mt.label||m.marker_type}});
-let checkpoint={};(db.checkpoint||[]).forEach(r=>{if(r.key)checkpoint[r.key]=r.value});
-return{characters,history,npcs,bestiary,items,base,checkpoint,recon_map:db.recon_map||[],maps,map_markers,marker_types:[...markerTypes.values()],lore,mysteries:(db.mysteries||[]).sort(order).map(m=>({...m,image:questIconForRecord(m)})),rules:db.rules||[],changelog:db.changelog||[],history_rolls:db.history_rolls||[],enemy_traits:group(db.enemy_traits,"enemy_id"),bible:(db.campaign_bible||[]).sort(order)}
+
+  CONFIG=
+    configRows(
+      db.config
+    );
+
+  SECTIONS=
+    (db.sections||[])
+      .sort(order);
+
+  ASSETS=
+    new Map(
+      (db.assets||[])
+        .filter(
+          a=>a.asset_id
+        )
+        .map(
+          a=>[
+            String(a.asset_id).trim(),
+            a
+          ]
+        )
+    );
+
+  const st=
+    first(
+      db.character_stats,
+      "character_id"
+    );
+
+  const sv=
+    group(
+      db.character_saves,
+      "character_id"
+    );
+
+  const sk=
+    group(
+      db.character_skills,
+      "character_id"
+    );
+
+  const pf=
+    group(
+      db.character_proficiencies,
+      "character_id"
+    );
+
+  const tr=
+    group(
+      db.character_traits,
+      "character_id"
+    );
+
+  const at=
+    group(
+      db.character_attacks,
+      "character_id"
+    );
+
+  const sp=
+    group(
+      db.character_spells,
+      "character_id"
+    );
+
+  const ss=
+    group(
+      db.character_spell_slots,
+      "character_id"
+    );
+
+  const eq=
+    group(
+      db.character_equipment,
+      "character_id"
+    );
+
+  const rel=
+    group(
+      db.relationships,
+      "subject_id"
+    );
+
+
+  const characters=
+    (db.characters||[])
+      .sort(order)
+      .map(c=>({
+        ...c,
+
+        portrait:
+          assetValue(
+            c.portrait_asset_id
+          ),
+
+        stats:
+          st.get(
+            c.character_id
+          ) || {},
+
+        saves:
+          sv.get(
+            c.character_id
+          ) || [],
+
+        skills:
+          (
+            sk.get(
+              c.character_id
+            ) || []
+          ).sort(order),
+
+        proficiencies:
+          (
+            pf.get(
+              c.character_id
+            ) || []
+          ).sort(order),
+
+        traits:
+          (
+            tr.get(
+              c.character_id
+            ) || []
+          ).sort(order),
+
+        attacks:
+          (
+            at.get(
+              c.character_id
+            ) || []
+          ).sort(order),
+
+        spells:
+          (
+            sp.get(
+              c.character_id
+            ) || []
+          ).sort(order),
+
+        spell_slots:
+          ss.get(
+            c.character_id
+          ) || [],
+
+        equipment:
+          (
+            eq.get(
+              c.character_id
+            ) || []
+          ).sort(order),
+
+        relationships:
+          rel.get(
+            c.character_id
+          ) || []
+      }));
+
+
+  const base={
+    ...(
+      (db.base_overview||[])[0] ||
+      {}
+    )
+  };
+
+  base.image=
+    assetValue(
+      base.map_asset_id ||
+      CONFIG.base_map_asset_id
+    );
+
+  base.banner=
+    assetValue(
+      "AST_FACTION_BANNER"
+    );
+
+  base.rooms=
+    (db.base_rooms||[])
+      .sort(order);
+
+  base.projects=
+    (db.base_projects||[])
+      .sort(order);
+
+  base.protocols=
+    (db.base_protocols||[])
+      .sort(order);
+
+  base.members=
+    (db.faction_members||[])
+      .sort(order);
+
+  base.details=
+    (db.base_details||[])
+      .sort(order);
+
+  base.resources=
+    (db.base_resources||[])
+      .sort(order);
+
+  base.occupants=
+    (db.base_occupants||[])
+      .sort(order)
+      .map(o=>({
+        ...o,
+        portrait:
+          assetValue(
+            o.portrait_asset_id
+          )
+      }));
+
+
+  const markerTypes=
+    new Map(
+      (db.marker_types||[])
+        .map(
+          x=>[
+            String(
+              x.marker_type ||
+              ""
+            ),
+            x
+          ]
+        )
+    );
+
+
+  const map_markers=
+    (db.map_markers||[])
+      .sort(order)
+      .map(m=>{
+
+        const t=
+          markerTypes.get(
+            String(
+              m.marker_type ||
+              ""
+            )
+          ) || {};
+
+        const aid=
+          m.marker_asset_id ||
+          t.default_asset_id ||
+          "";
+
+        return{
+          ...m,
+
+          image:
+            assetValue(aid),
+
+          type_label:
+            t.label ||
+            m.marker_type ||
+            "",
+
+          marker_size:
+            m.marker_size ||
+            t.default_size ||
+            "S"
+        };
+
+      });
+
+
+  const maps=
+    (db.maps||[])
+      .sort(order)
+      .map(m=>({
+        ...m,
+        image:
+          assetValue(
+            m.image_asset_id
+          )
+      }));
+
+
+  let checkpoint={};
+
+  (db.checkpoint||[])
+    .forEach(r=>{
+      if(r.key){
+        checkpoint[r.key]=r.value;
+      }
+    });
+
+
+  return{
+
+    characters,
+
+    history:
+      (db.history||[])
+        .sort(order)
+        .map(h=>({
+          ...h,
+          image:
+            assetValue(
+              h.image_asset_id
+            )
+        })),
+
+    npcs:
+      (db.npcs||[])
+        .sort(order)
+        .map(n=>({
+          ...n,
+          image:
+            assetValue(
+              n.portrait_asset_id ||
+              n.image_asset_id
+            )
+        })),
+
+    bestiary:
+      (db.bestiary||[])
+        .sort(order)
+        .map(e=>({
+          ...e,
+          image:
+            assetValue(
+              e.image_asset_id
+            )
+        })),
+
+    enemy_traits:
+      group(
+        db.enemy_traits,
+        "enemy_id"
+      ),
+
+    lore:
+      (db.lore||[])
+        .sort(order)
+        .map(l=>({
+          ...l,
+          image:
+            assetValue(
+              l.image_asset_id
+            )
+        })),
+
+    mysteries:
+      (db.mysteries||[])
+        .sort(order)
+        .map(m=>({
+          ...m,
+          image:
+            assetValue(
+              m.image_asset_id
+            )
+        })),
+
+    items:
+      (db.items||[])
+        .sort(order)
+        .map(i=>({
+          ...i,
+          image:
+            assetValue(
+              i.image_asset_id
+            )
+        })),
+
+    rules:
+      (db.rules||[])
+        .sort(order),
+
+    changelog:
+      db.changelog || [],
+
+    checkpoint,
+
+    base,
+
+    recon_map:
+      (db.recon_map||[])
+        .sort(order),
+
+    maps,
+
+    map_markers,
+
+    marker_types:
+      [
+        ...markerTypes.values()
+      ].sort(order),
+
+    bible:
+      (db.campaign_bible||[])
+        .sort(order),
+
+    history_rolls:
+      db.history_rolls ||
+      []
+
+  };
 }
 
-function bibleData(){return DATA.bible||[]}
-function bibleRowsByMajor(majors){const s=new Set((Array.isArray(majors)?majors:[majors]).map(String));return bibleData().filter(r=>r.entry_id!=="META"&&r.entry_id!=="BIBLE_1"&&s.has(String(r.major_section||""))).sort(order)}
-function bibleRowsByIds(ids){const s=new Set((Array.isArray(ids)?ids:[ids]).map(String));return bibleData().filter(r=>s.has(String(r.entry_id||""))).sort(order)}
-function bibleDetailHTML(r){if(!r)return"";return`<details class="campaignBibleDetail"><summary>${esc(r.title||"")}</summary><div class="campaignBibleDetailBody">${bibleBodyHTML(r.body||"")}</div></details>`}
-function bibleSupplementHTML(majors,title){const rows=bibleRowsByMajor(majors);return rows.length?`<div class="campaignSupplement"><div class="campaignSupplementHead"><span class="campaignSupplementKicker">Campaign Bible</span><h3>${esc(title||"Información completa")}</h3></div><div class="campaignSupplementRows">${rows.map(bibleDetailHTML).join("")}</div></div>`:""}
 
-function sectionMeta(id,title,subtitle,n){const r=SECTIONS.find(x=>x.section_id===id);return r?{title:r.title||title,subtitle:r.subtitle||subtitle,visible:r.visible===""?true:truth(r.visible),sort_order:num(r.sort_order)??n}:{title,subtitle,visible:true,sort_order:n}}
+function sectionMeta(
+  id,
+  title,
+  subtitle,
+  n
+){
+
+  const r=
+    SECTIONS.find(
+      x=>x.section_id===id
+    );
+
+  return r
+    ?
+    {
+      title:
+        r.title ||
+        title,
+
+      subtitle:
+        r.subtitle ||
+        subtitle,
+
+      visible:
+        r.visible===""
+          ?
+          true
+          :
+          truth(r.visible),
+
+      sort_order:
+        num(
+          r.sort_order
+        ) ?? n
+    }
+    :
+    {
+      title,
+      subtitle,
+      visible:true,
+      sort_order:n
+    };
+
+}
+
+
 function renderShell(){
-$("#brand").textContent=cfg("campaign_name","Campaign Codex");$("#eyebrow").textContent=cfg("ruleset","D&D 5e 2014");$("#heroTitle").textContent=cfg("site_title","Kazym Garnithor");$("#heroSubtitle").textContent=cfg("site_subtitle","Campaign Bible viva");
-const defs=[["characters","Personajes","Fichas del grupo y residentes",1],["history","Historia","Crónica completa",2],["npcs","PNJ","Contactos y figuras conocidas",3],["base","Base y facción","Instalaciones, proyectos y protocolos",4],["recon_map","Mapa de reconocimiento","Zonas conocidas, rutas confirmadas y destinos pendientes",4.5],["bestiary","Bestiario","Criaturas y enemigos conocidos",5],["lore","Lore","Culturas, lugares, religiones y organizaciones",6],["mysteries","Quests","Misiones, pistas, hipótesis y preguntas abiertas",7],["items","Objetos","Documentos, llaves y pistas",8],["rules","Reglas","Reglas oficiales, opcionales y adaptaciones",9],["campaign_bible","Campaign Bible","Archivo maestro completo",9.5],["checkpoint","Checkpoint","Estado canónico para continuar",10],["changelog","Changelog","Historial de cambios",11]];
-const main=$("#main"),nav=$("#nav");main.innerHTML="";nav.querySelectorAll("a").forEach(a=>a.remove());
-defs.map(d=>({id:d[0],...sectionMeta(...d)})).filter(x=>x.visible).sort((a,b)=>a.sort_order-b.sort_order).forEach(s=>{const sec=document.createElement("section");sec.id=s.id;sec.innerHTML=`<div class="head"><div><h2>${esc(s.title)}</h2><p>${esc(s.subtitle)}</p></div></div><div class="sectionBody"></div>`;main.appendChild(sec);const a=document.createElement("a");a.href="#"+s.id;a.textContent=s.title;nav.insertBefore(a,$("#refresh"))})
-}
-const body=id=>document.querySelector(`#${id} .sectionBody`);
 
-function sectionRenderers(){return{characters:renderCharacters,history:renderHistory,npcs:renderNPCs,base:renderBase,recon_map:renderReconMap,bestiary:renderBestiary,lore:renderLore,mysteries:renderMysteries,items:renderItems,rules:renderRules,campaign_bible:renderCampaignBible,checkpoint:renderCheckpoint,changelog:renderChanges}}
-function renderSectionNow(id){const r=body(id),fn=sectionRenderers()[id];if(!r||!fn||r.dataset.rendered==="1")return;fn();r.dataset.rendered="1"}
-function initLazySections(){Object.keys(sectionRenderers()).forEach(id=>{const r=body(id);if(r){r.dataset.rendered="0";r.innerHTML=EAGER_SECTIONS.has(id)?"":`<div class="lazySectionCard"><div><strong>${esc(id)}</strong><small>Cargando al entrar…</small></div></div>`}});EAGER_SECTIONS.forEach(renderSectionNow);SECTION_OBSERVER=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){renderSectionNow(e.target.id);SECTION_OBSERVER.unobserve(e.target)}}),{rootMargin:"280px"});Object.keys(sectionRenderers()).forEach(id=>{const s=document.getElementById(id);if(s&&!EAGER_SECTIONS.has(id))SECTION_OBSERVER.observe(s)})}
-function wireLazyNavigation(){document.addEventListener("click",e=>{const a=e.target.closest('a[href^="#"]');if(a)renderSectionNow(a.getAttribute("href").slice(1))})}
+  $("#brand").textContent=
+    cfg(
+      "campaign_name",
+      "Campaign Codex"
+    );
+
+  $("#eyebrow").textContent=
+    cfg(
+      "ruleset",
+      "D&D 5e 2014"
+    );
+
+  $("#heroTitle").textContent=
+    cfg(
+      "site_title",
+      cfg(
+        "campaign_name",
+        "Kazym Garnithor"
+      )
+    );
+
+  $("#heroSubtitle").textContent=
+    cfg(
+      "site_subtitle",
+      "Campaign Bible viva"
+    );
+
+  document.title=
+    cfg(
+      "site_title",
+      "Kazym Campaign Codex"
+    )
+    +
+    " · v2.9.4";
+
+
+  const defs=[
+
+    [
+      "characters",
+      "Personajes",
+      "Fichas del grupo y residentes",
+      1
+    ],
+
+    [
+      "history",
+      "Historia",
+      "Crónica completa",
+      2
+    ],
+
+    [
+      "npcs",
+      "PNJ",
+      "Contactos y figuras conocidas",
+      3
+    ],
+
+    [
+      "base",
+      "Base y facción",
+      "Base, facción, mapa, habitantes, recursos, proyectos y protocolos",
+      4
+    ],
+
+    [
+      "bestiary",
+      "Bestiario",
+      "Criaturas y enemigos conocidos",
+      5
+    ],
+
+    [
+      "lore",
+      "Lore",
+      "Culturas, lugares, religiones y organizaciones",
+      6
+    ],
+
+    [
+      "mysteries",
+      "Quests",
+      "Misiones, pistas, hipótesis y preguntas abiertas",
+      7
+    ],
+
+    [
+      "items",
+      "Objetos",
+      "Documentos, llaves, pistas y objetos importantes",
+      8
+    ],
+
+    [
+      "rules",
+      "Reglas",
+      "Reglas oficiales, opcionales y adaptaciones",
+      9
+    ],
+
+    [
+      "checkpoint",
+      "Checkpoint",
+      "Estado canónico para continuar",
+      10
+    ],
+
+    [
+      "changelog",
+      "Changelog",
+      "Historial de cambios",
+      11
+    ],
+
+    [
+      "campaign_bible",
+      "Archivo extendido",
+      "Campaign Bible: lore ampliado, continuidad, reglas y retcons",
+      12
+    ]
+
+  ];
+
+
+  const main=
+    $("#main");
+
+  const nav=
+    $("#nav");
+
+
+  main.innerHTML="";
+
+
+  nav
+    .querySelectorAll("a")
+    .forEach(
+      a=>a.remove()
+    );
+
+
+  defs
+    .map(
+      d=>({
+        id:d[0],
+        ...sectionMeta(...d)
+      })
+    )
+
+    .filter(
+      x=>x.visible
+    )
+
+    .sort(
+      (a,b)=>
+        a.sort_order-
+        b.sort_order
+    )
+
+    .forEach(s=>{
+
+      const sec=
+        document.createElement(
+          "section"
+        );
+
+      sec.id=
+        s.id;
+
+      sec.innerHTML=`
+        <div class="head">
+          <div>
+            <h2>
+              ${esc(s.title)}
+            </h2>
+
+            <p>
+              ${esc(
+                s.subtitle ||
+                ""
+              )}
+            </p>
+          </div>
+        </div>
+
+        <div class="sectionBody">
+        </div>
+      `;
+
+      main.appendChild(sec);
+
+
+      const a=
+        document.createElement(
+          "a"
+        );
+
+      a.href=
+        "#"+s.id;
+
+      a.textContent=
+        s.title;
+
+      nav.insertBefore(
+        a,
+        $("#refresh")
+      );
+
+    });
+
+}
+
+
+const body=
+  id=>
+    document.querySelector(
+      `#${id} .sectionBody`
+    );
+
 
 function renderCharacters(){
-const root=body("characters");root.innerHTML=`<div style="display:flex;justify-content:flex-end;margin-bottom:12px"><input id="characterSearch" class="search" placeholder="Buscar personaje…"></div><div class="grid avatars" id="charactersGrid"></div>${bibleSupplementHTML(["2","3"],"Personajes y aliados")}`;
-const draw=()=>{const q=norm($("#characterSearch").value),g=$("#charactersGrid");g.innerHTML=DATA.characters.filter(c=>norm([c.name,c.role,c.race,c.class].join(" ")).includes(q)).map(c=>`<button class="avatar" data-char="${esc(c.character_id)}"><div class="portrait">${img(c.portrait,"",c.name)}</div><b>${esc(c.name)}</b><small>${esc(c.role||"")}</small></button>`).join("");g.querySelectorAll("[data-char]").forEach(b=>b.onclick=()=>openChar(DATA.characters.find(c=>c.character_id===b.dataset.char)));queueImages(g)};$("#characterSearch").oninput=draw;draw()
+
+  const root=
+    body("characters");
+
+  root.innerHTML=`
+    <div
+      style="
+        display:flex;
+        justify-content:flex-end;
+        margin-bottom:12px
+      ">
+
+      <input
+        id="characterSearch"
+        class="search"
+        placeholder="Buscar personaje…">
+
+    </div>
+
+    <div
+      class="grid avatars"
+      id="charactersGrid">
+    </div>
+  `;
+
+
+  const draw=()=>{
+
+    const q=
+      norm(
+        $("#characterSearch").value
+      );
+
+    const g=
+      $("#charactersGrid");
+
+
+    g.innerHTML=
+      DATA.characters
+
+        .filter(
+          c=>
+            norm(
+              [
+                c.name,
+                c.role,
+                c.race,
+                c.class,
+                c.subclass
+              ].join(" ")
+            ).includes(q)
+        )
+
+        .map(
+          c=>`
+            <button
+              class="avatar"
+              data-id="${esc(c.character_id)}">
+
+              <div class="portrait">
+                ${
+                  img(
+                    c.portrait,
+                    "",
+                    c.name
+                  )
+                }
+              </div>
+
+              <b>
+                ${esc(c.name)}
+              </b>
+
+              <small>
+                ${esc(c.role||"")}
+              </small>
+
+            </button>
+          `
+        )
+
+        .join("")
+
+      ||
+
+      `
+        <div class="empty">
+          Sin personajes.
+        </div>
+      `;
+
+
+    g
+      .querySelectorAll(
+        "[data-id]"
+      )
+      .forEach(
+        b=>
+          b.onclick=
+            ()=>
+              openChar(
+                DATA.characters.find(
+                  c=>
+                    c.character_id===
+                    b.dataset.id
+                )
+              )
+      );
+
+
+    queueImages(g);
+
+  };
+
+
+  $("#characterSearch").oninput=
+    draw;
+
+  draw();
+
 }
+
 
 function renderHistory(){
-const root=body("history");if(!DATA.history.length){root.innerHTML=`<div class="empty">Sin capítulos.</div>`;return}
-root.innerHTML=`<div class="historyTimelineHorizontal"><div class="historyTimelineNav"><button class="historyTimelineNavBtn" data-dir="prev">‹</button><button class="historyTimelineNavBtn" data-dir="next">›</button></div><div class="historyTimelineViewport"><div class="historyTimelineTrack">${DATA.history.map((h,i)=>`<div class="historyTimelineStep"><button class="historyTimelineSelect" data-history="${i}"><div class="historyTimelineIcon">${h.image?img(h.image,"",h.title):"Sin imagen"}</div><div class="historyTimelineDot"></div><div class="historyTimelineLabel"><span class="historyTimelineChapter">Capítulo ${esc(h.sort_order||"")}</span><span class="historyTimelineName">${esc(h.title||"")}</span></div></button></div>`).join("")}</div></div><div class="historyStoryPanel"></div></div>`;
-const track=root.querySelector(".historyTimelineTrack"),panel=root.querySelector(".historyStoryPanel");
-root.querySelector("[data-dir='prev']").onclick=()=>track.scrollBy({left:-600,behavior:"smooth"});root.querySelector("[data-dir='next']").onclick=()=>track.scrollBy({left:600,behavior:"smooth"});
-root.querySelectorAll("[data-history]").forEach(b=>b.onclick=()=>{const h=DATA.history[+b.dataset.history],story=h.full_text||h.body||"";panel.innerHTML=`<div class="historyStorySplit"><div class="historyStoryImage">${h.image?img(h.image,"",h.title):""}</div><div class="historyStoryText"><div class="historyStoryHeader"><div class="eyebrow">Capítulo ${esc(h.sort_order||"")}</div><h3>${esc(h.title||"")}</h3><button class="historyStoryClose">×</button></div><p class="historyStorySummary">${esc(h.summary||"")}</p><p class="long">${esc(story)}</p></div></div>`;panel.classList.add("open");panel.querySelector(".historyStoryClose").onclick=()=>panel.classList.remove("open");queueImages(panel)});
-queueImages(root)
+
+  const root=
+    body("history");
+
+
+  if(!DATA.history.length){
+
+    root.innerHTML=`
+      <div class="empty">
+        Sin capítulos.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  root.innerHTML=`
+
+    <div class="historyTimelineHorizontal">
+
+      <div class="historyTimelineNav">
+
+        <button
+          class="historyTimelineNavBtn"
+          data-dir="prev">
+          ‹
+        </button>
+
+        <button
+          class="historyTimelineNavBtn"
+          data-dir="next">
+          ›
+        </button>
+
+      </div>
+
+
+      <div class="historyTimelineViewport">
+
+        <div class="historyTimelineTrack">
+
+          ${
+            DATA.history
+              .map(
+                (h,i)=>`
+
+                  <div class="historyTimelineStep">
+
+                    <button
+                      class="historyTimelineSelect"
+                      data-history="${i}">
+
+                      <div class="historyTimelineIcon">
+
+                        ${
+                          h.image
+                            ?
+                            img(
+                              h.image,
+                              "",
+                              h.title
+                            )
+                            :
+                            ""
+                        }
+
+                      </div>
+
+
+                      <div class="historyTimelineDot">
+                      </div>
+
+
+                      <div class="historyTimelineLabel">
+
+                        <span class="historyTimelineChapter">
+                          Capítulo ${
+                            esc(
+                              h.sort_order ||
+                              ""
+                            )
+                          }
+                        </span>
+
+                        <span class="historyTimelineName">
+                          ${
+                            esc(
+                              h.title ||
+                              ""
+                            )
+                          }
+                        </span>
+
+                      </div>
+
+                    </button>
+
+                  </div>
+
+                `
+              )
+              .join("")
+          }
+
+        </div>
+
+      </div>
+
+
+      <div class="historyStoryPanel">
+      </div>
+
+    </div>
+  `;
+
+
+  const track=
+    root.querySelector(
+      ".historyTimelineTrack"
+    );
+
+  const panel=
+    root.querySelector(
+      ".historyStoryPanel"
+    );
+
+
+  root
+    .querySelector(
+      '[data-dir="prev"]'
+    )
+    .onclick=
+      ()=>
+        track.scrollBy({
+          left:-600,
+          behavior:"smooth"
+        });
+
+
+  root
+    .querySelector(
+      '[data-dir="next"]'
+    )
+    .onclick=
+      ()=>
+        track.scrollBy({
+          left:600,
+          behavior:"smooth"
+        });
+
+
+  root
+    .querySelectorAll(
+      "[data-history]"
+    )
+    .forEach(
+      b=>
+        b.onclick=
+          ()=>{
+
+            const h=
+              DATA.history[
+                +b.dataset.history
+              ];
+
+
+            panel.innerHTML=`
+
+              <div class="historyStorySplit">
+
+                <div class="historyStoryImage">
+
+                  ${
+                    h.image
+                      ?
+                      img(
+                        h.image,
+                        "",
+                        h.title
+                      )
+                      :
+                      ""
+                  }
+
+                </div>
+
+
+                <div class="historyStoryText">
+
+                  <div class="historyStoryHeader">
+
+                    <div class="eyebrow">
+                      Capítulo ${
+                        esc(
+                          h.sort_order ||
+                          ""
+                        )
+                      }
+                    </div>
+
+                    <h3>
+                      ${
+                        esc(
+                          h.title ||
+                          ""
+                        )
+                      }
+                    </h3>
+
+                    <button class="historyStoryClose">
+                      ×
+                    </button>
+
+                  </div>
+
+
+                  ${
+                    h.summary
+                      ?
+                      `
+                        <p class="historyStorySummary">
+                          ${esc(h.summary)}
+                        </p>
+                      `
+                      :
+                      ""
+                  }
+
+
+                  <p class="long">
+                    ${
+                      esc(
+                        h.full_text ||
+                        h.detailed_text ||
+                        h.body ||
+                        ""
+                      )
+                    }
+                  </p>
+
+                </div>
+
+              </div>
+            `;
+
+
+            panel.classList.add(
+              "open"
+            );
+
+
+            panel
+              .querySelector(
+                ".historyStoryClose"
+              )
+              .onclick=
+                ()=>
+                  panel.classList.remove(
+                    "open"
+                  );
+
+
+            queueImages(panel);
+
+          }
+    );
+
+
+  queueImages(root);
+
 }
 
-function renderNPCs(){const root=body("npcs");root.innerHTML=`<div class="grid">${DATA.npcs.map(n=>`<article class="card"><div class="npcPortrait">${n.image?img(n.image,"",n.name):""}</div><div class="status">${esc(n.status||"")}</div><h3>${esc(n.name||"")}</h3><p class="long">${esc(n.known||n.description||"")}</p></article>`).join("")}</div>${bibleSupplementHTML(["8"],"NPC importantes")}`;queueImages(root)}
 
-function resourceTone(r){const need=num(r.needed),have=num(r.have);if(need===null||need<=0)return{tone:"neutral",pct:0,label:"objetivo pendiente"};if(have<need)return{tone:"short",pct:Math.max(0,100*have/need),label:"falta"};if(have===need)return{tone:"exact",pct:100,label:"justo"};return{tone:"surplus",pct:100,label:"sobra"}}
-function baseOccupantHTML(o){return`<div class="baseOccupant"><div class="baseOccupantIcon">${o.portrait?img(o.portrait,"",o.name):`<div class="basePersonFallback"></div>`}</div><span>${esc(o.name||"")}</span></div>`}
+function renderNPCs(){
+
+  const root=
+    body("npcs");
+
+
+  root.innerHTML=
+    DATA.npcs.length
+      ?
+      `
+        <div class="grid">
+
+          ${
+            DATA.npcs
+              .map(
+                n=>`
+                  <article class="card">
+
+                    <div class="npcPortrait">
+
+                      ${
+                        n.image
+                          ?
+                          img(
+                            n.image,
+                            "",
+                            n.name
+                          )
+                          :
+                          ""
+                      }
+
+                    </div>
+
+                    <div class="status">
+                      ${esc(n.status||"")}
+                    </div>
+
+                    <h3>
+                      ${esc(n.name||"")}
+                    </h3>
+
+                    <span class="chip">
+                      ${esc(n.role||"")}
+                    </span>
+
+                    <p class="long">
+                      ${
+                        esc(
+                          n.known ||
+                          n.known_info ||
+                          n.description ||
+                          ""
+                        )
+                      }
+                    </p>
+
+                  </article>
+                `
+              )
+              .join("")
+          }
+
+        </div>
+      `
+      :
+      `
+        <div class="empty">
+          Sin PNJ.
+        </div>
+      `;
+
+
+  queueImages(root);
+
+}
+
+
+function resourceTone(r){
+
+  const need=
+    num(r.needed);
+
+  const have=
+    num(r.have);
+
+
+  if(
+    need===null ||
+    need<=0 ||
+    have===null
+  ){
+
+    return{
+      tone:"neutral",
+      pct:0,
+      label:"objetivo pendiente"
+    };
+
+  }
+
+
+  if(have<need){
+
+    return{
+      tone:"short",
+      pct:
+        Math.max(
+          0,
+          Math.min(
+            100,
+            100*have/need
+          )
+        ),
+      label:"falta"
+    };
+
+  }
+
+
+  if(have===need){
+
+    return{
+      tone:"exact",
+      pct:100,
+      label:"justo"
+    };
+
+  }
+
+
+  return{
+    tone:"surplus",
+    pct:100,
+    label:"sobra"
+  };
+
+}
+
+
+function occupantHTML(o){
+
+  return`
+    <div class="baseOccupant">
+
+      <div class="baseOccupantIcon">
+
+        ${
+          o.portrait
+            ?
+            img(
+              o.portrait,
+              "",
+              o.name
+            )
+            :
+            `
+              <div class="basePersonFallback">
+              </div>
+            `
+        }
+
+      </div>
+
+      <span>
+        ${
+          esc(
+            o.name ||
+            "Residente"
+          )
+        }
+      </span>
+
+    </div>
+  `;
+
+}
+
+
 function renderBase(){
-const root=body("base"),b=DATA.base||{},occupants=b.occupants||[],standard=occupants.filter(o=>truth(o.counts_capacity)),secondary=occupants.filter(o=>!truth(o.counts_capacity)),capacity=num(b.capacity_confirmed_min)??standard.length,current=num(b.current_standard_occupancy)??standard.length;
-root.innerHTML=`<div class="baseOps"><div class="baseCapacityCard"><div class="baseCapacityTop"><div><div class="eyebrow">Ocupación actual</div><h3>Personas dentro de la base</h3></div><div class="baseCapacityNumber">${current} / ${capacity}+<small>plazas confirmadas</small></div></div><div class="baseOccupants">${standard.map(baseOccupantHTML).join("")}</div>${secondary.length?`<div class="baseResidentsSecondary"><b>Residentes no estándar</b><div class="baseOccupants">${secondary.map(baseOccupantHTML).join("")}</div></div>`:""}<p class="baseCapacityNote">${esc(b.capacity_note||"")}</p></div><div class="baseSupplyCard"><div class="eyebrow">Inventario operativo</div><h3>Suministros · necesario / tenemos</h3><div class="supplyGrid">${(b.resources||[]).map(r=>{const st=resourceTone(r);return`<div class="supplyRow ${st.tone}"><div><div class="supplyName">${esc(r.name)}</div><div class="supplyMeta">${esc(r.period||"")}</div></div><div class="supplyValue">${val(r.needed)} / ${val(r.have)} ${esc(r.unit||"")}<small>necesario / tenemos · ${st.label}</small></div><div class="supplyBar"><i style="width:${st.pct}%"></i></div></div>`}).join("")}</div></div></div><div class="two"><div>${b.image?img(b.image,"map",b.name):""}</div><div class="panel" style="padding:15px"><details><summary>Estado general</summary><div class="body"><h3>${esc(b.name||"Base")}</h3><p>${esc(b.purpose||"")}</p></div></details><details><summary>Salas</summary><div class="body">${list((b.rooms||[]).map(r=>`${r.name} — ${r.status}`))}</div></details><details><summary>Proyectos</summary><div class="body">${list((b.projects||[]).map(r=>`${r.name} — ${r.status}`))}</div></details><details><summary>Protocolos</summary><div class="body">${list((b.protocols||[]).map(r=>r.text||r.description||r.name||""))}</div></details></div></div>${bibleSupplementHTML(["4"],"Base y facción")}`;
-queueImages(root)
+
+  const root=
+    body("base");
+
+  const b=
+    DATA.base ||
+    {};
+
+  const occ=
+    b.occupants ||
+    [];
+
+  const standard=
+    occ.filter(
+      o=>truth(o.counts_capacity)
+    );
+
+  const secondary=
+    occ.filter(
+      o=>!truth(o.counts_capacity)
+    );
+
+  const cap=
+    num(
+      b.capacity_confirmed_min
+    ) ?? standard.length;
+
+  const now=
+    num(
+      b.current_standard_occupancy
+    ) ?? standard.length;
+
+  const done=
+    num(
+      b.functions_restored
+    ) || 0;
+
+  const total=
+    num(
+      b.functions_total
+    ) || 0;
+
+
+  const supplies=
+    (b.resources||[])
+      .map(r=>{
+
+        const s=
+          resourceTone(r);
+
+        return`
+
+          <div class="supplyRow ${s.tone}">
+
+            <div>
+
+              <div class="supplyName">
+                ${
+                  esc(
+                    r.name ||
+                    r.resource_id ||
+                    ""
+                  )
+                }
+              </div>
+
+              <div class="supplyMeta">
+                ${
+                  esc(
+                    r.note ||
+                    r.period ||
+                    ""
+                  )
+                }
+              </div>
+
+            </div>
+
+
+            <div class="supplyValue">
+
+              ${val(r.needed)}
+              /
+              ${val(r.have)}
+              ${esc(r.unit||"")}
+
+              <small>
+                necesario / tenemos
+                ·
+                ${s.label}
+              </small>
+
+            </div>
+
+
+            <div class="supplyBar">
+              <i style="width:${s.pct}%"></i>
+            </div>
+
+          </div>
+
+        `;
+
+      })
+
+      .join("");
+
+
+  root.innerHTML=`
+
+    <div class="baseUnified">
+
+
+      <div class="baseUnifiedHero">
+
+        <div class="baseFactionBanner">
+
+          ${
+            b.banner
+              ?
+              img(
+                b.banner,
+                "",
+                "Estandarte de facción"
+              )
+              :
+              ""
+          }
+
+        </div>
+
+
+        <div class="baseUnifiedHeroText">
+
+          <div class="eyebrow">
+            Base y facción
+          </div>
+
+          <h3>
+            ${
+              esc(
+                b.name ||
+                "Casa de Guardia / Puesto de Enlace"
+              )
+            }
+          </h3>
+
+          <p>
+            ${esc(b.purpose||"")}
+          </p>
+
+
+          <div class="progress">
+            <i
+              style="
+                width:${
+                  total
+                    ?
+                    100*done/total
+                    :
+                    0
+                }%
+              ">
+            </i>
+          </div>
+
+
+          <div class="baseUnifiedStats">
+
+            <span class="pill">
+              Funciones
+              ${done}/${total}
+            </span>
+
+            <span class="pill">
+              Ocupación
+              ${now}/${cap}+
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <details
+        class="baseUnifiedSection"
+        open>
+
+        <summary>
+          Estado general, plano y habitabilidad
+        </summary>
+
+        <div class="baseUnifiedBody">
+
+          <div class="two">
+
+            <div>
+              ${
+                b.image
+                  ?
+                  img(
+                    b.image,
+                    "map",
+                    b.name
+                  )
+                  :
+                  ""
+              }
+            </div>
+
+            <div>
+
+              <div class="status">
+                ${esc(b.status||"")}
+              </div>
+
+              <h3>
+                ${
+                  esc(
+                    b.name ||
+                    "Base"
+                  )
+                }
+              </h3>
+
+              <p>
+                ${
+                  esc(
+                    b.capacity_note ||
+                    ""
+                  )
+                }
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </details>
+
+
+      <details class="baseUnifiedSection">
+
+        <summary>
+          Habitantes y capacidad
+          ·
+          ${now} / ${cap}+
+        </summary>
+
+        <div class="baseUnifiedBody">
+
+          <div class="baseOccupants">
+
+            ${
+              standard
+                .map(
+                  occupantHTML
+                )
+                .join("")
+            }
+
+          </div>
+
+
+          ${
+            secondary.length
+              ?
+              `
+                <div class="baseResidentsSecondary">
+
+                  <b>
+                    Residentes no estándar
+                  </b>
+
+                  <div class="baseOccupants">
+
+                    ${
+                      secondary
+                        .map(
+                          occupantHTML
+                        )
+                        .join("")
+                    }
+
+                  </div>
+
+                </div>
+              `
+              :
+              ""
+          }
+
+        </div>
+
+      </details>
+
+
+      <details class="baseUnifiedSection">
+
+        <summary>
+          Recursos, tesorería y suministros
+        </summary>
+
+        <div class="baseUnifiedBody">
+
+          <div class="supplyGrid">
+
+            ${
+              supplies
+              ||
+              `
+                <div class="empty">
+                  Sin suministros.
+                </div>
+              `
+            }
+
+          </div>
+
+        </div>
+
+      </details>
+
+
+      <details class="baseUnifiedSection">
+
+        <summary>
+          Salas e instalaciones
+          ·
+          ${(b.rooms||[]).length}
+        </summary>
+
+        <div class="baseUnifiedBody">
+
+          ${
+            list(
+              (b.rooms||[])
+                .map(
+                  r=>
+                    `${r.name||""} — ${r.status||""}`
+                )
+            )
+          }
+
+        </div>
+
+      </details>
+
+
+      <details class="baseUnifiedSection">
+
+        <summary>
+          Proyectos y fases de crecimiento
+        </summary>
+
+        <div class="baseUnifiedBody">
+
+          ${
+            list(
+              (b.projects||[])
+                .map(
+                  p=>
+                    `${p.name||""} — ${p.status||""}`
+                )
+            )
+          }
+
+        </div>
+
+      </details>
+
+
+      <details class="baseUnifiedSection">
+
+        <summary>
+          Protocolos de custodia
+        </summary>
+
+        <div class="baseUnifiedBody">
+
+          ${
+            list(
+              (b.protocols||[])
+                .map(
+                  p=>
+                    p.text ||
+                    p.description ||
+                    p.name ||
+                    ""
+                )
+            )
+          }
+
+        </div>
+
+      </details>
+
+
+      <details class="baseUnifiedSection">
+
+        <summary>
+          Facción, miembros, candidatos y red de apoyo
+        </summary>
+
+        <div class="baseUnifiedBody">
+
+          ${
+            list(
+              (b.members||[])
+                .map(
+                  m=>
+                    m.role_summary ||
+                    m.entity_name ||
+                    m.name ||
+                    ""
+                )
+            )
+          }
+
+        </div>
+
+      </details>
+
+
+      <details class="baseUnifiedSection">
+
+        <summary>
+          Mapa de reconocimiento regional
+        </summary>
+
+        <div class="baseUnifiedBody baseReconInner">
+        </div>
+
+      </details>
+
+
+      <details class="baseUnifiedSection">
+
+        <summary>
+          Pendientes de la base y la facción
+        </summary>
+
+        <div class="baseUnifiedBody">
+
+          ${
+            list(
+              (b.details||[])
+                .filter(
+                  d=>
+                    norm(
+                      d.category
+                    )==="pending"
+                )
+                .map(
+                  d=>
+                    d.text ||
+                    ""
+                )
+            )
+          }
+
+        </div>
+
+      </details>
+
+
+    </div>
+  `;
+
+
+  queueImages(root);
+
+
+  renderReconMap(
+    root.querySelector(
+      ".baseReconInner"
+    )
+  );
+
 }
 
-function markerSizeClass(s){s=String(s||"S").toUpperCase();return s==="L"?"size-L":s==="M"?"size-M":"size-S"}
-function renderReconMap(){
-const root=body("recon_map"),map=(DATA.maps||[]).find(m=>String(m.status)==="active")||(DATA.maps||[])[0];if(!map||!map.image){root.innerHTML=`<div class="empty">Mapa no disponible.</div>`;return}
-const markers=(DATA.map_markers||[]).filter(m=>String(m.map_id)===String(map.map_id)),markerById=new Map(markers.map(m=>[String(m.marker_id),m])),minZoom=Math.max(.5,num(map.min_zoom)??1),maxZoom=Math.max(minZoom,num(map.max_zoom)??4),defaultZoom=Math.min(maxZoom,Math.max(minZoom,num(map.default_zoom)??1));
-root.innerHTML=`<div class="reconWrap"><div><div class="reconMapCard"><div class="reconMapToolbar"><button class="mapTool" data-map-action="out">−</button><button class="mapTool" data-map-action="reset">⌂</button><button class="mapTool" data-map-action="in">+</button><span class="zoomReadout" data-map-zoom>${Math.round(defaultZoom*100)}%</span><span class="mapHint">Rueda para zoom · arrastra para mover</span></div><div class="reconMapViewport"><div class="reconMapStage">${img(map.image,"reconBaseImage",map.name)}<div class="reconMarkerLayer">${markers.map(m=>`<button class="reconMarkerButton" data-marker-id="${esc(m.marker_id)}" style="left:${num(m.x_percent)??0}%;top:${num(m.y_percent)??0}%"><span class="reconMarkerUI ${markerSizeClass(m.marker_size)}">${m.image?img(m.image,"reconMarkerImage",m.label):`<span class="reconMarkerFallback"></span>`}<span class="reconMarkerTooltip"><b>${esc(m.label)}</b><span>${esc(m.tooltip||m.type_label||"")}</span></span></span></button>`).join("")}</div></div></div><div class="reconMapLegend">${(DATA.marker_types||[]).map(t=>{const a=assetValue(t.default_asset_id);return`<span class="reconLegendItem">${a?img(a,"",t.label):""}<span>${esc(t.label||t.marker_type)}</span></span>`}).join("")}</div></div><div class="reconMapNote">Las posiciones son propuestas cartográficas. Los banderines se anclan por la punta inferior y permanecen pequeños al hacer zoom.</div><div class="reconMarkerDetail"></div></div></div>`;
-queueImages(root);
-const viewport=root.querySelector(".reconMapViewport"),stage=root.querySelector(".reconMapStage"),readout=root.querySelector("[data-map-zoom]"),detail=root.querySelector(".reconMarkerDetail");let scale=defaultZoom,tx=0,ty=0,panning=false,lastX=0,lastY=0;
-const apply=()=>{stage.style.transform=`translate(${tx}px,${ty}px) scale(${scale})`;root.querySelectorAll(".reconMarkerUI").forEach(el=>el.style.setProperty("--marker-counter",1/scale));readout.textContent=`${Math.round(scale*100)}%`};
-const zoomAt=(next,cx,cy)=>{next=Math.min(maxZoom,Math.max(minZoom,next));const wx=(cx-tx)/scale,wy=(cy-ty)/scale;tx=cx-wx*next;ty=cy-wy*next;scale=next;apply()};
-const center=next=>{const r=viewport.getBoundingClientRect();zoomAt(next,r.width/2,r.height/2)};
-root.querySelector('[data-map-action="in"]').onclick=()=>center(scale*1.25);root.querySelector('[data-map-action="out"]').onclick=()=>center(scale/1.25);root.querySelector('[data-map-action="reset"]').onclick=()=>{scale=defaultZoom;tx=0;ty=0;apply()};
-viewport.addEventListener("wheel",e=>{e.preventDefault();const r=viewport.getBoundingClientRect();zoomAt(scale*(e.deltaY<0?1.12:.89),e.clientX-r.left,e.clientY-r.top)},{passive:false});
-viewport.onpointerdown=e=>{if(e.target.closest(".reconMarkerButton"))return;panning=true;lastX=e.clientX;lastY=e.clientY;viewport.classList.add("isPanning")};viewport.onpointermove=e=>{if(!panning)return;tx+=e.clientX-lastX;ty+=e.clientY-lastY;lastX=e.clientX;lastY=e.clientY;apply()};viewport.onpointerup=viewport.onpointercancel=()=>{panning=false;viewport.classList.remove("isPanning")};
-root.querySelectorAll(".reconMarkerButton").forEach(btn=>btn.onclick=()=>{const m=markerById.get(btn.dataset.markerId);detail.innerHTML=`<article class="card"><div class="status">${esc(m.type_label||m.marker_type)}</div><h3>${esc(m.label)}</h3><p>${esc(m.tooltip||"")}</p><p><b>Coordenada:</b> ${esc(m.x_px)}, ${esc(m.y_px)} px · ${esc(m.x_percent)}%, ${esc(m.y_percent)}%</p>${m.linked_section?`<button class="btn" data-linked="${esc(m.linked_section)}">Abrir sección relacionada</button>`:""}</article>`;detail.querySelector("[data-linked]")?.addEventListener("click",e=>{const id=e.currentTarget.dataset.linked;renderSectionNow(id);location.hash=id})});
-apply()
+
+function markerSizeClass(s){
+
+  s=
+    String(
+      s ||
+      "S"
+    ).toUpperCase();
+
+
+  return s==="L"
+    ?
+    "size-L"
+    :
+    s==="M"
+      ?
+      "size-M"
+      :
+      "size-S";
+
 }
 
-function carousel(root){const track=root.querySelector(".contentCarouselTrack")||root.querySelector(".questCarouselTrack");if(!track)return;root.querySelector("[data-dir='prev']")?.addEventListener("click",()=>track.scrollBy({left:-600,behavior:"smooth"}));root.querySelector("[data-dir='next']")?.addEventListener("click",()=>track.scrollBy({left:600,behavior:"smooth"}))}
-function renderBestiary(){const root=body("bestiary");root.innerHTML=`<div class="contentCarousel hasOverflow"><div class="contentCarouselControls"><button class="contentCarouselBtn" data-dir="prev">‹</button><button class="contentCarouselBtn" data-dir="next">›</button></div><div class="contentCarouselTrack">${DATA.bestiary.map(e=>`<article class="card monster">${e.image?`<div class="monsterPortrait">${img(e.image,"",e.name)}</div>`:""}<div class="status">${esc(e.status||"")}</div><h3>${esc(e.name||"")}</h3><span class="chip">${esc(e.type||"")}</span><p>${esc(e.description||"")}</p></article>`).join("")}</div></div>${bibleSupplementHTML(["7"],"Bestiario completo")}`;queueImages(root);carousel(root.querySelector(".contentCarousel"))}
-function renderLore(){const root=body("lore");root.innerHTML=`<div class="contentCarousel hasOverflow"><div class="contentCarouselControls"><button class="contentCarouselBtn" data-dir="prev">‹</button><button class="contentCarouselBtn" data-dir="next">›</button></div><div class="contentCarouselTrack">${DATA.lore.map(e=>`<article class="card loreCard"><div class="loreIcon">${e.image?img(e.image,"",e.title):""}</div><div class="loreText"><div class="status">${esc(e.category||"")}</div><h3>${esc(e.title||"")}</h3><p>${esc(e.body_public||e.body||"")}</p></div></article>`).join("")}</div></div>${bibleSupplementHTML(["9"],"Lore completo")}`;queueImages(root);carousel(root.querySelector(".contentCarousel"))}
-function renderMysteries(){const root=body("mysteries");root.innerHTML=`<div class="questCarousel hasOverflow"><div class="questCarouselControls"><button class="questCarouselBtn" data-dir="prev">‹</button><button class="questCarouselBtn" data-dir="next">›</button></div><div class="questCarouselTrack">${DATA.mysteries.map(m=>`<article class="card questCard"><div class="questIcon">${m.image?img(m.image,"",m.title):""}</div><div class="questContent"><div class="status">${esc(m.status||"")}</div><h3>${esc(m.title||"")}</h3><div class="progress"><i style="width:${num(m.progress_pct||m.progress)||0}%"></i></div><p>${esc(m.known||"")}</p></div></article>`).join("")}</div></div>${bibleSupplementHTML(["10"],"Pistas y misterios")}`;queueImages(root);carousel(root.querySelector(".questCarousel"))}
-function renderItems(){const root=body("items");root.innerHTML=`<div class="contentCarousel hasOverflow"><div class="contentCarouselControls"><button class="contentCarouselBtn" data-dir="prev">‹</button><button class="contentCarouselBtn" data-dir="next">›</button></div><div class="contentCarouselTrack">${DATA.items.map(i=>`<article class="card itemCard">${i.image?`<div class="itemPortrait">${img(i.image,"",i.name)}</div>`:""}<div class="status">${esc(i.status||"")}</div><h3>${esc(i.name||"")}</h3><p>${esc(i.description||"")}</p></article>`).join("")}</div></div>${bibleSupplementHTML(["11"],"Inventario completo")}`;queueImages(root);carousel(root.querySelector(".contentCarousel"))}
-function renderRules(){const root=body("rules");root.innerHTML=(DATA.rules||[]).map(r=>`<details><summary>${esc(r.title||"")}</summary><div class="body"><span class="pill">${esc(r.status||"")}</span><p>${esc(r.notes||r.body||"")}</p></div></details>`).join("")+bibleSupplementHTML(["12","13","14"],"Reglas y canon")}
+
+function renderReconMap(root){
+
+  if(!root){
+    return;
+  }
+
+
+  const map=
+    (DATA.maps||[])
+      .find(
+        m=>
+          String(
+            m.status ||
+            ""
+          )==="active"
+      )
+    ||
+    (DATA.maps||[])[0];
+
+
+  if(
+    !map ||
+    !map.image
+  ){
+
+    root.innerHTML=`
+      <div class="empty">
+        Mapa regional no disponible.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  const markers=
+    (DATA.map_markers||[])
+      .filter(
+        m=>
+          String(m.map_id)===
+          String(map.map_id)
+      );
+
+
+  const byId=
+    new Map(
+      markers.map(
+        m=>[
+          String(m.marker_id),
+          m
+        ]
+      )
+    );
+
+
+  const min=
+    Math.max(
+      .5,
+      num(map.min_zoom) ?? 1
+    );
+
+
+  const max=
+    Math.max(
+      min,
+      num(map.max_zoom) ?? 4
+    );
+
+
+  const def=
+    Math.min(
+      max,
+      Math.max(
+        min,
+        num(map.default_zoom) ?? 1
+      )
+    );
+
+
+  root.innerHTML=`
+
+    <div class="reconWrap">
+
+      <div>
+
+        <div class="reconMapCard">
+
+
+          <div class="reconMapToolbar">
+
+            <button
+              class="mapTool"
+              data-a="out">
+              −
+            </button>
+
+            <button
+              class="mapTool"
+              data-a="reset">
+              ⌂
+            </button>
+
+            <button
+              class="mapTool"
+              data-a="in">
+              +
+            </button>
+
+            <span class="zoomReadout">
+              ${Math.round(def*100)}%
+            </span>
+
+            <span class="mapHint">
+              Rueda para zoom · arrastra para mover
+            </span>
+
+          </div>
+
+
+          <div class="reconMapViewport">
+
+            <div class="reconMapStage">
+
+              ${
+                img(
+                  map.image,
+                  "reconBaseImage",
+                  map.name
+                )
+              }
+
+
+              <div class="reconMarkerLayer">
+
+                ${
+                  markers
+                    .map(
+                      m=>`
+
+                        <button
+                          class="reconMarkerButton"
+                          data-mid="${esc(m.marker_id)}"
+                          style="
+                            left:${num(m.x_percent)??0}%;
+                            top:${num(m.y_percent)??0}%;
+                          ">
+
+                          <span
+                            class="
+                              reconMarkerUI
+                              ${markerSizeClass(m.marker_size)}
+                            ">
+
+                            ${
+                              m.image
+                                ?
+                                img(
+                                  m.image,
+                                  "reconMarkerImage",
+                                  m.label
+                                )
+                                :
+                                `
+                                  <span class="reconMarkerFallback">
+                                  </span>
+                                `
+                            }
+
+
+                            <span class="reconMarkerTooltip">
+
+                              <b>
+                                ${esc(m.label||"")}
+                              </b>
+
+                              <span>
+                                ${
+                                  esc(
+                                    m.tooltip ||
+                                    m.type_label ||
+                                    ""
+                                  )
+                                }
+                              </span>
+
+                            </span>
+
+                          </span>
+
+                        </button>
+
+                      `
+                    )
+                    .join("")
+                }
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="reconMarkerDetail">
+        </div>
+
+      </div>
+
+    </div>
+  `;
+
+
+  queueImages(root);
+
+
+  const vp=
+    root.querySelector(
+      ".reconMapViewport"
+    );
+
+  const stage=
+    root.querySelector(
+      ".reconMapStage"
+    );
+
+  const read=
+    root.querySelector(
+      ".zoomReadout"
+    );
+
+  const detail=
+    root.querySelector(
+      ".reconMarkerDetail"
+    );
+
+
+  let scale=def;
+  let tx=0;
+  let ty=0;
+  let pan=false;
+  let lx=0;
+  let ly=0;
+
+
+  const apply=()=>{
+
+    stage.style.transform=`
+      translate(
+        ${tx}px,
+        ${ty}px
+      )
+      scale(${scale})
+    `;
+
+
+    root
+      .querySelectorAll(
+        ".reconMarkerUI"
+      )
+      .forEach(
+        el=>
+          el.style.setProperty(
+            "--marker-counter",
+            1/scale
+          )
+      );
+
+
+    read.textContent=
+      `${Math.round(scale*100)}%`;
+
+  };
+
+
+  const zoom=(
+    next,
+    cx,
+    cy
+  )=>{
+
+    next=
+      Math.min(
+        max,
+        Math.max(
+          min,
+          next
+        )
+      );
+
+
+    const wx=
+      (cx-tx)/scale;
+
+    const wy=
+      (cy-ty)/scale;
+
+
+    tx=
+      cx-wx*next;
+
+    ty=
+      cy-wy*next;
+
+    scale=
+      next;
+
+    apply();
+
+  };
+
+
+  const center=
+    n=>{
+
+      const r=
+        vp.getBoundingClientRect();
+
+      zoom(
+        n,
+        r.width/2,
+        r.height/2
+      );
+
+    };
+
+
+  root
+    .querySelector(
+      '[data-a="in"]'
+    )
+    .onclick=
+      ()=>
+        center(
+          scale*1.25
+        );
+
+
+  root
+    .querySelector(
+      '[data-a="out"]'
+    )
+    .onclick=
+      ()=>
+        center(
+          scale/1.25
+        );
+
+
+  root
+    .querySelector(
+      '[data-a="reset"]'
+    )
+    .onclick=
+      ()=>{
+
+        scale=def;
+        tx=0;
+        ty=0;
+
+        apply();
+
+      };
+
+
+  vp.addEventListener(
+    "wheel",
+    e=>{
+
+      e.preventDefault();
+
+      const r=
+        vp.getBoundingClientRect();
+
+      zoom(
+        scale *
+        (
+          e.deltaY<0
+            ?
+            1.12
+            :
+            .89
+        ),
+        e.clientX-r.left,
+        e.clientY-r.top
+      );
+
+    },
+    {
+      passive:false
+    }
+  );
+
+
+  vp.onpointerdown=
+    e=>{
+
+      if(
+        e.target.closest(
+          ".reconMarkerButton"
+        )
+      ){
+        return;
+      }
+
+      pan=true;
+
+      lx=e.clientX;
+      ly=e.clientY;
+
+      vp.classList.add(
+        "isPanning"
+      );
+
+    };
+
+
+  vp.onpointermove=
+    e=>{
+
+      if(!pan){
+        return;
+      }
+
+      tx+=
+        e.clientX-lx;
+
+      ty+=
+        e.clientY-ly;
+
+      lx=e.clientX;
+      ly=e.clientY;
+
+      apply();
+
+    };
+
+
+  vp.onpointerup=
+  vp.onpointercancel=
+    ()=>{
+
+      pan=false;
+
+      vp.classList.remove(
+        "isPanning"
+      );
+
+    };
+
+
+  root
+    .querySelectorAll(
+      "[data-mid]"
+    )
+    .forEach(
+      btn=>
+        btn.onclick=
+          ()=>{
+
+            const m=
+              byId.get(
+                btn.dataset.mid
+              );
+
+            detail.innerHTML=`
+
+              <article class="card">
+
+                <div class="status">
+                  ${
+                    esc(
+                      m.type_label ||
+                      m.marker_type ||
+                      ""
+                    )
+                  }
+                </div>
+
+                <h3>
+                  ${esc(m.label||"")}
+                </h3>
+
+                <p>
+                  ${esc(m.tooltip||"")}
+                </p>
+
+                <p>
+                  <b>Coordenada:</b>
+
+                  ${esc(m.x_px||"")},
+                  ${esc(m.y_px||"")}
+                  px
+
+                  ·
+
+                  ${esc(m.x_percent||"")}%,
+                  ${esc(m.y_percent||"")}%
+                </p>
+
+              </article>
+            `;
+
+          }
+    );
+
+
+  apply();
+
+}
+
+
+function carousel(
+  root,
+  trackSel,
+  btnSel
+){
+
+  const track=
+    root.querySelector(
+      trackSel
+    );
+
+  if(!track){
+    return;
+  }
+
+
+  const prev=
+    root.querySelector(
+      `${btnSel}[data-dir="prev"]`
+    );
+
+  const next=
+    root.querySelector(
+      `${btnSel}[data-dir="next"]`
+    );
+
+
+  const step=
+    d=>
+      track.scrollBy({
+        left:
+          d *
+          Math.max(
+            300,
+            track.clientWidth*.8
+          ),
+        behavior:"smooth"
+      });
+
+
+  if(prev){
+    prev.onclick=
+      ()=>step(-1);
+  }
+
+
+  if(next){
+    next.onclick=
+      ()=>step(1);
+  }
+
+
+  track
+    .parentElement
+    ?.classList.add(
+      "hasOverflow"
+    );
+
+}
+
+
+function renderBestiary(){
+
+  const root=
+    body("bestiary");
+
+
+  root.innerHTML=
+    DATA.bestiary.length
+      ?
+      `
+        <div class="contentCarousel hasOverflow">
+
+          <div class="contentCarouselControls">
+
+            <button
+              class="contentCarouselBtn"
+              data-dir="prev">
+              ‹
+            </button>
+
+            <button
+              class="contentCarouselBtn"
+              data-dir="next">
+              ›
+            </button>
+
+          </div>
+
+
+          <div class="contentCarouselTrack">
+
+            ${
+              DATA.bestiary
+                .map(
+                  e=>`
+
+                    <article class="card monster">
+
+                      ${
+                        e.image
+                          ?
+                          `
+                            <div class="monsterPortrait">
+                              ${
+                                img(
+                                  e.image,
+                                  "",
+                                  e.name
+                                )
+                              }
+                            </div>
+                          `
+                          :
+                          ""
+                      }
+
+                      <div class="status">
+                        ${esc(e.status||"")}
+                      </div>
+
+                      <h3>
+                        ${esc(e.name||"")}
+                      </h3>
+
+                      <span class="chip">
+                        ${esc(e.type||"")}
+                      </span>
+
+                      <p>
+                        ${
+                          esc(
+                            e.description ||
+                            ""
+                          )
+                        }
+                      </p>
+
+                    </article>
+
+                  `
+                )
+                .join("")
+            }
+
+          </div>
+
+        </div>
+      `
+      :
+      `
+        <div class="empty">
+          Sin entradas.
+        </div>
+      `;
+
+
+  queueImages(root);
+
+  carousel(
+    root,
+    ".contentCarouselTrack",
+    ".contentCarouselBtn"
+  );
+
+}
+
+
+function renderLore(){
+
+  const root=
+    body("lore");
+
+
+  root.innerHTML=
+    DATA.lore.length
+      ?
+      `
+        <div class="contentCarousel hasOverflow">
+
+          <div class="contentCarouselControls">
+
+            <button
+              class="contentCarouselBtn"
+              data-dir="prev">
+              ‹
+            </button>
+
+            <button
+              class="contentCarouselBtn"
+              data-dir="next">
+              ›
+            </button>
+
+          </div>
+
+
+          <div class="contentCarouselTrack">
+
+            ${
+              DATA.lore
+                .map(
+                  e=>`
+
+                    <article class="card loreCard">
+
+                      <div class="loreIcon">
+
+                        ${
+                          e.image
+                            ?
+                            img(
+                              e.image,
+                              "",
+                              e.title
+                            )
+                            :
+                            ""
+                        }
+
+                      </div>
+
+
+                      <div class="loreText">
+
+                        <div class="status">
+                          ${esc(e.category||"")}
+                        </div>
+
+                        <h3>
+                          ${esc(e.title||"")}
+                        </h3>
+
+                        <p class="long">
+                          ${
+                            esc(
+                              e.body_public ||
+                              e.body ||
+                              e.text_public ||
+                              ""
+                            )
+                          }
+                        </p>
+
+                      </div>
+
+                    </article>
+
+                  `
+                )
+                .join("")
+            }
+
+          </div>
+
+        </div>
+      `
+      :
+      `
+        <div class="empty">
+          Sin entradas.
+        </div>
+      `;
+
+
+  queueImages(root);
+
+  carousel(
+    root,
+    ".contentCarouselTrack",
+    ".contentCarouselBtn"
+  );
+
+}
+
+
+function renderMysteries(){
+
+  const root=
+    body("mysteries");
+
+
+  root.innerHTML=
+    DATA.mysteries.length
+      ?
+      `
+        <div class="questCarousel hasOverflow">
+
+          <div class="questCarouselControls">
+
+            <button
+              class="questCarouselBtn"
+              data-dir="prev">
+              ‹
+            </button>
+
+            <button
+              class="questCarouselBtn"
+              data-dir="next">
+              ›
+            </button>
+
+          </div>
+
+
+          <div class="questCarouselTrack">
+
+            ${
+              DATA.mysteries
+                .map(
+                  m=>`
+
+                    <article class="card questCard">
+
+                      <div class="questIcon">
+
+                        ${
+                          m.image
+                            ?
+                            img(
+                              m.image,
+                              "",
+                              m.title
+                            )
+                            :
+                            ""
+                        }
+
+                      </div>
+
+
+                      <div class="questContent">
+
+                        <div class="status">
+                          ${esc(m.status||"")}
+                        </div>
+
+                        <h3>
+                          ${esc(m.title||"")}
+                        </h3>
+
+
+                        <div class="progress">
+                          <i
+                            style="
+                              width:${
+                                num(
+                                  m.progress_pct ||
+                                  m.progress
+                                ) || 0
+                              }%
+                            ">
+                          </i>
+                        </div>
+
+
+                        <p>
+                          ${esc(m.known||"")}
+                        </p>
+
+
+                        ${
+                          m.suspicion
+                            ?
+                            `
+                              <p>
+                                <b>
+                                  Hipótesis:
+                                </b>
+                                ${esc(m.suspicion)}
+                              </p>
+                            `
+                            :
+                            ""
+                        }
+
+                      </div>
+
+                    </article>
+
+                  `
+                )
+                .join("")
+            }
+
+          </div>
+
+        </div>
+      `
+      :
+      `
+        <div class="empty">
+          Sin quests.
+        </div>
+      `;
+
+
+  queueImages(root);
+
+  carousel(
+    root,
+    ".questCarouselTrack",
+    ".questCarouselBtn"
+  );
+
+}
+
+
+function renderItems(){
+
+  const root=
+    body("items");
+
+
+  root.innerHTML=
+    DATA.items.length
+      ?
+      `
+        <div class="contentCarousel hasOverflow">
+
+          <div class="contentCarouselControls">
+
+            <button
+              class="contentCarouselBtn"
+              data-dir="prev">
+              ‹
+            </button>
+
+            <button
+              class="contentCarouselBtn"
+              data-dir="next">
+              ›
+            </button>
+
+          </div>
+
+
+          <div class="contentCarouselTrack">
+
+            ${
+              DATA.items
+                .map(
+                  i=>`
+
+                    <article class="card itemCard">
+
+                      ${
+                        i.image
+                          ?
+                          `
+                            <div class="itemPortrait">
+
+                              ${
+                                img(
+                                  i.image,
+                                  "",
+                                  i.name
+                                )
+                              }
+
+                            </div>
+                          `
+                          :
+                          ""
+                      }
+
+
+                      <div class="status">
+                        ${esc(i.status||"")}
+                      </div>
+
+
+                      <h3>
+                        ${esc(i.name||"")}
+                      </h3>
+
+
+                      <div class="itemMeta">
+
+                        ${
+                          i.type
+                            ?
+                            `
+                              <span class="chip">
+                                ${esc(i.type)}
+                              </span>
+                            `
+                            :
+                            ""
+                        }
+
+
+                        ${
+                          i.category
+                            ?
+                            `
+                              <span class="chip">
+                                ${esc(i.category)}
+                              </span>
+                            `
+                            :
+                            ""
+                        }
+
+                      </div>
+
+
+                      <p>
+                        ${
+                          esc(
+                            i.description ||
+                            ""
+                          )
+                        }
+                      </p>
+
+                    </article>
+
+                  `
+                )
+                .join("")
+            }
+
+          </div>
+
+        </div>
+      `
+      :
+      `
+        <div class="empty">
+          Sin objetos.
+        </div>
+      `;
+
+
+  queueImages(root);
+
+  carousel(
+    root,
+    ".contentCarouselTrack",
+    ".contentCarouselBtn"
+  );
+
+}
+
+
+function renderRules(){
+
+  const root=
+    body("rules");
+
+
+  root.innerHTML=
+    DATA.rules.length
+      ?
+      DATA.rules
+        .map(
+          r=>`
+
+            <details>
+
+              <summary>
+                ${esc(r.title||"")}
+              </summary>
+
+              <div class="body">
+
+                <span class="pill">
+                  ${esc(r.status||"")}
+                </span>
+
+                <span class="pill">
+                  ${
+                    esc(
+                      r.source_book ||
+                      r.source ||
+                      ""
+                    )
+                  }
+                </span>
+
+                <p>
+                  ${
+                    esc(
+                      r.notes ||
+                      r.body ||
+                      ""
+                    )
+                  }
+                </p>
+
+              </div>
+
+            </details>
+
+          `
+        )
+        .join("")
+      :
+      `
+        <div class="empty">
+          Sin reglas.
+        </div>
+      `;
+
+}
+
+
+function bibleBodyHTML(text){
+
+  return String(text||"")
+    .split("\n")
+    .map(esc)
+    .join("<br>");
+
+}
+
 
 function renderCampaignBible(){
-const root=body("campaign_bible"),data=bibleData(),resume=data.find(r=>r.entry_id==="BIBLE_1");
-root.innerHTML=`${resume?`<div class="bibleResume"><div class="eyebrow">Continuidad prioritaria</div><h3>Retomar en 60 segundos</h3><div class="bibleResumeText">${bibleBodyHTML(resume.body)}</div></div>`:""}<div class="bibleToolbar"><input class="bibleSearch" placeholder="Buscar en toda la Campaign Bible…"><div class="bibleCount"></div></div><div class="bibleMajorNav">${Object.keys(BIBLE_MAJOR_LABELS).map(k=>`<button class="bibleMajorBtn" data-major="${k}">${k} · ${BIBLE_MAJOR_LABELS[k]}</button>`).join("")}</div><div class="bibleResults"></div>`;
-const results=root.querySelector(".bibleResults"),search=root.querySelector(".bibleSearch"),count=root.querySelector(".bibleCount");let active="2";
-const draw=()=>{const q=norm(search.value);let rows=data.filter(r=>r.entry_id!=="META"&&r.entry_id!=="BIBLE_1");rows=q?rows.filter(r=>norm(`${r.title} ${r.body}`).includes(q)):rows.filter(r=>String(r.major_section)===active);count.textContent=`${rows.length} bloque(s)`;results.innerHTML=rows.map(r=>`<details class="bibleEntry"><summary>${esc(r.title||"")}</summary><div class="bibleEntryBody">${bibleBodyHTML(r.body||"")}</div></details>`).join("")};
-root.querySelectorAll("[data-major]").forEach(b=>b.onclick=()=>{active=b.dataset.major;search.value="";draw()});search.oninput=draw;draw()
+
+  const root=
+    body(
+      "campaign_bible"
+    );
+
+  const data=
+    DATA.bible ||
+    [];
+
+  const resume=
+    data.find(
+      r=>
+        r.entry_id===
+        "BIBLE_1"
+    );
+
+
+  root.innerHTML=`
+
+    ${
+      resume
+        ?
+        `
+          <div class="bibleResume">
+
+            <div class="eyebrow">
+              Continuidad prioritaria
+            </div>
+
+            <h3>
+              Retomar en 60 segundos
+            </h3>
+
+            <div class="bibleResumeText">
+              ${
+                bibleBodyHTML(
+                  resume.body
+                )
+              }
+            </div>
+
+          </div>
+        `
+        :
+        ""
+    }
+
+
+    <div class="bibleToolbar">
+
+      <input
+        class="bibleSearch"
+        placeholder="Buscar en toda la Campaign Bible…">
+
+      <div class="bibleCount">
+      </div>
+
+    </div>
+
+
+    <div class="bibleMajorNav">
+
+      ${
+        [
+          "0",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16"
+        ]
+
+        .map(
+          k=>`
+
+            <button
+              class="bibleMajorBtn"
+              data-major="${k}">
+
+              ${k}
+
+            </button>
+
+          `
+        )
+
+        .join("")
+      }
+
+    </div>
+
+
+    <div class="bibleResults">
+    </div>
+
+  `;
+
+
+  const search=
+    root.querySelector(
+      ".bibleSearch"
+    );
+
+  const results=
+    root.querySelector(
+      ".bibleResults"
+    );
+
+  const count=
+    root.querySelector(
+      ".bibleCount"
+    );
+
+  let active="2";
+
+
+  const draw=()=>{
+
+    const q=
+      norm(
+        search.value
+      );
+
+
+    let rows=
+      data.filter(
+        r=>
+          r.entry_id!=="META" &&
+          r.entry_id!=="BIBLE_1"
+      );
+
+
+    rows=
+      q
+        ?
+        rows.filter(
+          r=>
+            norm(
+              `${r.title} ${r.body}`
+            ).includes(q)
+        )
+        :
+        rows.filter(
+          r=>
+            String(
+              r.major_section
+            )===active
+        );
+
+
+    count.textContent=
+      `${rows.length} bloque(s)`;
+
+
+    results.innerHTML=
+      rows
+        .map(
+          r=>`
+
+            <details class="bibleEntry">
+
+              <summary>
+                ${esc(r.title||"")}
+              </summary>
+
+              <div class="bibleEntryBody">
+                ${
+                  bibleBodyHTML(
+                    r.body ||
+                    ""
+                  )
+                }
+              </div>
+
+            </details>
+
+          `
+        )
+        .join("")
+
+      ||
+
+      `
+        <div class="empty">
+          Sin contenido.
+        </div>
+      `;
+
+  };
+
+
+  root
+    .querySelectorAll(
+      "[data-major]"
+    )
+    .forEach(
+      b=>
+        b.onclick=
+          ()=>{
+
+            active=
+              b.dataset.major;
+
+            search.value="";
+
+            draw();
+
+          }
+    );
+
+
+  search.oninput=
+    draw;
+
+
+  draw();
+
 }
-function renderCheckpoint(){const root=body("checkpoint"),c=DATA.checkpoint||{};root.innerHTML=`<details><summary>Ver estado canónico</summary><div class="body"><h3>${esc(c.title||"Checkpoint")}</h3><b>Presentes</b>${list(arr(c.present))}<b>Pendiente</b>${list(arr(c.pending))}</div></details>${bibleSupplementHTML(["15"],"Checkpoint")}`}
-function renderChanges(){const root=body("changelog");root.innerHTML=`<details><summary>Ver historial de cambios</summary><div class="body">${(DATA.changelog||[]).map(e=>`<p><b>${esc(e.version||"")}</b> · ${esc(e.date||"")}<br>${esc(e.change||e.summary||"")}</p>`).join("")}</div></details>${bibleSupplementHTML(["16"],"Changelog")}`}
+
+
+function renderCheckpoint(){
+
+  const root=
+    body("checkpoint");
+
+  const c=
+    DATA.checkpoint ||
+    {};
+
+
+  root.innerHTML=`
+
+    <details>
+
+      <summary>
+        Ver estado canónico
+      </summary>
+
+      <div class="body">
+
+        <h3>
+          ${
+            esc(
+              c.title ||
+              "Checkpoint"
+            )
+          }
+        </h3>
+
+
+        <b>
+          Presentes
+        </b>
+
+        ${
+          list(
+            arr(
+              c.present ||
+              c.present_entity_ids
+            )
+          )
+        }
+
+
+        <b>
+          Pendiente
+        </b>
+
+        ${
+          list(
+            arr(
+              c.pending ||
+              c.pending_decisions
+            )
+          )
+        }
+
+
+        ${
+          c.last_line
+            ?
+            `
+              <div class="quote">
+                ${esc(c.last_line)}
+              </div>
+            `
+            :
+            ""
+        }
+
+      </div>
+
+    </details>
+  `;
+
+}
+
+
+function renderChanges(){
+
+  const root=
+    body("changelog");
+
+  const rows=
+    [
+      ...(DATA.changelog||[])
+    ].reverse();
+
+
+  root.innerHTML=`
+
+    <details>
+
+      <summary>
+        Ver historial de cambios
+        ·
+        ${rows.length}
+      </summary>
+
+      <div class="body">
+
+        ${
+          rows
+            .map(
+              e=>`
+
+                <p>
+
+                  <b>
+                    ${esc(e.version||"")}
+                  </b>
+
+                  ·
+
+                  ${esc(e.date||"")}
+
+                  <br>
+
+                  ${
+                    esc(
+                      e.change ||
+                      e.summary ||
+                      ""
+                    )
+                  }
+
+                </p>
+
+              `
+            )
+            .join("")
+        }
+
+      </div>
+
+    </details>
+  `;
+
+}
+
 
 function openChar(c){
-$("#modalTitle").textContent=c.name||"";const s=c.stats||{},template=assetValue(cfg("sheet_template_asset_id","AST_SHEET"));
-$("#sheet").innerHTML=`${template?img(template,"bg","Plantilla"):""}<div class="pic">${c.portrait?img(c.portrait,"",c.name):""}</div><span class="f f-name">${esc(c.name||"")}</span><span class="f f-race">${esc(c.race||"")}</span><span class="f f-class">${esc(c.class||"")}</span><span class="f f-sub">${esc(c.subclass||"")}</span><span class="f f-level">${esc(c.level||"")}</span><span class="f f-xp">${esc(c.xp||"")}</span>${["str","dex","con","int","wis","cha"].map((a,i)=>`<span class="score a${i+1}">${val(s[a])}</span><span class="mod a${i+1}">${mod(s[a])}</span>`).join("")}<span class="combat ac">${val(s.ac)}</span><span class="combat ini">${val(s.initiative)}</span><span class="combat spd">${val(s.speed_ft||s.speed)}</span><span class="combat hpm">${val(s.hp_max)}</span><span class="combat hpc">${val(s.hp_current)}</span>`;
-$("#side").innerHTML=`<div class="card"><div class="status">${esc(c.role||"")}</div><h3>${esc(c.name||"")}</h3><p>${esc(c.short_description||c.description||"")}</p><span class="pill">${esc(c.race||"")}</span><span class="pill">${esc(c.class||"")}</span><span class="pill">Nivel ${esc(c.level||"")}</span></div><details><summary>Historia conocida</summary><div class="body long">${esc(c.public_history||c.history||"—")}</div></details><details><summary>Estado actual</summary><div class="body long">${esc(c.current_state||c.status||"—")}</div></details>`;
-$("#modal").classList.add("open");document.body.style.overflow="hidden";queueImages($("#modal"))
+
+  const s=
+    c.stats ||
+    {};
+
+  const template=
+    assetValue(
+      cfg(
+        "sheet_template_asset_id",
+        "AST_SHEET"
+      )
+    );
+
+
+  $("#modalTitle").textContent=
+    c.name ||
+    "";
+
+
+  $("#sheet").innerHTML=`
+
+    ${
+      template
+        ?
+        img(
+          template,
+          "bg",
+          "Plantilla"
+        )
+        :
+        ""
+    }
+
+
+    <div class="pic">
+
+      ${
+        c.portrait
+          ?
+          img(
+            c.portrait,
+            "",
+            c.name
+          )
+          :
+          ""
+      }
+
+    </div>
+
+
+    <span class="f f-name">
+      ${esc(c.name||"")}
+    </span>
+
+    <span class="f f-race">
+      ${esc(c.race||"")}
+    </span>
+
+    <span class="f f-class">
+      ${esc(c.class||"")}
+    </span>
+
+    <span class="f f-sub">
+      ${esc(c.subclass||"")}
+    </span>
+
+    <span class="f f-level">
+      ${esc(c.level||"")}
+    </span>
+
+    <span class="f f-xp">
+      ${esc(c.xp||"")}
+    </span>
+
+
+    ${
+      [
+        "str",
+        "dex",
+        "con",
+        "int",
+        "wis",
+        "cha"
+      ]
+
+      .map(
+        (a,i)=>`
+
+          <span class="score a${i+1}">
+            ${val(s[a])}
+          </span>
+
+          <span class="mod a${i+1}">
+            ${mod(s[a])}
+          </span>
+
+        `
+      )
+
+      .join("")
+    }
+
+
+    <span class="combat ac">
+      ${val(s.ac)}
+    </span>
+
+    <span class="combat ini">
+      ${val(s.initiative)}
+    </span>
+
+    <span class="combat spd">
+      ${val(s.speed_ft||s.speed)}
+    </span>
+
+    <span class="combat hpm">
+      ${val(s.hp_max)}
+    </span>
+
+    <span class="combat hpc">
+      ${val(s.hp_current)}
+    </span>
+  `;
+
+
+  $("#side").innerHTML=`
+
+    <div class="card">
+
+      <div class="status">
+        ${esc(c.role||"")}
+      </div>
+
+      <h3>
+        ${esc(c.name||"")}
+      </h3>
+
+      <p>
+        ${
+          esc(
+            c.short_description ||
+            c.description ||
+            ""
+          )
+        }
+      </p>
+
+      <span class="pill">
+        ${esc(c.race||"")}
+      </span>
+
+      <span class="pill">
+        ${
+          esc(
+            [
+              c.class,
+              c.subclass
+            ]
+            .filter(Boolean)
+            .join(" — ")
+          )
+        }
+      </span>
+
+      <span class="pill">
+        Nivel ${esc(c.level||"")}
+      </span>
+
+    </div>
+
+
+    <details>
+
+      <summary>
+        Historia conocida
+      </summary>
+
+      <div class="body long">
+        ${
+          esc(
+            c.public_history ||
+            c.history ||
+            "—"
+          )
+        }
+      </div>
+
+    </details>
+
+
+    <details>
+
+      <summary>
+        Estado actual
+      </summary>
+
+      <div class="body long">
+        ${
+          esc(
+            c.current_state ||
+            c.status ||
+            "—"
+          )
+        }
+      </div>
+
+    </details>
+
+
+    <details>
+
+      <summary>
+        Habilidades
+      </summary>
+
+      <div class="body">
+
+        ${
+          list(
+            (c.skills||[])
+              .map(
+                x=>
+                  `${
+                    x.skill ||
+                    x.name ||
+                    ""
+                  } ${
+                    x.bonus ||
+                    x.value ||
+                    ""
+                  }`
+              )
+          )
+        }
+
+      </div>
+
+    </details>
+
+
+    <details>
+
+      <summary>
+        Equipo
+      </summary>
+
+      <div class="body">
+
+        ${
+          list(
+            (c.equipment||[])
+              .map(
+                x=>
+                  x.name ||
+                  x.item ||
+                  ""
+              )
+          )
+        }
+
+      </div>
+
+    </details>
+  `;
+
+
+  $("#modal").classList.add(
+    "open"
+  );
+
+  document.body.style.overflow=
+    "hidden";
+
+
+  queueImages(
+    $("#modal")
+  );
+
 }
 
-function renderAll(){renderShell();wireLazyNavigation();initLazySections();const c=DATA.characters.find(x=>x.character_id===cfg("default_character_id","PC_KAZYM"))||DATA.characters[0];if(c){$("#kLvl").textContent=c.level||"—";$("#kXp").textContent=c.xp||"—"}$("#kAllies").textContent=DATA.characters.length||"—";$("#kBase").textContent=`${DATA.base.functions_restored||"—"}/${DATA.base.functions_total||"—"}`}
+
+function renderAll(){
+
+  renderShell();
+
+  renderCharacters();
+  renderHistory();
+  renderNPCs();
+  renderBase();
+  renderBestiary();
+  renderLore();
+  renderMysteries();
+  renderItems();
+  renderRules();
+  renderCheckpoint();
+  renderChanges();
+  renderCampaignBible();
+
+
+  const c=
+    DATA.characters.find(
+      x=>
+        x.character_id===
+        cfg(
+          "default_character_id",
+          "PC_KAZYM"
+        )
+    )
+    ||
+    DATA.characters[0];
+
+
+  if(c){
+
+    $("#kLvl").textContent=
+      c.level ||
+      "—";
+
+    $("#kXp").textContent=
+      c.xp ||
+      "—";
+
+  }
+
+
+  $("#kAllies").textContent=
+    DATA.characters.length ||
+    "—";
+
+
+  $("#kBase").textContent=
+    `${
+      DATA.base.functions_restored ||
+      "—"
+    }/${
+      DATA.base.functions_total ||
+      "—"
+    }`;
+
+}
+
 
 async function refresh(){
-resetDiagnostics();
-try{$("#refresh").disabled=true;DB=await loadDB();DATA=build(DB);renderAll();$("#mode").textContent="Sheet vivo · "+new Date().toLocaleTimeString();$("#mode").className="badge live";clearInterval(TIMER);TIMER=setInterval(refresh,60000)}
-catch(e){console.error(e);$("#mode").textContent="Error de Sheet";$("#mode").className="badge err";$("#main").innerHTML=`<section><div class="panel" style="padding:20px"><h2>No se pudo leer la base de datos</h2><p>${esc(e.message||e)}</p></div></section>`}
-finally{$("#refresh").disabled=false}
+
+  resetDiagnostics();
+
+
+  try{
+
+    $("#refresh").disabled=
+      true;
+
+
+    DB=
+      await loadDB();
+
+
+    DATA=
+      build(DB);
+
+
+    renderAll();
+
+
+    const fails=
+      Object.values(
+        TAB_STATUS
+      )
+      .filter(
+        x=>!x.ok
+      )
+      .length;
+
+
+    $("#mode").textContent=
+      fails
+        ?
+        `Sheet parcial · ${fails} error(es)`
+        :
+        "Sheet vivo · "+
+        new Date().toLocaleTimeString();
+
+
+    $("#mode").className=
+      fails
+        ?
+        "badge err"
+        :
+        "badge live";
+
+
+    clearInterval(TIMER);
+
+
+    TIMER=
+      setInterval(
+        refresh,
+        60000
+      );
+
+  }catch(e){
+
+    console.error(e);
+
+
+    addDiag(
+      "error",
+      "APP-INIT",
+      "No se pudo inicializar",
+      String(
+        e.message ||
+        e
+      )
+    );
+
+
+    $("#mode").textContent=
+      "Error de Sheet";
+
+
+    $("#mode").className=
+      "badge err";
+
+
+    $("#main").innerHTML=`
+
+      <section>
+
+        <div
+          class="panel"
+          style="
+            padding:20px
+          ">
+
+          <h2>
+            No se pudo leer la base de datos
+          </h2>
+
+          <p>
+            ${esc(e.message||e)}
+          </p>
+
+        </div>
+
+      </section>
+    `;
+
+  }finally{
+
+    $("#refresh").disabled=
+      false;
+
+    renderDiagnostics();
+
+  }
+
 }
 
-$("#refresh").onclick=refresh;
-$("#diagToggle").onclick=()=>$("#diagPanel").hidden=!$("#diagPanel").hidden;
-$("#diagClose").onclick=()=>$("#diagPanel").hidden=true;
-$("#close").onclick=()=>{$("#modal").classList.remove("open");document.body.style.overflow=""};
-$("#modal").onclick=e=>{if(e.target.id==="modal")$("#close").click()};
-document.addEventListener("keydown",e=>{if(e.key==="Escape")$("#close").click()});
+
+$("#refresh").onclick=
+  refresh;
+
+
+$("#diagToggle").onclick=
+  ()=>
+    $("#diagPanel").hidden=
+      !$("#diagPanel").hidden;
+
+
+$("#diagClose").onclick=
+  ()=>
+    $("#diagPanel").hidden=
+      true;
+
+
+$("#diagCopy").onclick=
+  async()=>{
+
+    try{
+
+      await navigator.clipboard.writeText(
+        diagnosticReport()
+      );
+
+      $("#diagCopy").textContent=
+        "Copiado";
+
+      setTimeout(
+        ()=>
+          $("#diagCopy").textContent=
+            "Copiar informe",
+        1200
+      );
+
+    }catch{}
+
+  };
+
+
+$("#close").onclick=
+  ()=>{
+
+    $("#modal").classList.remove(
+      "open"
+    );
+
+    document.body.style.overflow=
+      "";
+
+  };
+
+
+$("#modal").onclick=
+  e=>{
+
+    if(
+      e.target.id===
+      "modal"
+    ){
+      $("#close").click();
+    }
+
+  };
+
+
+document.addEventListener(
+  "keydown",
+  e=>{
+
+    if(
+      e.key===
+      "Escape"
+    ){
+      $("#close").click();
+    }
+
+  }
+);
+
 
 refresh();
+
 </script>
 </body>
 </html>
-``` [❶](code://python)
