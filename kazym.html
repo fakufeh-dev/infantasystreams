@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="color-scheme" content="dark">
-<title>Kazym Campaign Codex · v3.3.0</title>
+<title>Kazym Campaign Codex · v3.3.3</title>
 <style>
 :root{--bg:#0b0d12;--panel:#151923;--panel2:#10131a;--line:#343947;--ink:#eee6d8;--muted:#aaa297;--gold:#c4a66f;--good:#79b784;--warn:#d3b45d;--bad:#cc6872;--blue:#718abf;--violet:#9880c2}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 15% -10%,#2c223c 0,transparent 30%),linear-gradient(#090b10,#11141b);color:var(--ink);font-family:Georgia,"Times New Roman",serif}button,input{font:inherit}img{max-width:100%}a{color:inherit}
@@ -350,20 +350,54 @@ details{margin-bottom:8px;overflow:hidden}summary{list-style:none;cursor:pointer
   .coinStrip{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 
+
+/* =========================================================
+   v3.3.1 — SISTEMA DE ICONOS UI GBA
+   ========================================================= */
+.uiIcon{width:100%;height:100%;object-fit:contain;image-rendering:pixelated;display:block}
+.navlink{display:inline-flex;align-items:center;gap:6px}
+.navIcon{width:20px;height:20px;object-fit:contain;image-rendering:pixelated;flex:none}
+.charVitals{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin:0 0 12px}
+.vitalCard{min-width:0;display:flex;align-items:center;gap:7px;background:#0f1218;border:1px solid #343947;border-radius:9px;padding:7px}
+.vitalIcon{width:30px;height:30px;flex:none;display:grid;place-items:center}.vitalCopy{min-width:0}.vitalCopy small{display:block;color:#938c84;font-size:.54rem;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.vitalCopy b{display:block;font-size:.76rem;color:#e4d9ca;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.attackGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:7px}
+.attackCard{display:grid;grid-template-columns:42px 1fr;gap:9px;align-items:start;background:#10141b;border:1px solid #303744;border-radius:9px;padding:8px}
+.attackIcon{width:42px;height:42px;display:grid;place-items:center}.attackCopy{min-width:0}.attackCopy>b{display:block;font-size:.73rem;line-height:1.25}.attackCopy>small{display:block;color:#928b82;font-size:.61rem;margin-top:2px}
+.attackMeta{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}.attackMeta>span,.spellMetaItem{display:inline-flex;align-items:center;gap:3px;border:1px solid #363d4b;background:#171c25;border-radius:999px;padding:2px 5px;color:#bfb6a9;font-size:.56rem}
+.miniInlineIcon{width:14px;height:14px;object-fit:contain;image-rendering:pixelated;display:inline-block;vertical-align:middle}
+.skillRow{align-items:center!important}.skillIdentity{display:flex;align-items:center;gap:7px;min-width:0}.skillIcon{width:31px;height:31px;flex:none;display:grid;place-items:center}.skillBonus{font-size:.77rem!important;color:#e4d8c8!important;font-weight:800}
+.proficiencyBlock h5{display:flex;align-items:center;gap:6px}.sectionTitleIcon{width:20px;height:20px;object-fit:contain;image-rendering:pixelated}.proficiencyChip{display:inline-flex!important;align-items:center;gap:4px}.chipIcon{width:18px;height:18px;object-fit:contain;image-rendering:pixelated;flex:none}
+.spellMeta{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px}
+.occPic{position:relative;overflow:visible!important}.occPic>img{border-radius:50%;overflow:hidden}.roleBadge{position:absolute;right:-7px;bottom:-5px;width:20px;height:20px;border-radius:50%;background:#0b0e14;border:1px solid #4a4352;padding:1px;box-shadow:0 2px 5px #000b}
+.projectStatusLine{display:flex;align-items:center;gap:5px}.projectStatusIcon{width:18px;height:18px;display:inline-grid;place-items:center;flex:none}.projectSummary .pill{display:inline-flex;align-items:center;gap:4px}.summaryIcon{width:18px;height:18px;object-fit:contain;image-rendering:pixelated}
+.baseMetricGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:9px}
+.baseMetricCard{display:grid;grid-template-columns:34px minmax(0,1fr);gap:7px;align-items:center;background:#10141b;border:1px solid #303642;border-radius:8px;padding:7px;min-width:0;position:relative}
+.baseMetricIcon{width:34px;height:34px;display:grid;place-items:center}.baseMetricCard b{display:block;font-size:.62rem;text-transform:uppercase;letter-spacing:.06em;color:#ddd2c2}.baseMetricCard small{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:#999187;font-size:.57rem;line-height:1.3}
+.protocolCard{display:grid!important;grid-template-columns:42px minmax(0,1fr);gap:9px;align-items:start}.protocolIcon{width:42px;height:42px;display:grid;place-items:center}
+.pendingCheck{border:0!important;background:transparent!important;box-shadow:none!important;overflow:hidden;display:grid;place-items:center}.pendingCheck img{width:18px;height:18px;object-fit:contain;image-rendering:pixelated}
+.itemTypeLine{display:flex;align-items:center;gap:5px;margin:4px 0}.itemTypeIcon{width:28px;height:28px;display:grid;place-items:center;flex:none}
+@media(max-width:1100px){.charVitals{grid-template-columns:repeat(4,minmax(0,1fr))}.baseMetricGrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){.charVitals{grid-template-columns:repeat(2,minmax(0,1fr))}.baseMetricGrid{grid-template-columns:1fr}.attackGrid{grid-template-columns:1fr}}
+
+
+/* Psicología / Locura v3.3.2 */
+/* v3.3.3 — la ficha de cada personaje presenta el sistema dentro de Información adicional */
+.psychPanel{display:grid;gap:12px}.psychSummary{display:grid;grid-template-columns:64px 110px 1fr;gap:12px;align-items:center;padding:12px;border:1px solid #34303f;border-radius:12px;background:linear-gradient(135deg,#19151f,#12141b)}.psychMainIcon img{width:58px;height:58px;object-fit:contain}.psychScoreBox{display:grid;gap:2px}.psychScoreBox small,.psychTrait small{font-size:.65rem;color:#aaa297;text-transform:uppercase;letter-spacing:.08em}.psychScore{font-size:1.5rem;font-weight:900;color:#e3bd69}.psychScore small{font-size:.65rem;margin-left:2px}.psychScore.pending{font-size:.88rem;color:#aaa297}.psychScoreBox>b{font-size:.72rem;color:#c7bdd9}.psychStatus p{margin:.35rem 0;font-size:.72rem;color:#b9b1aa}.psychBar{height:7px;background:#28232e;border-radius:999px;overflow:hidden;margin-bottom:8px}.psychBar i{display:block;height:100%;background:linear-gradient(90deg,#6b3a8e,#bd335b,#e0b95d);border-radius:inherit}.psychTraitGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.psychTrait{display:grid;grid-template-columns:48px 1fr;gap:9px;padding:10px;border:1px solid #302b38;border-radius:10px;background:#15131a}.psychTraitIcon img{width:44px;height:44px;object-fit:contain}.psychTrait h4{margin:.12rem 0 .3rem;font-size:.82rem}.psychTrait p{margin:.3rem 0;font-size:.7rem;color:#b8b0a7}.psychEvents{display:grid;gap:6px}.psychEvents h4{margin:0}.psychEvent{display:grid;grid-template-columns:130px 1fr auto;gap:8px;padding:7px 9px;border-left:2px solid #6f4789;background:#17151c;font-size:.68rem}.psychEvent small{color:#d6ad61}.additionalInfoIntro{display:grid;gap:4px;padding:10px 12px;border:1px solid #34303f;border-radius:10px;background:#11131a}.additionalInfoIntro b{font-size:.82rem;color:#e7ddd1}.additionalInfoIntro span{font-size:.69rem;line-height:1.45;color:#aaa297}.psychSectionHead{margin:1px 0 -2px;color:#cbbfae;font-size:.68rem;text-transform:uppercase;letter-spacing:.1em}.psychEventMeta{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}.psychEventMeta span{border:1px solid #37313f;background:#121017;border-radius:999px;padding:2px 6px;color:#aaa297;font-size:.6rem}.psychTraitDetails{display:grid;gap:3px;margin-top:5px}.psychTraitDetails p{margin:0}.psychEmptyNote{font-size:.7rem;color:#918a81;line-height:1.45}
+@media(max-width:700px){.psychSummary{grid-template-columns:52px 1fr}.psychStatus{grid-column:1/-1}.psychTraitGrid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<header class="top"><nav id="nav"><div class="brand" id="brand">KAZYM GARNITHOR</div><button class="btn" id="refresh">Actualizar</button><span class="badge live">v3.3.0</span><span class="badge" id="mode">Cargando…</span></nav></header>
+<header class="top"><nav id="nav"><div class="brand" id="brand">KAZYM GARNITHOR</div><button class="btn" id="refresh">Actualizar</button><span class="badge live">v3.3.3</span><span class="badge" id="mode">Cargando…</span></nav></header>
 <div class="diag"><div class="diagBox" id="diag"></div></div>
 <div class="hero"><div><div class="eyebrow" id="eyebrow">D&D 5e 2014</div><h1 id="heroTitle">Kazym Garnithor</h1><p id="heroSubtitle">Campaign Codex vivo</p></div><div class="kpis"><div class="kpi"><b id="kLvl">—</b><span>Nivel de Kazym</span></div><div class="kpi"><b id="kXp">—</b><span>PX</span></div><div class="kpi"><b id="kAllies">—</b><span>Personajes</span></div><div class="kpi"><b id="kBase">—</b><span>Funciones base</span></div></div></div>
 <main id="main"></main>
 <div class="modal" id="charModal"><div class="modalShell"><div class="modalBar"><h2 id="modalTitle">Personaje</h2><button class="btn" id="modalClose">Cerrar ×</button></div><div id="modalBody"></div></div></div>
-<footer style="text-align:center;border-top:1px solid #2e333e;padding:24px 18px;color:#888178;font-size:.72rem">Kazym Campaign Codex · v3.3.0 · base infográfica + fichas refinadas + historia contenida</footer>
+<footer style="text-align:center;border-top:1px solid #2e333e;padding:24px 18px;color:#888178;font-size:.72rem">Kazym Campaign Codex · v3.3.3 · información adicional por personaje + sistema psicológico</footer>
 <script>
 const SHEET_ID="1QSrD9vg2erPGGVyR92zSFETVOUmm8GhbKMYWRxGk2Jw";
-const BUILD_ID="v3.3.0-20260914-assets-integrated";
-const TABS=["config","sections","assets","characters","character_stats","character_saves","character_skills","character_proficiencies","character_traits","character_attacks","character_spells","character_spell_slots","character_equipment","relationships","history","history_rolls","history_events","npcs","bestiary","enemy_traits","base_overview","base_rooms","base_projects","base_protocols","faction_members","base_details","base_occupants","base_resources","maps","map_markers","marker_types","lore","mysteries","items","rules","checkpoint","changelog","campaign_bible"];
-const NEED={config:["key","value"],assets:["asset_id"],characters:["character_id"],character_stats:["character_id"],relationships:["subject_id"],history:["chapter_id"],npcs:["npc_id"],bestiary:["enemy_id"],base_overview:["base_id"],base_projects:["project_id"],base_occupants:["occupant_id"],base_resources:["resource_id"],maps:["map_id"],map_markers:["marker_id"],marker_types:["marker_type"],lore:["lore_id"],mysteries:["mystery_id"],items:["item_id"],rules:["rule_id"],checkpoint:["key"],campaign_bible:["entry_id"]};
+const BUILD_ID="v3.3.3-20260915-character-additional-info";
+const TABS=["config","sections","assets","characters","character_stats","character_saves","character_skills","character_proficiencies","character_traits","character_psychology","psychological_traits","psychology_events","psych_types","madness_bands","character_attacks","character_spells","character_spell_slots","character_equipment","relationships","history","history_rolls","history_events","npcs","bestiary","enemy_traits","base_overview","base_rooms","base_projects","base_protocols","faction_members","base_details","base_occupants","base_resources","maps","map_markers","marker_types","lore","mysteries","items","rules","checkpoint","changelog","campaign_bible"];
+const NEED={config:["key","value"],assets:["asset_id"],characters:["character_id"],character_stats:["character_id"],character_psychology:["character_id"],psychological_traits:["trait_id"],psychology_events:["event_id"],psych_types:["type_id"],madness_bands:["band_id"],relationships:["subject_id"],history:["chapter_id"],npcs:["npc_id"],bestiary:["enemy_id"],base_overview:["base_id"],base_projects:["project_id"],base_occupants:["occupant_id"],base_resources:["resource_id"],maps:["map_id"],map_markers:["marker_id"],marker_types:["marker_type"],lore:["lore_id"],mysteries:["mystery_id"],items:["item_id"],rules:["rule_id"],checkpoint:["key"],campaign_bible:["entry_id"]};
 let DB={},DATA={},ASSETS=new Map(),CONFIG={},activeCharacterFilter="all";
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
@@ -384,6 +418,7 @@ function driveURL(v){const raw=String(v||"").trim(),id=driveId(raw);if(/^https?:
 function asset(id){const a=ASSETS.get(String(id||"").trim());return a?driveURL(a.drive_file_id||a.image_url||a.url||""):""}
 function assetForOwner(owner,type=""){const o=String(owner||"");for(const a of ASSETS.values())if(String(a.owner_id||"")===o&&(!type||String(a.asset_type||"")===type))return driveURL(a.drive_file_id||a.image_url||a.url||"");return""}
 function img(url,cls="",alt=""){return url?`<img class="${esc(cls)}" src="${esc(url)}" alt="${esc(alt)}" loading="lazy" decoding="async" referrerpolicy="no-referrer">`:""}
+function uiIcon(assetId,alt="",cls="uiIcon"){const u=asset(assetId);return u?img(u,cls,alt):""}
 function chapterNo(h){const n=num(h.sort_order);if(n!==null)return n;const m=String(h.chapter_id||"").match(/CH\s*0*([0-9]+)/i);return m?Number(m[1]):9999}
 const RANKS={D:{min:0,max:19,asset:"AST_REL_D",label:"D · vínculo incipiente"},C:{min:20,max:39,asset:"AST_REL_C",label:"C · vínculo positivo"},B:{min:40,max:59,asset:"AST_REL_B",label:"B · confianza sólida"},A:{min:60,max:79,asset:"AST_REL_A",label:"A · amistad máxima"},S:{min:80,max:94,asset:"AST_REL_S",label:"S · vínculo excepcional"},"S+":{min:95,max:100,asset:"AST_REL_SPLUS",label:"S+ · vínculo supremo"}};
 function rankFromScore(score){const n=num(score)??0;if(n>=95)return"S+";if(n>=80)return"S";if(n>=60)return"A";if(n>=40)return"B";if(n>=20)return"C";return"D"}
@@ -392,6 +427,37 @@ function abilityMod(v){const n=num(v);if(n===null)return"—";const m=Math.floor
 function abilityDefs(){return[["FUE","str"],["DES","dex"],["CON","con"],["INT","int"],["SAB","wis"],["CAR","cha"]]}
 function strongestAbilities(c){const s=c.stats||{};const vals=abilityDefs().map(([,k])=>num(s[k])).filter(v=>v!==null);if(!vals.length)return new Set();const top=Math.max(...vals);return new Set(abilityDefs().filter(([,k])=>num(s[k])===top).map(([,k])=>k))}
 function saveRowsHTML(c){const s=c.stats||{};const by=new Map((c.saves||[]).map(x=>[String(x.ability||"").toUpperCase(),x]));return`<div class="saveGrid">${abilityDefs().map(([l,k])=>{const row=by.get(l);const bonus=row?.bonus||abilityMod(s[k]);return`<div class="saveCard ${row?"recorded":""}"><b>${esc(bonus)}</b><span>${l}</span></div>`}).join("")}</div>`}
+
+function characterVitalsHTML(c){
+  const s=c.stats||{};
+  const hp=(s.hp_current||s.hp_max)?`${s.hp_current||"—"}/${s.hp_max||"—"}`:"—";
+  const rows=[
+    ["AST_UI_STAT_HP","PG",hp],
+    ["AST_UI_STAT_AC","CA",s.ac||"—"],
+    ["AST_UI_STAT_INITIATIVE","Iniciativa",s.initiative!==""&&s.initiative!=null?`${num(s.initiative)>=0?"+":""}${s.initiative}`:"—"],
+    ["AST_UI_STAT_SPEED","Velocidad",s.speed_ft?`${s.speed_ft} pies`:"—"],
+    ["AST_UI_STAT_PROFICIENCY","Competencia",s.proficiency_bonus?`+${String(s.proficiency_bonus).replace(/^\+/,"")}`:"—"],
+    ["AST_UI_STAT_PASSIVE_PERCEPTION","Percepción pasiva",s.passive_perception||"—"],
+    ["AST_UI_STAT_HIT_DICE","Dados de golpe",s.hit_dice||"—"]
+  ];
+  return`<div class="charVitals">${rows.map(([aid,label,value])=>`<div class="vitalCard"><span class="vitalIcon">${uiIcon(aid,label)}</span><span class="vitalCopy"><small>${esc(label)}</small><b>${esc(value)}</b></span></div>`).join("")}</div>`;
+}
+function attackKind(a){
+  const n=norm(`${a.name||""} ${a.description||""} ${a.range||""}`);
+  if(n.includes("llama sagrada")||n.includes("ascua")||n.includes("magia")||n.includes("hechizo")||n.includes("cantrip")||n.includes("sagrada"))return"magic";
+  if(n.includes("arco")||n.includes("ballesta")||n.includes("150/600")||n.includes("alcance 30"))return"ranged";
+  return"melee";
+}
+function attackAssetId(a){return({melee:"AST_UI_COMBAT_MELEE",ranged:"AST_UI_COMBAT_RANGED",magic:"AST_UI_COMBAT_MAGIC"})[attackKind(a)]}
+function attacksHTML(c){
+  const rows=(c.attacks||[]).sort(order);
+  if(!rows.length)return`<div class="empty">Sin ataques registrados.</div>`;
+  return`<div class="attackGrid">${rows.map(a=>{
+    const desc=a.description&&a.description!==a.name?a.description:"";
+    const dc=/\bcd\s*\d+/i.test(String(a.name||""));
+    return`<article class="attackCard"><span class="attackIcon">${uiIcon(attackAssetId(a),a.name)}</span><div class="attackCopy"><b>${esc(a.name||"Ataque")}</b>${desc?`<small>${esc(desc)}</small>`:""}<div class="attackMeta">${a.attack_bonus?`<span>${esc(a.attack_bonus)} ataque</span>`:""}${a.damage?`<span>${uiIcon("AST_UI_COMBAT_DAMAGE","Daño","miniInlineIcon")}${esc(a.damage)}${a.damage_type?` ${esc(a.damage_type)}`:""}</span>`:""}${a.range?`<span>${uiIcon("AST_UI_COMBAT_RANGE","Alcance","miniInlineIcon")}${esc(a.range)}</span>`:""}${dc?`<span>${uiIcon("AST_UI_COMBAT_SAVE_DC","CD","miniInlineIcon")}CD</span>`:""}</div></div></article>`;
+  }).join("")}</div>`;
+}
 function dedupeSkills(rows){const m=new Map();(rows||[]).forEach(r=>{const key=norm(r.skill||r.name||"");if(!key)return;const prev=m.get(key);const quality=x=>[x.ability,x.proficiency_level,x.description,x.technical_details,x.source].filter(Boolean).length;if(!prev||quality(r)>=quality(prev))m.set(key,r)});return[...m.values()].sort(order)}
 function formatLanguageName(name){
   let s=String(name||"").trim();
@@ -403,12 +469,46 @@ function formatLanguageName(name){
   if(n.startsWith("lengua de fuego"))return"Lenguaje de fuego no especificado";
   return"Lenguaje "+s.charAt(0).toLocaleLowerCase("es")+s.slice(1);
 }
+
+function skillAssetId(name){
+  const n=norm(name);
+  const map=[
+    [["sigilo"],"AST_UI_SKILL_STEALTH"],
+    [["percepcion"],"AST_UI_SKILL_PERCEPTION"],
+    [["juego de manos"],"AST_UI_SKILL_SLEIGHT_OF_HAND"],
+    [["atletismo"],"AST_UI_SKILL_ATHLETICS"],
+    [["engano"],"AST_UI_SKILL_DECEPTION"],
+    [["persuasion"],"AST_UI_SKILL_PERSUASION"],
+    [["investigacion"],"AST_UI_SKILL_INVESTIGATION"],
+    [["historia"],"AST_UI_SKILL_HISTORY"],
+    [["naturaleza"],"AST_UI_SKILL_NATURE"],
+    [["religion"],"AST_UI_SKILL_RELIGION"],
+    [["medicina"],"AST_UI_SKILL_MEDICINE"],
+    [["supervivencia"],"AST_UI_SKILL_SURVIVAL"],
+    [["acrobacias"],"AST_UI_SKILL_ACROBATICS"],
+    [["intimidacion"],"AST_UI_SKILL_INTIMIDATION"],
+    [["interpretacion","actuacion","performance"],"AST_UI_SKILL_PERFORMANCE"],
+    [["trato con animales","manejo de animales"],"AST_UI_SKILL_ANIMAL_HANDLING"],
+    [["perspicacia"],"AST_UI_SKILL_INSIGHT"],
+    [["arcana"],"AST_UI_SKILL_ARCANA"],
+    [["herramientas de ladron"],"AST_UI_PROF_TOOL"]
+  ];
+  for(const [keys,id] of map)if(keys.some(k=>n.includes(k)))return id;
+  return"";
+}
+function proficiencyAssetId(name,category=""){
+  const n=norm(name),c=norm(category);
+  if(c==="language")return"AST_UI_PROF_LANGUAGE";
+  if(n.includes("armadura")||n.includes("escudo"))return"AST_UI_PROF_ARMOR";
+  if(n.includes("herramient")||n.includes("kit ")||n.includes("juego de ")||n.includes("cartogra")||n.includes("herbor"))return"AST_UI_PROF_TOOL";
+  return"AST_UI_PROF_WEAPON";
+}
 function skillHTML(c){
   const rows=dedupeSkills(c.skills);
   const profs=(c.proficiencies||[]).filter(x=>norm(x.category)!=="language");
   const langs=(c.proficiencies||[]).filter(x=>norm(x.category)==="language");
-  const skills=rows.length?`<div class="skillGrid">${rows.map(x=>`<div class="skillRow"><div><b>${esc(x.skill||x.name||"")}</b>${x.ability?`<div class="status">${esc(x.ability)}</div>`:""}</div><span>${esc(x.bonus||x.value||"—")}</span></div>`).join("")}</div>`:`<div class="empty">Sin habilidades registradas.</div>`;
-  const extra=(profs.length||langs.length)?`<div class="proficiencyBlocks">${profs.length?`<div class="proficiencyBlock"><h5>Competencias</h5><div class="proficiencyChips">${profs.map(x=>`<span class="proficiencyChip">${esc(x.name||x.proficiency||x.item||"")}</span>`).join("")}</div></div>`:""}${langs.length?`<div class="proficiencyBlock"><h5>Lenguajes</h5><div class="proficiencyChips">${langs.map(x=>`<span class="proficiencyChip">${esc(formatLanguageName(x.name||x.proficiency||x.item||""))}</span>`).join("")}</div></div>`:""}</div>`:"";
+  const skills=rows.length?`<div class="skillGrid">${rows.map(x=>{const name=x.skill||x.name||"";return`<div class="skillRow"><div class="skillIdentity"><span class="skillIcon">${uiIcon(skillAssetId(name),name)}</span><div><b>${esc(name)}</b>${x.ability?`<div class="status">${esc(x.ability)}</div>`:""}</div></div><span class="skillBonus">${esc(x.bonus||x.value||"—")}</span></div>`}).join("")}</div>`:`<div class="empty">Sin habilidades registradas.</div>`;
+  const extra=(profs.length||langs.length)?`<div class="proficiencyBlocks">${profs.length?`<div class="proficiencyBlock"><h5>${uiIcon("AST_UI_PROF_WEAPON","Competencias","sectionTitleIcon")}Competencias</h5><div class="proficiencyChips">${profs.map(x=>{const name=x.name||x.proficiency||x.item||"";return`<span class="proficiencyChip">${uiIcon(proficiencyAssetId(name,x.category),name,"chipIcon")}${esc(name)}</span>`}).join("")}</div></div>`:""}${langs.length?`<div class="proficiencyBlock"><h5>${uiIcon("AST_UI_PROF_LANGUAGE","Lenguajes","sectionTitleIcon")}Lenguajes</h5><div class="proficiencyChips">${langs.map(x=>{const name=formatLanguageName(x.name||x.proficiency||x.item||"");return`<span class="proficiencyChip">${uiIcon("AST_UI_PROF_LANGUAGE",name,"chipIcon")}${esc(name)}</span>`}).join("")}</div></div>`:""}</div>`:"";
   return skills+extra;
 }
 function normalizePowerCategory(p){
@@ -465,6 +565,20 @@ function powerItemIcon(key){
   const url=id?asset(id):"";
   return url?img(url,"",key):(({species:"E",class:"C",feat:"D",background:"T",spells:"H",other:"+"})[key]||"•");
 }
+
+function spellMetaHTML(p){
+  const bits=[],level=String(p.level??"").trim(),act=norm(p.action_type||"");
+  if(level==="0")bits.push(["AST_UI_MAGIC_CANTRIP","Truco","Truco"]);
+  else if(level)bits.push(["AST_UI_MAGIC_SPELL_LEVEL","Nivel",`Nivel ${level}`]);
+  if(p.concentration&&norm(p.concentration)!=="no")bits.push(["AST_UI_MAGIC_CONCENTRATION","Concentración","Concentración"]);
+  if(norm(`${p.name||""} ${p.description||""}`).includes("ritual"))bits.push(["AST_UI_MAGIC_RITUAL","Ritual","Ritual"]);
+  if(act.includes("bonus")||act.includes("adicional"))bits.push(["AST_UI_MAGIC_BONUS_ACTION","Acción adicional",p.action_type]);
+  else if(act.includes("reaccion"))bits.push(["AST_UI_MAGIC_REACTION","Reacción",p.action_type]);
+  else if(p.action_type)bits.push(["AST_UI_MAGIC_ACTION","Acción",p.action_type]);
+  if(p.range)bits.push(["AST_UI_MAGIC_RANGE","Alcance",p.range]);
+  if(p.duration)bits.push(["AST_UI_MAGIC_DURATION","Duración",p.duration]);
+  return bits.length?`<span class="spellMeta">${bits.map(([aid,alt,label])=>`<span class="spellMetaItem">${uiIcon(aid,alt,"miniInlineIcon")}${esc(label)}</span>`).join("")}</span>`:"";
+}
 function powersHTML(c){
   const traits=expandTraitRows(c.traits||[]),spells=expandSpellRows(c.spells||[]);
   const defs=[
@@ -476,7 +590,7 @@ function powersHTML(c){
     ["other","Otros poderes",traits.filter(x=>normalizePowerCategory(x)==="other")]
   ].filter(x=>x[2].length);
   if(!defs.length)return`<div class="empty">Sin poderes registrados.</div>`;
-  return`<div class="powerGroups">${defs.map(([key,title,rows])=>`<section class="powerGroup"><div class="powerGroupHead"><div class="powerCategoryIcon">${powerGroupIcon(key)}</div><h4>${title}</h4></div><div class="powerGrid">${rows.sort(order).map(p=>{const desc=p.description||p.technical_details||"Sin descripción adicional.";const meta=key==="spells"?`Nivel ${p.level??"—"}${p.concentration&&norm(p.concentration)!=="no"?" · concentración":""}`:(p.uses?`Usos: ${p.uses}${p.recharge?` · ${p.recharge}`:""}`:(p.source||""));return`<button type="button" class="powerItem" data-tip="${esc(desc)}"><span class="powerMiniIcon">${powerItemIcon(key)}</span><span class="powerCopy"><b>${esc(p.name||p.spell_id||"Poder")}</b>${meta?`<small>${esc(meta)}</small>`:""}</span></button>`}).join("")}</div></section>`).join("")}</div>`;
+  return`<div class="powerGroups">${defs.map(([key,title,rows])=>`<section class="powerGroup"><div class="powerGroupHead"><div class="powerCategoryIcon">${powerGroupIcon(key)}</div><h4>${title}</h4></div><div class="powerGrid">${rows.sort(order).map(p=>{const desc=p.description||p.technical_details||"Sin descripción adicional.";const meta=key==="spells"?spellMetaHTML(p):(p.uses?`<small>Usos: ${esc(p.uses)}${p.recharge?` · ${esc(p.recharge)}`:""}</small>`:(p.source?`<small>${esc(p.source)}</small>`:""));return`<button type="button" class="powerItem" data-tip="${esc(desc)}"><span class="powerMiniIcon">${powerItemIcon(key)}</span><span class="powerCopy"><b>${esc(p.name||p.spell_id||"Poder")}</b>${meta||""}</span></button>`}).join("")}</div></section>`).join("")}</div>`;
 }
 function equipmentIsReady(x){
   if(truth(x.equipped))return true;
@@ -495,12 +609,17 @@ function equipmentHTML(c){
   return`<div class="inventorySplit"><section class="inventoryPanel"><div class="inventoryHead"><div class="inventoryIconSlot">${eq?img(eq,"","Equipo"):"EQ"}</div><div><h4>Equipo</h4><small>Armas, armadura y objetos listos para usar</small></div></div>${inventoryListHTML(ready)}</section><section class="inventoryPanel"><div class="inventoryHead"><div class="inventoryIconSlot">${mo?img(mo,"","Mochila"):"MO"}</div><div><h4>Mochila</h4><small>Herramientas, suministros y objetos transportados</small></div></div>${inventoryListHTML(bag)}</section></div>`;
 }
 function rankLegendHTML(){return`<div class="relationshipLegend"><span class="eyebrow">Rangos</span>${Object.entries(RANKS).map(([r,d])=>`<span class="rankLegend">${img(asset(d.asset),"",r)}<b>${r}</b><span>${d.min}–${d.max}</span></span>`).join("")}</div>`}
-function build(db){CONFIG=Object.fromEntries((db.config||[]).filter(r=>r.key).map(r=>[r.key,r.value]));ASSETS=new Map((db.assets||[]).filter(a=>a.asset_id).map(a=>[String(a.asset_id),a]));const stats=first(db.character_stats,"character_id"),saves=group(db.character_saves,"character_id"),skills=group(db.character_skills,"character_id"),profs=group(db.character_proficiencies,"character_id"),traits=group(db.character_traits,"character_id"),attacks=group(db.character_attacks,"character_id"),spells=group(db.character_spells,"character_id"),slots=group(db.character_spell_slots,"character_id"),equipment=group(db.character_equipment,"character_id"),rels=group(db.relationships,"subject_id");
- const chars=(db.characters||[]).sort(order).map(c=>({...c,portrait:asset(c.portrait_asset_id),stats:stats.get(c.character_id)||{},saves:saves.get(c.character_id)||[],skills:skills.get(c.character_id)||[],proficiencies:profs.get(c.character_id)||[],traits:traits.get(c.character_id)||[],attacks:attacks.get(c.character_id)||[],spells:spells.get(c.character_id)||[],slots:slots.get(c.character_id)||[],equipment:equipment.get(c.character_id)||[],relationships:rels.get(c.character_id)||[]}));
+function build(db){CONFIG=Object.fromEntries((db.config||[]).filter(r=>r.key).map(r=>[r.key,r.value]));ASSETS=new Map((db.assets||[]).filter(a=>a.asset_id).map(a=>[String(a.asset_id),a]));const stats=first(db.character_stats,"character_id"),saves=group(db.character_saves,"character_id"),skills=group(db.character_skills,"character_id"),profs=group(db.character_proficiencies,"character_id"),traits=group(db.character_traits,"character_id"),psychProfiles=first(db.character_psychology,"character_id"),psychTraits=group(db.psychological_traits,"character_id"),psychEvents=group(db.psychology_events,"character_id"),attacks=group(db.character_attacks,"character_id"),spells=group(db.character_spells,"character_id"),slots=group(db.character_spell_slots,"character_id"),equipment=group(db.character_equipment,"character_id"),rels=group(db.relationships,"subject_id");
+ const psychTypes=new Map((db.psych_types||[]).filter(x=>x.type_id).map(x=>[String(x.type_id),x]));const madnessBands=[...(db.madness_bands||[])].sort(order);
+ const chars=(db.characters||[]).sort(order).map(c=>({...c,portrait:asset(c.portrait_asset_id),stats:stats.get(c.character_id)||{},saves:saves.get(c.character_id)||[],skills:skills.get(c.character_id)||[],proficiencies:profs.get(c.character_id)||[],traits:traits.get(c.character_id)||[],psychology:psychProfiles.get(c.character_id)||null,psychTraits:psychTraits.get(c.character_id)||[],psychEvents:psychEvents.get(c.character_id)||[],attacks:attacks.get(c.character_id)||[],spells:spells.get(c.character_id)||[],slots:slots.get(c.character_id)||[],equipment:equipment.get(c.character_id)||[],relationships:rels.get(c.character_id)||[]}));
  const bo={...((db.base_overview||[])[0]||{})};bo.image=asset(bo.map_asset_id);bo.banner=asset(bo.banner_asset_id||"AST_FACTION_BANNER");bo.rooms=(db.base_rooms||[]).sort(order).map(r=>({...r,image:assetForOwner(r.room_id,"room")}));bo.projects=(db.base_projects||[]).sort(order).map(p=>({...p,image:assetForOwner(p.project_id,"base_project")}));bo.protocols=(db.base_protocols||[]).sort(order);bo.members=(db.faction_members||[]).sort(order);bo.details=(db.base_details||[]).sort(order);bo.occupants=(db.base_occupants||[]).sort(order).map(o=>({...o,portrait:asset(o.portrait_asset_id)}));bo.resources=(db.base_resources||[]).sort(order).map(r=>({...r,image:assetForOwner(r.resource_id,"resource")}));
- const markerTypes=new Map((db.marker_types||[]).map(t=>[String(t.marker_type||""),t]));const markers=(db.map_markers||[]).sort(order).map(m=>{const t=markerTypes.get(String(m.marker_type||""))||{};const aid=m.marker_asset_id||t.default_asset_id;return{...m,image:asset(aid),type_label:t.label||m.marker_type}});let cp={};(db.checkpoint||[]).forEach(r=>{if(r.key)cp[r.key]=r.value});return{characters:chars,relationships:db.relationships||[],history:[...(db.history||[])].sort((a,b)=>chapterNo(a)-chapterNo(b)).map(h=>({...h,_chapter:chapterNo(h),image:asset(h.image_asset_id)||assetForOwner(h.chapter_id,"history")})),npcs:(db.npcs||[]).sort(order).map(n=>({...n,image:asset(n.portrait_asset_id||n.image_asset_id)})),bestiary:(db.bestiary||[]).sort(order).map(e=>({...e,image:asset(e.image_asset_id)})),base:bo,maps:(db.maps||[]).sort(order).map(m=>({...m,image:asset(m.image_asset_id)})),map_markers:markers,marker_types:[...markerTypes.values()].sort(order),lore:(db.lore||[]).sort(order).map(x=>({...x,image:asset(x.image_asset_id)})),mysteries:(db.mysteries||[]).sort(order).map(x=>({...x,image:asset(x.image_asset_id)})),items:(db.items||[]).sort(order).map(x=>({...x,image:asset(x.image_asset_id)||assetForOwner(x.item_id,"item")})),rules:(db.rules||[]).sort(order),checkpoint:cp,changelog:db.changelog||[],bible:(db.campaign_bible||[]).sort(order)}}
+ const markerTypes=new Map((db.marker_types||[]).map(t=>[String(t.marker_type||""),t]));const markers=(db.map_markers||[]).sort(order).map(m=>{const t=markerTypes.get(String(m.marker_type||""))||{};const aid=m.marker_asset_id||t.default_asset_id;return{...m,image:asset(aid),type_label:t.label||m.marker_type}});let cp={};(db.checkpoint||[]).forEach(r=>{if(r.key)cp[r.key]=r.value});return{characters:chars,relationships:db.relationships||[],psychTypes,madnessBands,history:[...(db.history||[])].sort((a,b)=>chapterNo(a)-chapterNo(b)).map(h=>({...h,_chapter:chapterNo(h),image:asset(h.image_asset_id)||assetForOwner(h.chapter_id,"history")})),npcs:(db.npcs||[]).sort(order).map(n=>({...n,image:asset(n.portrait_asset_id||n.image_asset_id)})),bestiary:(db.bestiary||[]).sort(order).map(e=>({...e,image:asset(e.image_asset_id)})),base:bo,maps:(db.maps||[]).sort(order).map(m=>({...m,image:asset(m.image_asset_id)})),map_markers:markers,marker_types:[...markerTypes.values()].sort(order),lore:(db.lore||[]).sort(order).map(x=>({...x,image:asset(x.image_asset_id)})),mysteries:(db.mysteries||[]).sort(order).map(x=>({...x,image:asset(x.image_asset_id)})),items:(db.items||[]).sort(order).map(x=>({...x,image:asset(x.image_asset_id)||assetForOwner(x.item_id,"item")})),rules:(db.rules||[]).sort(order),checkpoint:cp,changelog:db.changelog||[],bible:(db.campaign_bible||[]).sort(order)}}
+
+function navAssetId(id){
+  return({characters:"AST_UI_NAV_CHARACTERS",history:"AST_UI_NAV_HISTORY",base:"AST_UI_NAV_BASE",npcs:"AST_UI_NAV_CHARACTERS",bestiary:"AST_UI_NAV_BESTIARY",lore:"AST_UI_NAV_LORE",mysteries:"AST_UI_NAV_QUESTS",items:"AST_UI_NAV_ITEMS",rules:"AST_UI_NAV_RULES"})[id]||"";
+}
 function sectionDefs(){return[["characters","Personajes","Grupo, aliados, residentes y vínculos",1],["history","Historia","Crónica completa de la campaña",2],["base","Base y facción","Habitantes, recursos, construcción, proyectos y mapa",3],["npcs","PNJ","Contactos y figuras conocidas",4],["bestiary","Bestiario","Criaturas y enemigos conocidos",5],["lore","Lore","Culturas, lugares, religiones y organizaciones",6],["mysteries","Quests","Misiones, pistas e interrogantes abiertos",7],["items","Objetos","Evidencias, llaves, reliquias y documentos",8],["rules","Reglas","Reglas de campaña y adaptaciones",9],["checkpoint","Checkpoint","Estado exacto para continuar",10],["campaign_bible","Archivo extendido","Campaign Bible y continuidad detallada",11],["changelog","Changelog","Cambios de campaña y micrositio",12]]}
-function shell(){const main=$("#main"),nav=$("#nav");main.innerHTML="";$$('.navlink',nav).forEach(a=>a.remove());for(const [id,title,sub] of sectionDefs()){const sec=document.createElement("section");sec.id=id;sec.innerHTML=`<div class="head"><div><h2>${esc(title)}</h2><p>${esc(sub)}</p></div></div><div class="sectionBody"><div class="loading">Cargando…</div></div>`;main.appendChild(sec);const a=document.createElement("a");a.className="navlink";a.href="#"+id;a.textContent=title;nav.insertBefore(a,$("#refresh"))}}
+function shell(){const main=$("#main"),nav=$("#nav");main.innerHTML="";$$('.navlink',nav).forEach(a=>a.remove());for(const [id,title,sub] of sectionDefs()){const sec=document.createElement("section");sec.id=id;sec.innerHTML=`<div class="head"><div><h2>${esc(title)}</h2><p>${esc(sub)}</p></div></div><div class="sectionBody"><div class="loading">Cargando…</div></div>`;main.appendChild(sec);const a=document.createElement("a");a.className="navlink";a.href="#"+id;const aid=navAssetId(id),u=aid?asset(aid):"";a.innerHTML=`${u?img(u,"navIcon",title):""}<span>${esc(title)}</span>`;nav.insertBefore(a,$("#refresh"))}}
 function relationWithKazym(c){if(c.character_id==="PC_KAZYM")return null;return DATA.relationships.find(r=>(r.subject_id==="PC_KAZYM"&&r.object_id===c.character_id)||(r.object_id==="PC_KAZYM"&&r.subject_id===c.character_id))||null}
 function charCategory(c){if(["PC_KAZYM","ALLY_MAERA","ALLY_TOMAS","ALLY_PIPIK"].includes(c.character_id))return"core";if(String(c.kind||"").toLowerCase().includes("residente")||["ALLY_SARRIK","ALLY_BRAN","ALLY_RAVEN_CONSTRUCT","ALLY_GUARDIAN"].includes(c.character_id))return"resident";return"ally"}
 function renderCharacters(){const root=$("#characters .sectionBody");root.innerHTML=`<div class="characterToolbar"><div class="filters"><button class="filterBtn active" data-filter="all">Todos</button><button class="filterBtn" data-filter="core">Núcleo</button><button class="filterBtn" data-filter="ally">Miembros y aliados</button><button class="filterBtn" data-filter="resident">Residentes</button></div><input class="search" id="charSearch" placeholder="Buscar personaje…"></div><div class="avatars" id="charGrid"></div>`;
@@ -509,7 +628,36 @@ function renderCharacters(){const root=$("#characters .sectionBody");root.innerH
 function characterName(id){return DATA.characters.find(x=>x.character_id===id)?.name||id||""}
 function relationshipRowsFor(c){const cid=String(c.character_id||""),cname=norm(c.name||"");const rows=(DATA.relationships||[]).filter(r=>r.bond_score!==""&&(String(r.subject_id||"")===cid||String(r.object_id||"")===cid)).map(r=>{const subjectIsSelf=String(r.subject_id||"")===cid;const partnerId=subjectIsSelf?String(r.object_id||""):String(r.subject_id||"");const partnerName=subjectIsSelf?(r.object_name||characterName(partnerId)):characterName(partnerId);return{...r,_partner_id:partnerId,_partner_name:partnerName}}).filter(r=>r._partner_id!==cid&&norm(r._partner_name)!==cname);const best=new Map();for(const r of rows){const key=r._partner_id||norm(r._partner_name);const prev=best.get(key);if(!prev||(num(r.bond_score)??-1)>(num(prev.bond_score)??-1))best.set(key,r)}return[...best.values()].sort((a,b)=>(num(b.bond_score)??-1)-(num(a.bond_score)??-1))}
 function relationshipHTML(c){const rows=relationshipRowsFor(c);if(!rows.length)return`${rankLegendHTML()}<div class="empty">Todavía no hay vínculo cuantificado con otros personajes.</div>`;return`${rankLegendHTML()}<div class="relationshipGrid">${rows.map(r=>{const rd=rankData(r),score=num(r.bond_score)??0;return`<div class="relationshipCard"><div class="relationshipRank">${img(rd.image,"",rd.rank)}</div><div><h4>${esc(r._partner_name||r.object_name||"Vínculo")}</h4><p>${esc(r.public_summary||r.bond_note||"")}</p><div class="relScore"><div class="progress"><i style="width:${Math.max(0,Math.min(100,score))}%"></i></div><b>${score} · ${rd.rank}</b></div></div></div>`}).join("")}</div>`}
-function openCharacter(c){if(!c)return;const s=c.stats||{},strong=strongestAbilities(c);$("#modalTitle").textContent=c.name||"Personaje";const stat=k=>s[k]??"—";$("#modalBody").innerHTML=`<div class="charView"><div><div class="charPortrait">${img(c.portrait,"",c.name)}</div><div class="card" style="margin-top:10px"><div class="status">${esc(c.role||"")}</div><h3 style="margin:.25rem 0">${esc(c.name||"")}</h3><span class="pill">${esc(c.race||"")}</span><span class="pill">${esc([c.class,c.subclass].filter(Boolean).join(" · "))}</span>${c.level?`<span class="pill">Nivel ${esc(c.level)}</span>`:""}<p>${esc(c.short_description||"")}</p>${c.current_state?`<p class="long" style="color:#aaa297;font-size:.72rem">${esc(c.current_state)}</p>`:""}</div></div><div class="charMeta"><div class="sheetSectionTitle">Atributos</div><div class="statGrid">${abilityDefs().map(([l,k])=>`<div class="stat ${strong.has(k)?"strong":""}">${strong.has(k)?`<span class="statStar" title="Atributo más fuerte">${asset("AST_UI_STRONG_ATTRIBUTE")?img(asset("AST_UI_STRONG_ATTRIBUTE"),"","Atributo más fuerte"):"★"}</span>`:""}<b>${esc(stat(k))} <span class="abilityMod">(${esc(abilityMod(stat(k)))})</span></b><span class="abilityName">${l}</span></div>`).join("")}</div><div class="sheetSectionTitle">Tiradas de salvación</div>${saveRowsHTML(c)}<div class="charAccordion"><details open><summary>Habilidades</summary><div class="detailBody">${skillHTML(c)}</div></details><details><summary>Poderes</summary><div class="detailBody">${powersHTML(c)}</div></details><details><summary>Equipo</summary><div class="detailBody">${equipmentHTML(c)}</div></details><details><summary>Historia conocida</summary><div class="detailBody long">${esc(c.public_history||"—")}</div></details><details><summary>Relaciones</summary><div class="detailBody">${relationshipHTML(c)}</div></details></div></div></div>`;const accordion=$(".charAccordion",$("#modalBody"));if(accordion){$$(':scope > details',accordion).forEach(d=>d.addEventListener('toggle',()=>{if(d.open)$$(':scope > details',accordion).forEach(o=>{if(o!==d)o.open=false})}))}$("#charModal").classList.add("open");document.body.style.overflow="hidden"}
+function madnessBandFor(profile){
+  if(!profile)return null;
+  const explicit=String(profile.madness_band||"").trim();
+  if(explicit){const byId=(DATA.madnessBands||[]).find(b=>String(b.band_id||"")===explicit||norm(b.name)===norm(explicit));if(byId)return byId}
+  const raw=String(profile.madness_score??"").trim();if(raw==="")return null;const score=num(raw);if(score===null)return null;
+  return(DATA.madnessBands||[]).find(b=>score>=(num(b.min_score)??0)&&score<=(num(b.max_score)??100))||null;
+}
+function psychologyHTML(c){
+  const rawProfile=c.psychology||null;
+  const p=(rawProfile&&!(String(rawProfile.player_visible||"").trim()&&!truth(rawProfile.player_visible)))?rawProfile:null;
+  const traits=(c.psychTraits||[]).filter(t=>!(String(t.discovered||"").trim()&&!truth(t.discovered))).sort(order);
+  const events=(c.psychEvents||[]).sort(order);
+  const hasAny=!!p||traits.length||events.length;
+  const intro=`<div class="additionalInfoIntro"><b>Psicología y salud mental</b><span>Información adicional del personaje. Los rasgos estables se muestran separados de la puntuación de Locura; un rasgo psicológico no aumenta Locura por sí mismo.</span></div>`;
+  if(!hasAny)return`<div class="psychPanel">${intro}<div class="empty"><div class="psychEmptyNote">Sin información psicológica pública registrada para este personaje.</div></div></div>`;
+
+  const rawScore=String(p?.madness_score??"").trim(),score=rawScore===""?null:num(rawScore),band=madnessBandFor(p),status=p?.status_note||"";
+  const scoreHTML=score===null?`<span class="psychScore pending">No fijada</span>`:`<span class="psychScore">${esc(score)}<small>/100</small></span>`;
+  const bandName=band?.name||p?.madness_band||"—";
+  const bar=score===null?"":`<div class="psychBar"><i style="width:${Math.max(0,Math.min(100,score))}%"></i></div>`;
+  const threshold=band?.threshold_event?`<p><b>Umbral:</b> ${esc(band.threshold_event)}</p>`:"";
+  const profileHTML=p?`<div class="psychSectionHead">Estado psicológico</div><div class="psychSummary"><div class="psychMainIcon">${uiIcon("AST_UI_PSYCH_STABLE_TRAIT","Psicología")}</div><div class="psychScoreBox"><small>Locura</small>${scoreHTML}<b>${esc(bandName)}</b></div><div class="psychStatus">${bar}${p.current_manifestation?`<p><b>Manifestación actual:</b> ${esc(p.current_manifestation)}</p>`:""}${status?`<p>${esc(status)}</p>`:""}${threshold}</div></div>`:"";
+
+  const traitHTML=traits.length?`<div class="psychSectionHead">Rasgos psicológicos</div><div class="psychTraitGrid">${traits.map(t=>{const typ=DATA.psychTypes?.get(String(t.type_id||""))||{};const icon=asset(typ.asset_id);return`<article class="psychTrait"><div class="psychTraitIcon">${icon?img(icon,"",typ.name||t.name):""}</div><div><small>${esc(typ.name||"Rasgo psicológico")}</small><h4>${esc(t.name||"Rasgo")}</h4>${t.status?`<span class="pill">${esc(t.status)}</span>`:""}<div class="psychTraitDetails">${t.trigger?`<p><b>Desencadenante:</b> ${esc(t.trigger)}</p>`:""}${t.benefit?`<p><b>Beneficio:</b> ${esc(t.benefit)}</p>`:""}${t.penalty?`<p><b>Penalización:</b> ${esc(t.penalty)}</p>`:""}${t.mechanical_effect?`<p><b>Efecto mecánico:</b> ${esc(t.mechanical_effect)}</p>`:""}</div></div></article>`}).join("")}</div>`:`<div class="psychSectionHead">Rasgos psicológicos</div><div class="empty">Sin rasgos psicológicos mecánicos registrados.</div>`;
+
+  const eventHTML=events.length?`<div class="psychSectionHead">Evolución y eventos</div><div class="psychEvents">${events.slice().reverse().map(e=>`<div class="psychEvent"><b>${esc(e.event_type||"Evento")}</b><div><span>${esc(e.cause||"")}</span>${e.manifestation?`<p><b>Manifestación:</b> ${esc(e.manifestation)}</p>`:""}${e.recovery?`<p><b>Recuperación:</b> ${esc(e.recovery)}</p>`:""}<div class="psychEventMeta">${e.stability_save?`<span>Estabilidad: ${esc(e.stability_save)}</span>`:""}${e.delta!==""?`<span>Δ ${esc(e.delta)}</span>`:""}${e.score_before!==""?`<span>Antes: ${esc(e.score_before)}</span>`:""}${e.score_after!==""?`<span>Después: ${esc(e.score_after)}</span>`:""}${e.chapter_id?`<span>${esc(e.chapter_id)}</span>`:""}</div></div></div>`).join("")}</div>`:"";
+
+  return`<div class="psychPanel">${intro}${profileHTML}${traitHTML}${eventHTML}</div>`;
+}
+function openCharacter(c){if(!c)return;const s=c.stats||{},strong=strongestAbilities(c);$("#modalTitle").textContent=c.name||"Personaje";const stat=k=>s[k]??"—";$("#modalBody").innerHTML=`<div class="charView"><div><div class="charPortrait">${img(c.portrait,"",c.name)}</div><div class="card" style="margin-top:10px"><div class="status">${esc(c.role||"")}</div><h3 style="margin:.25rem 0">${esc(c.name||"")}</h3><span class="pill">${esc(c.race||"")}</span><span class="pill">${esc([c.class,c.subclass].filter(Boolean).join(" · "))}</span>${c.level?`<span class="pill">Nivel ${esc(c.level)}</span>`:""}<p>${esc(c.short_description||"")}</p>${c.current_state?`<p class="long" style="color:#aaa297;font-size:.72rem">${esc(c.current_state)}</p>`:""}</div></div><div class="charMeta">${characterVitalsHTML(c)}<div class="sheetSectionTitle">Atributos</div><div class="statGrid">${abilityDefs().map(([l,k])=>`<div class="stat ${strong.has(k)?"strong":""}">${strong.has(k)?`<span class="statStar" title="Atributo más fuerte">${asset("AST_UI_STRONG_ATTRIBUTE")?img(asset("AST_UI_STRONG_ATTRIBUTE"),"","Atributo más fuerte"):"★"}</span>`:""}<b>${esc(stat(k))} <span class="abilityMod">(${esc(abilityMod(stat(k)))})</span></b><span class="abilityName">${l}</span></div>`).join("")}</div><div class="sheetSectionTitle">Tiradas de salvación</div>${saveRowsHTML(c)}<div class="charAccordion"><details open><summary>Habilidades</summary><div class="detailBody">${skillHTML(c)}</div></details><details><summary>Combate</summary><div class="detailBody">${attacksHTML(c)}</div></details><details><summary>Poderes</summary><div class="detailBody">${powersHTML(c)}</div></details><details><summary>Equipo</summary><div class="detailBody">${equipmentHTML(c)}</div></details><details><summary>Información adicional</summary><div class="detailBody">${psychologyHTML(c)}</div></details><details><summary>Historia conocida</summary><div class="detailBody long">${esc(c.public_history||"—")}</div></details><details><summary>Relaciones</summary><div class="detailBody">${relationshipHTML(c)}</div></details></div></div></div>`;const accordion=$(".charAccordion",$("#modalBody"));if(accordion){$$(':scope > details',accordion).forEach(d=>d.addEventListener('toggle',()=>{if(d.open)$$(':scope > details',accordion).forEach(o=>{if(o!==d)o.open=false})}))}$("#charModal").classList.add("open");document.body.style.overflow="hidden"}
 function renderHistory(){
   const root=$("#history .sectionBody");
   if(!DATA.history.length){root.innerHTML=`<div class="empty">Sin capítulos.</div>`;return}
@@ -546,9 +694,31 @@ function hSection(id,rows,cardFn){
 function renderBestiary(){hSection("bestiary",DATA.bestiary,e=>`<article class="card hCard"><div class="artBox">${img(e.image,"",e.name)}</div><div class="status">${esc(e.status||"")}</div><h3>${esc(e.name||"")}</h3><span class="chip">${esc(e.type||"")}</span><p>${esc(e.description||"")}</p></article>`)}
 function renderLore(){hSection("lore",DATA.lore,e=>`<article class="card hCard loreCard"><div class="artBox">${img(e.image,"",e.title)}</div><div class="status">${esc(e.category||"")}</div><h3>${esc(e.title||"")}</h3><p class="long">${esc(e.body_public||e.body||"")}</p></article>`)}
 function renderMysteries(){hSection("mysteries",DATA.mysteries,m=>`<article class="card hCard questCard"><div class="artBox">${img(m.image,"",m.title)}</div><div class="status">${esc(m.status||"")}</div><h3>${esc(m.title||"")}</h3><div class="progress"><i style="width:${Math.max(0,Math.min(100,num(m.progress_pct||m.progress)||0))}%"></i></div><p>${esc(m.known||"")}</p></article>`)}
-function renderItems(){hSection("items",DATA.items,i=>`<article class="card hCard"><div class="artBox">${img(i.image,"",i.name)}</div><div class="status">${esc(i.status||"")}</div><h3>${esc(i.name||"")}</h3><span class="chip">${esc(i.type||"")}</span><p>${esc(i.description||"")}</p>${i.technical_details?`<details><summary>Detalle técnico</summary><div class="detailBody">${esc(i.technical_details)}</div></details>`:""}</article>`)}
+function itemTypeAssetId(type){
+  const n=norm(type);
+  if(n.includes("llave"))return"AST_UI_ITEM_TYPE_KEY";
+  if(n.includes("document")||n.includes("mensaje")||n.includes("pergamino")||n.includes("mapa"))return"AST_UI_ITEM_TYPE_DOCUMENT";
+  if(n.includes("ritual"))return"AST_UI_ITEM_TYPE_RITUAL";
+  if(n.includes("evidencia")||n.includes("pista")||n.includes("marca"))return"AST_UI_ITEM_TYPE_EVIDENCE";
+  if(n.includes("armadura"))return"AST_UI_ITEM_TYPE_ARMOR";
+  if(n.includes("arma"))return"AST_UI_ITEM_TYPE_WEAPON";
+  if(n.includes("herramient")||n.includes("dispositivo")||n.includes("tecnologia"))return"AST_UI_ITEM_TYPE_TOOL";
+  if(n.includes("consum")||n.includes("pocion")||n.includes("racion"))return"AST_UI_ITEM_TYPE_CONSUMABLE";
+  return"AST_UI_ITEM_TYPE_MAGIC";
+}
+function renderItems(){hSection("items",DATA.items,i=>{const type=i.type||"";return`<article class="card hCard"><div class="artBox">${img(i.image,"",i.name)}</div><div class="status">${esc(i.status||"")}</div><h3>${esc(i.name||"")}</h3><div class="itemTypeLine"><span class="itemTypeIcon">${uiIcon(itemTypeAssetId(type),type)}</span><span class="chip">${esc(type)}</span></div><p>${esc(i.description||"")}</p>${i.technical_details?`<details><summary>Detalle técnico</summary><div class="detailBody">${esc(i.technical_details)}</div></details>`:""}</article>`})}
 function resourceTone(r){const need=num(r.needed),have=num(r.have);if(need===null||have===null)return{cls:'neutral',pct:0};if(have<need)return{cls:'short',pct:Math.max(0,100*have/need)};if(have===need)return{cls:'exact',pct:100};return{cls:'surplus',pct:100}}
 function projectStatusClass(s){const n=norm(s);if(n.includes('complet')||n.includes('estabil'))return'statusDone';if(n.includes('activo')||n.includes('curso')||n.includes('validacion')||n.includes('provisional'))return'statusActive';return'statusPending'}
+function projectStatusAssetId(s){
+  const n=norm(s);
+  if(n.includes("advert")||n.includes("bloque")||n.includes("crit"))return"AST_UI_PROJECT_WARNING";
+  if(n.includes("complet")||n.includes("estabil"))return"AST_UI_PROJECT_COMPLETE";
+  if(n.includes("evaluacion"))return"AST_UI_PROJECT_EVALUATION";
+  if(n.includes("planific"))return"AST_UI_PROJECT_PLANNED";
+  if(n.includes("pendiente"))return"AST_UI_PROJECT_PENDING";
+  return"AST_UI_PROJECT_ACTIVE";
+}
+
 function treasuryCoins(text){
   const defs=[["po","Oro","AST_COIN_GOLD"],["pp","Plata","AST_COIN_SILVER"],["pe","Electro","AST_COIN_ELECTRUM"],["pc","Cobre","AST_COIN_COPPER"],["ppt","Platino","AST_COIN_PLATINUM"]];
   const raw=String(text||"");
@@ -571,6 +741,43 @@ function protocolParts(text){
   if(i<0)return{title:"PROTOCOLO",body:s};
   return{title:s.slice(0,i).trim(),body:s.slice(i+1).trim()};
 }
+function protocolAssetId(title,body=""){
+  const n=norm(`${title} ${body}`);
+  if(n.includes("evacu"))return"AST_UI_PROTOCOL_EVACUATION";
+  if(n.includes("abaste")||n.includes("suministr"))return"AST_UI_PROTOCOL_SUPPLY";
+  if(n.includes("nombre")||n.includes("visit"))return"AST_UI_PROTOCOL_VISITORS";
+  if(n.includes("recuerdo")||n.includes("perspectiva")||n.includes("secreto")||n.includes("informacion"))return"AST_UI_PROTOCOL_SECRET";
+  if(n.includes("cuerpo")||n.includes("emerg")||n.includes("letal"))return"AST_UI_PROTOCOL_EMERGENCY";
+  return"AST_UI_PROTOCOL_SECURITY";
+}
+function occupantRoleAssetId(o){
+  const n=norm(`${o.status||""} ${o.entity_type||""}`),id=String(o.occupant_id||"");
+  if(n.includes("candidat"))return"AST_UI_ROLE_CANDIDATE";
+  if(n.includes("proteg"))return"AST_UI_ROLE_PROTECTED";
+  if(id.startsWith("GUEST_")||n.includes("visitante"))return n.includes("trabajador")?"AST_UI_ROLE_WORKER":"AST_UI_ROLE_VISITOR";
+  if(n.includes("trabajador")||n.includes("colaborador"))return"AST_UI_ROLE_WORKER";
+  if(n.includes("residente")||n.includes("libre")||n.includes("activo de base"))return"AST_UI_ROLE_RESIDENT";
+  if(n.includes("aliado"))return"AST_UI_ROLE_ALLY";
+  return"AST_UI_ROLE_MEMBER";
+}
+function baseMetricsHTML(b,projects){
+  const econ=(projects||[]).find(p=>String(p.project_id)==="PROJ_20")||{};
+  const water=norm(b.habitability||"").includes("pozo")?"Pozo revisado":"Sin estado separado";
+  const cap=(b.current_standard_occupancy||b.capacity_confirmed_min)?`${b.current_standard_occupancy||"—"} / ${b.capacity_confirmed_min||"—"} plazas estándar`:"—";
+  const rows=[
+    ["AST_UI_BASE_FOOD","Alimentos",b.supplies||"—"],
+    ["AST_UI_BASE_WATER","Agua",water],
+    ["AST_UI_BASE_SECURITY","Seguridad",b.security||"—"],
+    ["AST_UI_BASE_HABITABILITY","Habitabilidad",b.habitability||"—"],
+    ["AST_UI_BASE_STRUCTURE","Estructura",b.integrity||"—"],
+    ["AST_UI_BASE_CAPACITY","Capacidad",cap],
+    ["AST_UI_BASE_INCOME","Ingresos",econ.result||"Sin ingreso automático confirmado."],
+    ["AST_UI_BASE_EXPENSE","Gastos",econ.cost||"Sin inversión global fijada."],
+    ["AST_UI_BASE_TRADE","Comercio",econ.notes||"Economía recurrente en desarrollo."]
+  ];
+  return`<div class="baseMetricGrid">${rows.map(([aid,label,value])=>`<div class="baseMetricCard" tabindex="0" data-tip="${esc(value)}"><span class="baseMetricIcon">${uiIcon(aid,label)}</span><div><b>${esc(label)}</b><small>${esc(value)}</small></div></div>`).join("")}</div>`;
+}
+
 function memberInfoFor(o,members){
   const on=norm(o.name||"");
   const m=(members||[]).find(x=>{const mn=norm(x.entity_name||x.name||"");return mn&&(on.includes(mn)||mn.includes(on))});
@@ -578,7 +785,7 @@ function memberInfoFor(o,members){
 }
 function occupantCard(o,members){
   const tip=memberInfoFor(o,members);
-  return`<div class="occ" tabindex="0" data-tip="${esc(tip)}"><div class="occPic">${img(o.portrait,"",o.name)}</div><div class="occText"><b>${esc(o.name||"")}</b><small>${esc(o.status||o.location||"")}</small></div></div>`;
+  return`<div class="occ" tabindex="0" data-tip="${esc(tip)}"><div class="occPic">${img(o.portrait,"",o.name)}<span class="roleBadge">${uiIcon(occupantRoleAssetId(o),o.status||"Rol")}</span></div><div class="occText"><b>${esc(o.name||"")}</b><small>${esc(o.status||o.location||"")}</small></div></div>`;
 }
 function roomCardHTML(r){
   return`<article class="roomCard"><div class="roomVisual">${r.image?img(r.image,"",r.name):`<div class="roomIconSlot">SA</div>`}</div><div class="roomBody"><div class="status">${esc(r.status||"")}</div><h4>${esc(r.name||"")}</h4><div class="roomFunction">${esc(r.function||"")}</div><p>${esc(r.description||"")}</p>${r.project_id?`<span class="pill">Proyecto ${esc(r.project_id)}</span>`:""}</div></article>`;
@@ -593,21 +800,21 @@ function renderBase(){
   const membersOcc=occupants.filter(o=>!visitorIds.has(o.occupant_id)&&!residentIds.has(o.occupant_id));
   const coins=treasuryCoins(b.treasury);
   root.innerHTML=`<div class="baseWorkspace"><div class="baseDesk"><nav class="baseNav" aria-label="Secciones de la base"><button class="baseTab active" type="button" data-base-tab="overview">Resumen</button><button class="baseTab" type="button" data-base-tab="people">Habitantes</button><button class="baseTab" type="button" data-base-tab="resources">Recursos</button><button class="baseTab" type="button" data-base-tab="build">Construcción</button><button class="baseTab" type="button" data-base-tab="rooms">Salas</button><button class="baseTab" type="button" data-base-tab="protocols">Protocolos</button><button class="baseTab" type="button" data-base-tab="map">Mapa</button><button class="baseTab" type="button" data-base-tab="pending">Pendientes</button></nav><div class="basePaneWrap">
-    <div class="basePane active" data-base-pane="overview"><div class="baseOverviewGrid"><div class="baseOverviewVisual">${img(b.image,"",b.name)}</div><div class="baseOverviewText"><div class="eyebrow">Estado operativo</div><h4>${esc(b.name||"Base")}</h4><p>${esc(b.status||"")}</p><div class="baseQuickFacts"><div class="baseQuickFact"><b>Propósito</b>${esc(b.purpose||"—")}</div><div class="baseQuickFact"><b>Habitabilidad</b>${esc(b.habitability||"—")}</div><div class="baseQuickFact"><b>Seguridad</b>${esc(b.security||"—")}</div><div class="baseQuickFact"><b>Integridad</b>${esc(b.integrity||"—")}</div></div></div></div></div>
+    <div class="basePane active" data-base-pane="overview"><div class="baseOverviewGrid"><div class="baseOverviewVisual">${img(b.image,"",b.name)}</div><div class="baseOverviewText"><div class="eyebrow">Estado operativo</div><h4>${esc(b.name||"Base")}</h4><p>${esc(b.status||"")}</p>${baseMetricsHTML(b,projects)}</div></div></div>
     <div class="basePane" data-base-pane="people"><div class="basePeopleLayout"><section class="basePeopleGroup"><h4>Miembros y núcleo · ${membersOcc.length}</h4><div class="occupants">${membersOcc.map(o=>occupantCard(o,members)).join("")||'<span class="status">Ninguno</span>'}</div></section><section class="basePeopleGroup"><h4>Residentes · ${residents.length}</h4><div class="occupants">${residents.map(o=>occupantCard(o,members)).join("")||'<span class="status">Ninguno</span>'}</div></section><section class="basePeopleGroup"><h4>Visitantes y trabajadores · ${visitors.length}</h4><div class="occupants">${visitors.map(o=>occupantCard(o,members)).join("")||'<span class="status">Ninguno</span>'}</div></section></div><p style="margin-top:9px;color:#8d867d;font-size:.64rem">${esc(b.capacity_note||"")}</p></div>
     <div class="basePane" data-base-pane="resources"><section class="treasuryPanel"><h4>Tesorería</h4><div class="coinStrip">${coins.map(c=>`<div class="coinCard"><div class="coinIcon">${c.image?img(c.image,"",c.label):c.code}</div><div><b>${c.value}</b><small>${c.label}</small></div></div>`).join("")}</div></section><div class="resourceCards">${resources.map(r=>{const t=resourceTone(r);return`<article class="resourceCard ${t.cls}" data-tip="${esc(r.note||r.period||"")}"><div class="resourceIconSlot">${r.image?img(r.image,"",r.name):resourceGlyph(r)}</div><div><b>${esc(r.name||r.resource_id)}</b><div class="resourceValue">${esc(r.have||"—")} <small>${esc(r.unit||"")}</small></div><div class="resourceTarget">${r.needed?`Objetivo ${esc(r.needed)}`:"Sin objetivo físico confirmado"}</div></div></article>`}).join("")||'<div class="empty">Sin recursos registrados.</div>'}</div></div>
     <div class="basePane" data-base-pane="build">${projectDashboard(projects)}</div>
     <div class="basePane" data-base-pane="rooms"><div class="roomGrid">${rooms.map(roomCardHTML).join("")||'<div class="empty">Sin salas.</div>'}</div></div>
-    <div class="basePane" data-base-pane="protocols"><div class="protocolGrid">${protocols.map(p=>{const q=protocolParts(p.text||p.description||p.name||"");return`<article class="protocolCard"><h4>${esc(q.title)}</h4><p>${esc(q.body)}</p></article>`}).join("")||'<div class="empty">Sin protocolos.</div>'}</div></div>
+    <div class="basePane" data-base-pane="protocols"><div class="protocolGrid">${protocols.map(p=>{const q=protocolParts(p.text||p.description||p.name||"");return`<article class="protocolCard"><span class="protocolIcon">${uiIcon(protocolAssetId(q.title,q.body),q.title)}</span><div><h4>${esc(q.title)}</h4><p>${esc(q.body)}</p></div></article>`}).join("")||'<div class="empty">Sin protocolos.</div>'}</div></div>
     <div class="basePane" data-base-pane="map"><div id="mapSlot"></div></div>
-    <div class="basePane" data-base-pane="pending"><div class="pendingChecklist">${pending.map(x=>`<div class="pendingItem"><span class="pendingCheck"></span><span>${esc(x.text||x.description||"")}</span></div>`).join("")||'<div class="empty">Sin pendientes registrados.</div>'}</div></div>
+    <div class="basePane" data-base-pane="pending"><div class="pendingChecklist">${pending.map(x=>`<div class="pendingItem"><span class="pendingCheck">${uiIcon("AST_UI_CHECK_EMPTY","Pendiente")}</span><span>${esc(x.text||x.description||"")}</span></div>`).join("")||'<div class="empty">Sin pendientes registrados.</div>'}</div></div>
   </div></div></div>`;
   $$('.baseTab',root).forEach(btn=>btn.onclick=()=>{$$('.baseTab',root).forEach(x=>x.classList.toggle('active',x===btn));$$('.basePane',root).forEach(p=>p.classList.toggle('active',p.dataset.basePane===btn.dataset.baseTab));if(btn.dataset.baseTab==='map')requestAnimationFrame(()=>renderMap($('#mapSlot',root)))});
 }
 function projectDashboard(projects){
   const counts={done:0,active:0,pending:0};
   projects.forEach(p=>{const c=projectStatusClass(p.status);if(c==='statusDone')counts.done++;else if(c==='statusActive')counts.active++;else counts.pending++});
-  return`<div class="projectSummary"><span class="pill">Completados ${counts.done}</span><span class="pill">Activos ${counts.active}</span><span class="pill">Pendientes ${counts.pending}</span></div><div class="projectGrid">${projects.map(p=>`<article class="projectCard ${projectStatusClass(p.status)}"><div class="projectImage">${p.image?img(p.image,"",p.name):`<div class="roomIconSlot">PR</div>`}</div><div class="projectBody"><div class="status"><span class="statusDot"></span>${esc(p.status||"")}</div><h4>${esc(p.name||"")}</h4><div class="projectMeta">${p.cost?`<div><b>Materiales:</b> ${esc(p.cost)}</div>`:""}${p.duration?`<div><b>Jornadas:</b> ${esc(p.duration)}</div>`:""}${p.result?`<div><b>Resultado:</b> ${esc(p.result)}</div>`:""}${p.notes?`<div><b>Nota:</b> ${esc(p.notes)}</div>`:""}</div></div></article>`).join("")}</div>`;
+  return`<div class="projectSummary"><span class="pill">${uiIcon("AST_UI_PROJECT_COMPLETE","Completados","summaryIcon")}Completados ${counts.done}</span><span class="pill">${uiIcon("AST_UI_PROJECT_ACTIVE","Activos","summaryIcon")}Activos ${counts.active}</span><span class="pill">${uiIcon("AST_UI_PROJECT_PENDING","Pendientes","summaryIcon")}Pendientes ${counts.pending}</span></div><div class="projectGrid">${projects.map(p=>`<article class="projectCard ${projectStatusClass(p.status)}"><div class="projectImage">${p.image?img(p.image,"",p.name):`<div class="roomIconSlot">PR</div>`}</div><div class="projectBody"><div class="status projectStatusLine"><span class="projectStatusIcon">${uiIcon(projectStatusAssetId(p.status),p.status)}</span>${esc(p.status||"")}</div><h4>${esc(p.name||"")}</h4><div class="projectMeta">${p.cost?`<div><b>Materiales:</b> ${esc(p.cost)}</div>`:""}${p.duration?`<div><b>Jornadas:</b> ${esc(p.duration)}</div>`:""}${p.result?`<div><b>Resultado:</b> ${esc(p.result)}</div>`:""}${p.notes?`<div><b>Nota:</b> ${esc(p.notes)}</div>`:""}</div></div></article>`).join("")}</div>`;
 }
 function renderMap(root){const map=DATA.maps.find(m=>String(m.status||'active')==='active')||DATA.maps[0];if(!root||!map||!map.image){if(root)root.innerHTML=`<div class="empty">Mapa no disponible.</div>`;return}const markers=DATA.map_markers.filter(m=>String(m.map_id)===String(map.map_id));root.innerHTML=`<div class="reconCard"><div class="mapTools"><button class="mapTool" data-out>−</button><button class="mapTool" data-reset>⌂</button><button class="mapTool" data-in>+</button><span class="mapZoom">100%</span></div><div class="mapViewport"><div class="mapStage">${img(map.image,"",map.name)}${markers.map(m=>`<button class="marker" style="left:${num(m.x_percent)??0}%;top:${num(m.y_percent)??0}%" data-marker="${esc(m.marker_id)}"><span class="markerUI">${img(m.image,"",m.label)}<span class="markerTip"><b>${esc(m.label||"")}</b><br>${esc(m.tooltip||m.type_label||"")}</span></span></button>`).join("")}</div></div></div><div class="mapDetail"></div>`;const vp=$('.mapViewport',root),stage=$('.mapStage',root),read=$('.mapZoom',root),detail=$('.mapDetail',root);let scale=num(map.default_zoom)??1,tx=0,ty=0,pan=false,lx=0,ly=0;const min=num(map.min_zoom)??1,max=num(map.max_zoom)??4;const apply=()=>{stage.style.transform=`translate(${tx}px,${ty}px) scale(${scale})`;$$('.markerUI',root).forEach(x=>x.style.setProperty('--counter',1/scale));read.textContent=Math.round(scale*100)+'%'};const zoom=(next,cx,cy)=>{next=Math.min(max,Math.max(min,next));const wx=(cx-tx)/scale,wy=(cy-ty)/scale;tx=cx-wx*next;ty=cy-wy*next;scale=next;apply()};const center=n=>{const r=vp.getBoundingClientRect();zoom(n,r.width/2,r.height/2)};$('[data-in]',root).onclick=()=>center(scale*1.25);$('[data-out]',root).onclick=()=>center(scale/1.25);$('[data-reset]',root).onclick=()=>{scale=num(map.default_zoom)??1;tx=0;ty=0;apply()};vp.addEventListener('wheel',e=>{e.preventDefault();const r=vp.getBoundingClientRect();zoom(scale*(e.deltaY<0?1.12:.89),e.clientX-r.left,e.clientY-r.top)},{passive:false});vp.onpointerdown=e=>{if(e.target.closest('.marker'))return;pan=true;lx=e.clientX;ly=e.clientY;vp.classList.add('pan')};vp.onpointermove=e=>{if(!pan)return;tx+=e.clientX-lx;ty+=e.clientY-ly;lx=e.clientX;ly=e.clientY;apply()};vp.onpointerup=vp.onpointercancel=()=>{pan=false;vp.classList.remove('pan')};$$('[data-marker]',root).forEach(b=>b.onclick=()=>{const m=markers.find(x=>x.marker_id===b.dataset.marker);detail.innerHTML=`<div class="card"><div class="status">${esc(m.type_label||m.marker_type||"")}</div><h3>${esc(m.label||"")}</h3><p>${esc(m.tooltip||"")}</p></div>`});apply()}
 function renderRules(){
